@@ -164,20 +164,59 @@ export default function Notes() {
 
   const paperBg = getPaperBackground(paperStyle);
 
-  if (isLoading) {
+  // Notes Skeleton - Exact spatial footprint match
+  function NotesSkeleton() {
     return (
-      <div className="flex items-center justify-center h-[calc(100vh-4rem)] p-8">
-        <div className="w-full max-w-4xl space-y-6">
-          <Skeleton className="h-16 w-full rounded-xl" />
-          <Skeleton className="h-64 w-full rounded-xl" />
-          <div className="grid grid-cols-3 gap-4">
-            <Skeleton className="h-32 w-full rounded-xl" />
-            <Skeleton className="h-32 w-full rounded-xl" />
-            <Skeleton className="h-32 w-full rounded-xl" />
+      <div className="flex h-[calc(100vh-4rem)] overflow-hidden rounded-2xl border border-border/30">
+        {/* Sidebar Skeleton */}
+        <div className="w-64 border-r border-border/30 p-4 space-y-4">
+          <div className="h-8 w-32 bg-muted/30 rounded animate-pulse" />
+          <div className="space-y-2">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-16 w-full bg-muted/20 rounded-lg animate-pulse" />
+            ))}
           </div>
+        </div>
+
+        {/* Canvas Area Skeleton */}
+        <div className="flex-1 relative overflow-hidden" style={{ background: "hsl(var(--background))" }}>
+          {/* Paper Background Pattern Skeleton */}
+          <div className="absolute inset-0 pointer-events-none opacity-10 bg-grid-pattern" />
+          
+          {/* Canvas Toolbar Skeleton */}
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 flex gap-2 p-2 bg-card border border-border/30 rounded-xl">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="h-8 w-8 bg-muted/20 rounded-lg animate-pulse" />
+            ))}
+          </div>
+
+          {/* Note Cards Skeleton - Positioned absolutely like real notes */}
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="absolute p-4 rounded-xl border border-border/30 bg-card/80 backdrop-blur-sm"
+              style={{
+                left: 50 + (i % 3) * 280,
+                top: 50 + Math.floor(i / 3) * 220,
+                width: 260,
+                height: 200,
+              }}
+            >
+              <div className="space-y-2">
+                <div className="h-5 w-3/4 bg-muted/30 rounded animate-pulse" />
+                <div className="h-4 w-full bg-muted/20 rounded animate-pulse" />
+                <div className="h-4 w-2/3 bg-muted/20 rounded animate-pulse" />
+                <div className="h-4 w-1/2 bg-muted/20 rounded animate-pulse" />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );
+  }
+
+  if (isLoading) {
+    return <NotesSkeleton />;
   }
 
   return (

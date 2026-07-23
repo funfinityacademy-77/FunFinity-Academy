@@ -6,38 +6,58 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { apiClient } from "@/lib/api-client";
 
-// Skeleton Loading Component
+// Skeleton Loading Component - Exact spatial footprint match
 function CourseMapSkeleton() {
   return (
-    <div className="space-y-6 animate-pulse">
-      {/* Header Skeleton */}
-      <div className="platform-card p-6">
-        <div className="h-8 w-64 bg-slate-700/50 rounded mb-2" />
-        <div className="h-4 w-96 bg-slate-700/30 rounded" />
+    <div className="max-w-7xl mx-auto bg-slate-950 min-h-screen text-white space-y-6">
+      {/* Breadcrumb Skeleton */}
+      <div className="text-sm text-slate-400 mb-4 space-x-2">
+        <div className="inline-block h-4 w-16 bg-slate-700/30 rounded animate-pulse" />
+        <span className="mx-2">/</span>
+        <div className="inline-block h-4 w-32 bg-slate-700/50 rounded animate-pulse" />
       </div>
 
-      {/* Image Samples Skeleton */}
-      <div className="platform-card p-4">
-        <div className="h-6 w-40 bg-slate-700/50 rounded mb-3" />
+      {/* Header Skeleton - Exact platform-card p-6 match */}
+      <div className="platform-card p-6 bg-slate-900/50 border-slate-800">
+        <div className="flex items-center justify-between">
+          <div className="space-y-2">
+            <div className="h-10 w-64 bg-slate-700/50 rounded animate-pulse" />
+            <div className="h-4 w-96 bg-slate-700/30 rounded animate-pulse" />
+          </div>
+          <div className="h-10 w-32 bg-slate-700/30 rounded-lg animate-pulse" />
+        </div>
+      </div>
+
+      {/* Image Samples Skeleton - Exact grid match */}
+      <div className="platform-card p-4 bg-slate-900/50 border-slate-800">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="h-5 w-5 bg-slate-700/30 rounded animate-pulse" />
+          <div className="h-6 w-40 bg-slate-700/50 rounded animate-pulse" />
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="aspect-video bg-slate-700/30 rounded-xl" />
+            <div key={i} className="aspect-video rounded-xl bg-slate-700/30 border border-border/30 animate-pulse" />
           ))}
         </div>
       </div>
 
-      {/* Hexagonal Roadmap Skeleton */}
-      <div className="platform-card p-8">
-        <div className="max-w-md mx-auto space-y-8">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="relative">
-              <div className="w-24 h-24 mx-auto bg-slate-700/40 rounded-full" />
-              <div className="text-center mt-3">
-                <div className="h-4 w-24 bg-slate-700/30 rounded mx-auto mb-1" />
-                <div className="h-3 w-16 bg-slate-700/20 rounded mx-auto" />
+      {/* Hexagonal Roadmap Skeleton - Exact layout match */}
+      <div className="platform-card p-8 relative bg-slate-900/50 border-slate-800 min-h-[500px]">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan/5 via-transparent to-purple/5 opacity-50" />
+        <div className="relative z-10 max-w-md mx-auto">
+          <div className="space-y-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="relative">
+                {/* Node Circle */}
+                <div className="w-24 h-24 mx-auto bg-slate-700/40 rounded-full animate-pulse" />
+                {/* Node Text */}
+                <div className="text-center mt-3 space-y-1">
+                  <div className="h-4 w-24 bg-slate-700/30 rounded mx-auto animate-pulse" />
+                  <div className="h-3 w-16 bg-slate-700/20 rounded mx-auto animate-pulse" />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

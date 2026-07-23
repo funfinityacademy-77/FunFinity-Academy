@@ -16,6 +16,90 @@ const fadeIn = (delay: number) => ({
   transition: { duration: 0.5, delay },
 });
 
+// Teacher Dashboard Skeleton - Exact spatial footprint match
+function TeacherDashboardSkeleton() {
+  return (
+    <div className="max-w-7xl mx-auto space-y-6">
+      {/* Welcome Banner Skeleton */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="platform-card p-6 lg:p-8 relative overflow-hidden min-h-[180px]"
+      >
+        <div className="absolute inset-0 bg-gradient-brand-soft opacity-30" />
+        <div className="relative z-10 space-y-4">
+          <div className="h-5 w-40 bg-muted/30 rounded animate-pulse" />
+          <div className="h-10 w-72 bg-muted/50 rounded animate-pulse" />
+          <div className="h-4 w-64 bg-muted/20 rounded animate-pulse" />
+          <div className="flex gap-3">
+            <div className="h-10 w-36 bg-primary/20 rounded-lg animate-pulse" />
+            <div className="h-10 w-28 bg-muted/20 rounded-lg animate-pulse" />
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Stats Grid Skeleton */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1 }}
+        className="grid grid-cols-2 lg:grid-cols-4 gap-4"
+      >
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="platform-card p-4">
+            <div className="w-9 h-9 rounded-xl bg-primary/10 animate-pulse mb-3" />
+            <div className="h-7 w-16 bg-muted/50 rounded animate-pulse mb-1" />
+            <div className="h-3 w-24 bg-muted/20 rounded animate-pulse" />
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Two-Column Layout Skeleton */}
+      <div className="grid lg:grid-cols-2 gap-6">
+        {/* My Courses Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="space-y-4"
+        >
+          <div className="flex items-center justify-between">
+            <div className="h-7 w-32 bg-muted/30 rounded animate-pulse" />
+            <div className="h-5 w-20 bg-muted/20 rounded animate-pulse" />
+          </div>
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="platform-card p-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <div className="h-5 w-48 bg-muted/30 rounded animate-pulse" />
+                  <div className="h-4 w-32 bg-muted/20 rounded animate-pulse" />
+                </div>
+                <div className="h-6 w-20 rounded-full bg-secondary animate-pulse" />
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Recent Quizzes Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="space-y-4"
+        >
+          <div className="h-7 w-40 bg-muted/30 rounded animate-pulse" />
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className="platform-card p-4">
+              <div className="h-5 w-56 bg-muted/30 rounded animate-pulse mb-1" />
+              <div className="h-4 w-40 bg-muted/20 rounded animate-pulse" />
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
 export default function TeacherDashboard() {
   const { user } = useAuth();
 
@@ -45,6 +129,10 @@ export default function TeacherDashboard() {
     { label: "My Courses", value: String((myCourses || []).length), icon: BookOpen, colorClass: "bg-primary/10 text-primary" },
     { label: "Quizzes", value: String((myQuizzes || []).length), icon: BarChart3, colorClass: "bg-magenta/10 text-magenta" },
   ];
+
+  if (isLoading) {
+    return <TeacherDashboardSkeleton />;
+  }
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
@@ -89,9 +177,7 @@ export default function TeacherDashboard() {
               Manage <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
-          {isLoading ? (
-            <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin text-muted-foreground" /></div>
-          ) : (myCourses || []).length === 0 ? (
+          {(myCourses || []).length === 0 ? (
             <div className="platform-card p-8 text-center text-sm text-muted-foreground">
               No courses yet — create your first course!
             </div>
