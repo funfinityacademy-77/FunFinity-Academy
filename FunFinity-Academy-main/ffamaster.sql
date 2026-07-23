@@ -318,14 +318,36 @@ CREATE TABLE IF NOT EXISTS public.bug_reports (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Activity Logs
-CREATE TABLE IF NOT EXISTS public.activity_logs (
+-- Activity Logs (Updated schema for AdminActivityLogs.tsx)
+-- Drop existing table to recreate with new schema
+DROP TABLE IF EXISTS public.activity_logs CASCADE;
+
+CREATE TABLE public.activity_logs (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+  user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+  user_email TEXT,
+  role TEXT CHECK (role IN ('student', 'teacher', 'admin', 'system')),
   action TEXT NOT NULL,
-  details JSONB,
+  category TEXT CHECK (category IN ('Security', 'Course', 'Grade', 'Settings', 'Billing', 'System', 'Live')),
+  severity TEXT CHECK (severity IN ('info', 'warning', 'critical', 'success')),
+  details TEXT,
   ip_address TEXT,
+  user_agent TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Privacy Requests (Added for GDPR Edge Function)
+-- Drop existing table to recreate with new schema
+DROP TABLE IF EXISTS public.privacy_requests CASCADE;
+
+CREATE TABLE public.privacy_requests (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  requested_by UUID REFERENCES auth.users(id),
+  status TEXT CHECK (status IN ('pending', 'completed', 'rejected')),
+  reason TEXT,
+  requested_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  completed_at TIMESTAMP WITH TIME ZONE
 );
 
 -- Restrictions (Bans, Timeouts, etc.)
@@ -523,6 +545,7 @@ ALTER TABLE public.user_badges ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.points_history ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.bug_reports ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.activity_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.privacy_requests ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.restrictions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.live_classes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
@@ -708,10 +731,57 @@ DROP POLICY IF EXISTS "Service role can view all bug reports" ON public.bug_repo
 CREATE POLICY "Service role can view all bug reports" ON public.bug_reports
   FOR SELECT TO service_role USING (true);
 
--- Activity logs policies
+-- Activity logs policies (Updated for new schema)
 DROP POLICY IF EXISTS "Service role can view activity logs" ON public.activity_logs;
 CREATE POLICY "Service role can view activity logs" ON public.activity_logs
   FOR SELECT TO service_role USING (true);
+
+DROP POLICY IF EXISTS "Service role can insert activity logs" ON public.activity_logs;
+CREATE POLICY "Service role can insert activity logs" ON public.activity_logs
+  FOR INSERT TO service_role WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Admins can view activity logs" ON public.activity_logs;
+CREATE POLICY "Admins can view activity logs" ON public.activity_logs
+  FOR SELECT TO authenticated USING (
+    EXISTS (
+      SELECT 1 FROM auth.users
+      WHERE id = auth.uid()
+      AND email IN ('funfinityacademy@gmail.com', 'academyfunfinity@gmail.com')
+    )
+  );
+
+-- Privacy Requests policies (Added for GDPR Edge Function)
+DROP POLICY IF EXISTS "Users can view own privacy requests" ON public.privacy_requests;
+CREATE POLICY "Users can view own privacy requests" ON public.privacy_requests
+  FOR SELECT TO authenticated USING (user_id = auth.uid() OR requested_by = auth.uid());
+
+DROP POLICY IF EXISTS "Admins can view all privacy requests" ON public.privacy_requests;
+CREATE POLICY "Admins can view all privacy requests" ON public.privacy_requests
+  FOR SELECT TO authenticated USING (
+    EXISTS (
+      SELECT 1 FROM auth.users
+      WHERE id = auth.uid()
+      AND email IN ('funfinityacademy@gmail.com', 'academyfunfinity@gmail.com')
+    )
+  );
+
+DROP POLICY IF EXISTS "Users can create privacy requests" ON public.privacy_requests;
+CREATE POLICY "Users can create privacy requests" ON public.privacy_requests
+  FOR INSERT TO authenticated WITH CHECK (requested_by = auth.uid());
+
+DROP POLICY IF EXISTS "Admins can update privacy requests" ON public.privacy_requests;
+CREATE POLICY "Admins can update privacy requests" ON public.privacy_requests
+  FOR UPDATE TO authenticated USING (
+    EXISTS (
+      SELECT 1 FROM auth.users
+      WHERE id = auth.uid()
+      AND email IN ('funfinityacademy@gmail.com', 'academyfunfinity@gmail.com')
+    )
+  );
+
+DROP POLICY IF EXISTS "Service role can manage privacy requests" ON public.privacy_requests;
+CREATE POLICY "Service role can manage privacy requests" ON public.privacy_requests
+  FOR ALL TO service_role USING (true);
 
 -- Notifications policies
 DROP POLICY IF EXISTS "Public can view active notifications" ON public.notifications;
@@ -832,6 +902,17 @@ CREATE INDEX IF NOT EXISTS idx_milestones_user_id ON public.milestones(user_id);
 CREATE INDEX IF NOT EXISTS idx_milestones_completed ON public.milestones(completed);
 CREATE INDEX IF NOT EXISTS idx_resumes_user_id ON public.resumes(user_id);
 
+-- Indexes for activity_logs (Updated for new schema)
+CREATE INDEX IF NOT EXISTS idx_activity_logs_user_id ON public.activity_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_activity_logs_created_at ON public.activity_logs(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_activity_logs_category ON public.activity_logs(category);
+CREATE INDEX IF NOT EXISTS idx_activity_logs_severity ON public.activity_logs(severity);
+
+-- Indexes for privacy_requests
+CREATE INDEX IF NOT EXISTS idx_privacy_requests_user_id ON public.privacy_requests(user_id);
+CREATE INDEX IF NOT EXISTS idx_privacy_requests_requested_by ON public.privacy_requests(requested_by);
+CREATE INDEX IF NOT EXISTS idx_privacy_requests_status ON public.privacy_requests(status);
+
 -- Analyze tables
 ANALYZE public.profiles;
 ANALYZE public.user_roles;
@@ -845,6 +926,8 @@ ANALYZE public.notifications;
 ANALYZE public.academic_profiles;
 ANALYZE public.milestones;
 ANALYZE public.resumes;
+ANALYZE public.activity_logs;
+ANALYZE public.privacy_requests;
 
 -- ============================================================================
 -- SECTION 5: AI MEMORY SCHEMA

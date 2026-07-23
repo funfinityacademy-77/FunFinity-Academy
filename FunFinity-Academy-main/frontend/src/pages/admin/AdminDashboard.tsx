@@ -304,35 +304,6 @@ export default function AdminDashboard() {
           <div className="platform-card p-5 space-y-4 bg-gradient-to-br from-primary/5 to-transparent border-primary/10">
             <p className="text-sm text-muted-foreground text-center py-4">No automation protocols configured yet</p>
           </div>
-
-          <h2 className="font-display text-base font-bold text-foreground mt-6">New <span className="text-cyan">Features</span></h2>
-          <div className="platform-card p-5 space-y-3 bg-gradient-to-br from-cyan/5 to-transparent border-cyan/10">
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-secondary/30">
-              <Award className="w-4 h-4 text-cyan" />
-              <span className="text-xs text-foreground">College & University Search</span>
-              <Link to="/admin/college-university" className="ml-auto text-xs text-primary hover:underline">Manage</Link>
-            </div>
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-secondary/30">
-              <FileText className="w-4 h-4 text-primary" />
-              <span className="text-xs text-foreground">Academic Profiles</span>
-              <Link to="/admin/academic-profiles" className="ml-auto text-xs text-primary hover:underline">Manage</Link>
-            </div>
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-secondary/30">
-              <MessageSquare className="w-4 h-4 text-magenta" />
-              <span className="text-xs text-foreground">Feedback Center</span>
-              <Link to="/admin/feedback" className="ml-auto text-xs text-primary hover:underline">Manage</Link>
-            </div>
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-secondary/30">
-              <Palette className="w-4 h-4 text-accent" />
-              <span className="text-xs text-foreground">Custom Backgrounds</span>
-              <Link to="/admin/backgrounds" className="ml-auto text-xs text-primary hover:underline">Manage</Link>
-            </div>
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-secondary/30">
-              <Bell className="w-4 h-4 text-yellow-500" />
-              <span className="text-xs text-foreground">Notifications</span>
-              <Link to="/admin/notifications" className="ml-auto text-xs text-primary hover:underline">Manage</Link>
-            </div>
-          </div>
         </motion.div>
       </div>
         </>

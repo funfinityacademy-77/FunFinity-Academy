@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Activity, Search, Filter, Shield, User, BookOpen, Settings, Download, Clock, ChevronLeft, ChevronRight, Zap, Play, Pause, RotateCcw, AlertTriangle, CheckCircle, Info } from "lucide-react";
+import { Activity, Search, Filter, Shield, User, BookOpen, Settings, Download, Clock, ChevronLeft, ChevronRight, Zap, Play, Pause, RotateCcw, AlertTriangle, CheckCircle, Info, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/lib/supabase";
 
 interface ActivityLog {
   id: string;
@@ -48,72 +49,99 @@ export default function AdminActivityLogs() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLive, setIsLive] = useState(true);
   const [latency, setLatency] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(true);
   const logCounterRef = useRef(0);
   const performanceRef = useRef(performance.now());
 
-  // High-precision timestamp generator
-  const getHighPrecisionTimestamp = () => {
-    const now = performance.now();
-    const timestamp = Date.now();
-    const micro = Math.floor((now % 1) * 1000); // Extract microseconds
-    return { timestamp, timestampMicro: micro };
+  // Fetch real activity logs from Supabase
+  const fetchLogs = async () => {
+    try {
+      setIsLoading(true);
+      const { data, error } = await supabase
+        .from('activity_logs')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(1000);
+
+      if (error) {
+        console.error('Error fetching activity logs:', error);
+        return;
+      }
+
+      if (data) {
+        const transformedLogs: ActivityLog[] = data.map((log: any) => ({
+          id: log.id,
+          timestamp: new Date(log.created_at).getTime(),
+          timestampMicro: 0,
+          user: log.user_email || log.user_id,
+          role: log.role || 'System',
+          action: log.action,
+          category: log.category || 'System',
+          severity: log.severity || 'info',
+          details: log.details,
+          ipAddress: log.ip_address,
+          userAgent: log.user_agent,
+        }));
+        setLogs(transformedLogs);
+      }
+    } catch (error) {
+      console.error('Error fetching logs:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // Simulate real-time activity with ultra-low latency
+  // Initial fetch
+  useEffect(() => {
+    fetchLogs();
+  }, []);
+
+  // Real-time subscription to activity logs
   useEffect(() => {
     if (!isLive) return;
 
-    const interval = setInterval(() => {
-      const { timestamp, timestampMicro } = getHighPrecisionTimestamp();
-      const latency = performance.now() - performanceRef.current;
-      setLatency(latency);
+    const subscription = supabase
+      .channel('activity_logs_channel')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'activity_logs',
+        },
+        (payload) => {
+          const newLog: ActivityLog = {
+            id: payload.new.id,
+            timestamp: new Date(payload.new.created_at).getTime(),
+            timestampMicro: 0,
+            user: payload.new.user_email || payload.new.user_id,
+            role: payload.new.role || 'System',
+            action: payload.new.action,
+            category: payload.new.category || 'System',
+            severity: payload.new.severity || 'info',
+            details: payload.new.details,
+            ipAddress: payload.new.ip_address,
+            userAgent: payload.new.user_agent,
+          };
+          setLogs(prev => [newLog, ...prev].slice(0, 1000));
+        }
+      )
+      .subscribe();
 
-      const actions = [
-        { action: "User logged in", category: "Security", severity: "success" as const, role: "Student" },
-        { action: "Course enrollment completed", category: "Course", severity: "info" as const, role: "Student" },
-        { action: "Grade submitted", category: "Grade", severity: "info" as const, role: "Teacher" },
-        { action: "Settings updated", category: "Settings", severity: "warning" as const, role: "Admin" },
-        { action: "Payment processed", category: "Billing", severity: "success" as const, role: "System" },
-        { action: "Failed login attempt", category: "Security", severity: "critical" as const, role: "System" },
-        { action: "Live session started", category: "Live", severity: "info" as const, role: "Teacher" },
-        { action: "API rate limit exceeded", category: "System", severity: "warning" as const, role: "System" },
-      ];
-
-      const randomAction = actions[Math.floor(Math.random() * actions.length)];
-      const users = ["john.doe", "jane.smith", "admin.user", "teacher.jones", "student.wilson"];
-      const randomUser = users[Math.floor(Math.random() * users.length)];
-
-      const newLog: ActivityLog = {
-        id: `log-${logCounterRef.current++}`,
-        timestamp,
-        timestampMicro,
-        user: randomUser,
-        role: randomAction.role,
-        action: randomAction.action,
-        category: randomAction.category,
-        severity: randomAction.severity,
-        details: `Session ID: ${Math.random().toString(36).substring(7)}`,
-        ipAddress: `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
-      };
-
-      setLogs(prev => [newLog, ...prev].slice(0, 1000)); // Keep last 1000 logs
-      performanceRef.current = performance.now();
-    }, Math.random() * 2000 + 500); // Random interval between 500ms and 2500ms
-
-    return () => clearInterval(interval);
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [isLive]);
 
-  // Format timestamp with microsecond precision
-  const formatHighPrecisionTimestamp = (timestamp: number, micro: number) => {
+  // Format timestamp
+  const formatTimestamp = (timestamp: number) => {
     const date = new Date(timestamp);
-    const timeStr = date.toLocaleTimeString('en-US', { 
+    return date.toLocaleTimeString('en-US', { 
       hour12: false, 
       hour: '2-digit', 
       minute: '2-digit', 
       second: '2-digit',
-      fractionalSecondDigits: 3 
     });
-    return `${timeStr}.${micro.toString().padStart(3, '0')}`;
   };
 
   const filtered = logs.filter(l =>
@@ -203,7 +231,12 @@ export default function AdminActivityLogs() {
 
         {/* Log entries */}
         <div className="space-y-2">
-          {paginatedLogs.length === 0 ? (
+          {isLoading ? (
+            <div className="platform-card p-12 flex flex-col items-center justify-center text-center">
+              <Loader2 className="w-12 h-12 text-muted-foreground/30 mb-3 animate-spin" />
+              <p className="text-muted-foreground text-sm">Loading activity logs...</p>
+            </div>
+          ) : paginatedLogs.length === 0 ? (
             <div className="platform-card p-12 flex flex-col items-center justify-center text-center">
               <Activity className="w-12 h-12 text-muted-foreground/30 mb-3" />
               <p className="text-muted-foreground text-sm">{isLive ? "Waiting for activity..." : "No activity recorded"}</p>
@@ -240,11 +273,8 @@ export default function AdminActivityLogs() {
                     </div>
                     <div className="text-right shrink-0">
                       <span className="text-xs text-muted-foreground font-mono">
-                        {formatHighPrecisionTimestamp(log.timestamp, log.timestampMicro)}
+                        {formatTimestamp(log.timestamp)}
                       </span>
-                      <div className="text-[9px] text-muted-foreground mt-0.5">
-                        μs: {log.timestampMicro}
-                      </div>
                     </div>
                   </div>
                 </motion.div>

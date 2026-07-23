@@ -119,60 +119,45 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const isAdmin = isAdminUser(authUser.email);
       const adminRole = isAdmin ? 'admin' : 'student';
       
-      const { data: profile, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', authUser.id)
-        .single();
-
-      console.log('loadCurrentUser profile query:', { profile, error, isAdmin });
-
-      if (error || !profile) {
-        console.log('Profile not found, creating new profile');
-        // Create profile if it doesn't exist
-        const { data: newProfile, error: createError } = await supabase
-          .from('profiles')
-          .insert({
-            id: authUser.id,
-            email: authUser.email,
-            display_name: authUser.user_metadata.display_name || authUser.email?.split('@')[0],
-            role: adminRole
-          })
-          .select()
-          .single();
-
-        if (createError) {
-          console.warn('Profile creation failed:', createError);
-          // Set fallback user so the session isn't broken
-          setUser({
-            id: authUser.id,
-            email: authUser.email,
-            display_name: authUser.user_metadata.display_name || authUser.email?.split('@')[0],
-            role: adminRole
-          } as User);
-          setRole(adminRole);
-        } else {
-          console.log('Profile created successfully with role:', adminRole);
-          setUser(newProfile as User);
-          setRole(adminRole);
-        }
-      } else {
-        console.log('Profile found:', profile);
-        // For admin emails, force admin role in database
-        if (isAdmin && profile.role !== 'admin') {
-          console.log('Updating profile role to admin');
-          await supabase
+      // Set user immediately without waiting for profile
+      setUser({
+        id: authUser.id,
+        email: authUser.email,
+        display_name: authUser.user_metadata.display_name || authUser.email?.split('@')[0],
+        role: adminRole
+      } as User);
+      setRole(adminRole);
+      
+      // Try to load profile in background (don't block)
+      (async () => {
+        try {
+          const { data: profile, error: profileError } = await supabase
             .from('profiles')
-            .update({ role: 'admin' })
-            .eq('id', authUser.id);
-          setUser(profile as User);
-          setRole('admin');
-        } else {
-          setUser(profile as User);
-          const userRole = isAdmin ? 'admin' : (profile.role || 'student');
-          setRole(userRole);
+            .select('*')
+            .eq('id', authUser.id)
+            .single();
+          
+          if (profileError || !profile) {
+            console.log('Profile not found, creating in background');
+            await supabase
+              .from('profiles')
+              .insert({
+                id: authUser.id,
+                email: authUser.email,
+                display_name: authUser.user_metadata.display_name || authUser.email?.split('@')[0],
+                role: adminRole
+              });
+          } else if (isAdmin && profile.role !== 'admin') {
+            console.log('Updating profile role to admin');
+            await supabase
+              .from('profiles')
+              .update({ role: 'admin' })
+              .eq('id', authUser.id);
+          }
+        } catch (err) {
+          console.warn('Profile load/update failed:', err);
         }
-      }
+      })();
     } catch (error) {
       console.error('loadCurrentUser error:', error);
       if (authUser) {
@@ -215,25 +200,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (data.user) {
         console.log('Sign up successful for user:', data.user.id, 'with role:', finalRole);
         
-        // Try to create profile, but don't block if it fails
-        try {
-          const { error: profileError } = await supabase
-            .from('profiles')
-            .insert({
-              id: data.user.id,
-              email: email,
-              display_name: name,
-              role: finalRole
-            });
-
-          if (profileError) {
-            console.warn('Profile creation failed:', profileError);
-            // Don't throw - user is still authenticated
-          }
-        } catch (profileError) {
-          console.warn('Profile creation error:', profileError);
-        }
-
+        // Set user immediately
         setUser({
           id: data.user.id,
           email: email,
@@ -241,6 +208,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           role: finalRole
         } as User);
         setRole(finalRole);
+        
+        // Create profile in background (don't block)
+        (async () => {
+          try {
+            await supabase
+              .from('profiles')
+              .insert({
+                id: data.user.id,
+                email: email,
+                display_name: name,
+                role: finalRole
+              });
+          } catch (err) {
+            console.warn('Profile creation failed:', err);
+          }
+        })();
       }
 
       return { error: null };
@@ -269,48 +252,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (data.user) {
         console.log('Sign in successful for user:', data.user.id);
         
-        // Try to fetch role, but don't block sign-in if it fails
-        let role = 'student';
-        try {
-          role = await fetchUserRole(data.user.id, data.user.email);
-        } catch (roleError) {
-          console.warn('Failed to fetch role, defaulting to student:', roleError);
-        }
-        
         // For admin emails, force admin role
-        if (isAdmin) {
-          role = 'admin';
-        }
+        const role = isAdmin ? 'admin' : 'student';
         
-        // Try to create/update profile if it doesn't exist or role is wrong
-        try {
-          const { data: existingProfile } = await supabase
-            .from('profiles')
-            .select('id, role')
-            .eq('id', data.user.id)
-            .single();
-
-          if (!existingProfile) {
-            console.log('Creating profile during sign-in with role:', role);
-            await supabase
-              .from('profiles')
-              .insert({
-                id: data.user.id,
-                email: data.user.email,
-                display_name: data.user.user_metadata.display_name || data.user.email?.split('@')[0],
-                role: role
-              });
-          } else if (isAdmin && existingProfile.role !== 'admin') {
-            console.log('Updating profile role to admin');
-            await supabase
-              .from('profiles')
-              .update({ role: 'admin' })
-              .eq('id', data.user.id);
-          }
-        } catch (profileError) {
-          console.warn('Profile check/creation during sign-in failed:', profileError);
-        }
-        
+        // Set user immediately without waiting for profile
         setUser({
           id: data.user.id,
           email: data.user.email,
@@ -319,6 +264,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } as User);
         
         setRole(role);
+        
+        // Try to create/update profile in background (don't block)
+        (async () => {
+          try {
+            const { data: existingProfile, error: profileError } = await supabase
+              .from('profiles')
+              .select('id, role')
+              .eq('id', data.user.id)
+              .single();
+            
+            if (profileError || !existingProfile) {
+              console.log('Creating profile in background with role:', role);
+              await supabase
+                .from('profiles')
+                .insert({
+                  id: data.user.id,
+                  email: data.user.email,
+                  display_name: data.user.user_metadata.display_name || data.user.email?.split('@')[0],
+                  role: role
+                });
+            } else if (isAdmin && existingProfile.role !== 'admin') {
+              console.log('Updating profile role to admin');
+              await supabase
+                .from('profiles')
+                .update({ role: 'admin' })
+                .eq('id', data.user.id);
+            }
+          } catch (err) {
+            console.warn('Profile check/update failed:', err);
+          }
+        })();
       }
 
       return { error: null };

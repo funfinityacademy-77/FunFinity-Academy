@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Dna, Sliders, RefreshCw, User } from "lucide-react";
+import { Dna, Sliders, RefreshCw, User, Network } from "lucide-react";
 
 const features = [
   {
@@ -22,10 +22,10 @@ const features = [
       "Discover your natural focus patterns. The system supports your rhythm, never fights it.",
   },
   {
-    icon: User,
-    title: "Agency First",
+    icon: Network,
+    title: "Interconnected Learning",
     description:
-      "Personalization amplifies your choices, never restricts them. You're always in control.",
+      "Connect concepts across subjects. Build a knowledge network that strengthens over time.",
   },
 ];
 
@@ -54,7 +54,7 @@ export function LearningDNASection() {
             <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 text-foreground">
               Your <span className="text-gradient-brand">Learning DNA</span>
             </h2>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 sm:mb-8">
+            <p className="text-base sm:text-lg text-foreground/80 leading-relaxed mb-6 sm:mb-8">
               Our AI adapts to your unique learning style, creating a personalized experience that evolves with you.
             </p>
           </motion.div>
@@ -67,13 +67,13 @@ export function LearningDNASection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                className="p-4 sm:p-5 rounded-xl bg-card/60 backdrop-blur-sm border border-border/50 hover:border-accent/30 transition-all duration-300"
+                className="p-4 sm:p-5 rounded-xl bg-card/60 backdrop-blur-sm border border-foreground/20 hover:border-accent/30 transition-all duration-300"
               >
                 <feature.icon className="w-8 h-8 text-accent mb-3" />
                 <h3 className="font-display font-semibold mb-2 text-foreground">
                   {feature.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-foreground/70 leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
