@@ -18,6 +18,8 @@ dist-ssr
 .env.*.local
 .env.production
 .env.development
+# Allow .env.example for deployment reference
+!.env.example
 
 # Editor directories and files
 .vscode/*
@@ -31,7 +33,6 @@ dist-ssr
 *.sw?
 
 .vercel
-.env*
 
 # Auto-generated entries
 # Dependencies
@@ -44,11 +45,6 @@ yarn-error.log*
 dist/
 build/
 *.log
-
-# Environment files
-.env
-.env.*
-!.env.example
 
 # IDE files
 .vscode/
@@ -65,12 +61,6 @@ Thumbs.db
 *.temp
 .cache/
 
-# Sensitive files (auto-detected)
-.env
-.env.example
-.env.local
-node_modules
-
 # Database schemas - SECURITY: Never commit sensitive database schemas
 # Allow documentation files in specific directories
 !database/docs/*.sql
@@ -80,7 +70,3 @@ node_modules
 database/secrets/
 database/production/
 database/migrations/
-
-
-.vercel
-.env*
