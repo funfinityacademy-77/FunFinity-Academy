@@ -108,9 +108,9 @@ export function PhilosophySection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="philosophy" className="py-12 md:py-16 relative overflow-hidden">
+    <section id="philosophy" className="py-8 sm:py-10 md:py-16 relative overflow-hidden">
       {/* Subtle background accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] md:w-[1000px] h-[400px] sm:h-[500px] md:h-[600px] bg-glow-cyan opacity-30" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] sm:w-[500px] md:w-[800px] h-[200px] sm:h-[300px] md:h-[600px] bg-glow-cyan opacity-30" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
@@ -121,21 +121,21 @@ export function PhilosophySection() {
           transition={{ duration: 0.8 }}
           className="text-center max-w-3xl mx-auto mb-6 sm:mb-8"
         >
-          <span className="text-sm font-medium text-cyan uppercase tracking-wider mb-4 block">
+          <span className="text-xs sm:text-sm font-medium text-cyan uppercase tracking-wider mb-2 sm:mb-4 block">
             Our Philosophy
           </span>
-          <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 text-foreground">
+          <h2 className="font-display text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-2 sm:mb-3 text-foreground">
             Designed for how learning{" "}
             <span className="text-gradient-brand">actually works</span>
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
             Traditional platforms fragment attention. We create conditions where
             understanding can genuinely thrive.
           </p>
         </motion.div>
 
         {/* Pillars Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {pillars.map((pillar, index) => (
             <PillarCard key={pillar.title} pillar={pillar} index={index} />
           ))}

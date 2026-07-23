@@ -203,14 +203,14 @@ export function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-[70vh] sm:min-h-[75vh] flex flex-col justify-center overflow-hidden pt-16 sm:pt-16" aria-label="Hero section - Funfinity Academy learning platform">
+    <section className="relative min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)] flex flex-col justify-center overflow-hidden" aria-label="Hero section - Funfinity Academy learning platform">
       <div className="absolute inset-0 bg-gradient-to-br from-blue/10 via-orange/10 to-pink/10" aria-hidden="true" />
-      <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-blue/30 rounded-full blur-3xl opacity-50" aria-hidden="true" />
-      <div className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] bg-pink/30 rounded-full blur-3xl opacity-50" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] bg-orange/30 rounded-full blur-3xl opacity-40" />
+      <div className="absolute top-1/4 left-1/4 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] lg:w-[500px] lg:h-[500px] bg-blue/30 rounded-full blur-3xl opacity-50" aria-hidden="true" />
+      <div className="absolute bottom-1/4 right-1/4 w-[150px] h-[150px] sm:w-[250px] sm:h-[250px] lg:w-[400px] lg:h-[400px] bg-pink/30 rounded-full blur-3xl opacity-50" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] lg:w-[300px] lg:h-[300px] bg-orange/30 rounded-full blur-3xl opacity-40" />
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10 flex-1 flex items-center">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto w-full">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 flex-1 flex items-center py-8 sm:py-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center max-w-6xl mx-auto w-full">
           {/* Left - Copy */}
           <div>
             <motion.div
@@ -229,7 +229,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.2]"
+              className="font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4 md:mb-6 leading-[1.15] sm:leading-[1.2]"
             >
               AI-Powered Coding Academy
               <br />
@@ -240,7 +240,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-sm sm:text-base md:text-lg text-foreground/90 max-w-lg mb-6 sm:mb-8 leading-relaxed font-medium"
+              className="text-xs sm:text-sm md:text-base lg:text-lg text-foreground/90 max-w-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed font-medium"
             >
               Master coding, math, and science through interactive AI-powered lessons designed specifically for students ages 10-16.
             </motion.p>

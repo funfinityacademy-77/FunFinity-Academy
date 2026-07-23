@@ -48,9 +48,9 @@ export function HowItWorksSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="how-it-works" className="py-12 md:py-16 relative overflow-hidden">
+    <section id="how-it-works" className="py-8 sm:py-10 md:py-16 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute top-1/2 right-0 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-glow-accent opacity-20" />
+      <div className="absolute top-1/2 right-0 w-[150px] sm:w-[250px] md:w-[400px] h-[150px] sm:h-[250px] md:h-[500px] bg-glow-accent opacity-20" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
@@ -59,15 +59,15 @@ export function HowItWorksSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8 }}
-          className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 md:mb-16"
+          className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 md:mb-16"
         >
-          <span className="text-sm font-medium text-accent uppercase tracking-wider mb-4 block">
+          <span className="text-xs sm:text-sm font-medium text-accent uppercase tracking-wider mb-2 sm:mb-4 block">
             The Journey
           </span>
-          <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 text-foreground">
+          <h2 className="font-display text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-2 sm:mb-3 text-foreground">
             How the <span className="text-gradient-brand">adventure unfolds</span>
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
             Learning is not a race to completion. It's an ongoing exploration that
             respects your child's natural curiosity and pace.
           </p>

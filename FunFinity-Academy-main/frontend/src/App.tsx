@@ -175,7 +175,7 @@ const App = () => {
                         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                           <ScrollRestoration />
                           <Suspense fallback={<RouteSkeleton />}>
-                            <div className="spacing-compact" role="application">
+                            <div className="min-h-screen flex flex-col" role="application">
                               <Routes>
                                 <Route path="/" element={<Index />} />
                                 <Route path="/auth" element={<Auth />} />

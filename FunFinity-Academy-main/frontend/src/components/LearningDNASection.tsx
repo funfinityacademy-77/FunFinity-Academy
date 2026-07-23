@@ -34,10 +34,10 @@ export function LearningDNASection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-12 md:py-16 relative overflow-hidden bg-secondary/30">
+    <section className="py-8 sm:py-10 md:py-16 relative overflow-hidden bg-secondary/30">
       {/* Background elements */}
-      <div className="absolute bottom-0 right-0 w-[300px] sm:w-[400px] md:w-[600px] h-[300px] sm:h-[400px] md:h-[600px] bg-glow-magenta opacity-20" />
-      <div className="absolute top-1/2 left-0 w-[200px] sm:w-[300px] md:w-[400px] h-[200px] sm:h-[300px] md:h-[400px] bg-glow-accent opacity-15" />
+      <div className="absolute bottom-0 right-0 w-[150px] sm:w-[250px] md:w-[500px] h-[150px] sm:h-[250px] md:h-[600px] bg-glow-magenta opacity-20" />
+      <div className="absolute top-1/2 left-0 w-[100px] sm:w-[200px] md:w-[400px] h-[100px] sm:h-[200px] md:h-[400px] bg-glow-accent opacity-15" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-center">

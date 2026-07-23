@@ -308,12 +308,16 @@
 
   html {
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
     line-height: var(--leading-normal);
+    margin: 0;
+    padding: 0;
   }
 
   h1,

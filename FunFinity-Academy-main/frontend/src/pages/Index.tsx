@@ -14,10 +14,10 @@ import { SupportChatWidget } from "@/components/chat/SupportChatWidget";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <NotificationBanner />
       <Navbar />
-      <main id="main-content">
+      <main id="main-content" className="flex-1">
         <HeroSection />
         <LegalPopupSection />
         <RollingExperienceWall />
