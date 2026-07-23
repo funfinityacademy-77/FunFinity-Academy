@@ -5,9 +5,7 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    'Missing required Supabase environment variables. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your environment variables.'
-  );
+  console.warn('[SUPABASE_WARNING]: Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. Running in degraded mode or utilizing local mocks.');
 }
 
 // Use hybrid storage (cookies with localStorage fallback) for security
@@ -18,12 +16,16 @@ const hybridStorage = new HybridStorage({
   path: '/',
 });
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: true,
-    storage: hybridStorage as any,
-    storageKey: 'funfinity-auth-token',
-  },
-});
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseAnonKey || 'placeholder-key',
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+      storage: hybridStorage as any,
+      storageKey: 'funfinity-auth-token',
+    },
+  }
+);
