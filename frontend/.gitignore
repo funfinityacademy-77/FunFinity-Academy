@@ -1,0 +1,21 @@
+.vercel
+.env*
+# Node / build outputs
+node_modules/
+dist/
+build/
+
+# Environment files - explicitly ignore common local env patterns
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+# Allow .env.example for documentation
+!.env.example
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,37 @@
+# FunFinity Academy - Robots.txt
+# Last updated: 2026
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Social media crawlers
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Disallow admin and private areas
+User-agent: *
+Disallow: /app/
+Disallow: /admin/
+Disallow: /auth/
+Disallow: /reset-password
+Disallow: /account-banned
+Disallow: /api/
+
+# Allow sitemap
+Sitemap: https://funfinityacademy.vercel.app/sitemap.xml

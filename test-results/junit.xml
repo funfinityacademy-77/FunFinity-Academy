@@ -1,0 +1,70 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="1" time="28.039225">
+<testsuite name="auth.spec.ts" timestamp="2026-07-22T04:03:38.925Z" hostname="chromium" tests="1" failures="0" skipped="0" time="24.028" errors="1">
+<testcase name="Authentication Flow › should navigate to auth page and display login form" classname="auth.spec.ts" time="24.028">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium\video.webm]]
+
+[[ATTACHMENT|auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium\error-context.md]]
+]]>
+</system-out>
+<error message="page.click: Timeout 10000ms exceeded." type="TimeoutError">
+<![CDATA[  [chromium] › auth.spec.ts:13:3 › Authentication Flow › should navigate to auth page and display login form 
+
+    TimeoutError: page.click: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('text=Start Learning Now')
+        - locator resolved to <a href="/auth" class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-body ring-offset-background duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-brand hover:shadow-glow-accent active:scale-[0.98] h-12 rounded-xl px-8 group bg-gradient-to-r from-blue-dark to-orange-dark hover:from-blue hover:…>…</a>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-state="open" aria-hidden="true" data-aria-hidden="true" class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"></div> intercepts pointer events
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-state="open" aria-hidden="true" data-aria-hidden="true" class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"></div> intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        6 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-state="open" aria-hidden="true" data-aria-hidden="true" class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"></div> intercepts pointer events
+        - retrying click action
+          - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+
+
+      13 |   test('should navigate to auth page and display login form', async ({ page }) => {
+      14 |     // Click on login button
+    > 15 |     await page.click('text=Start Learning Now');
+         |                ^
+      16 |     
+      17 |     // Wait for navigation to auth page
+      18 |     await page.waitForURL('**/auth');
+        at C:\Users\harsh\Downloads\FunFinity Academy\tests\e2e\auth.spec.ts:15:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium\error-context.md
+]]>
+</error>
+</testcase>
+</testsuite>
+</testsuites>
