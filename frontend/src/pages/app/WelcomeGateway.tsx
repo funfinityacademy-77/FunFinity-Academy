@@ -98,20 +98,16 @@ export default function WelcomeGateway() {
 
             {/* CTA Button */}
             <Button 
-              asChild 
-              size="lg" 
-              className="w-full group"
               variant="hero"
+              size="xl"
+              className="w-full group"
+              asChild
             >
               <Link to="/app/compact-profile-quiz">
-                Start Your Profile Setup
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                Begin Your Learning Profile Setup
+                <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
-
-            <p className="text-xs text-muted-foreground text-center mt-4">
-              You can complete this setup at any time. Your progress will be saved automatically.
-            </p>
           </motion.div>
         </motion.div>
       </div>

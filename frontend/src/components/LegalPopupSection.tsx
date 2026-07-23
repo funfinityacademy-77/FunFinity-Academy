@@ -156,22 +156,23 @@ export function LegalPopupSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 onClick={() => setActivePopup(card.id)}
-                className="group relative p-6 rounded-2xl bg-background border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg text-left"
+                className="group relative p-6 rounded-2xl glass-card border border-border/40 hover:border-primary/40 transition-all duration-300 hover:shadow-medium text-left overflow-hidden"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-xl bg-secondary/80 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Icon className="w-6 h-6 text-primary" />
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary to-secondary/60 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm ring-1 ring-border/30">
+                    <Icon className="w-7 h-7 text-primary" />
                   </div>
                   <h3 className="font-display font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {card.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">
+                  <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
                     {card.description}
                   </p>
-                  <div className="flex items-center gap-1 mt-3 text-xs text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center gap-1.5 mt-4 text-xs text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                     <span>Learn more</span>
-                    <ChevronRight className="w-3 h-3" />
+                    <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </motion.button>
@@ -196,7 +197,7 @@ export function LegalPopupSection() {
                 transition={{ duration: 0.3 }}
                 className="fixed inset-0 z-50 flex items-center justify-center p-4"
               >
-                <div className="bg-background rounded-3xl border border-border/50 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto w-full max-w-2xl">
+                <div className="glass-card-heavy border border-border/40 rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto w-full max-w-2xl relative">
                   {(() => {
                     const card = popupCards.find(c => c.id === activePopup);
                     if (!card) return null;

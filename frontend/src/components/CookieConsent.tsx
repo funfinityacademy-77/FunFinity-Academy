@@ -69,73 +69,82 @@ export function CookieConsent() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 100 }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
         className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
       >
         <div className="max-w-4xl mx-auto">
-          <div className="bg-background/95 backdrop-blur-lg border border-border/50 rounded-2xl shadow-2xl p-6 md:p-8">
-            <div className="flex flex-col gap-6 items-start">
+          <div className="glass-card-heavy border border-border/40 rounded-3xl shadow-2xl p-6 md:p-8 relative overflow-hidden">
+            {/* Animated gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue/5 via-orange/5 to-pink/5" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue/10 rounded-full blur-3xl opacity-30" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-pink/10 rounded-full blur-3xl opacity-30" />
+            
+            <div className="relative flex flex-col gap-6 items-start">
               {/* Icon and Title */}
               <div className="flex items-start gap-4 w-full">
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue to-orange flex items-center justify-center">
-                    <Cookie className="w-6 h-6 text-white" />
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary via-accent to-primary flex items-center justify-center shadow-lg ring-2 ring-primary/20">
+                    <Cookie className="w-7 h-7 text-white" />
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-display text-lg font-bold text-foreground">
+                  <h3 className="font-display text-xl font-bold text-foreground">
                     Cookie Preferences
                   </h3>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
                     We use cookies to enhance your experience. Please choose which cookies you allow us to use.
                   </p>
                 </div>
                 <button
                   onClick={() => setIsVisible(false)}
-                  className="flex-shrink-0 p-1 rounded-lg hover:bg-secondary/50 text-muted-foreground transition-colors"
+                  className="flex-shrink-0 p-2 rounded-xl hover:bg-secondary/50 text-muted-foreground transition-colors"
                   aria-label="Close cookie consent"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Cookie Options */}
               <div className="space-y-3 w-full">
                 {/* Essential - Always enabled */}
-                <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/30 border border-border/30">
+                <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/40 border border-border/40 hover:bg-secondary/50 transition-colors">
                   <div className="flex items-start gap-3">
-                    <Shield className="w-5 h-5 text-blue mt-0.5 flex-shrink-0" />
+                    <div className="w-8 h-8 rounded-lg bg-blue/10 flex items-center justify-center flex-shrink-0">
+                      <Shield className="w-4 h-4 text-blue" />
+                    </div>
                     <div>
                       <p className="text-sm font-semibold text-foreground">Essential Cookies</p>
-                      <p className="text-xs text-muted-foreground">Required for basic functionality and security</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Required for basic functionality and security</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-muted-foreground">Always Active</span>
-                    <div className="w-10 h-6 bg-blue rounded-full relative">
-                      <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full" />
+                    <span className="text-xs font-medium text-muted-foreground">Always Active</span>
+                    <div className="w-11 h-6 bg-blue rounded-full relative shadow-sm">
+                      <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm" />
                     </div>
                   </div>
                 </div>
 
                 {/* Analytics - Opt-in */}
-                <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/30 border border-border/30">
+                <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/40 border border-border/40 hover:bg-secondary/50 transition-colors">
                   <div className="flex items-start gap-3">
-                    <Info className="w-5 h-5 text-orange mt-0.5 flex-shrink-0" />
+                    <div className="w-8 h-8 rounded-lg bg-orange/10 flex items-center justify-center flex-shrink-0">
+                      <Info className="w-4 h-4 text-orange" />
+                    </div>
                     <div>
                       <p className="text-sm font-semibold text-foreground">Analytics Cookies</p>
-                      <p className="text-xs text-muted-foreground">Help us improve the platform by understanding usage</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Help us improve the platform by understanding usage</p>
                     </div>
                   </div>
                   <button
                     onClick={() => setPreferences({ ...preferences, analytics: !preferences.analytics })}
-                    className={`w-10 h-6 rounded-full relative transition-colors ${
+                    className={`w-11 h-6 rounded-full relative transition-colors shadow-sm ${
                       preferences.analytics ? 'bg-orange' : 'bg-border'
                     }`}
                     aria-label="Toggle analytics cookies"
                   >
                     <motion.div
-                      className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-colors ${
+                      className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-colors ${
                         preferences.analytics ? 'right-1' : 'left-1'
                       }`}
                     />
@@ -143,23 +152,25 @@ export function CookieConsent() {
                 </div>
 
                 {/* Marketing - Opt-in */}
-                <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/30 border border-border/30">
+                <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/40 border border-border/40 hover:bg-secondary/50 transition-colors">
                   <div className="flex items-start gap-3">
-                    <Cookie className="w-5 h-5 text-pink mt-0.5 flex-shrink-0" />
+                    <div className="w-8 h-8 rounded-lg bg-pink/10 flex items-center justify-center flex-shrink-0">
+                      <Cookie className="w-4 h-4 text-pink" />
+                    </div>
                     <div>
                       <p className="text-sm font-semibold text-foreground">Marketing Cookies</p>
-                      <p className="text-xs text-muted-foreground">Used for personalized content and advertising</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Used for personalized content and advertising</p>
                     </div>
                   </div>
                   <button
                     onClick={() => setPreferences({ ...preferences, marketing: !preferences.marketing })}
-                    className={`w-10 h-6 rounded-full relative transition-colors ${
+                    className={`w-11 h-6 rounded-full relative transition-colors shadow-sm ${
                       preferences.marketing ? 'bg-pink' : 'bg-border'
                     }`}
                     aria-label="Toggle marketing cookies"
                   >
                     <motion.div
-                      className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-colors ${
+                      className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-colors ${
                         preferences.marketing ? 'right-1' : 'left-1'
                       }`}
                     />

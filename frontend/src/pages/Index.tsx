@@ -17,12 +17,6 @@ const Index = () => {
   return (
     <div 
       className="min-h-screen bg-background flex flex-col"
-      style={{
-        // Fluid container with clamp for responsive sizing
-        maxWidth: 'clamp(100%, 90vw, 1920px)',
-        margin: '0 auto',
-        width: '100%',
-      }}
     >
       <AgeGate />
       <NotificationBanner />
@@ -30,19 +24,17 @@ const Index = () => {
       <main 
         id="main-content" 
         className="flex-1 w-full"
-        style={{
-          // Fluid spacing for main content
-          padding: 'clamp(1rem, 2vw, 2rem)',
-        }}
       >
-        <HeroSection />
-        <LegalPopupSection />
-        <RollingExperienceWall />
-        <HowItWorksSection />
-        <SubjectsSection />
-        <PhilosophySection />
-        <LearningDNASection />
-        <CTASection />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <HeroSection />
+          <LegalPopupSection />
+          <RollingExperienceWall />
+          <HowItWorksSection />
+          <SubjectsSection />
+          <PhilosophySection />
+          <LearningDNASection />
+          <CTASection />
+        </div>
       </main>
       <Footer />
       <CookieConsent />

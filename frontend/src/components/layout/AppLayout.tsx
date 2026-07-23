@@ -77,7 +77,6 @@ const navGroups = [
     label: "Progress",
     items: [
       { label: "Calendar", href: "/app/calendar", icon: Calendar },
-      { label: "Calendar Page", href: "/app/calendar-page", icon: Calendar },
       { label: "Performance", href: "/app/analytics", icon: BarChart3 },
       { label: "Bookmarks", href: "/app/bookmarks", icon: Bookmark },
       { label: "Notes", href: "/app/notes", icon: StickyNote },
@@ -119,7 +118,7 @@ export function AppLayout() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
   const sidebarNavRef = useRef<HTMLElement>(null);
   const { stats: gamificationStats, isLoading: gamificationLoading } = useGamificationBackend();
   const { data: enrollments } = useEnrollments();
@@ -323,6 +322,13 @@ export function AppLayout() {
             </div>
 
             <div className="w-px h-6 bg-border/30 hidden md:block" />
+
+            {/* User Avatar */}
+            <Link to="/app/profile" className="flex items-center gap-2 rounded-lg p-1.5 transition-colors hover:bg-secondary/50" aria-label="Go to profile">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-sm font-bold text-white">
+                {user?.display_name?.charAt(0).toUpperCase() || user?.email?.charAt(0).toUpperCase() || 'U'}
+              </div>
+            </Link>
 
             <button onClick={toggleTheme} className="rounded-lg p-2 transition-colors hover:bg-secondary/50" aria-label="Toggle dark mode">
               {theme === "dark" ? <Sun className="h-4 w-4 text-muted-foreground" /> : <Moon className="h-4 w-4 text-muted-foreground" />}

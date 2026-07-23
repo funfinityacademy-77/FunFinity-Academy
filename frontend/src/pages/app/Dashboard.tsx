@@ -10,9 +10,8 @@ import { Link } from "react-router-dom";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SkeletonLoader } from "@/components/ui/skeleton-loader";
-import { DashboardCharts } from "@/components/charts/DashboardCharts";
 import { DashboardSkeleton } from "@/components/skeletons/DashboardSkeleton";
-import { useState } from "react";
+import { useState, useMemo, lazy, Suspense } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useEnrollments } from "@/hooks/use-courses";
 import { useGamificationBackend } from "@/hooks/use-gamification-backend";
@@ -24,6 +23,9 @@ import { supabase } from "@/lib/supabase";
 import { AIAsset } from "@/components/AIAsset";
 import { VIS } from "@/lib/visual-intelligence";
 import { cn } from "@/lib/utils";
+
+// Lazy load heavy components for performance
+const DashboardCharts = lazy(() => import("@/components/charts/DashboardCharts").then(m => ({ default: m.DashboardCharts })));
 
 const fadeIn = (delay: number) => ({
   initial: { opacity: 0, y: 20 },
@@ -206,11 +208,13 @@ export default function Dashboard() {
 
       {/* Modern Charts Section */}
       <motion.div {...fadeIn(0.1)} className="min-h-[650px]">
-        <DashboardCharts 
-          quizSubmissions={quizSubmissions || []}
-          studyTimeData={undefined}
-          courseProgress={undefined}
-        />
+        <Suspense fallback={<SkeletonLoader type="dashboard" />}>
+          <DashboardCharts 
+            quizSubmissions={quizSubmissions || []}
+            studyTimeData={undefined}
+            courseProgress={undefined}
+          />
+        </Suspense>
       </motion.div>
 
       <div className="grid lg:grid-cols-4 gap-4 sm:gap-6">

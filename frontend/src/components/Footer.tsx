@@ -386,8 +386,9 @@ export function Footer() {
                     e.stopPropagation();
                     setIsModalOpen(true);
                   }}
-                  className="w-full group"
+                  className="w-full group shadow-lg ring-2 ring-primary/20 hover:ring-primary/40 transition-all"
                 >
+                  <Sparkles className="w-4 h-4 mr-2" />
                   Explore More
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                 </Button>
@@ -408,9 +409,12 @@ export function Footer() {
                             e.stopPropagation();
                             handleLinkClick(link);
                           }}
-                          className="text-sm text-muted-foreground hover:text-primary hover:translate-x-1 transition-all text-left w-full focus:outline-none focus:ring-2 focus:ring-primary/50 rounded py-2 px-2"
+                          className="text-sm text-muted-foreground hover:text-primary hover:translate-x-1 transition-all text-left w-full focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg py-2.5 px-3 hover:bg-secondary/50 group"
                         >
-                          {link}
+                          <span className="flex items-center gap-2">
+                            <span className="w-1 h-1 rounded-full bg-primary/0 group-hover:bg-primary/60 transition-colors" />
+                            {link}
+                          </span>
                         </button>
                       </li>
                     ))}
@@ -486,16 +490,18 @@ export function Footer() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25 }}
-              className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto platform-card"
+              className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-card-heavy border border-border/40 rounded-3xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="sticky top-0 bg-slate-900/95 backdrop-blur-md border-b border-border/30 p-6 flex items-center justify-between">
+              <div className="sticky top-0 bg-background/95 backdrop-blur-lg border-b border-border/40 p-6 flex items-center justify-between z-20">
                 <div className="flex items-center gap-4">
-                  <FunfinityIcon 
-                    size="lg"
-                    className="transition-transform hover:scale-105 drop-shadow-lg" 
-                  />
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary via-accent to-primary flex items-center justify-center shadow-lg ring-2 ring-primary/20">
+                    <FunfinityIcon 
+                      size="sm"
+                      className="text-white"
+                    />
+                  </div>
                   <div>
                     <h2 className="font-display text-xl font-bold text-foreground">Funfinity Academy</h2>
                     <p className="text-sm text-muted-foreground">Turning learning into adventure</p>
@@ -503,9 +509,9 @@ export function Footer() {
                 </div>
                 <Button
                   variant="ghost"
-                  size="sm"
+                  size="icon"
                   onClick={() => setIsModalOpen(false)}
-                  className="rounded-full"
+                  className="rounded-full hover:bg-secondary/50 transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </Button>
@@ -515,12 +521,14 @@ export function Footer() {
               <div className="p-6 space-y-8">
                 {/* Selected Link Content */}
                 {selectedLink && footerContent[selectedLink] && (
-                  <div className="glass-card p-6 rounded-2xl">
+                  <div className="glass-card p-6 rounded-2xl border border-border/30">
                     <div className="flex items-center gap-4 mb-4">
-                      <Sparkles className="w-6 h-6 text-primary" />
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <Sparkles className="w-5 h-5 text-primary" />
+                      </div>
                       <h3 className="font-display text-xl font-bold text-foreground">{footerContent[selectedLink].title}</h3>
                     </div>
-                    <p className="text-muted-foreground mb-6">{footerContent[selectedLink].content}</p>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">{footerContent[selectedLink].content}</p>
                     
                     {footerContent[selectedLink].sections && (
                       <div className="space-y-6">
@@ -529,9 +537,9 @@ export function Footer() {
                             <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider">{section.heading}</h4>
                             <ul className="space-y-2">
                               {section.items.map((item, itemIdx) => (
-                                <li key={itemIdx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                                  <span>{item}</span>
+                                <li key={itemIdx} className="flex items-start gap-3 text-sm text-muted-foreground">
+                                  <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
+                                  <span className="leading-relaxed">{item}</span>
                                 </li>
                               ))}
                             </ul>
@@ -541,7 +549,7 @@ export function Footer() {
                     )}
                     
                     <div className="flex gap-3 mt-6">
-                      <Button variant="hero" size="default" onClick={() => setIsModalOpen(false)}>
+                      <Button variant="hero" size="default" onClick={() => setIsModalOpen(false)} className="shadow-lg">
                         Got it
                       </Button>
                       <Button variant="outline" size="default" onClick={() => setIsModalOpen(false)}>

@@ -6,33 +6,33 @@ const steps = [
   {
     number: "01",
     icon: Compass,
-    title: "Discover Your Path",
+    title: "Complete Learning DNA Assessment",
     description:
-      "Begin with a gentle exploration that reveals how you naturally engage with learning. No tests, no pressure—just curious discovery.",
+      "Take our adaptive questionnaire that analyzes your learning preferences, strengths, and areas for growth. Results guide personalized content recommendations.",
     color: "cyan",
   },
   {
     number: "02",
     icon: Map,
-    title: "Navigate the Landscape",
+    title: "Explore Personalized Curriculum",
     description:
-      "Enter an interconnected world of knowledge where subjects flow into each other. See relationships, not isolated facts.",
+      "Access a curriculum tailored to your profile. Courses adapt in real-time based on your progress, engagement patterns, and performance metrics.",
     color: "orange",
   },
   {
     number: "03",
     icon: Mountain,
-    title: "Build Deep Understanding",
+    title: "Engage with Interactive Content",
     description:
-      "Engage with concepts at your own pace. The environment adapts to your rhythm, supporting focus without demanding it.",
+      "Learn through hands-on exercises, AI-powered tutoring, and collaborative projects. Track progress with detailed analytics and milestone achievements.",
     color: "magenta",
   },
   {
     number: "04",
     icon: Sunrise,
-    title: "Watch Mastery Emerge",
+    title: "Achieve Mastery & Recognition",
     description:
-      "Progress unfolds naturally over time. Confidence grows from genuine comprehension, not accumulated points.",
+      "Earn certificates, badges, and skill endorsements. Build a comprehensive academic portfolio that showcases your learning journey and accomplishments.",
     color: "cyan",
   },
 ];
@@ -68,8 +68,7 @@ export function HowItWorksSection() {
             How the <span className="text-gradient-brand">adventure unfolds</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Learning is not a race to completion. It's an ongoing exploration that
-            respects your child's natural curiosity and pace.
+            A structured learning journey designed for measurable outcomes. Each step builds upon the previous, ensuring comprehensive skill development.
           </p>
         </motion.div>
 

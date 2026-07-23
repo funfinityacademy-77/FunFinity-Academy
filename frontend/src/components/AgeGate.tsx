@@ -52,12 +52,32 @@ export function AgeGate() {
 
     const year = parseInt(birthYear);
 
-    if (isNaN(year) || year < 1900 || year > currentYear) {
-      setError("Please enter a valid birth year");
+    // Enhanced realistic validation
+    if (isNaN(year) || year < 1920 || year > currentYear) {
+      setError("Please enter a valid birth year between 1920 and " + currentYear);
       return;
     }
 
+    // Prevent obviously fake entries (e.g., future years, unrealistic ages)
     const age = currentYear - year;
+    if (age > 120) {
+      setError("Please enter a realistic birth year");
+      return;
+    }
+
+    // Check for suspicious patterns (e.g., 1111, 1234, 0000)
+    const yearStr = year.toString();
+    if (/^(\d)\1+$/.test(yearStr) || /^(1234|4321|1111|0000|9999|8888|7777|6666|5555|4444|3333|2222)$/.test(yearStr)) {
+      setError("Please enter your actual birth year");
+      return;
+    }
+
+    // Additional validation: check for common test years
+    const testYears = [2000, 2001, 1990, 1995, 1985];
+    if (testYears.includes(year) && age < 18) {
+      setError("Please verify your actual birth year");
+      return;
+    }
 
     if (age < MIN_AGE) {
       // User is under 13, trigger parental consent flow
@@ -68,6 +88,8 @@ export function AgeGate() {
     // User is 13 or older, allow access
     localStorage.setItem('age-verified', 'true');
     localStorage.setItem('age-verified-year', year.toString());
+    localStorage.setItem('age-verified-timestamp', Date.now().toString());
+    localStorage.setItem('age-verified-age', age.toString());
     setIsVerified(true);
   };
 

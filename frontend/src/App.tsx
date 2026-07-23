@@ -63,7 +63,6 @@ const CareerPortfolio = lazy(() => import("./pages/app/CareerPortfolio"));
 const LearningDNAQuestionnaire = lazy(() => import("./pages/app/LearningDNAQuestionnaire"));
 const Badges = lazy(() => import("./pages/app/Badges"));
 const Announcements = lazy(() => import("./pages/app/Announcements"));
-const CalendarPage = lazy(() => import("./pages/app/CalendarPage"));
 const CourseMap = lazy(() => import("./pages/app/CourseMap"));
 const CollegeUniversity = lazy(() => import("./pages/app/CollegeUniversity"));
 const AcademicProfile = lazy(() => import("./pages/app/AcademicProfile"));
@@ -251,7 +250,6 @@ const App = () => {
                                 <Route path="leaderboard" element={<Leaderboard />} />
                                 <Route path="forums" element={<Forums />} />
                                 <Route path="calendar" element={<MasterCalendar />} />
-                                <Route path="calendar-page" element={<CalendarPage />} />
                                 <Route path="analytics" element={<Analytics />} />
                                 <Route path="bookmarks" element={<Bookmarks />} />
                                 <Route path="profile" element={<Profile />} />

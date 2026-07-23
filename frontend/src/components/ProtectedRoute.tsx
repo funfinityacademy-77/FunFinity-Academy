@@ -82,8 +82,8 @@ export function ProtectedRoute({ children, allowedRoles, requireOnboarding = fal
     const { dna_complete, academic_complete } = onboardingStatus;
     
     // If onboarding not complete, redirect to welcome gateway
-    if (!dna_complete || !academic_complete) {
-      console.log('ProtectedRoute: Onboarding incomplete, redirecting to welcome gateway');
+    if (!dna_complete) {
+      console.log('ProtectedRoute: DNA onboarding incomplete, redirecting to welcome gateway');
       return <Navigate to="/app/welcome-gateway" replace />;
     }
   }

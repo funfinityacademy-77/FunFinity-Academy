@@ -203,7 +203,7 @@ export function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-[90vh] sm:min-h-[85vh] md:min-h-[80vh] flex flex-col justify-center overflow-hidden pt-16 sm:pt-16" aria-label="Hero section - Funfinity Academy learning platform">
+    <section className="relative min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)] flex flex-col justify-center overflow-hidden" aria-label="Hero section - Funfinity Academy learning platform">
       <div className="absolute inset-0 bg-gradient-to-br from-blue/10 via-orange/10 to-pink/10" aria-hidden="true" />
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue/30 rounded-full blur-3xl opacity-50" aria-hidden="true" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-pink/30 rounded-full blur-3xl opacity-50" />
@@ -231,9 +231,9 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.2]"
             >
-              AI-Powered Coding Academy
+              Adaptive Learning Platform
               <br />
-              <span className="text-gradient-brand">For Kids Ages 10-16</span>
+              <span className="text-gradient-brand">For Students Ages 10-18</span>
             </motion.h1>
 
             <motion.p
@@ -242,7 +242,7 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-sm sm:text-base md:text-lg text-foreground max-w-lg mb-6 sm:mb-8 leading-relaxed font-medium"
             >
-              Master coding, math, and science through interactive AI-powered lessons designed specifically for students ages 10-16.
+              Personalized learning paths powered by AI. Master mathematics, science, coding, and more through interactive lessons adapted to your unique learning style.
             </motion.p>
 
             <motion.div

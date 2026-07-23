@@ -6,44 +6,44 @@ import { Brain, Eye, Clock, Layers, Shield, Sparkles } from "lucide-react";
 const pillars = [
   {
     icon: Eye,
-    title: "Presence Over Pages",
+    title: "Evidence-Based Learning",
     description:
-      "Learning happens in a continuous, navigable space—not fragmented screens. Build mental maps of knowledge that stick.",
+      "Curriculum designed using cognitive science research. Spaced repetition, active recall, and interleaved practice optimize retention and understanding.",
     color: "cyan",
   },
   {
     icon: Brain,
-    title: "Cognitive Design",
+    title: "Adaptive AI Technology",
     description:
-      "Attention is treated as precious. Silence, spacing, and restraint allow understanding to settle naturally.",
+      "Machine learning algorithms continuously analyze performance data to personalize difficulty, pacing, and content delivery for optimal learning outcomes.",
     color: "orange",
   },
   {
     icon: Clock,
-    title: "Time Awareness",
+    title: "Flexible Scheduling",
     description:
-      "Sessions feel complete and satisfying. Progress unfolds over weeks without pressure or artificial urgency.",
+      "Self-paced learning accommodates diverse schedules. Progress tracking ensures completion without time pressure or artificial deadlines.",
     color: "magenta",
   },
   {
     icon: Layers,
-    title: "Knowledge Landscape",
+    title: "Interconnected Curriculum",
     description:
-      "Ideas connect across domains. Mastery emerges through pattern recognition, not isolated memorization.",
+      "Cross-disciplinary connections demonstrate real-world applications. Mathematics, science, and coding concepts reinforce each other for deeper comprehension.",
     color: "cyan",
   },
   {
     icon: Sparkles,
-    title: "Understated Joy",
+    title: "Gamified Progress",
     description:
-      "Motivation feels internal and earned. Rewards appear when meaningful, never dominating attention.",
+      "Achievement badges, XP systems, and progress visualizations provide intrinsic motivation. Rewards celebrate genuine learning milestones.",
     color: "orange",
   },
   {
     icon: Shield,
-    title: "Trust by Design",
+    title: "Privacy & Security",
     description:
-      "Every interaction is evaluated for psychological impact. Manipulative patterns are avoided entirely.",
+      "COPPA-compliant data practices with parental controls. Student information is encrypted, never sold, and fully transparent to authorized guardians.",
     color: "magenta",
   },
 ];

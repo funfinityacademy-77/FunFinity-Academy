@@ -170,47 +170,15 @@ export default function Auth() {
         }
       }
 
-      // For students, check if they've completed DNA assessment
-      if (userRole === "student") {
-        const checkDNAProfile = async () => {
-          try {
-            // Check learning_dna_profiles table first
-            const { data: dnaProfile } = await supabase
-              .from('learning_dna_profiles')
-              .select('completed')
-              .eq('user_id', user.id)
-              .single();
-            
-            // Also check profiles table for dna_complete flag
-            const { data: profile } = await supabase
-              .from('profiles')
-              .select('dna_complete')
-              .eq('id', user.id)
-              .single();
-            
-            // Check localStorage as fallback
-            const lsKey = `funfinity_onboarding_${user.id}`;
-            const localStorageComplete = localStorage.getItem(lsKey);
-            
-            const isCompleted = dnaProfile?.completed || profile?.dna_complete || (localStorageComplete && JSON.parse(localStorageComplete).dna_complete);
-            
-            if (isCompleted) {
-              navigate("/app");
-            } else {
-              navigate("/app/learning-dna");
-            }
-          } catch (error) {
-            console.error("Unable to verify your learning profile. Redirecting to setup.");
-            // If check fails, default to learning-dna to be safe
-            navigate("/app/learning-dna");
-          }
-        };
-        checkDNAProfile();
-      } else if (userRole === "admin") {
-        console.log('Auth: Redirecting admin to /admin');
+      // Strict role-based routing
+      const isAdmin = userRole === "admin" || (user.email && (user.email.toLowerCase() === 'funfinityacademy@gmail.com' || user.email.toLowerCase() === 'academyfunfinity@gmail.com'));
+      
+      if (isAdmin) {
+        console.log('Auth: Admin user detected, redirecting to /admin');
         navigate("/admin");
       } else {
-        console.log('Auth: Unknown role, redirecting to /app');
+        // All non-admin users go to student dashboard
+        console.log('Auth: Student user, redirecting to /app');
         navigate("/app");
       }
     }
