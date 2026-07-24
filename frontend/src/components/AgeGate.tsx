@@ -11,13 +11,20 @@ type AgeGateStep = "verification" | "parental_consent" | "parent_email" | "conse
 
 export function AgeGate() {
   const [isVerified, setIsVerified] = useState(false);
+  const [birthDay, setBirthDay] = useState("");
+  const [birthMonth, setBirthMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
   const [error, setError] = useState("");
   const [step, setStep] = useState<AgeGateStep>("verification");
   const [parentEmail, setParentEmail] = useState("");
   const [childName, setChildName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  const [lastAttemptTime, setLastAttemptTime] = useState(0);
+  const [isRateLimited, setIsRateLimited] = useState(false);
   const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth() + 1;
+  const currentDay = new Date().getDate();
   // Pick theme colors based on the active app theme
   const { theme: activeTheme } = useTheme();
   const theme = productionThemes[activeTheme] || productionThemes.light;
@@ -28,68 +35,187 @@ export function AgeGate() {
   useEffect(() => {
     // Check if user has already verified
     const verified = localStorage.getItem('age-verified');
-    const verifiedYear = localStorage.getItem('age-verified-year');
+    const verifiedBirthDate = localStorage.getItem('age-verified-birthdate');
     
-    if (verified === 'true' && verifiedYear) {
-      const age = currentYear - parseInt(verifiedYear);
+    if (verified === 'true' && verifiedBirthDate) {
+      const birthDate = new Date(verifiedBirthDate);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear() - 
+                 (today.getMonth() < birthDate.getMonth() || 
+                  (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate()) ? 1 : 0);
+      
       if (age >= MIN_AGE) {
         setIsVerified(true);
       } else {
         // User was previously verified but is now under age (edge case)
         localStorage.removeItem('age-verified');
-        localStorage.removeItem('age-verified-year');
+        localStorage.removeItem('age-verified-birthdate');
+        localStorage.removeItem('age-verified-device-id');
       }
     }
-  }, [currentYear]);
+    
+    // Load rate limiting data
+    const storedAttempts = localStorage.getItem('age-gate-attempts');
+    const storedLastAttempt = localStorage.getItem('age-gate-last-attempt');
+    if (storedAttempts) setAttempts(parseInt(storedAttempts));
+    if (storedLastAttempt) setLastAttemptTime(parseInt(storedLastAttempt));
+  }, [currentYear, currentMonth, currentDay]);
+
+  // Generate device fingerprint
+  const generateDeviceFingerprint = () => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return 'unknown';
+    
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.fillStyle = '#f60';
+    ctx.fillRect(125, 1, 62, 20);
+    ctx.fillStyle = '#069';
+    ctx.fillText('FunFinity Academy', 2, 15);
+    
+    const fingerprint = canvas.toDataURL() + 
+                       navigator.userAgent + 
+                       navigator.language + 
+                       screen.colorDepth + 
+                       new Date().getTimezoneOffset();
+    
+    return btoa(fingerprint).substring(0, 32);
+  };
 
   const handleVerification = () => {
     setError("");
 
-    if (!birthYear) {
-      setError("Please enter your birth year");
+    // Rate limiting check
+    const now = Date.now();
+    const timeSinceLastAttempt = now - lastAttemptTime;
+    const cooldownPeriod = 60000; // 1 minute cooldown
+    
+    if (attempts >= 5 && timeSinceLastAttempt < cooldownPeriod) {
+      setIsRateLimited(true);
+      const remainingTime = Math.ceil((cooldownPeriod - timeSinceLastAttempt) / 1000);
+      setError(`Too many attempts. Please wait ${remainingTime} seconds before trying again.`);
+      return;
+    }
+    
+    if (timeSinceLastAttempt >= cooldownPeriod) {
+      // Reset attempts after cooldown
+      setAttempts(0);
+      setLastAttemptTime(now);
+    }
+
+    // Validate all date fields
+    if (!birthDay || !birthMonth || !birthYear) {
+      setError("Please enter your complete birth date (day, month, and year)");
       return;
     }
 
+    const day = parseInt(birthDay);
+    const month = parseInt(birthMonth);
     const year = parseInt(birthYear);
 
     // Enhanced realistic validation
-    if (isNaN(year) || year < 1920 || year > currentYear) {
-      setError("Please enter a valid birth year between 1920 and " + currentYear);
+    if (isNaN(day) || isNaN(month) || isNaN(year)) {
+      setError("Please enter valid numbers for your birth date");
       return;
     }
 
-    // Prevent obviously fake entries (e.g., future years, unrealistic ages)
-    const age = currentYear - year;
+    if (day < 1 || day > 31) {
+      setError("Please enter a valid day (1-31)");
+      return;
+    }
+
+    if (month < 1 || month > 12) {
+      setError("Please enter a valid month (1-12)");
+      return;
+    }
+
+    if (year < 1920 || year > currentYear) {
+      setError(`Please enter a valid birth year between 1920 and ${currentYear}`);
+      return;
+    }
+
+    // Check if the date is valid (e.g., no February 30)
+    const inputDate = new Date(year, month - 1, day);
+    if (inputDate.getDate() !== day || inputDate.getMonth() !== month - 1 || inputDate.getFullYear() !== year) {
+      setError("Please enter a valid calendar date");
+      return;
+    }
+
+    // Calculate exact age
+    const today = new Date();
+    const birthDate = new Date(year, month - 1, day);
+    const age = today.getFullYear() - birthDate.getFullYear() - 
+               (today.getMonth() < birthDate.getMonth() || 
+                (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate()) ? 1 : 0);
+
+    // Prevent obviously fake entries (e.g., future dates, unrealistic ages)
     if (age > 120) {
-      setError("Please enter a realistic birth year");
+      setError("Please enter a realistic birth date");
+      setAttempts(prev => prev + 1);
+      setLastAttemptTime(now);
+      localStorage.setItem('age-gate-attempts', String(attempts + 1));
+      localStorage.setItem('age-gate-last-attempt', String(now));
       return;
     }
 
-    // Check for suspicious patterns (e.g., 1111, 1234, 0000)
+    // Check for suspicious patterns in day/month/year
+    const dayStr = day.toString();
+    const monthStr = month.toString();
     const yearStr = year.toString();
-    if (/^(\d)\1+$/.test(yearStr) || /^(1234|4321|1111|0000|9999|8888|7777|6666|5555|4444|3333|2222)$/.test(yearStr)) {
-      setError("Please enter your actual birth year");
+    
+    // Detect repeated patterns (e.g., 11/11/1111, 01/01/2000)
+    if ((/^(\d)\1+$/.test(dayStr) && /^(\d)\1+$/.test(monthStr)) || 
+        /^(01|11|12)$/.test(dayStr) && /^(01|11|12)$/.test(monthStr) && /^(2000|2001|1990|1995|1985)$/.test(yearStr)) {
+      setError("Please enter your actual birth date");
+      setAttempts(prev => prev + 1);
+      setLastAttemptTime(now);
+      localStorage.setItem('age-gate-attempts', String(attempts + 1));
+      localStorage.setItem('age-gate-last-attempt', String(now));
       return;
     }
 
-    // Additional validation: check for common test years
-    const testYears = [2000, 2001, 1990, 1995, 1985];
-    if (testYears.includes(year) && age < 18) {
-      setError("Please verify your actual birth year");
+    // Check for sequential patterns (e.g., 01/02/2003)
+    if ((day === 1 && month === 2 && year === 2003) ||
+        (day === 12 && month === 12 && year === 2012) ||
+        (day === 1 && month === 1 && year === 2000)) {
+      setError("Please verify your actual birth date");
+      setAttempts(prev => prev + 1);
+      setLastAttemptTime(now);
+      localStorage.setItem('age-gate-attempts', String(attempts + 1));
+      localStorage.setItem('age-gate-last-attempt', String(now));
+      return;
+    }
+
+    // Check for common test dates
+    if (age < 18 && (day === 1 && month === 1)) {
+      setError("Please verify your actual birth date");
+      setAttempts(prev => prev + 1);
+      setLastAttemptTime(now);
+      localStorage.setItem('age-gate-attempts', String(attempts + 1));
+      localStorage.setItem('age-gate-last-attempt', String(now));
       return;
     }
 
     if (age < MIN_AGE) {
       // User is under 13, trigger parental consent flow
       setStep("parental_consent");
+      setAttempts(prev => prev + 1);
+      setLastAttemptTime(now);
+      localStorage.setItem('age-gate-attempts', String(attempts + 1));
+      localStorage.setItem('age-gate-last-attempt', String(now));
       return;
     }
 
-    // User is 13 or older, allow access
+    // User is 13 or older, allow access with enhanced security
+    const deviceId = generateDeviceFingerprint();
     localStorage.setItem('age-verified', 'true');
-    localStorage.setItem('age-verified-year', year.toString());
+    localStorage.setItem('age-verified-birthdate', birthDate.toISOString());
     localStorage.setItem('age-verified-timestamp', Date.now().toString());
     localStorage.setItem('age-verified-age', age.toString());
+    localStorage.setItem('age-verified-device-id', deviceId);
+    localStorage.setItem('age-gate-attempts', '0'); // Reset on success
+    localStorage.setItem('age-gate-last-attempt', '0');
     setIsVerified(true);
   };
 
@@ -112,11 +238,13 @@ export function AgeGate() {
 
     setIsSubmitting(true);
     try {
-      const resp = await requestParentalConsent(childName.trim(), parentEmail.trim(), parseInt(birthYear || String(currentYear)));
+      const birthDateStr = `${birthYear}-${birthMonth.padStart(2, '0')}-${birthDay.padStart(2, '0')}`;
+      const resp = await requestParentalConsent(childName.trim(), parentEmail.trim(), birthDateStr);
       // Store that parental consent was requested
       localStorage.setItem('parental-consent-requested', 'true');
       localStorage.setItem('parental-consent-email', parentEmail);
       localStorage.setItem('child-name', childName.trim());
+      localStorage.setItem('child-birthdate', birthDateStr);
       // Optionally store token for later verification
       if (resp?.token) localStorage.setItem('parental-consent-token', resp.token);
       setIsSubmitting(false);
@@ -129,8 +257,11 @@ export function AgeGate() {
 
   const handleReturnToVerification = () => {
     setStep("verification");
+    setBirthDay("");
+    setBirthMonth("");
     setBirthYear("");
     setError("");
+    setIsRateLimited(false);
   };
 
   if (isVerified) {
@@ -174,25 +305,55 @@ export function AgeGate() {
               {/* Form */}
               <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <label htmlFor="birthYear" className="block text-xs sm:text-sm font-medium mb-1 sm:mb-2" style={{ color: theme.neutral[900] }}>
-                    What year were you born?
+                  <label className="block text-xs sm:text-sm font-medium mb-1 sm:mb-2" style={{ color: theme.neutral[900] }}>
+                    What is your date of birth?
                   </label>
-                  <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" style={{ color: theme.neutral[500] }} />
-                    <input
-                      id="birthYear"
-                      type="number"
-                      value={birthYear}
-                      onChange={(e) => setBirthYear(e.target.value)}
-                      placeholder="YYYY"
-                      min="1900"
-                      max={currentYear}
-                      className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors text-sm sm:text-base"
-                      style={{ background: theme.neutral[50], border: `2px solid ${theme.neutral[300]}`, color: theme.neutral[900] }}
-                      aria-label="Birth year"
-                      aria-invalid={!!error}
-                      aria-describedby={error ? "birthYear-error" : undefined}
-                    />
+                  <div className="flex gap-2">
+                    <div className="relative flex-1">
+                      <input
+                        type="number"
+                        value={birthDay}
+                        onChange={(e) => setBirthDay(e.target.value)}
+                        placeholder="DD"
+                        min="1"
+                        max="31"
+                        className="w-full pl-3 pr-3 py-2 sm:py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors text-sm sm:text-base text-center"
+                        style={{ background: theme.neutral[50], border: `2px solid ${theme.neutral[300]}`, color: theme.neutral[900] }}
+                        aria-label="Birth day"
+                        aria-invalid={!!error}
+                      />
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: theme.neutral[400] }}>Day</span>
+                    </div>
+                    <div className="relative flex-1">
+                      <input
+                        type="number"
+                        value={birthMonth}
+                        onChange={(e) => setBirthMonth(e.target.value)}
+                        placeholder="MM"
+                        min="1"
+                        max="12"
+                        className="w-full pl-3 pr-3 py-2 sm:py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors text-sm sm:text-base text-center"
+                        style={{ background: theme.neutral[50], border: `2px solid ${theme.neutral[300]}`, color: theme.neutral[900] }}
+                        aria-label="Birth month"
+                        aria-invalid={!!error}
+                      />
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: theme.neutral[400] }}>Month</span>
+                    </div>
+                    <div className="relative flex-1">
+                      <input
+                        type="number"
+                        value={birthYear}
+                        onChange={(e) => setBirthYear(e.target.value)}
+                        placeholder="YYYY"
+                        min="1920"
+                        max={currentYear}
+                        className="w-full pl-3 pr-3 py-2 sm:py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors text-sm sm:text-base text-center"
+                        style={{ background: theme.neutral[50], border: `2px solid ${theme.neutral[300]}`, color: theme.neutral[900] }}
+                        aria-label="Birth year"
+                        aria-invalid={!!error}
+                      />
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: theme.neutral[400] }}>Year</span>
+                    </div>
                   </div>
                 </div>
 
@@ -206,6 +367,23 @@ export function AgeGate() {
                     role="alert"
                   >
                     <p className="text-xs sm:text-sm text-center" style={{ color: theme.error }}>{error}</p>
+                  </motion.div>
+                )}
+
+                {isRateLimited && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="rounded-xl p-3 sm:p-4"
+                    style={{ background: `${theme.warning}22`, borderColor: `${theme.warning}44` }}
+                    role="alert"
+                  >
+                    <div className="flex items-center justify-center gap-2">
+                      <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: theme.warning }} />
+                      <p className="text-xs sm:text-sm text-center" style={{ color: theme.warning }}>
+                        Security measure activated. Multiple failed attempts detected. Please wait before trying again.
+                      </p>
+                    </div>
                   </motion.div>
                 )}
 
