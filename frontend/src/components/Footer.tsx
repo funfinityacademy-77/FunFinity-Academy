@@ -350,11 +350,12 @@ export function Footer() {
   return (
     <>
       <footer
-        className="border-t border-border/50 bg-gradient-to-b from-secondary/30 to-background cursor-pointer transition-all hover:bg-secondary/40"
+        className="border-t border-border bg-secondary/20 cursor-pointer transition-all hover:bg-secondary/30"
+        onClick={() => setIsModalOpen(true)}
         role="contentinfo"
         aria-label="Site footer"
       >
-        <div className="container mx-auto px-6 py-12">
+        <div className="container mx-auto px-6 py-10">
           {loading ? (
             <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
               <div className="col-span-2 md:col-span-1">
@@ -370,35 +371,19 @@ export function Footer() {
             <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
               {/* Brand Column */}
               <div className="col-span-2 md:col-span-1">
-                <div className="flex items-center gap-3 mb-4">
-                  <FunfinityIcon 
-                    size="xl"
-                    className="transition-transform hover:scale-105 drop-shadow-lg" 
-                  />
-                </div>
-                <p className="text-sm text-foreground/80 leading-relaxed mb-4">
+                <FunfinityIcon 
+                  size="xl"
+                  className="mb-4 transition-transform hover:scale-105 drop-shadow-lg" 
+                />
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   Turning learning into adventure. A calm, immersive space for deep understanding.
                 </p>
-                <Button
-                  variant="hero"
-                  size="sm"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsModalOpen(true);
-                  }}
-                  className="w-full group shadow-lg ring-2 ring-primary/20 hover:ring-primary/40 transition-all"
-                >
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  Explore More
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                </Button>
               </div>
 
               {/* Link Columns */}
               {Object.entries(footerLinks).map(([category, links]) => (
                 <div key={category}>
-                  <h4 className="font-display font-semibold text-foreground mb-4 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
+                  <h4 className="font-display font-semibold text-foreground mb-4">
                     {category}
                   </h4>
                   <ul className="space-y-2">
@@ -409,12 +394,9 @@ export function Footer() {
                             e.stopPropagation();
                             handleLinkClick(link);
                           }}
-                          className="text-sm text-muted-foreground hover:text-primary hover:translate-x-1 transition-all text-left w-full focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg py-2.5 px-3 hover:bg-secondary/50 group"
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors text-left w-full focus:outline-none focus:ring-2 focus:ring-primary rounded py-3 px-2"
                         >
-                          <span className="flex items-center gap-2">
-                            <span className="w-1 h-1 rounded-full bg-primary/0 group-hover:bg-primary/60 transition-colors" />
-                            {link}
-                          </span>
+                          {link}
                         </button>
                       </li>
                     ))}
@@ -425,47 +407,41 @@ export function Footer() {
           )}
 
           {/* Bottom Bar */}
-          <div className="mt-10 pt-6 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="mt-8 pt-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-sm text-muted-foreground">
-              <p className="mb-1 text-foreground/90">© 2026 FunFinity Academy, Inc. All rights reserved.</p>
+              <p className="mb-1">© 2026 FunFinity Academy, Inc. All rights reserved.</p>
               <p className="text-xs mb-1">Corporate Address: 123 Innovation Way, Suite 400, San Francisco, CA 94107</p>
               <p className="text-xs">Contact: academyfunfinity@gmail.com | Response Time: &lt; 24 Hours</p>
-              <p className="text-xs mt-1 text-primary font-medium">Billing Terms: 14-Day Money-Back Guarantee. Cancel anytime via account settings.</p>
+              <p className="text-xs mt-1 text-primary">Billing Terms: 14-Day Money-Back Guarantee. Cancel anytime via account settings.</p>
             </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <Button
-                variant="ghost"
-                size="sm"
+            <div className="flex flex-wrap items-center gap-4">
+              <button
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded py-3 px-2"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleLinkClick("Privacy Policy");
                 }}
-                className="text-xs font-medium"
               >
                 Privacy Policy
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
+              </button>
+              <button
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded py-3 px-2"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleLinkClick("Terms of Service");
                 }}
-                className="text-xs font-medium"
               >
                 Terms of Service
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
+              </button>
+              <button
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded py-3 px-2"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleLinkClick("Do Not Sell/Share My Info");
                 }}
-                className="text-xs font-medium"
               >
                 Do Not Sell/Share My Info
-              </Button>
+              </button>
             </div>
           </div>
         </div>
@@ -490,18 +466,16 @@ export function Footer() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25 }}
-              className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-card-heavy border border-border/40 rounded-3xl shadow-2xl"
+              className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto platform-card"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="sticky top-0 bg-background/95 backdrop-blur-lg border-b border-border/40 p-6 flex items-center justify-between z-20">
+              <div className="sticky top-0 bg-slate-900/95 backdrop-blur-md border-b border-border/30 p-6 flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary via-accent to-primary flex items-center justify-center shadow-lg ring-2 ring-primary/20">
-                    <FunfinityIcon 
-                      size="sm"
-                      className="text-white"
-                    />
-                  </div>
+                  <FunfinityIcon 
+                    size="lg"
+                    className="transition-transform hover:scale-105 drop-shadow-lg" 
+                  />
                   <div>
                     <h2 className="font-display text-xl font-bold text-foreground">Funfinity Academy</h2>
                     <p className="text-sm text-muted-foreground">Turning learning into adventure</p>
@@ -509,9 +483,9 @@ export function Footer() {
                 </div>
                 <Button
                   variant="ghost"
-                  size="icon"
+                  size="sm"
                   onClick={() => setIsModalOpen(false)}
-                  className="rounded-full hover:bg-secondary/50 transition-colors"
+                  className="rounded-full"
                 >
                   <X className="w-5 h-5" />
                 </Button>
@@ -521,14 +495,12 @@ export function Footer() {
               <div className="p-6 space-y-8">
                 {/* Selected Link Content */}
                 {selectedLink && footerContent[selectedLink] && (
-                  <div className="glass-card p-6 rounded-2xl border border-border/30">
+                  <div className="glass-card p-6 rounded-2xl">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <Sparkles className="w-5 h-5 text-primary" />
-                      </div>
+                      <Sparkles className="w-6 h-6 text-primary" />
                       <h3 className="font-display text-xl font-bold text-foreground">{footerContent[selectedLink].title}</h3>
                     </div>
-                    <p className="text-muted-foreground mb-6 leading-relaxed">{footerContent[selectedLink].content}</p>
+                    <p className="text-muted-foreground mb-6">{footerContent[selectedLink].content}</p>
                     
                     {footerContent[selectedLink].sections && (
                       <div className="space-y-6">
@@ -537,9 +509,9 @@ export function Footer() {
                             <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider">{section.heading}</h4>
                             <ul className="space-y-2">
                               {section.items.map((item, itemIdx) => (
-                                <li key={itemIdx} className="flex items-start gap-3 text-sm text-muted-foreground">
-                                  <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
-                                  <span className="leading-relaxed">{item}</span>
+                                <li key={itemIdx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                                  <span>{item}</span>
                                 </li>
                               ))}
                             </ul>
@@ -549,7 +521,7 @@ export function Footer() {
                     )}
                     
                     <div className="flex gap-3 mt-6">
-                      <Button variant="hero" size="default" onClick={() => setIsModalOpen(false)} className="shadow-lg">
+                      <Button variant="hero" size="default" onClick={() => setIsModalOpen(false)}>
                         Got it
                       </Button>
                       <Button variant="outline" size="default" onClick={() => setIsModalOpen(false)}>

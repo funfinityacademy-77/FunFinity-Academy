@@ -352,6 +352,7 @@ export default function AuthPage() {
                               value={formData.fullName}
                               onChange={(e) => handleInputChange('fullName', e.target.value)}
                               className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-white/40"
+                              autoComplete="name"
                               required
                             />
                           </div>
@@ -372,8 +373,8 @@ export default function AuthPage() {
                           placeholder="Enter your email"
                           value={formData.email}
                           onChange={(e) => handleInputChange('email', e.target.value)}
-                          autoComplete="email"
                           className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-white/40"
+                          autoComplete="email"
                           required
                         />
                       </div>
@@ -392,8 +393,8 @@ export default function AuthPage() {
                           placeholder="Enter your password"
                           value={formData.password}
                           onChange={(e) => handleInputChange('password', e.target.value)}
-                          autoComplete="current-password"
                           className="pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-white/40"
+                          autoComplete={isSignUp ? 'new-password' : 'current-password'}
                           required
                         />
                         <button

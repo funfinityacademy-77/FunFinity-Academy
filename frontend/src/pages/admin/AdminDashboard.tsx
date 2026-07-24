@@ -4,7 +4,7 @@ import {
   Users, BookOpen, TrendingUp, AlertCircle, ArrowRight, CheckCircle2,
   Clock, DollarSign, Activity, Shield, Zap, Globe, Server, BarChart3, Loader2,
   Award, FileText, Bell, Palette, MessageSquare, Lightbulb, Wifi, Cpu, Database,
-  RefreshCw, Eye, UserPlus, LogOut, AlertTriangle, Search
+  RefreshCw, Eye, UserPlus, LogOut, AlertTriangle
 } from "lucide-react";
 import { FunfinityIcon } from "@/components/brand/FunfinityLogo";
 import { Button } from "@/components/ui/button";
@@ -42,11 +42,6 @@ export default function AdminDashboard() {
   const [lastUpdated, setLastUpdated] = useState(new Date());
   const [isRefreshing, setIsRefreshing] = useState(false);
   
-  // Search state
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
-  
   // Use profiles directly for user count to avoid RPC permission issues
   const { data: users, isLoading: usersLoading, refetch } = useQuery({
     queryKey: ["admin-users-count"],
@@ -59,107 +54,16 @@ export default function AdminDashboard() {
 
   const isLoading = coursesLoading || profilesLoading || enrollmentsLoading || announcementsLoading || usersLoading;
 
-  // Debounced search handler
-  useEffect(() => {
-    const debounceTimer = setTimeout(async () => {
-      if (searchQuery.trim().length >= 2) {
-        setIsSearching(true);
-        try {
-          const { supabase } = await import('@/lib/supabase');
-          
-          // Search across multiple tables
-          const [usersResult, coursesResult] = await Promise.all([
-            supabase
-              .from('profiles')
-              .select('id, display_name, email')
-              .ilike('display_name', `%${searchQuery}%`)
-              .limit(5),
-            supabase
-              .from('courses')
-              .select('id, title, description')
-              .ilike('title', `%${searchQuery}%`)
-              .limit(5),
-          ]);
-
-          const results = [
-            ...(usersResult.data?.map(u => ({ ...u, type: 'user' })) || []),
-            ...(coursesResult.data?.map(c => ({ ...c, type: 'course' })) || []),
-          ];
-          
-          setSearchResults(results);
-        } catch (error) {
-          console.error('Search failed:', error);
-          setSearchResults([]);
-        } finally {
-          setIsSearching(false);
-        }
-      } else {
-        setSearchResults([]);
-      }
-    }, 300);
-
-    return () => clearTimeout(debounceTimer);
-  }, [searchQuery]);
-
-  // Real-time active users from Supabase
-  useEffect(() => {
-    const fetchActiveUsers = async () => {
-      try {
-        const { supabase } = await import('@/lib/supabase');
-        const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
-        
-        const { data: activeSessions, error } = await supabase
-          .from('user_sessions')
-          .select('user_id')
-          .gte('last_active', fiveMinutesAgo);
-        
-        if (!error && activeSessions) {
-          setActiveUsers(activeSessions.length);
-        }
-      } catch (error) {
-        console.error('Failed to fetch active users:', error);
-      }
-    };
-
-    fetchActiveUsers();
-    const interval = setInterval(fetchActiveUsers, 30000); // Update every 30 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // System health check from Supabase
-  useEffect(() => {
-    const checkSystemHealth = async () => {
-      try {
-        const { supabase } = await import('@/lib/supabase');
-        
-        // Check database connectivity
-        const { error: dbError } = await supabase.from('profiles').select('id').limit(1);
-        
-        if (dbError) {
-          setSystemHealth('degraded');
-        } else {
-          setSystemHealth('healthy');
-        }
-      } catch (error) {
-        setSystemHealth('down');
-      }
-    };
-
-    checkSystemHealth();
-    const interval = setInterval(checkSystemHealth, 60000); // Check every minute
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Update timestamp
+  // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
       setLastUpdated(new Date());
+      setActiveUsers(Math.floor(Math.random() * (users?.length || 10) + 5));
+      setSystemHealth(Math.random() > 0.95 ? 'degraded' : 'healthy');
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [users?.length]);
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
@@ -253,54 +157,13 @@ export default function AdminDashboard() {
               </Button>
             </div>
           </div>
-          
-          {/* Global Search Bar */}
-          <div className="relative w-full md:w-auto">
-            <Input
-              placeholder="Search users, courses..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full md:w-64 pl-10"
-            />
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            
-            {/* Search Results Dropdown */}
-            {searchQuery.length >= 2 && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-background border border-border/50 rounded-xl shadow-lg z-50 max-h-64 overflow-y-auto">
-                {isSearching ? (
-                  <div className="p-4 text-center text-sm text-muted-foreground">
-                    <Loader2 className="w-4 h-4 animate-spin mx-auto mb-2" />
-                    Searching...
-                  </div>
-                ) : searchResults.length > 0 ? (
-                  searchResults.map((result) => (
-                    <Link
-                      key={`${result.type}-${result.id}`}
-                      to={result.type === 'user' ? `/admin/users` : `/admin/courses`}
-                      className="block px-4 py-3 hover:bg-secondary/50 transition-colors border-b border-border/30 last:border-0"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-                          {result.type === 'user' ? <Users className="w-4 h-4 text-primary" /> : <BookOpen className="w-4 h-4 text-primary" />}
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-foreground">
-                            {result.display_name || result.title}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            {result.type === 'user' ? result.email : result.description?.substring(0, 50)}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))
-                ) : (
-                  <div className="p-4 text-center text-sm text-muted-foreground">
-                    No results found
-                  </div>
-                )}
-              </div>
-            )}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 shrink-0">
+            {quickActions.map((a) => (
+              <Link key={a.label} to={a.href} className="flex items-center gap-2 p-3 rounded-xl border border-border/30 bg-secondary/30 hover:bg-secondary/50 transition-colors">
+                <a.icon className="w-4 h-4 text-muted-foreground" />
+                <span className="text-xs font-medium text-foreground">{a.label}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </motion.div>

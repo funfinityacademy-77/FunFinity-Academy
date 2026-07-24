@@ -1,125 +1,206 @@
 /**
- * Centralized Zustand Store for State Management
- * Handles user session, theme, low-bandwidth mode, and global application state
+ * Centralized Zustand Store for FunFinity Academy
+ * Manages global application state including user session, theme, and settings
  */
 
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
-interface AppState {
-  // Theme
-  theme: 'light' | 'dark' | 'system';
-  setTheme: (theme: 'light' | 'dark' | 'system') => void;
+// User Session State
+interface UserSession {
+  id: string;
+  email: string;
+  display_name: string;
+  role: 'student' | 'teacher' | 'admin';
+  avatar_url?: string;
+}
 
-  // Low Bandwidth Mode
-  lowBandwidthMode: boolean;
-  toggleLowBandwidthMode: () => void;
-  setLowBandwidthMode: (enabled: boolean) => void;
+// Theme State
+type ThemeMode = 'light' | 'dark' | 'system';
 
+// Low Bandwidth Mode State
+interface LowBandwidthSettings {
+  enabled: boolean;
+  disableImages: boolean;
+  disableVideos: boolean;
+  disableAnimations: boolean;
+  disableAutoPlay: boolean;
+  reduceQuality: boolean;
+}
+
+// UI State
+interface UIState {
+  sidebarOpen: boolean;
+  mobileMenuOpen: boolean;
+  notificationsPanelOpen: boolean;
+}
+
+// App Store Interface
+interface AppStore {
   // User Session
-  user: {
-    id: string;
-    email: string;
-    displayName?: string;
-    role?: string;
-  } | null;
-  setUser: (user: AppState['user']) => void;
+  user: UserSession | null;
+  setUser: (user: UserSession | null) => void;
   clearUser: () => void;
 
-  // UI State
-  sidebarCollapsed: boolean;
-  toggleSidebar: () => void;
-  setSidebarCollapsed: (collapsed: boolean) => void;
+  // Theme
+  theme: ThemeMode;
+  setTheme: (theme: ThemeMode) => void;
 
-  // Notifications
-  notifications: Array<{
-    id: string;
-    title: string;
-    message: string;
-    type: 'info' | 'success' | 'warning' | 'error';
-    timestamp: number;
-    read: boolean;
-  }>;
-  addNotification: (notification: Omit<AppState['notifications'][0], 'id' | 'timestamp' | 'read'>) => void;
-  markNotificationRead: (id: string) => void;
-  clearNotifications: () => void;
+  // Low Bandwidth Mode
+  lowBandwidth: LowBandwidthSettings;
+  setLowBandwidth: (settings: Partial<LowBandwidthSettings>) => void;
+  toggleLowBandwidth: () => void;
+
+  // UI State
+  ui: UIState;
+  setSidebarOpen: (open: boolean) => void;
+  setMobileMenuOpen: (open: boolean) => void;
+  setNotificationsPanelOpen: (open: boolean) => void;
 
   // Loading States
   isLoading: boolean;
-  setLoading: (loading: boolean) => void;
+  setIsLoading: (loading: boolean) => void;
 
   // Error State
   error: string | null;
   setError: (error: string | null) => void;
+
+  // Reset Store
+  reset: () => void;
 }
 
-export const useAppStore = create<AppState>()(
+const defaultLowBandwidthSettings: LowBandwidthSettings = {
+  enabled: false,
+  disableImages: false,
+  disableVideos: false,
+  disableAnimations: false,
+  disableAutoPlay: false,
+  reduceQuality: false,
+};
+
+const defaultUIState: UIState = {
+  sidebarOpen: true,
+  mobileMenuOpen: false,
+  notificationsPanelOpen: false,
+};
+
+export const useAppStore = create<AppStore>()(
   persist(
     (set) => ({
-      // Theme
-      theme: 'system',
-      setTheme: (theme) => set({ theme }),
-
-      // Low Bandwidth Mode
-      lowBandwidthMode: false,
-      toggleLowBandwidthMode: () => set((state) => ({ lowBandwidthMode: !state.lowBandwidthMode })),
-      setLowBandwidthMode: (enabled) => set({ lowBandwidthMode: enabled }),
-
       // User Session
       user: null,
       setUser: (user) => set({ user }),
       clearUser: () => set({ user: null }),
 
-      // UI State
-      sidebarCollapsed: false,
-      toggleSidebar: () => set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
-      setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
+      // Theme
+      theme: 'system',
+      setTheme: (theme) => set({ theme }),
 
-      // Notifications
-      notifications: [],
-      addNotification: (notification) =>
+      // Low Bandwidth Mode
+      lowBandwidth: defaultLowBandwidthSettings,
+      setLowBandwidth: (settings) =>
         set((state) => ({
-          notifications: [
-            {
-              ...notification,
-              id: crypto.randomUUID(),
-              timestamp: Date.now(),
-              read: false,
-            },
-            ...state.notifications,
-          ].slice(0, 50), // Keep only last 50 notifications
+          lowBandwidth: { ...state.lowBandwidth, ...settings },
         })),
-      markNotificationRead: (id) =>
+      toggleLowBandwidth: () =>
         set((state) => ({
-          notifications: state.notifications.map((n) =>
-            n.id === id ? { ...n, read: true } : n
-          ),
+          lowBandwidth: {
+            ...state.lowBandwidth,
+            enabled: !state.lowBandwidth.enabled,
+          },
         })),
-      clearNotifications: () => set({ notifications: [] }),
+
+      // UI State
+      ui: defaultUIState,
+      setSidebarOpen: (open) =>
+        set((state) => ({
+          ui: { ...state.ui, sidebarOpen: open },
+        })),
+      setMobileMenuOpen: (open) =>
+        set((state) => ({
+          ui: { ...state.ui, mobileMenuOpen: open },
+        })),
+      setNotificationsPanelOpen: (open) =>
+        set((state) => ({
+          ui: { ...state.ui, notificationsPanelOpen: open },
+        })),
 
       // Loading States
       isLoading: false,
-      setLoading: (loading) => set({ isLoading: loading }),
+      setIsLoading: (loading) => set({ isLoading: loading }),
 
       // Error State
       error: null,
       setError: (error) => set({ error }),
+
+      // Reset Store
+      reset: () =>
+        set({
+          user: null,
+          theme: 'system',
+          lowBandwidth: defaultLowBandwidthSettings,
+          ui: defaultUIState,
+          isLoading: false,
+          error: null,
+        }),
     }),
     {
-      name: 'funfinity-app-storage',
+      name: 'funfinity-app-store',
+      storage: createJSONStorage(() => localStorage),
+      // Only persist specific fields
       partialize: (state) => ({
         theme: state.theme,
-        lowBandwidthMode: state.lowBandwidthMode,
-        sidebarCollapsed: state.sidebarCollapsed,
+        lowBandwidth: state.lowBandwidth,
+        ui: state.ui,
       }),
     }
   )
 );
 
 // Selectors for common use cases
-export const selectTheme = (state: AppState) => state.theme;
-export const selectLowBandwidthMode = (state: AppState) => state.lowBandwidthMode;
-export const selectUser = (state: AppState) => state.user;
-export const selectNotifications = (state: AppState) => state.notifications;
-export const selectUnreadNotifications = (state: AppState) =>
-  state.notifications.filter((n) => !n.read);
+export const selectUser = (state: AppStore) => state.user;
+export const selectTheme = (state: AppStore) => state.theme;
+export const selectLowBandwidth = (state: AppStore) => state.lowBandwidth;
+export const selectUI = (state: AppStore) => state.ui;
+export const selectIsLoading = (state: AppStore) => state.isLoading;
+export const selectError = (state: AppStore) => state.error;
+
+// Hooks for specific state slices
+export const useUser = () => useAppStore(selectUser);
+export const useTheme = () => useAppStore(selectTheme);
+export const useLowBandwidth = () => useAppStore(selectLowBandwidth);
+export const useUI = () => useAppStore(selectUI);
+export const useLoading = () => useAppStore(selectIsLoading);
+export const useError = () => useAppStore(selectError);
+
+// Helper hook to check if user has specific role
+export const useUserRole = () => {
+  const user = useUser();
+  return user?.role || 'student';
+};
+
+// Helper hook to check if user is admin
+export const useIsAdmin = () => {
+  const role = useUserRole();
+  return role === 'admin';
+};
+
+// Helper hook to check if user is teacher
+export const useIsTeacher = () => {
+  const role = useUserRole();
+  return role === 'teacher' || role === 'admin';
+};
+
+// Helper hook to get effective theme (respects system preference)
+export const useEffectiveTheme = () => {
+  const theme = useTheme();
+  
+  if (theme === 'system') {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return 'light';
+  }
+  
+  return theme;
+};

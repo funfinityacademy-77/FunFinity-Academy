@@ -203,14 +203,14 @@ export function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)] flex flex-col justify-center overflow-hidden" aria-label="Hero section - Funfinity Academy learning platform">
+    <section className="relative min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)] flex flex-col justify-center overflow-hidden" aria-label="Hero section - Funfinity Academy learning platform">
       <div className="absolute inset-0 bg-gradient-to-br from-blue/10 via-orange/10 to-pink/10" aria-hidden="true" />
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue/30 rounded-full blur-3xl opacity-50" aria-hidden="true" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-pink/30 rounded-full blur-3xl opacity-50" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-orange/30 rounded-full blur-3xl opacity-40" />
+      <div className="absolute top-1/4 left-1/4 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] lg:w-[500px] lg:h-[500px] bg-blue/30 rounded-full blur-3xl opacity-50" aria-hidden="true" />
+      <div className="absolute bottom-1/4 right-1/4 w-[150px] h-[150px] sm:w-[250px] sm:h-[250px] lg:w-[400px] lg:h-[400px] bg-pink/30 rounded-full blur-3xl opacity-50" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] lg:w-[300px] lg:h-[300px] bg-orange/30 rounded-full blur-3xl opacity-40" />
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10 flex-1 flex items-center">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto w-full">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 flex-1 flex items-center py-8 sm:py-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center max-w-6xl mx-auto w-full">
           {/* Left - Copy */}
           <div>
             <motion.div
@@ -229,20 +229,20 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.2]"
+              className="font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4 md:mb-6 leading-[1.15] sm:leading-[1.2]"
             >
-              Adaptive Learning Platform
+              AI-Powered Coding Academy
               <br />
-              <span className="text-gradient-brand">For Students Ages 10-18</span>
+              <span className="text-gradient-brand">For Kids Ages 10-16</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-sm sm:text-base md:text-lg text-foreground max-w-lg mb-6 sm:mb-8 leading-relaxed font-medium"
+              className="text-xs sm:text-sm md:text-base lg:text-lg text-foreground/90 max-w-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed font-medium"
             >
-              Personalized learning paths powered by AI. Master mathematics, science, coding, and more through interactive lessons adapted to your unique learning style.
+              Master coding, math, and science through interactive AI-powered lessons designed specifically for students ages 10-16.
             </motion.p>
 
             <motion.div
@@ -265,7 +265,7 @@ export function HeroSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-2 border-border/30 text-muted-foreground hover:text-foreground hover:bg-secondary/30 font-medium transition-all"
+                className="border-2 border-foreground/30 text-foreground hover:text-foreground hover:bg-foreground/10 font-medium transition-all"
                 asChild
               >
                 <Link to="/demo">
@@ -279,7 +279,7 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex items-center gap-2 text-xs text-muted-foreground"
+              className="flex items-center gap-2 text-xs text-foreground/80"
             >
               <Shield className="w-3.5 h-3.5 text-green-500" />
               <span>No credit card required. Cancel anytime.</span>
@@ -290,7 +290,7 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-foreground"
+              className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-foreground/90"
             >
               <div className="flex items-center gap-1.5">
                 <div className="w-2 h-2 rounded-full bg-blue shadow-glow-blue" />
@@ -332,7 +332,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.7 }}
-        className="relative z-10 border-t-2 border-blue/20 bg-gradient-to-r from-blue/10 via-orange/10 to-pink/10 backdrop-blur-sm"
+        className="relative z-10 border-t-2 border-foreground/10 bg-gradient-to-r from-blue/20 via-orange/20 to-pink/20 backdrop-blur-sm"
         aria-label="Trust statistics"
       >
         <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-5">
@@ -362,7 +362,7 @@ export function HeroSection() {
                       decimals={stat.decimals || 0}
                     />
                   </p>
-                  <p className="text-[11px] text-foreground mt-0.5 font-medium">{stat.label}</p>
+                  <p className="text-[11px] text-foreground/90 mt-0.5 font-medium">{stat.label}</p>
                 </div>
               </div>
             ))}
@@ -375,11 +375,11 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="relative z-10 border-t border-border/30 bg-background/80 backdrop-blur-sm py-6 sm:py-8"
+        className="relative z-10 border-t border-foreground/10 bg-background/90 backdrop-blur-sm py-6 sm:py-8"
       >
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-4 sm:mb-6">
-            <p className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wider">Trusted by students worldwide</p>
+            <p className="text-xs sm:text-sm font-medium text-foreground/80 uppercase tracking-wider">Trusted by students worldwide</p>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 lg:gap-12">
             {[
@@ -394,10 +394,10 @@ export function HeroSection() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 0.9 + index * 0.1 }}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 border border-border/30"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-foreground/5 border border-foreground/20"
               >
                 <span className="text-xl">{badge.icon}</span>
-                <span className="text-sm font-medium text-foreground">{badge.name}</span>
+                <span className="text-sm font-medium text-foreground/90">{badge.name}</span>
               </motion.div>
             ))}
           </div>

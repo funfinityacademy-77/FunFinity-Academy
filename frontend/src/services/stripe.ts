@@ -1,239 +1,168 @@
 /**
- * Stripe Checkout Service
- * Handles multi-currency checkout sessions with local payment methods
+ * Stripe Checkout Service for Multi-Currency Payments
+ * Handles server-side checkout session creation with local payment methods
  */
 
-import { getPricingForCountry, getPreferredPaymentMethods, type PricingConfig } from '@/utils/geoPricing';
+import { supabase } from '@/lib/supabase';
+import { getPricingForCountry, getStripePaymentMethods } from '@/utils/geoPricing';
 
-export interface CheckoutSessionParams {
+export interface CheckoutSessionRequest {
   userId: string;
-  userEmail: string;
-  countryCode?: string;
+  email: string;
+  countryCode: string;
+  tier: 'monthly' | 'annual';
   successUrl: string;
   cancelUrl: string;
-  metadata?: Record<string, string>;
 }
 
 export interface CheckoutSessionResponse {
   sessionId: string;
-  checkoutUrl: string;
-  pricing: PricingConfig;
+  url: string;
 }
 
 /**
- * Create a Stripe checkout session with localized pricing
- * This calls a Supabase Edge Function or serverless API route
+ * Create a Stripe Checkout session with localized pricing
+ * This would typically call a Supabase Edge Function or Next.js API route
  */
-export async function createCheckoutSession(
-  params: CheckoutSessionParams
-): Promise<CheckoutSessionResponse> {
-  const { userId, userEmail, countryCode, successUrl, cancelUrl, metadata = {} } = params;
+export const createCheckoutSession = async (
+  request: CheckoutSessionRequest
+): Promise<CheckoutSessionResponse> => {
+  const { userId, email, countryCode, tier, successUrl, cancelUrl } = request;
 
-  // Get pricing configuration for user's location
-  const { pricing, isRestricted, restrictionReason } = getPricingForCountry(countryCode);
+  // Get pricing configuration for the user's country
+  const pricing = getPricingForCountry(countryCode);
+  const paymentMethods = getStripePaymentMethods(countryCode);
 
-  if (isRestricted) {
-    throw new Error(restrictionReason || 'Service not available in your region');
-  }
-
-  // Get preferred payment methods for the country
-  const paymentMethods = getPreferredPaymentMethods(countryCode || 'US');
+  // Calculate price based on tier
+  const isAnnual = tier === 'annual';
+  const amount = isAnnual 
+    ? Math.round(pricing.priceLocal * 10) // 10 months = 2 months free
+    : pricing.priceLocal;
 
   try {
-    // Call the Supabase Edge Function for Stripe checkout
-    const response = await fetch(
-      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout-session`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({
-          userId,
-          userEmail,
-          currency: pricing.currency,
-          amount: pricing.amount,
-          paymentMethodTypes: paymentMethods,
-          successUrl,
-          cancelUrl,
-          metadata: {
-            ...metadata,
-            countryCode,
-            originalAmount: pricing.amount,
-            currency: pricing.currency,
-          },
-        }),
-      }
-    );
+    // Call Supabase Edge Function for secure session creation
+    const { data, error } = await supabase.functions.invoke('create-checkout-session', {
+      body: {
+        userId,
+        email,
+        countryCode,
+        currency: pricing.currency,
+        amount,
+        tier,
+        paymentMethods,
+        successUrl,
+        cancelUrl,
+      },
+    });
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Failed to create checkout session');
+    if (error) {
+      throw new Error(`Failed to create checkout session: ${error.message}`);
     }
-
-    const data = await response.json();
 
     return {
       sessionId: data.sessionId,
-      checkoutUrl: data.checkoutUrl,
-      pricing,
+      url: data.url,
     };
   } catch (error) {
-    console.error('Stripe checkout session creation failed:', error);
-    throw new Error(
-      error instanceof Error ? error.message : 'Unable to initialize payment. Please try again.'
-    );
+    console.error('Checkout session creation error:', error);
+    throw error;
   }
-}
+};
 
 /**
- * Create a customer portal session for managing subscriptions
+ * Redirect to Stripe Checkout
  */
-export async function createCustomerPortalSession(
-  customerId: string,
-  returnUrl: string
-): Promise<{ url: string }> {
-  try {
-    const response = await fetch(
-      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-portal-session`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({
-          customerId,
-          returnUrl,
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Failed to create portal session');
-    }
-
-    const data = await response.json();
-    return { url: data.url };
-  } catch (error) {
-    console.error('Customer portal session creation failed:', error);
-    throw new Error(
-      error instanceof Error ? error.message : 'Unable to open billing portal. Please try again.'
-    );
-  }
-}
-
-/**
- * Validate a checkout session after completion
- */
-export async function validateCheckoutSession(sessionId: string): Promise<{
-  valid: boolean;
-  userId?: string;
-  subscriptionId?: string;
-  status?: string;
-}> {
-  try {
-    const response = await fetch(
-      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/validate-checkout-session`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({ sessionId }),
-      }
-    );
-
-    if (!response.ok) {
-      return { valid: false };
-    }
-
-    const data = await response.json();
-    return {
-      valid: data.valid || false,
-      userId: data.userId,
-      subscriptionId: data.subscriptionId,
-      status: data.status,
-    };
-  } catch (error) {
-    console.error('Checkout session validation failed:', error);
-    return { valid: false };
-  }
-}
+export const redirectToCheckout = async (
+  request: CheckoutSessionRequest
+): Promise<void> => {
+  const session = await createCheckoutSession(request);
+  window.location.href = session.url;
+};
 
 /**
  * Get subscription status for a user
  */
-export async function getSubscriptionStatus(userId: string): Promise<{
-  isActive: boolean;
-  plan?: string;
-  currency?: string;
-  amount?: number;
-  cancelAtPeriodEnd?: boolean;
-  currentPeriodEnd?: string;
-}> {
+export const getSubscriptionStatus = async (userId: string) => {
   try {
-    const response = await fetch(
-      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/get-subscription-status`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({ userId }),
-      }
-    );
+    const { data, error } = await supabase
+      .from('subscriptions')
+      .select('*')
+      .eq('user_id', userId)
+      .eq('status', 'active')
+      .single();
 
-    if (!response.ok) {
-      return { isActive: false };
+    if (error) {
+      if (error.code === 'PGRST116') {
+        // No active subscription found
+        return null;
+      }
+      throw error;
     }
 
-    const data = await response.json();
-    return {
-      isActive: data.isActive || false,
-      plan: data.plan,
-      currency: data.currency,
-      amount: data.amount,
-      cancelAtPeriodEnd: data.cancelAtPeriodEnd,
-      currentPeriodEnd: data.currentPeriodEnd,
-    };
+    return data;
   } catch (error) {
-    console.error('Subscription status fetch failed:', error);
-    return { isActive: false };
+    console.error('Failed to get subscription status:', error);
+    throw error;
   }
-}
+};
 
 /**
- * Cancel subscription at period end
+ * Cancel subscription
  */
-export async function cancelSubscription(subscriptionId: string): Promise<{ success: boolean }> {
+export const cancelSubscription = async (subscriptionId: string): Promise<void> => {
   try {
-    const response = await fetch(
-      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/cancel-subscription`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({ subscriptionId }),
-      }
-    );
+    const { error } = await supabase.functions.invoke('cancel-subscription', {
+      body: { subscriptionId },
+    });
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Failed to cancel subscription');
+    if (error) {
+      throw new Error(`Failed to cancel subscription: ${error.message}`);
+    }
+  } catch (error) {
+    console.error('Subscription cancellation error:', error);
+    throw error;
+  }
+};
+
+/**
+ * Update subscription tier
+ */
+export const updateSubscriptionTier = async (
+  subscriptionId: string,
+  newTier: 'monthly' | 'annual'
+): Promise<void> => {
+  try {
+    const { error } = await supabase.functions.invoke('update-subscription', {
+      body: { subscriptionId, newTier },
+    });
+
+    if (error) {
+      throw new Error(`Failed to update subscription: ${error.message}`);
+    }
+  } catch (error) {
+    console.error('Subscription update error:', error);
+    throw error;
+  }
+};
+
+/**
+ * Get payment history for a user
+ */
+export const getPaymentHistory = async (userId: string) => {
+  try {
+    const { data, error } = await supabase
+      .from('payments')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      throw error;
     }
 
-    return { success: true };
+    return data;
   } catch (error) {
-    console.error('Subscription cancellation failed:', error);
-    throw new Error(
-      error instanceof Error ? error.message : 'Unable to cancel subscription. Please try again.'
-    );
+    console.error('Failed to get payment history:', error);
+    throw error;
   }
-}
+};

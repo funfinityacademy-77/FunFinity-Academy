@@ -211,11 +211,11 @@ export function SubjectsSection() {
   return (
     <section
       id="subjects"
-      className="py-12 md:py-16 relative overflow-hidden bg-background"
+      className="py-8 sm:py-10 md:py-16 relative overflow-hidden bg-background"
     >
       {/* Background glows */}
-      <div className="absolute top-0 left-1/4 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-glow-cyan opacity-20" />
-      <div className="absolute bottom-0 right-1/4 w-[250px] sm:w-[300px] md:w-[400px] h-[250px] sm:h-[300px] md:h-[400px] bg-glow-magenta opacity-15" />
+      <div className="absolute top-0 left-1/4 w-[150px] sm:w-[250px] md:w-[400px] h-[150px] sm:h-[250px] md:h-[500px] bg-glow-cyan opacity-20" />
+      <div className="absolute bottom-0 right-1/4 w-[120px] sm:w-[200px] md:w-[400px] h-[120px] sm:h-[200px] md:h-[400px] bg-glow-magenta opacity-15" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
@@ -226,13 +226,13 @@ export function SubjectsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-6 sm:mb-8"
         >
-          <span className="text-sm font-medium text-accent uppercase tracking-wider mb-4 block">
+          <span className="text-xs sm:text-sm font-medium text-accent uppercase tracking-wider mb-2 sm:mb-4 block">
             Knowledge Landscape
           </span>
-          <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 text-foreground">
+          <h2 className="font-display text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-2 sm:mb-3 text-foreground">
             Interconnected <span className="text-gradient-brand">Learning</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Knowledge is not a checklist of isolated facts. Explore a landscape
             where ideas connect, patterns emerge, and understanding deepens
             naturally.

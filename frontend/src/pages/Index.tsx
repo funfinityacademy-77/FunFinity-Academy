@@ -11,30 +11,21 @@ import { Footer } from "@/components/Footer";
 import { NotificationBanner } from "@/components/NotificationBanner";
 import { CookieConsent } from "@/components/CookieConsent";
 import { SupportChatWidget } from "@/components/chat/SupportChatWidget";
-import { AgeGate } from "@/components/AgeGate";
 
 const Index = () => {
   return (
-    <div 
-      className="min-h-screen bg-background flex flex-col"
-    >
-      <AgeGate />
+    <div className="min-h-screen bg-background flex flex-col">
       <NotificationBanner />
       <Navbar />
-      <main 
-        id="main-content" 
-        className="flex-1 w-full"
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <HeroSection />
-          <LegalPopupSection />
-          <RollingExperienceWall />
-          <HowItWorksSection />
-          <SubjectsSection />
-          <PhilosophySection />
-          <LearningDNASection />
-          <CTASection />
-        </div>
+      <main id="main-content" className="flex-1">
+        <HeroSection />
+        <LegalPopupSection />
+        <RollingExperienceWall />
+        <HowItWorksSection />
+        <SubjectsSection />
+        <PhilosophySection />
+        <LearningDNASection />
+        <CTASection />
       </main>
       <Footer />
       <CookieConsent />

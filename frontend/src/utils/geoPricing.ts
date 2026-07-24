@@ -1,24 +1,28 @@
 /**
- * Geo-Location Pricing Utility
- * Handles PPP-based pricing tiers and regional compliance checks
+ * Geo-Routing & Purchasing Power Parity (PPP) Pricing Utility
+ * Detects user country and applies localized pricing based on PPP
  */
 
-export interface PricingConfig {
-  currency: string;
-  amount: number;
-  currencySymbol: string;
-  localizedLabel: string;
-}
-
-export interface GeoPricingResult {
-  pricing: PricingConfig;
-  isRestricted: boolean;
-  restrictionReason?: string;
+export interface CountryPricing {
   countryCode: string;
+  currency: string;
+  priceUSD: number;
+  priceLocal: number;
+  currencySymbol: string;
+  paymentMethods: string[];
 }
 
-// OFAC-sanctioned and restricted countries
-const RESTRICTED_COUNTRIES = new Set([
+export interface PricingTier {
+  name: string;
+  features: string[];
+  pricing: CountryPricing;
+}
+
+/**
+ * OFAC-sanctioned and restricted countries
+ * These countries are blocked from accessing the platform
+ */
+const RESTRICTED_COUNTRIES = [
   'CU', // Cuba
   'IR', // Iran
   'KP', // North Korea
@@ -26,235 +30,425 @@ const RESTRICTED_COUNTRIES = new Set([
   'RU', // Russia (sanctions)
   'BY', // Belarus
   'MM', // Myanmar
-]);
+];
 
-// PPP-based pricing tiers (USD equivalent)
-const PRICING_TIERS: Record<string, PricingConfig> = {
-  // India - $2 equivalent
+/**
+ * PPP-based pricing configuration
+ * Prices are adjusted based on purchasing power parity
+ */
+const PPP_PRICING: Record<string, CountryPricing> = {
+  // India - lowest tier due to PPP
   IN: {
+    countryCode: 'IN',
     currency: 'INR',
-    amount: 165,
+    priceUSD: 2.00,
+    priceLocal: 169, // ~$2 USD equivalent
     currencySymbol: '₹',
-    localizedLabel: '₹165/month',
+    paymentMethods: ['card', 'upi', 'netbanking'],
   },
-  // Brazil - $3 equivalent
+  // Brazil - mid-low tier
   BR: {
+    countryCode: 'BR',
     currency: 'BRL',
-    amount: 15,
+    priceUSD: 3.00,
+    priceLocal: 15.00, // ~$3 USD equivalent
     currencySymbol: 'R$',
-    localizedLabel: 'R$15/month',
+    paymentMethods: ['card', 'pix', 'boleto'],
   },
-  // Mexico - $3.5 equivalent
+  // Mexico - mid tier
   MX: {
+    countryCode: 'MX',
     currency: 'MXN',
-    amount: 65,
+    priceUSD: 3.50,
+    priceLocal: 60.00, // ~$3.50 USD equivalent
     currencySymbol: '$',
-    localizedLabel: '$65 MXN/month',
+    paymentMethods: ['card', 'oxxo', 'spei'],
   },
-  // Philippines - $2.5 equivalent
+  // Philippines - mid-low tier
   PH: {
+    countryCode: 'PH',
     currency: 'PHP',
-    amount: 140,
+    priceUSD: 2.50,
+    priceLocal: 140, // ~$2.50 USD equivalent
     currencySymbol: '₱',
-    localizedLabel: '₱140/month',
+    paymentMethods: ['card', 'gcash', 'maya'],
   },
-  // Indonesia - $2.5 equivalent
+  // Indonesia - low tier
   ID: {
+    countryCode: 'ID',
     currency: 'IDR',
-    amount: 38000,
+    priceUSD: 2.50,
+    priceLocal: 37500, // ~$2.50 USD equivalent
     currencySymbol: 'Rp',
-    localizedLabel: 'Rp38,000/month',
+    paymentMethods: ['card', 'gopay', 'ovo', 'dana'],
   },
-  // Nigeria - $2.5 equivalent
+  // Nigeria - low tier
   NG: {
+    countryCode: 'NG',
     currency: 'NGN',
-    amount: 3800,
+    priceUSD: 2.50,
+    priceLocal: 3750, // ~$2.50 USD equivalent
     currencySymbol: '₦',
-    localizedLabel: '₦3,800/month',
+    paymentMethods: ['card', 'bank_transfer'],
   },
-  // Pakistan - $2 equivalent
+  // Pakistan - lowest tier
   PK: {
+    countryCode: 'PK',
     currency: 'PKR',
-    amount: 560,
+    priceUSD: 2.00,
+    priceLocal: 560, // ~$2 USD equivalent
     currencySymbol: '₨',
-    localizedLabel: '₨560/month',
+    paymentMethods: ['card', 'jazzcash', 'easypaisa'],
   },
-  // Bangladesh - $2 equivalent
+  // Bangladesh - lowest tier
   BD: {
+    countryCode: 'BD',
     currency: 'BDT',
-    amount: 220,
+    priceUSD: 2.00,
+    priceLocal: 220, // ~$2 USD equivalent
     currencySymbol: '৳',
-    localizedLabel: '৳220/month',
+    paymentMethods: ['card', 'bkash', 'nagad'],
   },
-  // Vietnam - $2.5 equivalent
+  // Vietnam - low tier
   VN: {
+    countryCode: 'VN',
     currency: 'VND',
-    amount: 60000,
+    priceUSD: 2.50,
+    priceLocal: 60000, // ~$2.50 USD equivalent
     currencySymbol: '₫',
-    localizedLabel: '₫60,000/month',
+    paymentMethods: ['card', 'momo', 'zalopay'],
   },
-  // Egypt - $2.5 equivalent
+  // Egypt - low tier
   EG: {
+    countryCode: 'EG',
     currency: 'EGP',
-    amount: 75,
+    priceUSD: 2.50,
+    priceLocal: 77, // ~$2.50 USD equivalent
     currencySymbol: 'E£',
-    localizedLabel: 'E£75/month',
+    paymentMethods: ['card', 'fawry', 'instapay'],
   },
-  // Turkey - $3.5 equivalent
+  // Turkey - mid tier
   TR: {
+    countryCode: 'TR',
     currency: 'TRY',
-    amount: 105,
+    priceUSD: 3.00,
+    priceLocal: 90, // ~$3 USD equivalent
     currencySymbol: '₺',
-    localizedLabel: '₺105/month',
+    paymentMethods: ['card', 'bank_transfer'],
   },
-  // Colombia - $3 equivalent
-  CO: {
-    currency: 'COP',
-    amount: 12000,
-    currencySymbol: '$',
-    localizedLabel: '$12,000 COP/month',
-  },
-  // Argentina - $3.5 equivalent
+  // Argentina - mid tier
   AR: {
+    countryCode: 'AR',
     currency: 'ARS',
-    amount: 3500,
+    priceUSD: 3.50,
+    priceLocal: 3500, // ~$3.50 USD equivalent
     currencySymbol: '$',
-    localizedLabel: '$3,500 ARS/month',
+    paymentMethods: ['card', 'mercado_pago'],
   },
-  // South Africa - $4 equivalent
-  ZA: {
-    currency: 'ZAR',
-    amount: 75,
-    currencySymbol: 'R',
-    localizedLabel: 'R75/month',
+  // Colombia - mid tier
+  CO: {
+    countryCode: 'CO',
+    currency: 'COP',
+    priceUSD: 3.00,
+    priceLocal: 12000, // ~$3 USD equivalent
+    currencySymbol: '$',
+    paymentMethods: ['card', 'pse', 'nequi'],
   },
-  // Kenya - $3 equivalent
-  KE: {
-    currency: 'KES',
-    amount: 450,
-    currencySymbol: 'KSh',
-    localizedLabel: 'KSh450/month',
+  // Peru - mid tier
+  PE: {
+    countryCode: 'PE',
+    currency: 'PEN',
+    priceUSD: 3.00,
+    priceLocal: 11, // ~$3 USD equivalent
+    currencySymbol: 'S/',
+    paymentMethods: ['card', 'yape', 'plin'],
   },
-  // Nigeria - already listed above
-  // Default global pricing - $5 USD
-  DEFAULT: {
+  // Chile - mid tier
+  CL: {
+    countryCode: 'CL',
+    currency: 'CLP',
+    priceUSD: 3.50,
+    priceLocal: 3200, // ~$3.50 USD equivalent
+    currencySymbol: '$',
+    paymentMethods: ['card', 'webpay'],
+  },
+  // Thailand - mid-low tier
+  TH: {
+    countryCode: 'TH',
+    currency: 'THB',
+    priceUSD: 3.00,
+    priceLocal: 105, // ~$3 USD equivalent
+    currencySymbol: '฿',
+    paymentMethods: ['card', 'promptpay', 'truemoney'],
+  },
+  // Malaysia - mid tier
+  MY: {
+    countryCode: 'MY',
+    currency: 'MYR',
+    priceUSD: 3.50,
+    priceLocal: 16, // ~$3.50 USD equivalent
+    currencySymbol: 'RM',
+    paymentMethods: ['card', 'fpx', 'grabpay'],
+  },
+  // Singapore - high tier (developed)
+  SG: {
+    countryCode: 'SG',
+    currency: 'SGD',
+    priceUSD: 5.00,
+    priceLocal: 6.70, // ~$5 USD equivalent
+    currencySymbol: 'S$',
+    paymentMethods: ['card', 'grabpay', 'paynow'],
+  },
+  // United Kingdom - high tier
+  GB: {
+    countryCode: 'GB',
+    currency: 'GBP',
+    priceUSD: 5.00,
+    priceLocal: 4.00, // ~$5 USD equivalent
+    currencySymbol: '£',
+    paymentMethods: ['card', 'bacs', 'sepa'],
+  },
+  // Eurozone - high tier
+  DE: {
+    countryCode: 'DE',
+    currency: 'EUR',
+    priceUSD: 5.00,
+    priceLocal: 4.60, // ~$5 USD equivalent
+    currencySymbol: '€',
+    paymentMethods: ['card', 'sofort', 'sepa', 'giropay'],
+  },
+  FR: {
+    countryCode: 'FR',
+    currency: 'EUR',
+    priceUSD: 5.00,
+    priceLocal: 4.60, // ~$5 USD equivalent
+    currencySymbol: '€',
+    paymentMethods: ['card', 'sepa', 'carte_bancaire'],
+  },
+  // Canada - high tier
+  CA: {
+    countryCode: 'CA',
+    currency: 'CAD',
+    priceUSD: 5.00,
+    priceLocal: 6.80, // ~$5 USD equivalent
+    currencySymbol: 'C$',
+    paymentMethods: ['card', 'interac'],
+  },
+  // Australia - high tier
+  AU: {
+    countryCode: 'AU',
+    currency: 'AUD',
+    priceUSD: 5.00,
+    priceLocal: 7.50, // ~$5 USD equivalent
+    currencySymbol: 'A$',
+    paymentMethods: ['card', 'bpay', 'poli'],
+  },
+  // Japan - high tier
+  JP: {
+    countryCode: 'JP',
+    currency: 'JPY',
+    priceUSD: 5.00,
+    priceLocal: 750, // ~$5 USD equivalent
+    currencySymbol: '¥',
+    paymentMethods: ['card', 'konbini', 'bank_transfer'],
+  },
+  // South Korea - high tier
+  KR: {
+    countryCode: 'KR',
+    currency: 'KRW',
+    priceUSD: 5.00,
+    priceLocal: 6800, // ~$5 USD equivalent
+    currencySymbol: '₩',
+    paymentMethods: ['card', 'kakao_pay', 'naver_pay'],
+  },
+  // United States - high tier (default)
+  US: {
+    countryCode: 'US',
     currency: 'USD',
-    amount: 5,
+    priceUSD: 5.00,
+    priceLocal: 5.00,
     currencySymbol: '$',
-    localizedLabel: '$5/month',
+    paymentMethods: ['card', 'apple_pay', 'google_pay'],
   },
 };
 
 /**
- * Get country code from Vercel request headers
- * Falls back to client-side detection if headers not available
+ * Default pricing for countries not in PPP table
  */
-export function getCountryCode(): string {
-  // Server-side: check Vercel headers
-  if (typeof window === 'undefined') {
-    // This would be used in Edge Functions/Serverless functions
-    return 'US';
-  }
-
-  // Client-side: try to detect from browser locale
-  const locale = navigator.language || 'en-US';
-  const countryCode = locale.split('-')[1]?.toUpperCase() || 'US';
-  return countryCode;
-}
+const DEFAULT_PRICING: CountryPricing = {
+  countryCode: 'US',
+  currency: 'USD',
+  priceUSD: 5.00,
+  priceLocal: 5.00,
+  currencySymbol: '$',
+  paymentMethods: ['card'],
+};
 
 /**
- * Get pricing configuration based on user's location
+ * Detect user country from request headers (Vercel)
+ * Falls back to client-side IP detection if headers not available
  */
-export function getPricingForCountry(countryCode?: string): GeoPricingResult {
-  const code = countryCode?.toUpperCase() || getCountryCode();
-
-  // Check if country is restricted
-  if (RESTRICTED_COUNTRIES.has(code)) {
-    return {
-      pricing: PRICING_TIERS.DEFAULT,
-      isRestricted: true,
-      restrictionReason: 'Service not available in this region due to trade compliance regulations',
-      countryCode: code,
-    };
+export const detectCountry = async (): Promise<string> => {
+  // Try Vercel headers first (server-side)
+  if (typeof window === 'undefined') {
+    // Server-side: would use request headers in actual implementation
+    return 'US'; // Default for server-side
   }
 
-  // Get pricing for country or fall back to default
-  const pricing = PRICING_TIERS[code] || PRICING_TIERS.DEFAULT;
+  // Client-side: use IP geolocation API
+  try {
+    const response = await fetch('https://ipapi.co/json/');
+    const data = await response.json();
+    return data.country_code || 'US';
+  } catch (error) {
+    console.error('Failed to detect country:', error);
+    return 'US'; // Fallback to US
+  }
+};
+
+/**
+ * Check if country is restricted
+ */
+export const isCountryRestricted = (countryCode: string): boolean => {
+  return RESTRICTED_COUNTRIES.includes(countryCode.toUpperCase());
+};
+
+/**
+ * Get pricing configuration for a country
+ */
+export const getPricingForCountry = (countryCode: string): CountryPricing => {
+  const code = countryCode.toUpperCase();
+  return PPP_PRICING[code] || DEFAULT_PRICING;
+};
+
+/**
+ * Get all available pricing tiers for a country
+ */
+export const getPricingTiers = (countryCode: string): PricingTier[] => {
+  const basePricing = getPricingForCountry(countryCode);
+  
+  return [
+    {
+      name: 'Monthly',
+      features: [
+        'Access to all courses',
+        'AI-powered study notes',
+        'Live cohort sessions',
+        'Community support',
+        'Mobile app access',
+      ],
+      pricing: basePricing,
+    },
+    {
+      name: 'Annual',
+      features: [
+        'Everything in Monthly',
+        '2 months free',
+        'Priority support',
+        'Advanced AI features',
+        'Certificate of completion',
+      ],
+      pricing: {
+        ...basePricing,
+        priceLocal: Math.round(basePricing.priceLocal * 10), // 10 months = 2 months free
+        priceUSD: basePricing.priceUSD * 10,
+      },
+    },
+  ];
+};
+
+/**
+ * Format price for display
+ */
+export const formatPrice = (pricing: CountryPricing): string => {
+  return `${pricing.currencySymbol}${pricing.priceLocal.toLocaleString()}`;
+};
+
+/**
+ * Get Stripe payment method types for a country
+ */
+export const getStripePaymentMethods = (countryCode: string): string[] => {
+  const pricing = getPricingForCountry(countryCode);
+  
+  // Map local payment methods to Stripe types
+  const methodMap: Record<string, string> = {
+    card: 'card',
+    upi: 'upi',
+    pix: 'pix',
+    boleto: 'boleto',
+    oxxo: 'oxxo',
+    spei: 'spei',
+    gcash: 'gcash',
+    maya: 'maya',
+    gopay: 'gopay',
+    ovo: 'ovo',
+    dana: 'dana',
+    jazzcash: 'grabpay', // Fallback
+    easypaisa: 'grabpay', // Fallback
+    bkash: 'grabpay', // Fallback
+    nagad: 'grabpay', // Fallback
+    momo: 'grabpay', // Fallback
+    zalopay: 'grabpay', // Fallback
+    fawry: 'grabpay', // Fallback
+    instapay: 'grabpay', // Fallback
+    mercado_pago: 'grabpay', // Fallback
+    pse: 'pse',
+    nequi: 'nequi',
+    yape: 'grabpay', // Fallback
+    plin: 'grabpay', // Fallback
+    webpay: 'webpay',
+    promptpay: 'promptpay',
+    truemoney: 'grabpay', // Fallback
+    fpx: 'fpx',
+    grabpay: 'grabpay',
+    paynow: 'grabpay', // Fallback
+    bacs: 'bacs',
+    sepa: 'sepa_debit',
+    sofort: 'sofort',
+    giropay: 'giropay',
+    interac: 'interac',
+    bpay: 'bpay',
+    poli: 'poli',
+    konbini: 'konbini',
+    kakao_pay: 'kakao_pay',
+    naver_pay: 'naver_pay',
+    apple_pay: 'apple_pay',
+    google_pay: 'google_pay',
+  };
+
+  return pricing.paymentMethods
+    .map(method => methodMap[method] || 'card')
+    .filter((method, index, self) => self.indexOf(method) === index); // Remove duplicates
+};
+
+/**
+ * Validate country code format
+ */
+export const isValidCountryCode = (code: string): boolean => {
+  return /^[A-Z]{2}$/i.test(code);
+};
+
+/**
+ * Main function to get complete pricing configuration
+ */
+export const getPricingConfig = async (): Promise<{
+  countryCode: string;
+  isRestricted: boolean;
+  pricing: CountryPricing;
+  tiers: PricingTier[];
+  paymentMethods: string[];
+}> => {
+  const countryCode = await detectCountry();
+  const isRestricted = isCountryRestricted(countryCode);
+  const pricing = getPricingForCountry(countryCode);
+  const tiers = getPricingTiers(countryCode);
+  const paymentMethods = getStripePaymentMethods(countryCode);
 
   return {
+    countryCode,
+    isRestricted,
     pricing,
-    isRestricted: false,
-    countryCode: code,
+    tiers,
+    paymentMethods,
   };
-}
-
-/**
- * Get all available pricing tiers for display
- */
-export function getAllPricingTiers(): Array<{
-  countryCode: string;
-  config: PricingConfig;
-  regionName: string;
-}> {
-  const regionNames: Record<string, string> = {
-    IN: 'India',
-    BR: 'Brazil',
-    MX: 'Mexico',
-    PH: 'Philippines',
-    ID: 'Indonesia',
-    NG: 'Nigeria',
-    PK: 'Pakistan',
-    BD: 'Bangladesh',
-    VN: 'Vietnam',
-    EG: 'Egypt',
-    TR: 'Turkey',
-    CO: 'Colombia',
-    AR: 'Argentina',
-    ZA: 'South Africa',
-    KE: 'Kenya',
-    US: 'United States',
-  };
-
-  return Object.entries(PRICING_TIERS)
-    .filter(([key]) => key !== 'DEFAULT')
-    .map(([countryCode, config]) => ({
-      countryCode,
-      config,
-      regionName: regionNames[countryCode] || countryCode,
-    }))
-    .sort((a, b) => a.regionName.localeCompare(b.regionName));
-}
-
-/**
- * Validate if a country code is supported
- */
-export function isCountrySupported(countryCode: string): boolean {
-  return !RESTRICTED_COUNTRIES.has(countryCode.toUpperCase());
-}
-
-/**
- * Get Stripe payment method preferences for a country
- */
-export function getPreferredPaymentMethods(countryCode: string): string[] {
-  const code = countryCode.toUpperCase();
-  
-  const paymentMethods: Record<string, string[]> = {
-    IN: ['upi', 'card', 'netbanking'],
-    BR: ['pix', 'card', 'boleto'],
-    MX: ['oxxo', 'card', 'spei'],
-    PH: ['gcash', 'maya', 'card'],
-    ID: ['gopay', 'ovo', 'dana', 'card'],
-    NG: ['card', 'bank_transfer'],
-    PK: ['jazzcash', 'easypaisa', 'card'],
-    BD: ['bkash', 'card'],
-    VN: ['momo', 'zalopay', 'card'],
-    EG: ['fawry', 'card'],
-    TR: ['card', 'bank_transfer'],
-    CO: ['pse', 'card', 'baloto'],
-    AR: ['card', 'rapipago', 'pagofacil'],
-    ZA: ['card', 'eft'],
-    KE: ['mpesa', 'card'],
-  };
-
-  return paymentMethods[code] || ['card'];
-}
+};

@@ -6,44 +6,44 @@ import { Brain, Eye, Clock, Layers, Shield, Sparkles } from "lucide-react";
 const pillars = [
   {
     icon: Eye,
-    title: "Evidence-Based Learning",
+    title: "Presence Over Pages",
     description:
-      "Curriculum designed using cognitive science research. Spaced repetition, active recall, and interleaved practice optimize retention and understanding.",
+      "Learning happens in a continuous, navigable space—not fragmented screens. Build mental maps of knowledge that stick.",
     color: "cyan",
   },
   {
     icon: Brain,
-    title: "Adaptive AI Technology",
+    title: "Cognitive Design",
     description:
-      "Machine learning algorithms continuously analyze performance data to personalize difficulty, pacing, and content delivery for optimal learning outcomes.",
+      "Attention is treated as precious. Silence, spacing, and restraint allow understanding to settle naturally.",
     color: "orange",
   },
   {
     icon: Clock,
-    title: "Flexible Scheduling",
+    title: "Time Awareness",
     description:
-      "Self-paced learning accommodates diverse schedules. Progress tracking ensures completion without time pressure or artificial deadlines.",
+      "Sessions feel complete and satisfying. Progress unfolds over weeks without pressure or artificial urgency.",
     color: "magenta",
   },
   {
     icon: Layers,
-    title: "Interconnected Curriculum",
+    title: "Knowledge Landscape",
     description:
-      "Cross-disciplinary connections demonstrate real-world applications. Mathematics, science, and coding concepts reinforce each other for deeper comprehension.",
+      "Ideas connect across domains. Mastery emerges through pattern recognition, not isolated memorization.",
     color: "cyan",
   },
   {
     icon: Sparkles,
-    title: "Gamified Progress",
+    title: "Understated Joy",
     description:
-      "Achievement badges, XP systems, and progress visualizations provide intrinsic motivation. Rewards celebrate genuine learning milestones.",
+      "Motivation feels internal and earned. Rewards appear when meaningful, never dominating attention.",
     color: "orange",
   },
   {
     icon: Shield,
-    title: "Privacy & Security",
+    title: "Trust by Design",
     description:
-      "COPPA-compliant data practices with parental controls. Student information is encrypted, never sold, and fully transparent to authorized guardians.",
+      "Every interaction is evaluated for psychological impact. Manipulative patterns are avoided entirely.",
     color: "magenta",
   },
 ];
@@ -108,9 +108,9 @@ export function PhilosophySection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="philosophy" className="py-12 md:py-16 relative overflow-hidden">
+    <section id="philosophy" className="py-8 sm:py-10 md:py-16 relative overflow-hidden">
       {/* Subtle background accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] md:w-[1000px] h-[400px] sm:h-[500px] md:h-[600px] bg-glow-cyan opacity-30" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] sm:w-[500px] md:w-[800px] h-[200px] sm:h-[300px] md:h-[600px] bg-glow-cyan opacity-30" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
@@ -121,21 +121,21 @@ export function PhilosophySection() {
           transition={{ duration: 0.8 }}
           className="text-center max-w-3xl mx-auto mb-6 sm:mb-8"
         >
-          <span className="text-sm font-medium text-cyan uppercase tracking-wider mb-4 block">
+          <span className="text-xs sm:text-sm font-medium text-cyan uppercase tracking-wider mb-2 sm:mb-4 block">
             Our Philosophy
           </span>
-          <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 text-foreground">
+          <h2 className="font-display text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-2 sm:mb-3 text-foreground">
             Designed for how learning{" "}
             <span className="text-gradient-brand">actually works</span>
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
             Traditional platforms fragment attention. We create conditions where
             understanding can genuinely thrive.
           </p>
         </motion.div>
 
         {/* Pillars Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {pillars.map((pillar, index) => (
             <PillarCard key={pillar.title} pillar={pillar} index={index} />
           ))}

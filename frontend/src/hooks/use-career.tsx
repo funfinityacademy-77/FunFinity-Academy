@@ -131,7 +131,8 @@ interface CareerContextType {
 const CareerContext = createContext<CareerContextType | undefined>(undefined);
 
 export function CareerProvider({ children }: { children: ReactNode }) {
-  const { user } = useAuth();
+  const auth = useAuth();
+  const user = auth?.user;
   const [profile, setProfile] = useState<CareerProfile>(defaultProfile);
   const [loading, setLoading] = useState(true);
 

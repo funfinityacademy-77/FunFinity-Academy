@@ -15,7 +15,7 @@ const sizeClasses = {
 export function FunfinityLogoSVG({ className, size = 'md' }: FunfinityLogoSVGProps) {
   return (
     <img
-      src="/funfinityacademylogo.jpg"
+      src="/logo.png"
       alt="Funfinity Academy Logo"
       className={cn(sizeClasses[size], className, "object-contain")}
     />

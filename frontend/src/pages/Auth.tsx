@@ -170,15 +170,47 @@ export default function Auth() {
         }
       }
 
-      // Strict role-based routing
-      const isAdmin = userRole === "admin" || (user.email && (user.email.toLowerCase() === 'funfinityacademy@gmail.com' || user.email.toLowerCase() === 'academyfunfinity@gmail.com'));
-      
-      if (isAdmin) {
-        console.log('Auth: Admin user detected, redirecting to /admin');
+      // For students, check if they've completed DNA assessment
+      if (userRole === "student") {
+        const checkDNAProfile = async () => {
+          try {
+            // Check learning_dna_profiles table first
+            const { data: dnaProfile } = await supabase
+              .from('learning_dna_profiles')
+              .select('completed')
+              .eq('user_id', user.id)
+              .single();
+            
+            // Also check profiles table for dna_complete flag
+            const { data: profile } = await supabase
+              .from('profiles')
+              .select('dna_complete')
+              .eq('id', user.id)
+              .single();
+            
+            // Check localStorage as fallback
+            const lsKey = `funfinity_onboarding_${user.id}`;
+            const localStorageComplete = localStorage.getItem(lsKey);
+            
+            const isCompleted = dnaProfile?.completed || profile?.dna_complete || (localStorageComplete && JSON.parse(localStorageComplete).dna_complete);
+            
+            if (isCompleted) {
+              navigate("/app");
+            } else {
+              navigate("/app/learning-dna");
+            }
+          } catch (error) {
+            console.error("Unable to verify your learning profile. Redirecting to setup.");
+            // If check fails, default to learning-dna to be safe
+            navigate("/app/learning-dna");
+          }
+        };
+        checkDNAProfile();
+      } else if (userRole === "admin") {
+        console.log('Auth: Redirecting admin to /admin');
         navigate("/admin");
       } else {
-        // All non-admin users go to student dashboard
-        console.log('Auth: Student user, redirecting to /app');
+        console.log('Auth: Unknown role, redirecting to /app');
         navigate("/app");
       }
     }
@@ -220,8 +252,7 @@ export default function Auth() {
       if (isReset) {
         const { error } = await resetPassword(email.trim());
         if (error) {
-          const userFriendlyError = getAuthErrorMessage(error);
-          toast({ title: "Reset failed", description: userFriendlyError, variant: "destructive" });
+          toast({ title: "Reset failed", description: error.message, variant: "destructive" });
           return;
         }
         toast({ title: "Reset link sent", description: "Check your email for the secure recovery link." });
@@ -237,8 +268,7 @@ export default function Auth() {
             setPassword("");
             return;
           }
-          const userFriendlyError = getAuthErrorMessage(error);
-          toast({ title: "Sign up failed", description: userFriendlyError, variant: "destructive" });
+          toast({ title: "Sign up failed", description: error.message, variant: "destructive" });
           return;
         }
         toast({ title: "Account created", description: "You can now sign in immediately." });
@@ -248,55 +278,14 @@ export default function Auth() {
       }
       const { error } = await signIn(email.trim(), password);
       if (error) {
-        const userFriendlyError = getAuthErrorMessage(error);
-        toast({ title: "Sign in failed", description: userFriendlyError, variant: "destructive" });
+        const description = /invalid login credentials/i.test(error.message ?? "")
+          ? "Invalid email or password."
+          : error.message;
+        toast({ title: "Sign in failed", description, variant: "destructive" });
       }
-    } catch (error) {
-      console.error('Auth error:', error);
-      toast({ 
-        title: "Authentication error", 
-        description: "An unexpected error occurred. Please try again or contact support if the issue persists.",
-        variant: "destructive" 
-      });
     } finally {
       setSubmitting(false);
     }
-  };
-
-  /**
-   * Convert Supabase auth errors to user-friendly messages
-   */
-  const getAuthErrorMessage = (error: any): string => {
-    const message = error?.message || String(error);
-    
-    // Common error patterns
-    if (/invalid login credentials/i.test(message)) {
-      return "Invalid email or password. Please check your credentials and try again.";
-    }
-    if (/email not confirmed/i.test(message)) {
-      return "Please confirm your email address before signing in. Check your inbox for the confirmation link.";
-    }
-    if (/invalid email/i.test(message)) {
-      return "Please enter a valid email address.";
-    }
-    if (/password too short/i.test(message)) {
-      return "Password must be at least 8 characters long.";
-    }
-    if (/user already registered/i.test(message)) {
-      return "An account with this email already exists. Please sign in instead.";
-    }
-    if (/auth api error/i.test(message) || /invalid api key/i.test(message)) {
-      return "Authentication service is temporarily unavailable. Please try again later.";
-    }
-    if (/network/i.test(message) || /fetch/i.test(message)) {
-      return "Network error. Please check your internet connection and try again.";
-    }
-    if (/rate limit/i.test(message)) {
-      return "Too many attempts. Please wait a few minutes before trying again.";
-    }
-    
-    // Return original message if no pattern matches
-    return message;
   };
 
   return (
@@ -404,7 +393,6 @@ export default function Auth() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
-                    autoComplete="email"
                     className="h-12 rounded-xl border-border/50 bg-secondary/40 pl-11 focus:bg-background transition-all"
                   />
                 </div>
@@ -432,7 +420,6 @@ export default function Auth() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      autoComplete="current-password"
                       className="h-12 rounded-xl border-border/50 bg-secondary/40 pl-11 pr-11 focus:bg-background transition-all"
                     />
                     <button
