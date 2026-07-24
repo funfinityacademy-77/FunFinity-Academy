@@ -15,6 +15,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { SkeletonLoader } from "@/components/ui/skeleton-loader";
 import { Suspense, useEffect, useState, lazy } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react";
 import { AgeGate } from "@/components/compliance/AgeGate";
 import { ParentalConsent, ParentalConsentData } from "@/components/compliance/ParentalConsent";
 import { AppLayout } from "./components/layout/AppLayout";
@@ -320,6 +321,7 @@ const App = () => {
         </ThemeProvider>
       </QueryClientProvider>
       <SpeedInsights />
+      <Analytics />
     </>
   );
 };
