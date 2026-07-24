@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
 # Environment variables - CRITICAL: Never commit these
 .env
 .env.local
@@ -80,4 +86,3 @@ node_modules
 database/secrets/
 database/production/
 database/migrations/
-

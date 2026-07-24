@@ -1,14 +1,13 @@
 {
   "config": {
     "argv": [
-      "C:\\Program Files\\nodejs\\node.exe",
-      "C:\\Users\\harsh\\Downloads\\FunFinity Academy\\node_modules\\@playwright\\test\\cli.js",
+      "/home/jules/.nvm/versions/node/v22.22.1/bin/node",
+      "/app/node_modules/.bin/playwright",
       "test",
-      "auth.spec.ts:13",
       "--project=chromium"
     ],
-    "configFile": "C:\\Users\\harsh\\Downloads\\FunFinity Academy\\playwright.config.ts",
-    "rootDir": "C:/Users/harsh/Downloads/FunFinity Academy/tests/e2e",
+    "configFile": "/app/playwright.config.ts",
+    "rootDir": "/app/tests/e2e",
     "failOnFlakyTests": false,
     "forbidOnly": false,
     "fullyParallel": true,
@@ -19,20 +18,20 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 1
+      "actualWorkers": 2
     },
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "C:/Users/harsh/Downloads/FunFinity Academy/test-results",
+        "outputDir": "/app/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "chromium",
         "name": "chromium",
-        "testDir": "C:/Users/harsh/Downloads/FunFinity Academy/tests/e2e",
+        "testDir": "/app/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -40,15 +39,15 @@
         "timeout": 30000
       },
       {
-        "outputDir": "C:/Users/harsh/Downloads/FunFinity Academy/test-results",
+        "outputDir": "/app/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "firefox",
         "name": "firefox",
-        "testDir": "C:/Users/harsh/Downloads/FunFinity Academy/tests/e2e",
+        "testDir": "/app/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -56,15 +55,15 @@
         "timeout": 30000
       },
       {
-        "outputDir": "C:/Users/harsh/Downloads/FunFinity Academy/test-results",
+        "outputDir": "/app/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "webkit",
         "name": "webkit",
-        "testDir": "C:/Users/harsh/Downloads/FunFinity Academy/tests/e2e",
+        "testDir": "/app/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -72,15 +71,15 @@
         "timeout": 30000
       },
       {
-        "outputDir": "C:/Users/harsh/Downloads/FunFinity Academy/test-results",
+        "outputDir": "/app/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "Mobile Chrome",
         "name": "Mobile Chrome",
-        "testDir": "C:/Users/harsh/Downloads/FunFinity Academy/tests/e2e",
+        "testDir": "/app/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -88,15 +87,15 @@
         "timeout": 30000
       },
       {
-        "outputDir": "C:/Users/harsh/Downloads/FunFinity Academy/test-results",
+        "outputDir": "/app/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "Mobile Safari",
         "name": "Mobile Safari",
-        "testDir": "C:/Users/harsh/Downloads/FunFinity Academy/tests/e2e",
+        "testDir": "/app/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -132,7 +131,7 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.61.1",
-    "workers": 6,
+    "workers": 2,
     "webServer": null
   },
   "suites": [
@@ -165,53 +164,53 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 24028,
+                      "duration": 13869,
                       "error": {
-                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=Start Learning Now')\u001b[22m\n\u001b[2m    - locator resolved to <a href=\"/auth\" class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap font-body ring-offset-background duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-brand hover:shadow-glow-accent active:scale-[0.98] h-12 rounded-xl px-8 group bg-gradient-to-r from-blue-dark to-orange-dark hover:from-blue hover:…>…</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    6 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n",
-                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=Start Learning Now')\u001b[22m\n\u001b[2m    - locator resolved to <a href=\"/auth\" class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap font-body ring-offset-background duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-brand hover:shadow-glow-accent active:scale-[0.98] h-12 rounded-xl px-8 group bg-gradient-to-r from-blue-dark to-orange-dark hover:from-blue hover:…>…</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    6 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\n    at C:\\Users\\harsh\\Downloads\\FunFinity Academy\\tests\\e2e\\auth.spec.ts:15:16",
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=Start Learning Now')\u001b[22m\n\u001b[2m    - locator resolved to <a href=\"/auth\" class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap font-body ring-offset-background duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-brand hover:shadow-glow-accent active:scale-[0.98] h-12 rounded-xl px-8 group bg-gradient-to-r from-blue-dark to-orange-dark hover:from-blue hover:…>…</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 100ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is not stable\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 100ms\u001b[22m\n\u001b[2m    16 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=Start Learning Now')\u001b[22m\n\u001b[2m    - locator resolved to <a href=\"/auth\" class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap font-body ring-offset-background duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-brand hover:shadow-glow-accent active:scale-[0.98] h-12 rounded-xl px-8 group bg-gradient-to-r from-blue-dark to-orange-dark hover:from-blue hover:…>…</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 100ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is not stable\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 100ms\u001b[22m\n\u001b[2m    16 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at /app/tests/e2e/auth.spec.ts:22:16",
                         "location": {
-                          "file": "C:\\Users\\harsh\\Downloads\\FunFinity Academy\\tests\\e2e\\auth.spec.ts",
+                          "file": "/app/tests/e2e/auth.spec.ts",
                           "column": 16,
-                          "line": 15
+                          "line": 22
                         },
-                        "snippet": "\u001b[0m \u001b[90m 13 |\u001b[39m   test(\u001b[32m'should navigate to auth page and display login form'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m 14 |\u001b[39m     \u001b[90m// Click on login button\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 15 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'text=Start Learning Now'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 16 |\u001b[39m     \n \u001b[90m 17 |\u001b[39m     \u001b[90m// Wait for navigation to auth page\u001b[39m\n \u001b[90m 18 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForURL(\u001b[32m'**/auth'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                        "snippet": "  20 |     \n  21 |     // Click on login button\n> 22 |     await page.click('text=Start Learning Now');\n     |                ^\n  23 |     \n  24 |     // Wait for navigation to auth page\n  25 |     await page.waitForURL('**/auth');"
                       },
                       "errors": [
                         {
                           "location": {
-                            "file": "C:\\Users\\harsh\\Downloads\\FunFinity Academy\\tests\\e2e\\auth.spec.ts",
+                            "file": "/app/tests/e2e/auth.spec.ts",
                             "column": 16,
-                            "line": 15
+                            "line": 22
                           },
-                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=Start Learning Now')\u001b[22m\n\u001b[2m    - locator resolved to <a href=\"/auth\" class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap font-body ring-offset-background duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-brand hover:shadow-glow-accent active:scale-[0.98] h-12 rounded-xl px-8 group bg-gradient-to-r from-blue-dark to-orange-dark hover:from-blue hover:…>…</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    6 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\n\n\u001b[0m \u001b[90m 13 |\u001b[39m   test(\u001b[32m'should navigate to auth page and display login form'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m 14 |\u001b[39m     \u001b[90m// Click on login button\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 15 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'text=Start Learning Now'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 16 |\u001b[39m     \n \u001b[90m 17 |\u001b[39m     \u001b[90m// Wait for navigation to auth page\u001b[39m\n \u001b[90m 18 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForURL(\u001b[32m'**/auth'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\harsh\\Downloads\\FunFinity Academy\\tests\\e2e\\auth.spec.ts:15:16\u001b[22m"
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=Start Learning Now')\u001b[22m\n\u001b[2m    - locator resolved to <a href=\"/auth\" class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap font-body ring-offset-background duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-brand hover:shadow-glow-accent active:scale-[0.98] h-12 rounded-xl px-8 group bg-gradient-to-r from-blue-dark to-orange-dark hover:from-blue hover:…>…</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 100ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is not stable\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 100ms\u001b[22m\n\u001b[2m    16 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  20 |     \n  21 |     // Click on login button\n> 22 |     await page.click('text=Start Learning Now');\n     |                ^\n  23 |     \n  24 |     // Wait for navigation to auth page\n  25 |     await page.waitForURL('**/auth');\n    at /app/tests/e2e/auth.spec.ts:22:16"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-07-22T04:03:39.910Z",
+                      "startTime": "2026-07-24T17:11:45.045Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\harsh\\Downloads\\FunFinity Academy\\test-results\\auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium\\test-failed-1.png"
+                          "path": "/app/test-results/auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium/test-failed-1.png"
                         },
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "C:\\Users\\harsh\\Downloads\\FunFinity Academy\\test-results\\auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium\\video.webm"
+                          "path": "/app/test-results/auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium/video.webm"
                         },
                         {
                           "name": "error-context",
                           "contentType": "text/markdown",
-                          "path": "C:\\Users\\harsh\\Downloads\\FunFinity Academy\\test-results\\auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium\\error-context.md"
+                          "path": "/app/test-results/auth-Authentication-Flow-s-1b2e1-page-and-display-login-form-chromium/error-context.md"
                         }
                       ],
                       "errorLocation": {
-                        "file": "C:\\Users\\harsh\\Downloads\\FunFinity Academy\\tests\\e2e\\auth.spec.ts",
+                        "file": "/app/tests/e2e/auth.spec.ts",
                         "column": 16,
-                        "line": 15
+                        "line": 22
                       }
                     }
                   ],
@@ -222,6 +221,1697 @@
               "file": "auth.spec.ts",
               "line": 13,
               "column": 3
+            },
+            {
+              "title": "should show validation error for invalid email",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 13559,
+                      "error": {
+                        "message": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n    at /app/tests/e2e/auth.spec.ts:38:16",
+                        "location": {
+                          "file": "/app/tests/e2e/auth.spec.ts",
+                          "column": 16,
+                          "line": 38
+                        },
+                        "snippet": "  36 |     \n  37 |     // Enter invalid email\n> 38 |     await page.fill('input[type=\"email\"]', 'invalid-email');\n     |                ^\n  39 |     await page.fill('input[type=\"password\"]', 'password123');\n  40 |     await page.click('button[type=\"submit\"]');\n  41 |     "
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/auth.spec.ts",
+                            "column": 16,
+                            "line": 38
+                          },
+                          "message": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n\n  36 |     \n  37 |     // Enter invalid email\n> 38 |     await page.fill('input[type=\"email\"]', 'invalid-email');\n     |                ^\n  39 |     await page.fill('input[type=\"password\"]', 'password123');\n  40 |     await page.click('button[type=\"submit\"]');\n  41 |     \n    at /app/tests/e2e/auth.spec.ts:38:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:11:45.145Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-9729a-ion-error-for-invalid-email-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-9729a-ion-error-for-invalid-email-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-9729a-ion-error-for-invalid-email-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/auth.spec.ts",
+                        "column": 16,
+                        "line": 38
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-148006933bfb72b57cea",
+              "file": "auth.spec.ts",
+              "line": 34,
+              "column": 3
+            },
+            {
+              "title": "should show validation error for short password",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 12058,
+                      "error": {
+                        "message": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n    at /app/tests/e2e/auth.spec.ts:50:16",
+                        "location": {
+                          "file": "/app/tests/e2e/auth.spec.ts",
+                          "column": 16,
+                          "line": 50
+                        },
+                        "snippet": "  48 |     \n  49 |     // Enter short password\n> 50 |     await page.fill('input[type=\"email\"]', 'test@example.com');\n     |                ^\n  51 |     await page.fill('input[type=\"password\"]', 'short');\n  52 |     await page.click('button[type=\"submit\"]');\n  53 |     "
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/auth.spec.ts",
+                            "column": 16,
+                            "line": 50
+                          },
+                          "message": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n\n  48 |     \n  49 |     // Enter short password\n> 50 |     await page.fill('input[type=\"email\"]', 'test@example.com');\n     |                ^\n  51 |     await page.fill('input[type=\"password\"]', 'short');\n  52 |     await page.click('button[type=\"submit\"]');\n  53 |     \n    at /app/tests/e2e/auth.spec.ts:50:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:00.551Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-cfee4-on-error-for-short-password-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-cfee4-on-error-for-short-password-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-cfee4-on-error-for-short-password-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/auth.spec.ts",
+                        "column": 16,
+                        "line": 50
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-201515101bdeae8272c5",
+              "file": "auth.spec.ts",
+              "line": 46,
+              "column": 3
+            },
+            {
+              "title": "should switch between login and signup modes",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 6972,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('h1')\nExpected substring: \u001b[32m\"Welcome Back\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('h1')\nExpected substring: \u001b[32m\"Welcome Back\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\n    at /app/tests/e2e/auth.spec.ts:62:38",
+                        "location": {
+                          "file": "/app/tests/e2e/auth.spec.ts",
+                          "column": 38,
+                          "line": 62
+                        },
+                        "snippet": "  60 |     \n  61 |     // Verify login mode is active\n> 62 |     await expect(page.locator('h1')).toContainText('Welcome Back');\n     |                                      ^\n  63 |     \n  64 |     // Click on signup link\n  65 |     await page.click('text=Create account');"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/auth.spec.ts",
+                            "column": 38,
+                            "line": 62
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('h1')\nExpected substring: \u001b[32m\"Welcome Back\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\n\n  60 |     \n  61 |     // Verify login mode is active\n> 62 |     await expect(page.locator('h1')).toContainText('Welcome Back');\n     |                                      ^\n  63 |     \n  64 |     // Click on signup link\n  65 |     await page.click('text=Create account');\n    at /app/tests/e2e/auth.spec.ts:62:38"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:00.873Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-70f98-ween-login-and-signup-modes-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-70f98-ween-login-and-signup-modes-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-70f98-ween-login-and-signup-modes-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/auth.spec.ts",
+                        "column": 38,
+                        "line": 62
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-fdde6a388d16e8aeb7fc",
+              "file": "auth.spec.ts",
+              "line": 58,
+              "column": 3
+            },
+            {
+              "title": "should handle password reset flow",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 12271,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=Forgot password?')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=Forgot password?')\u001b[22m\n\n    at /app/tests/e2e/auth.spec.ts:76:16",
+                        "location": {
+                          "file": "/app/tests/e2e/auth.spec.ts",
+                          "column": 16,
+                          "line": 76
+                        },
+                        "snippet": "  74 |     \n  75 |     // Click on forgot password\n> 76 |     await page.click('text=Forgot password?');\n     |                ^\n  77 |     \n  78 |     // Verify reset form is visible\n  79 |     await expect(page.locator('h1')).toContainText('Reset Password');"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/auth.spec.ts",
+                            "column": 16,
+                            "line": 76
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=Forgot password?')\u001b[22m\n\n\n  74 |     \n  75 |     // Click on forgot password\n> 76 |     await page.click('text=Forgot password?');\n     |                ^\n  77 |     \n  78 |     // Verify reset form is visible\n  79 |     await expect(page.locator('h1')).toContainText('Reset Password');\n    at /app/tests/e2e/auth.spec.ts:76:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:09.222Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/auth-Authentication-Flow-should-handle-password-reset-flow-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/auth-Authentication-Flow-should-handle-password-reset-flow-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/auth-Authentication-Flow-should-handle-password-reset-flow-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/auth.spec.ts",
+                        "column": 16,
+                        "line": 76
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-77191ea14b0f9441dfa4",
+              "file": "auth.spec.ts",
+              "line": 72,
+              "column": 3
+            },
+            {
+              "title": "should have proper autocomplete attributes on auth forms",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 6878,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('input[type=\"email\"]')\nExpected: \u001b[32m\"email\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('input[type=\"email\"]')\nExpected: \u001b[32m\"email\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n    at /app/tests/e2e/auth.spec.ts:95:30",
+                        "location": {
+                          "file": "/app/tests/e2e/auth.spec.ts",
+                          "column": 30,
+                          "line": 95
+                        },
+                        "snippet": "  93 |     // Verify email autocomplete\n  94 |     const emailInput = page.locator('input[type=\"email\"]');\n> 95 |     await expect(emailInput).toHaveAttribute('autoComplete', 'email');\n     |                              ^\n  96 |     \n  97 |     // Verify password autocomplete\n  98 |     const passwordInput = page.locator('input[type=\"password\"]');"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/auth.spec.ts",
+                            "column": 30,
+                            "line": 95
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('input[type=\"email\"]')\nExpected: \u001b[32m\"email\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n\n  93 |     // Verify email autocomplete\n  94 |     const emailInput = page.locator('input[type=\"email\"]');\n> 95 |     await expect(emailInput).toHaveAttribute('autoComplete', 'email');\n     |                              ^\n  96 |     \n  97 |     // Verify password autocomplete\n  98 |     const passwordInput = page.locator('input[type=\"password\"]');\n    at /app/tests/e2e/auth.spec.ts:95:30"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:13.896Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-ad192-te-attributes-on-auth-forms-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-ad192-te-attributes-on-auth-forms-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-ad192-te-attributes-on-auth-forms-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/auth.spec.ts",
+                        "column": 30,
+                        "line": 95
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-1e19cbd24a6e95c506d2",
+              "file": "auth.spec.ts",
+              "line": 90,
+              "column": 3
+            },
+            {
+              "title": "should prevent form submission during loading state",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 12288,
+                      "error": {
+                        "message": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n    at /app/tests/e2e/auth.spec.ts:106:16",
+                        "location": {
+                          "file": "/app/tests/e2e/auth.spec.ts",
+                          "column": 16,
+                          "line": 106
+                        },
+                        "snippet": "  104 |     \n  105 |     // Fill form\n> 106 |     await page.fill('input[type=\"email\"]', 'test@example.com');\n      |                ^\n  107 |     await page.fill('input[type=\"password\"]', 'password123');\n  108 |     \n  109 |     // Click submit"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/auth.spec.ts",
+                            "column": 16,
+                            "line": 106
+                          },
+                          "message": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n\n  104 |     \n  105 |     // Fill form\n> 106 |     await page.fill('input[type=\"email\"]', 'test@example.com');\n      |                ^\n  107 |     await page.fill('input[type=\"password\"]', 'password123');\n  108 |     \n  109 |     // Click submit\n    at /app/tests/e2e/auth.spec.ts:106:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:22.192Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-5fdfe-ission-during-loading-state-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-5fdfe-ission-during-loading-state-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-5fdfe-ission-during-loading-state-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/auth.spec.ts",
+                        "column": 16,
+                        "line": 106
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-39947547e71392ac907a",
+              "file": "auth.spec.ts",
+              "line": 102,
+              "column": 3
+            },
+            {
+              "title": "should redirect to dashboard after successful login",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 12406,
+                      "error": {
+                        "message": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n    at /app/tests/e2e/auth.spec.ts:124:16",
+                        "location": {
+                          "file": "/app/tests/e2e/auth.spec.ts",
+                          "column": 16,
+                          "line": 124
+                        },
+                        "snippet": "  122 |     \n  123 |     // Fill form with test credentials\n> 124 |     await page.fill('input[type=\"email\"]', process.env.TEST_EMAIL || 'test@example.com');\n      |                ^\n  125 |     await page.fill('input[type=\"password\"]', process.env.TEST_PASSWORD || 'password123');\n  126 |     \n  127 |     // Submit form"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/auth.spec.ts",
+                            "column": 16,
+                            "line": 124
+                          },
+                          "message": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n\n  122 |     \n  123 |     // Fill form with test credentials\n> 124 |     await page.fill('input[type=\"email\"]', process.env.TEST_EMAIL || 'test@example.com');\n      |                ^\n  125 |     await page.fill('input[type=\"password\"]', process.env.TEST_PASSWORD || 'password123');\n  126 |     \n  127 |     // Submit form\n    at /app/tests/e2e/auth.spec.ts:124:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:22.792Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-3481d-oard-after-successful-login-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-3481d-oard-after-successful-login-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/auth-Authentication-Flow-s-3481d-oard-after-successful-login-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/auth.spec.ts",
+                        "column": 16,
+                        "line": 124
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-2d599662dce329d7fb5d",
+              "file": "auth.spec.ts",
+              "line": 117,
+              "column": 3
+            },
+            {
+              "title": "should handle session expiration gracefully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1765,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:35.853Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-d0fed141016ef8a18b12",
+              "file": "auth.spec.ts",
+              "line": 137,
+              "column": 3
+            },
+            {
+              "title": "should maintain session across page reloads",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "/app/tests/e2e/auth.spec.ts",
+                        "line": 152,
+                        "column": 12
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2705,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:37.354Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "location": {
+                            "file": "/app/tests/e2e/auth.spec.ts",
+                            "line": 152,
+                            "column": 12
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-db3cb4ff9821326b532c",
+              "file": "auth.spec.ts",
+              "line": 148,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "student-flow.spec.ts",
+      "file": "student-flow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Student Flow",
+          "file": "student-flow.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should display landing page with hero section",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 4606,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('h1')\nExpected substring: \u001b[32m\"AI-Powered Coding Academy\"\u001b[39m\nError: strict mode violation: locator('h1') resolved to 2 elements:\n    1) <h1 class=\"text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-3\">Age Verification Required</h1> aka getByRole('heading', { name: 'Age Verification Required' })\n    2) <h1 class=\"font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4 md:mb-6 leading-[1.15] sm:leading-[1.2]\">…</h1> aka getByRole('heading', { name: 'AI-Powered Coding Academy For' })\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('h1')\nExpected substring: \u001b[32m\"AI-Powered Coding Academy\"\u001b[39m\nError: strict mode violation: locator('h1') resolved to 2 elements:\n    1) <h1 class=\"text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-3\">Age Verification Required</h1> aka getByRole('heading', { name: 'Age Verification Required' })\n    2) <h1 class=\"font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4 md:mb-6 leading-[1.15] sm:leading-[1.2]\">…</h1> aka getByRole('heading', { name: 'AI-Powered Coding Academy For' })\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:15:38",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 38,
+                          "line": 15
+                        },
+                        "snippet": "  13 |   test('should display landing page with hero section', async ({ page }) => {\n  14 |     // Verify hero section is visible\n> 15 |     await expect(page.locator('h1')).toContainText('AI-Powered Coding Academy');\n     |                                      ^\n  16 |     await expect(page.locator('text=Where curiosity meets depth')).toBeVisible();\n  17 |     \n  18 |     // Verify CTA button"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 38,
+                            "line": 15
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('h1')\nExpected substring: \u001b[32m\"AI-Powered Coding Academy\"\u001b[39m\nError: strict mode violation: locator('h1') resolved to 2 elements:\n    1) <h1 class=\"text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-3\">Age Verification Required</h1> aka getByRole('heading', { name: 'Age Verification Required' })\n    2) <h1 class=\"font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4 md:mb-6 leading-[1.15] sm:leading-[1.2]\">…</h1> aka getByRole('heading', { name: 'AI-Powered Coding Academy For' })\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\n\n  13 |   test('should display landing page with hero section', async ({ page }) => {\n  14 |     // Verify hero section is visible\n> 15 |     await expect(page.locator('h1')).toContainText('AI-Powered Coding Academy');\n     |                                      ^\n  16 |     await expect(page.locator('text=Where curiosity meets depth')).toBeVisible();\n  17 |     \n  18 |     // Verify CTA button\n    at /app/tests/e2e/student-flow.spec.ts:15:38"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:38.029Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow--c7da8-ding-page-with-hero-section-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow--c7da8-ding-page-with-hero-section-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow--c7da8-ding-page-with-hero-section-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 38,
+                        "line": 15
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-cfa7bd9bdb8fd7db6808",
+              "file": "student-flow.spec.ts",
+              "line": 13,
+              "column": 3
+            },
+            {
+              "title": "should display trust statistics",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 4480,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=Students')\nExpected: visible\nError: strict mode violation: locator('text=Students') resolved to 4 elements:\n    1) <p class=\"text-xs sm:text-sm md:text-base lg:text-lg text-foreground/90 max-w-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed font-medium\">Master coding, math, and science through interact…</p> aka getByText('Master coding, math, and')\n    2) <p class=\"text-[11px] text-foreground/90 mt-0.5 font-medium\">Students</p> aka getByText('Students', { exact: true })\n    3) <p class=\"text-xs sm:text-sm font-medium text-foreground/80 uppercase tracking-wider\">Trusted by students worldwide</p> aka getByText('Trusted by students worldwide')\n    4) <h2 class=\"text-4xl md:text-5xl font-display font-bold tracking-tight\">…</h2> aka getByRole('heading', { name: 'Loved by Visionary Students' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Students')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=Students')\nExpected: visible\nError: strict mode violation: locator('text=Students') resolved to 4 elements:\n    1) <p class=\"text-xs sm:text-sm md:text-base lg:text-lg text-foreground/90 max-w-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed font-medium\">Master coding, math, and science through interact…</p> aka getByText('Master coding, math, and')\n    2) <p class=\"text-[11px] text-foreground/90 mt-0.5 font-medium\">Students</p> aka getByText('Students', { exact: true })\n    3) <p class=\"text-xs sm:text-sm font-medium text-foreground/80 uppercase tracking-wider\">Trusted by students worldwide</p> aka getByText('Trusted by students worldwide')\n    4) <h2 class=\"text-4xl md:text-5xl font-display font-bold tracking-tight\">…</h2> aka getByRole('heading', { name: 'Loved by Visionary Students' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Students')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:29:49",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 49,
+                          "line": 29
+                        },
+                        "snippet": "  27 |     \n  28 |     // Verify stats are displayed\n> 29 |     await expect(page.locator('text=Students')).toBeVisible();\n     |                                                 ^\n  30 |     await expect(page.locator('text=Courses')).toBeVisible();\n  31 |     await expect(page.locator('text=Rating')).toBeVisible();\n  32 |   });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 49,
+                            "line": 29
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=Students')\nExpected: visible\nError: strict mode violation: locator('text=Students') resolved to 4 elements:\n    1) <p class=\"text-xs sm:text-sm md:text-base lg:text-lg text-foreground/90 max-w-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed font-medium\">Master coding, math, and science through interact…</p> aka getByText('Master coding, math, and')\n    2) <p class=\"text-[11px] text-foreground/90 mt-0.5 font-medium\">Students</p> aka getByText('Students', { exact: true })\n    3) <p class=\"text-xs sm:text-sm font-medium text-foreground/80 uppercase tracking-wider\">Trusted by students worldwide</p> aka getByText('Trusted by students worldwide')\n    4) <h2 class=\"text-4xl md:text-5xl font-display font-bold tracking-tight\">…</h2> aka getByRole('heading', { name: 'Loved by Visionary Students' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Students')\u001b[22m\n\n\n  27 |     \n  28 |     // Verify stats are displayed\n> 29 |     await expect(page.locator('text=Students')).toBeVisible();\n     |                                                 ^\n  30 |     await expect(page.locator('text=Courses')).toBeVisible();\n  31 |     await expect(page.locator('text=Rating')).toBeVisible();\n  32 |   });\n    at /app/tests/e2e/student-flow.spec.ts:29:49"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:40.486Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-display-trust-statistics-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-display-trust-statistics-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-display-trust-statistics-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 49,
+                        "line": 29
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-c6c27a2e0e3fe0a61d5a",
+              "file": "student-flow.spec.ts",
+              "line": 24,
+              "column": 3
+            },
+            {
+              "title": "should navigate to A4 infographic generator",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 7284,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=Infographic Generator')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Infographic Generator')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=Infographic Generator')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Infographic Generator')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:42:62",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 62,
+                          "line": 42
+                        },
+                        "snippet": "  40 |     \n  41 |     // Verify infographic generator is visible\n> 42 |     await expect(page.locator('text=Infographic Generator')).toBeVisible();\n     |                                                              ^\n  43 |   });\n  44 |\n  45 |   test('should create A4 infographic with text element', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 62,
+                            "line": 42
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=Infographic Generator')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Infographic Generator')\u001b[22m\n\n\n  40 |     \n  41 |     // Verify infographic generator is visible\n> 42 |     await expect(page.locator('text=Infographic Generator')).toBeVisible();\n     |                                                              ^\n  43 |   });\n  44 |\n  45 |   test('should create A4 infographic with text element', async ({ page }) => {\n    at /app/tests/e2e/student-flow.spec.ts:42:62"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:44.285Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow--6eab5-to-A4-infographic-generator-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow--6eab5-to-A4-infographic-generator-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow--6eab5-to-A4-infographic-generator-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 62,
+                        "line": 42
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-9b648dfd319c72f12c4f",
+              "file": "student-flow.spec.ts",
+              "line": 34,
+              "column": 3
+            },
+            {
+              "title": "should create A4 infographic with text element",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 12437,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Text\")')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Text\")')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:49:16",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 16,
+                          "line": 49
+                        },
+                        "snippet": "  47 |     \n  48 |     // Click add text element\n> 49 |     await page.click('button:has-text(\"Text\")');\n     |                ^\n  50 |     \n  51 |     // Verify text element is added\n  52 |     await expect(page.locator('[contenteditable=\"true\"]')).toBeVisible();"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 16,
+                            "line": 49
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Text\")')\u001b[22m\n\n\n  47 |     \n  48 |     // Click add text element\n> 49 |     await page.click('button:has-text(\"Text\")');\n     |                ^\n  50 |     \n  51 |     // Verify text element is added\n  52 |     await expect(page.locator('[contenteditable=\"true\"]')).toBeVisible();\n    at /app/tests/e2e/student-flow.spec.ts:49:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:46.912Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow--1c1b4-fographic-with-text-element-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow--1c1b4-fographic-with-text-element-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow--1c1b4-fographic-with-text-element-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 16,
+                        "line": 49
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-66b9d7c2a413c42917ae",
+              "file": "student-flow.spec.ts",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "should change infographic element color",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 12160,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Text\")')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Text\")')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:65:16",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 16,
+                          "line": 65
+                        },
+                        "snippet": "  63 |     \n  64 |     // Add text element\n> 65 |     await page.click('button:has-text(\"Text\")');\n     |                ^\n  66 |     \n  67 |     // Select color picker\n  68 |     await page.click('button[style*=\"background-color: #000000\"]');"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 16,
+                            "line": 65
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Text\")')\u001b[22m\n\n\n  63 |     \n  64 |     // Add text element\n> 65 |     await page.click('button:has-text(\"Text\")');\n     |                ^\n  66 |     \n  67 |     // Select color picker\n  68 |     await page.click('button[style*=\"background-color: #000000\"]');\n    at /app/tests/e2e/student-flow.spec.ts:65:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:12:52.817Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow--22103-e-infographic-element-color-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow--22103-e-infographic-element-color-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow--22103-e-infographic-element-color-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 16,
+                        "line": 65
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-a318d6924410656cb575",
+              "file": "student-flow.spec.ts",
+              "line": 61,
+              "column": 3
+            },
+            {
+              "title": "should export infographic as image",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 12159,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Text\")')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Text\")')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:79:16",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 16,
+                          "line": 79
+                        },
+                        "snippet": "  77 |     \n  78 |     // Add element\n> 79 |     await page.click('button:has-text(\"Text\")');\n     |                ^\n  80 |     await page.type('[contenteditable=\"true\"]', 'Test Notes');\n  81 |     \n  82 |     // Click export button"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 16,
+                            "line": 79
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Text\")')\u001b[22m\n\n\n  77 |     \n  78 |     // Add element\n> 79 |     await page.click('button:has-text(\"Text\")');\n     |                ^\n  80 |     await page.type('[contenteditable=\"true\"]', 'Test Notes');\n  81 |     \n  82 |     // Click export button\n    at /app/tests/e2e/student-flow.spec.ts:79:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:13:00.537Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-export-infographic-as-image-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-export-infographic-as-image-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-export-infographic-as-image-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 16,
+                        "line": 79
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-440bd994b3afa06ac7bc",
+              "file": "student-flow.spec.ts",
+              "line": 75,
+              "column": 3
+            },
+            {
+              "title": "should use low bandwidth mode toggle",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 6691,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=Low Bandwidth Mode')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Low Bandwidth Mode')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=Low Bandwidth Mode')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Low Bandwidth Mode')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:93:59",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 59,
+                          "line": 93
+                        },
+                        "snippet": "  91 |     \n  92 |     // Verify low bandwidth toggle is visible\n> 93 |     await expect(page.locator('text=Low Bandwidth Mode')).toBeVisible();\n     |                                                           ^\n  94 |     \n  95 |     // Click toggle\n  96 |     await page.click('button[role=\"switch\"]');"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 59,
+                            "line": 93
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=Low Bandwidth Mode')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Low Bandwidth Mode')\u001b[22m\n\n\n  91 |     \n  92 |     // Verify low bandwidth toggle is visible\n> 93 |     await expect(page.locator('text=Low Bandwidth Mode')).toBeVisible();\n     |                                                           ^\n  94 |     \n  95 |     // Click toggle\n  96 |     await page.click('button[role=\"switch\"]');\n    at /app/tests/e2e/student-flow.spec.ts:93:59"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:13:06.217Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow--9a538-e-low-bandwidth-mode-toggle-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow--9a538-e-low-bandwidth-mode-toggle-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow--9a538-e-low-bandwidth-mode-toggle-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 59,
+                        "line": 93
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-5a481f8ddd0ea1c5b367",
+              "file": "student-flow.spec.ts",
+              "line": 89,
+              "column": 3
+            },
+            {
+              "title": "should test connection speed",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 12240,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Test Speed\")')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Test Speed\")')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:106:16",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 16,
+                          "line": 106
+                        },
+                        "snippet": "  104 |     \n  105 |     // Click test speed button\n> 106 |     await page.click('button:has-text(\"Test Speed\")');\n      |                ^\n  107 |     \n  108 |     // Wait for test to complete\n  109 |     await page.waitForTimeout(3000);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 16,
+                            "line": 106
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Test Speed\")')\u001b[22m\n\n\n  104 |     \n  105 |     // Click test speed button\n> 106 |     await page.click('button:has-text(\"Test Speed\")');\n      |                ^\n  107 |     \n  108 |     // Wait for test to complete\n  109 |     await page.waitForTimeout(3000);\n    at /app/tests/e2e/student-flow.spec.ts:106:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:13:13.989Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-test-connection-speed-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-test-connection-speed-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-test-connection-speed-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 16,
+                        "line": 106
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-daebc406f98412ae2dc8",
+              "file": "student-flow.spec.ts",
+              "line": 102,
+              "column": 3
+            },
+            {
+              "title": "should display responsive design on mobile",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 6943,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('button[aria-label=\"Menu\"]')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('button[aria-label=\"Menu\"]')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('button[aria-label=\"Menu\"]')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('button[aria-label=\"Menu\"]')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:122:61",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 61,
+                          "line": 122
+                        },
+                        "snippet": "  120 |     \n  121 |     // Verify mobile menu is visible\n> 122 |     await expect(page.locator('button[aria-label=\"Menu\"]')).toBeVisible();\n      |                                                             ^\n  123 |     \n  124 |     // Verify hero text is readable on mobile\n  125 |     const heroText = page.locator('h1');"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 61,
+                            "line": 122
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('button[aria-label=\"Menu\"]')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('button[aria-label=\"Menu\"]')\u001b[22m\n\n\n  120 |     \n  121 |     // Verify mobile menu is visible\n> 122 |     await expect(page.locator('button[aria-label=\"Menu\"]')).toBeVisible();\n      |                                                             ^\n  123 |     \n  124 |     // Verify hero text is readable on mobile\n  125 |     const heroText = page.locator('h1');\n    at /app/tests/e2e/student-flow.spec.ts:122:61"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:13:14.147Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow--97876-responsive-design-on-mobile-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow--97876-responsive-design-on-mobile-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow--97876-responsive-design-on-mobile-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 61,
+                        "line": 122
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-121ff65cbaf36b4e5446",
+              "file": "student-flow.spec.ts",
+              "line": 115,
+              "column": 3
+            },
+            {
+              "title": "should have proper z-index on modals",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 11815,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('footer')\u001b[22m\n\u001b[2m    - locator resolved to <footer role=\"contentinfo\" aria-label=\"Site footer\" class=\"border-t border-border bg-secondary/20 cursor-pointer transition-all hover:bg-secondary/30\">…</footer>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"text-xs sm:text-sm\">Your information is processed securely and in acc…</span> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"text-xs sm:text-sm\">Your information is processed securely and in acc…</span> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"text-xs sm:text-sm\">Your information is processed securely and in acc…</span> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    14 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button class=\"w-full font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-xl transition-colors shadow-lg text-sm sm:text-base focus:outline-none focus:ring-2\">Continue to Platform</button> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('footer')\u001b[22m\n\u001b[2m    - locator resolved to <footer role=\"contentinfo\" aria-label=\"Site footer\" class=\"border-t border-border bg-secondary/20 cursor-pointer transition-all hover:bg-secondary/30\">…</footer>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"text-xs sm:text-sm\">Your information is processed securely and in acc…</span> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"text-xs sm:text-sm\">Your information is processed securely and in acc…</span> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"text-xs sm:text-sm\">Your information is processed securely and in acc…</span> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    14 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button class=\"w-full font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-xl transition-colors shadow-lg text-sm sm:text-base focus:outline-none focus:ring-2\">Continue to Platform</button> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:138:16",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 16,
+                          "line": 138
+                        },
+                        "snippet": "  136 |     \n  137 |     // Click footer to open modal\n> 138 |     await page.click('footer');\n      |                ^\n  139 |     \n  140 |     // Verify modal is visible\n  141 |     await expect(page.locator('[role=\"dialog\"]')).toBeVisible();"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 16,
+                            "line": 138
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('footer')\u001b[22m\n\u001b[2m    - locator resolved to <footer role=\"contentinfo\" aria-label=\"Site footer\" class=\"border-t border-border bg-secondary/20 cursor-pointer transition-all hover:bg-secondary/30\">…</footer>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"text-xs sm:text-sm\">Your information is processed securely and in acc…</span> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"text-xs sm:text-sm\">Your information is processed securely and in acc…</span> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"text-xs sm:text-sm\">Your information is processed securely and in acc…</span> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    14 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button class=\"w-full font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-xl transition-colors shadow-lg text-sm sm:text-base focus:outline-none focus:ring-2\">Continue to Platform</button> from <div class=\"fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  136 |     \n  137 |     // Click footer to open modal\n> 138 |     await page.click('footer');\n      |                ^\n  139 |     \n  140 |     // Verify modal is visible\n  141 |     await expect(page.locator('[role=\"dialog\"]')).toBeVisible();\n    at /app/tests/e2e/student-flow.spec.ts:138:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:13:22.307Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow--9161f-ve-proper-z-index-on-modals-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow--9161f-ve-proper-z-index-on-modals-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow--9161f-ve-proper-z-index-on-modals-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 16,
+                        "line": 138
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-d8a89633a5eb987cf522",
+              "file": "student-flow.spec.ts",
+              "line": 134,
+              "column": 3
+            },
+            {
+              "title": "should handle keyboard navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2022,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:13:27.398Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-2d77fed366a1bc2dc762",
+              "file": "student-flow.spec.ts",
+              "line": 150,
+              "column": 3
+            },
+            {
+              "title": "should have proper ARIA labels for accessibility",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 3533,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31m\"\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31m\"\"\u001b[39m\n    at /app/tests/e2e/student-flow.spec.ts:181:36",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 36,
+                          "line": 181
+                        },
+                        "snippet": "  179 |       \n  180 |       // Button should either have aria-label or text content\n> 181 |       expect(ariaLabel || hasText).toBeTruthy();\n      |                                    ^\n  182 |     }\n  183 |   });\n  184 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 36,
+                            "line": 181
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31m\"\"\u001b[39m\n\n  179 |       \n  180 |       // Button should either have aria-label or text content\n> 181 |       expect(ariaLabel || hasText).toBeTruthy();\n      |                                    ^\n  182 |     }\n  183 |   });\n  184 |\n    at /app/tests/e2e/student-flow.spec.ts:181:36"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:13:29.597Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow--4c0cb-IA-labels-for-accessibility-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow--4c0cb-IA-labels-for-accessibility-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow--4c0cb-IA-labels-for-accessibility-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 36,
+                        "line": 181
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-407b1da5c3e020a391bf",
+              "file": "student-flow.spec.ts",
+              "line": 168,
+              "column": 3
+            },
+            {
+              "title": "should have sufficient color contrast",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 3122,
+                      "error": {
+                        "message": "Error: locator.evaluate: Error: strict mode violation: locator('h1') resolved to 2 elements:\n    1) <h1 class=\"text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-3\">Age Verification Required</h1> aka getByRole('heading', { name: 'Age Verification Required' })\n    2) <h1 class=\"font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4 md:mb-6 leading-[1.15] sm:leading-[1.2]\">…</h1> aka getByRole('heading', { name: 'AI-Powered Coding Academy For' })\n\nCall log:\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n",
+                        "stack": "Error: locator.evaluate: Error: strict mode violation: locator('h1') resolved to 2 elements:\n    1) <h1 class=\"text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-3\">Age Verification Required</h1> aka getByRole('heading', { name: 'Age Verification Required' })\n    2) <h1 class=\"font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4 md:mb-6 leading-[1.15] sm:leading-[1.2]\">…</h1> aka getByRole('heading', { name: 'AI-Powered Coding Academy For' })\n\nCall log:\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:190:43",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 43,
+                          "line": 190
+                        },
+                        "snippet": "  188 |     // Check contrast of main heading\n  189 |     const heading = page.locator('h1');\n> 190 |     const backgroundColor = await heading.evaluate(el => {\n      |                                           ^\n  191 |       return window.getComputedStyle(el).backgroundColor;\n  192 |     });\n  193 |     const color = await heading.evaluate(el => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 43,
+                            "line": 190
+                          },
+                          "message": "Error: locator.evaluate: Error: strict mode violation: locator('h1') resolved to 2 elements:\n    1) <h1 class=\"text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-3\">Age Verification Required</h1> aka getByRole('heading', { name: 'Age Verification Required' })\n    2) <h1 class=\"font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4 md:mb-6 leading-[1.15] sm:leading-[1.2]\">…</h1> aka getByRole('heading', { name: 'AI-Powered Coding Academy For' })\n\nCall log:\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\n\n  188 |     // Check contrast of main heading\n  189 |     const heading = page.locator('h1');\n> 190 |     const backgroundColor = await heading.evaluate(el => {\n      |                                           ^\n  191 |       return window.getComputedStyle(el).backgroundColor;\n  192 |     });\n  193 |     const color = await heading.evaluate(el => {\n    at /app/tests/e2e/student-flow.spec.ts:190:43"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:13:34.168Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow--1b7cb-e-sufficient-color-contrast-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow--1b7cb-e-sufficient-color-contrast-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow--1b7cb-e-sufficient-color-contrast-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 43,
+                        "line": 190
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-3048c4edcd3b1e307f7b",
+              "file": "student-flow.spec.ts",
+              "line": 185,
+              "column": 3
+            },
+            {
+              "title": "should handle form validation with Zod schemas",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 12347,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button[type=\"submit\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button[type=\"submit\"]')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:205:16",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 16,
+                          "line": 205
+                        },
+                        "snippet": "  203 |     \n  204 |     // Try to submit empty form\n> 205 |     await page.click('button[type=\"submit\"]');\n      |                ^\n  206 |     \n  207 |     // Verify validation errors appear\n  208 |     await expect(page.locator('text=required')).toBeVisible({ timeout: 5000 });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 16,
+                            "line": 205
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button[type=\"submit\"]')\u001b[22m\n\n\n  203 |     \n  204 |     // Try to submit empty form\n> 205 |     await page.click('button[type=\"submit\"]');\n      |                ^\n  206 |     \n  207 |     // Verify validation errors appear\n  208 |     await expect(page.locator('text=required')).toBeVisible({ timeout: 5000 });\n    at /app/tests/e2e/student-flow.spec.ts:205:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:13:35.451Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow--e3d0a-validation-with-Zod-schemas-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow--e3d0a-validation-with-Zod-schemas-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow--e3d0a-validation-with-Zod-schemas-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 16,
+                        "line": 205
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-2b10e23dbca9a9af1e90",
+              "file": "student-flow.spec.ts",
+              "line": 201,
+              "column": 3
+            },
+            {
+              "title": "should prevent XSS in form inputs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 12078,
+                      "error": {
+                        "message": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n    at /app/tests/e2e/student-flow.spec.ts:215:16",
+                        "location": {
+                          "file": "/app/tests/e2e/student-flow.spec.ts",
+                          "column": 16,
+                          "line": 215
+                        },
+                        "snippet": "  213 |     \n  214 |     // Try to inject script\n> 215 |     await page.fill('input[type=\"email\"]', '<script>alert(\"XSS\")</script>');\n      |                ^\n  216 |     await page.fill('input[type=\"password\"]', 'password123');\n  217 |     await page.click('button[type=\"submit\"]');\n  218 |     "
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/app/tests/e2e/student-flow.spec.ts",
+                            "column": 16,
+                            "line": 215
+                          },
+                          "message": "TimeoutError: page.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"email\"]')\u001b[22m\n\n\n  213 |     \n  214 |     // Try to inject script\n> 215 |     await page.fill('input[type=\"email\"]', '<script>alert(\"XSS\")</script>');\n      |                ^\n  216 |     await page.fill('input[type=\"password\"]', 'password123');\n  217 |     await page.click('button[type=\"submit\"]');\n  218 |     \n    at /app/tests/e2e/student-flow.spec.ts:215:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-24T17:13:38.523Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-prevent-XSS-in-form-inputs-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-prevent-XSS-in-form-inputs-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/app/test-results/student-flow-Student-Flow-should-prevent-XSS-in-form-inputs-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/app/tests/e2e/student-flow.spec.ts",
+                        "column": 16,
+                        "line": 215
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c680e5de754ef87073f9-805e36156a157914ed1c",
+              "file": "student-flow.spec.ts",
+              "line": 211,
+              "column": 3
             }
           ]
         }
@@ -230,11 +1920,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-07-22T04:03:38.829Z",
-    "duration": 28039.225,
-    "expected": 0,
-    "skipped": 0,
-    "unexpected": 1,
+    "startTime": "2026-07-24T17:11:42.854Z",
+    "duration": 127981.674,
+    "expected": 2,
+    "skipped": 1,
+    "unexpected": 22,
     "flaky": 0
   }
 }

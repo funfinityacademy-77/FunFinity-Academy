@@ -7,7 +7,7 @@
 # Test info
 
 - Name: auth.spec.ts >> Authentication Flow >> should navigate to auth page and display login form
-- Location: tests\e2e\auth.spec.ts:13:3
+- Location: tests/e2e/auth.spec.ts:13:3
 
 # Error details
 
@@ -21,7164 +21,6331 @@ Call log:
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div data-state="open" aria-hidden="true" data-aria-hidden="true" class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"></div> intercepts pointer events
+      - <div class="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4">…</div> intercepts pointer events
     - retrying click action
     - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div data-state="open" aria-hidden="true" data-aria-hidden="true" class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"></div> intercepts pointer events
-    - retrying click action
-      - waiting 100ms
-    6 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div data-state="open" aria-hidden="true" data-aria-hidden="true" class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"></div> intercepts pointer events
-    - retrying click action
-      - waiting 500ms
     - waiting for element to be visible, enabled and stable
     - element is visible, enabled and stable
     - scrolling into view if needed
     - done scrolling
+    - <div class="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 100ms
+    - waiting for element to be visible, enabled and stable
+    - element is not stable
+  - retrying click action
+    - waiting 100ms
+    16 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
 
 ```
 
 # Page snapshot
 
 ```yaml
-- generic:
-  - generic:
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e8]
+      - heading "Age Verification Required" [level=1] [ref=e10]
+      - paragraph [ref=e11]: To comply with COPPA and GDPR regulations, we need to verify that you are at least 13 years old before accessing FunFinity Academy.
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: What is your date of birth?
+          - generic [ref=e15]:
+            - generic [ref=e16]:
+              - spinbutton "Birth day" [ref=e17]
+              - generic [ref=e18]: Day
+            - generic [ref=e19]:
+              - spinbutton "Birth month" [ref=e20]
+              - generic [ref=e21]: Month
+            - generic [ref=e22]:
+              - spinbutton "Birth year" [ref=e23]
+              - generic [ref=e24]: Year
+        - button "Continue to Platform" [ref=e25] [cursor=pointer]
+      - generic [ref=e27]:
+        - img [ref=e28]
+        - generic [ref=e31]: Your information is processed securely and in accordance with our Privacy Policy
+      - link "View Privacy Policy" [ref=e33] [cursor=pointer]:
+        - /url: /privacy
+    - paragraph [ref=e35]: "FunFinity Academy • Contact: academyfunfinity@gmail.com"
+  - generic [ref=e39]:
+    - generic [ref=e40]:
+      - img [ref=e43]
+      - generic [ref=e45]:
+        - heading "Cookie Preferences" [level=3] [ref=e46]
+        - paragraph [ref=e47]: We use cookies to enhance your experience. Please choose which cookies you allow us to use.
+      - button "Close cookie consent" [ref=e48] [cursor=pointer]:
+        - img [ref=e49]
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - img [ref=e55]
+          - generic [ref=e57]:
+            - paragraph [ref=e58]: Essential Cookies
+            - paragraph [ref=e59]: Required for basic functionality and security
+        - generic [ref=e61]: Always Active
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - img [ref=e66]
+          - generic [ref=e68]:
+            - paragraph [ref=e69]: Analytics Cookies
+            - paragraph [ref=e70]: Help us improve the platform by understanding usage
+        - button "Toggle analytics cookies" [ref=e71] [cursor=pointer]
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - img [ref=e75]
+          - generic [ref=e77]:
+            - paragraph [ref=e78]: Marketing Cookies
+            - paragraph [ref=e79]: Used for personalized content and advertising
+        - button "Toggle marketing cookies" [ref=e80] [cursor=pointer]
+    - generic [ref=e82]:
+      - text: By continuing, you agree to our use of cookies. View our
+      - link "Privacy Policy" [ref=e83] [cursor=pointer]:
+        - /url: /privacy
+      - text: and
+      - link "Terms of Service" [ref=e84] [cursor=pointer]:
+        - /url: /terms
+    - generic [ref=e85]:
+      - button "Save Preferences" [ref=e86] [cursor=pointer]
+      - button "Accept All" [ref=e87] [cursor=pointer]
+      - button "Decline All" [ref=e88] [cursor=pointer]
+  - region "Notifications (F8)":
     - list
-    - region "Notifications alt+T"
-    - application:
-      - generic:
-        - generic:
-          - generic:
-            - generic:
-              - generic:
-                - generic:
-                  - img
-              - heading [level=1]: Age Verification Required
-              - paragraph: To comply with COPPA and GDPR regulations, we need to verify that you are at least 13 years old before accessing FunFinity Academy.
-              - generic:
-                - generic:
-                  - generic: What year were you born?
-                  - generic:
-                    - img
-                    - spinbutton
-                - button: Continue to Platform
-              - generic:
-                - generic:
-                  - img
-                  - generic: Your information is processed securely and in accordance with our Privacy Policy
-              - generic:
-                - link:
-                  - /url: /privacy
-                  - text: View Privacy Policy
-            - generic:
-              - paragraph: "FunFinity Academy • Contact: academyfunfinity@gmail.com"
-        - banner:
-          - navigation:
-            - link:
-              - /url: /
-              - img
-              - generic: Funfinity
-            - generic:
-              - link:
-                - /url: "#how-it-works"
-                - text: How It Works
-              - link:
-                - /url: "#subjects"
-                - text: Courses
-              - link:
-                - /url: "#philosophy"
-                - text: Philosophy
-            - generic:
-              - button:
-                - img
-              - button: Log In
-              - button: Get Started
-        - main:
-          - region:
-            - generic:
-              - generic:
-                - generic:
-                  - generic:
-                    - img
-                    - generic: Where curiosity meets depth
-                  - heading [level=1]: AI-Powered Coding Academy For Kids Ages 10-16
-                  - paragraph: Master coding, math, and science through interactive AI-powered lessons designed specifically for students ages 10-16.
-                  - generic:
-                    - link:
-                      - /url: /auth
-                      - text: Start Learning Now - Free
-                      - img
-                    - link:
-                      - /url: /demo
-                      - text: Watch Demo
-                  - generic:
-                    - img
-                    - generic: No credit card required. Cancel anytime.
-                  - generic:
-                    - generic:
-                      - generic: Math
-                    - generic:
-                      - generic: Science
-                    - generic:
-                      - generic: Social Studies
-                    - generic:
-                      - generic: English
-                    - generic:
-                      - generic: Other
-                - generic:
-                  - generic:
-                    - generic:
-                      - img
-                      - generic: 50+ Courses
-                    - generic:
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic:
-                              - img
-                            - generic:
-                              - heading [level=3]: AP Calculus BC
-                              - paragraph: Advanced calculus
-                          - generic:
-                            - generic:
-                              - generic: Progress
-                              - generic: 78%
-                          - generic:
-                            - generic: 2,450 XP
-                            - generic:
-                              - text: "13"
-                              - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic:
-                              - img
-                            - generic:
-                              - heading [level=3]: Physics I
-                              - paragraph: Mechanics & waves
-                          - generic:
-                            - generic:
-                              - generic: Progress
-                              - generic: 62%
-                          - generic:
-                            - generic: 1,890 XP
-                            - generic:
-                              - text: "10"
-                              - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic:
-                              - img
-                            - generic:
-                              - heading [level=3]: World History
-                              - paragraph: Civilizations & empires
-                          - generic:
-                            - generic:
-                              - generic: Progress
-                              - generic: 45%
-                          - generic:
-                            - generic: 1,200 XP
-                            - generic:
-                              - text: "7"
-                              - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic:
-                              - img
-                            - generic:
-                              - heading [level=3]: Creative Writing
-                              - paragraph: Stories & expression
-                          - generic:
-                            - generic:
-                              - generic: Progress
-                              - generic: 88%
-                          - generic:
-                            - generic: 3,100 XP
-                            - generic:
-                              - text: "14"
-                              - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic:
-                              - img
-                            - generic:
-                              - heading [level=3]: Digital Art
-                              - paragraph: Design fundamentals
-                          - generic:
-                            - generic:
-                              - generic: Progress
-                              - generic: 34%
-                          - generic:
-                            - generic: 890 XP
-                            - generic:
-                              - text: "5"
-                              - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic:
-                              - img
-                            - generic:
-                              - heading [level=3]: Computer Science
-                              - paragraph: Algorithms & logic
-                          - generic:
-                            - generic:
-                              - generic: Progress
-                              - generic: 56%
-                          - generic:
-                            - generic: 1,650 XP
-                            - generic:
-                              - text: "9"
-                              - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic:
-                              - img
-                            - generic:
-                              - heading [level=3]: Chemistry
-                              - paragraph: Reactions & elements
-                          - generic:
-                            - generic:
-                              - generic: Progress
-                              - generic: 71%
-                          - generic:
-                            - generic: 2,100 XP
-                            - generic:
-                              - text: "11"
-                              - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic:
-                              - img
-                            - generic:
-                              - heading [level=3]: Music Theory
-                              - paragraph: Rhythm & harmony
-                          - generic:
-                            - generic:
-                              - generic: Progress
-                              - generic: 29%
-                          - generic:
-                            - generic: 720 XP
-                            - generic:
-                              - text: "4"
-                              - img
-            - generic:
-              - generic:
-                - generic:
-                  - generic:
-                    - generic:
-                      - img
-                    - generic:
-                      - paragraph:
-                        - generic: 1,240+
-                      - paragraph: Students
-                  - generic:
-                    - generic:
-                      - img
-                    - generic:
-                      - paragraph:
-                        - generic: 48+
-                      - paragraph: Courses
-                  - generic:
-                    - generic:
-                      - img
-                    - generic:
-                      - paragraph:
-                        - generic: 4.9/5
-                      - paragraph: Rating
-                  - generic:
-                    - generic:
-                      - img
-                    - generic:
-                      - paragraph:
-                        - generic: 14,880+
-                      - paragraph: User Benefits
-            - generic:
-              - generic:
-                - generic:
-                  - paragraph: Trusted by students worldwide
-                - generic:
-                  - generic:
-                    - generic: 📰
-                    - generic: Featured in TechCrunch
-                  - generic:
-                    - generic: 🏆
-                    - generic: EdTech Award Winner
-                  - generic:
-                    - generic: ⭐
-                    - generic: 4.8/5 Rating
-                  - generic:
-                    - generic: 🔒
-                    - generic: GDPR Compliant
-                  - generic:
-                    - generic: 🛡️
-                    - generic: COPPA Safe
-          - generic:
-            - generic:
-              - generic:
-                - heading [level=2]: Trust & Transparency
-                - paragraph: Our commitment to legal excellence and ethical practices ensures a safe, reliable learning environment for everyone.
-              - generic:
-                - button:
-                  - generic:
-                    - generic:
-                      - img
-                    - heading [level=3]: Terms of Service
-                    - paragraph: Our commitment to transparency and fair practices
-                    - generic:
-                      - generic: Learn more
-                      - img
-                - button:
-                  - generic:
-                    - generic:
-                      - img
-                    - heading [level=3]: Privacy Policy
-                    - paragraph: Your data security is our highest priority
-                    - generic:
-                      - generic: Learn more
-                      - img
-                - button:
-                  - generic:
-                    - generic:
-                      - img
-                    - heading [level=3]: Legal Compliance
-                    - paragraph: Operating within full regulatory frameworks
-                    - generic:
-                      - generic: Learn more
-                      - img
-                - button:
-                  - generic:
-                    - generic:
-                      - img
-                    - heading [level=3]: Academic Integrity
-                    - paragraph: Upholding the highest standards of education
-                    - generic:
-                      - generic: Learn more
-                      - img
-                - button:
-                  - generic:
-                    - generic:
-                      - img
-                    - heading [level=3]: Dispute Resolution
-                    - paragraph: Fair and transparent conflict resolution
-                    - generic:
-                      - generic: Learn more
-                      - img
-                - button:
-                  - generic:
-                    - generic:
-                      - img
-                    - heading [level=3]: Sign Up Free
-                    - paragraph: Begin your learning journey today
-                    - generic:
-                      - generic: Learn more
-                      - img
-                - button:
-                  - generic:
-                    - generic:
-                      - img
-                    - heading [level=3]: Try Demo
-                    - paragraph: Experience the platform before committing
-                    - generic:
-                      - generic: Learn more
-                      - img
-              - generic:
-                - paragraph: By using FunFinity Academy, you agree to our Terms of Service and Privacy Policy. We are committed to protecting your rights and providing a transparent, fair learning environment.
-          - generic:
-            - generic:
-              - generic:
-                - generic:
-                  - img
-                  - text: Social Proof
-                - heading [level=2]: Loved by Visionary Students
-                - paragraph: See how the next generation of leaders is leveraging FunFinity to master complex subjects with ease.
-            - generic:
-              - generic:
-                - generic:
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 10
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 10
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 10
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-              - generic:
-                - generic:
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-              - generic:
-                - generic:
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 10
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 10
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Rachel Green
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
-                      - generic:
-                        - generic: Jul 11
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: James Wilson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Megan Taylor
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
-                      - generic:
-                        - generic: Jul 19
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: M
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Michael Chen
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
-                      - generic:
-                        - generic: Jul 21
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Jessica Williams
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: C
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Christopher Lee
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: T
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Taylor Anderson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Daniel Wright
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sophie Davis
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: J
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Joshua Miller
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
-                      - generic:
-                        - generic: Jul 20
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: E
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Emily Rodriguez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
-                      - generic:
-                        - generic: Jul 10
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: R
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Ryan Thompson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The community features helped me find study partners. We aced our finals together!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: "N"
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Nicole Martinez
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
-                      - generic:
-                        - generic: Jul 17
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: K
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Kevin Patel
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
-                      - generic:
-                        - generic: Jul 16
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: O
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Olivia Brown
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
-                      - generic:
-                        - generic: Jul 18
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Andrew Garcia
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The spaced repetition system actually works. I remember everything I learn now.\""
-                      - generic:
-                        - generic: Jul 13
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: S
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Sarah Johnson
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
-                      - generic:
-                        - generic: Jul 14
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: D
-                          - generic:
-                            - generic:
-                              - heading [level=4]: David Kim
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: A
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Amanda Foster
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
-                      - generic:
-                        - generic: Jul 15
-                        - generic:
-                          - img
-                          - text: Verified Success
-                  - generic:
-                    - generic:
-                      - generic:
-                        - img
-                      - generic:
-                        - generic:
-                          - generic:
-                            - generic: B
-                          - generic:
-                            - generic:
-                              - heading [level=4]: Brandon Scott
-                              - img
-                            - generic:
-                              - img
-                              - img
-                              - img
-                              - img
-                              - img
-                        - paragraph: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
-                      - generic:
-                        - generic: Jul 12
-                        - generic:
-                          - img
-                          - text: Verified Success
-            - generic:
-              - generic:
-                - generic:
-                  - img
-                - generic:
-                  - paragraph: Join the elite learning community
-                  - paragraph: Start your personalized journey today
-                - link:
+  - region "Notifications alt+T" [ref=e89]
+  - application [ref=e90]:
+    - generic [ref=e91]:
+      - banner [ref=e92]:
+        - navigation "Main navigation" [ref=e93]:
+          - link "Funfinity Academy Home" [ref=e94] [cursor=pointer]:
+            - /url: /
+            - img "Funfinity Academy Logo" [ref=e95]
+            - generic [ref=e96]: Funfinity
+          - generic [ref=e97]:
+            - link "How It Works" [ref=e98] [cursor=pointer]:
+              - /url: "#how-it-works"
+            - link "Courses" [ref=e99] [cursor=pointer]:
+              - /url: "#subjects"
+            - link "Philosophy" [ref=e100] [cursor=pointer]:
+              - /url: "#philosophy"
+          - generic [ref=e101]:
+            - button "Toggle dark mode" [ref=e102] [cursor=pointer]:
+              - img [ref=e103]
+            - button "Log In" [ref=e105] [cursor=pointer]
+            - button "Get Started" [ref=e106] [cursor=pointer]
+      - main [ref=e107]:
+        - region "Hero section - Funfinity Academy learning platform" [ref=e108]:
+          - generic [ref=e114]:
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - img [ref=e117]
+                - generic [ref=e119]: Where curiosity meets depth
+              - heading "AI-Powered Coding Academy For Kids Ages 10-16" [level=1] [ref=e120]:
+                - text: AI-Powered Coding Academy
+                - text: For Kids Ages 10-16
+              - paragraph [ref=e121]: Master coding, math, and science through interactive AI-powered lessons designed specifically for students ages 10-16.
+              - generic [ref=e122]:
+                - link "Start Learning Now - Free" [ref=e123] [cursor=pointer]:
                   - /url: /auth
-                  - text: Sign Up Now — It's Free
-          - generic:
-            - generic:
-              - generic:
-                - generic: The Journey
-                - heading [level=2]: How the adventure unfolds
-                - paragraph: Learning is not a race to completion. It's an ongoing exploration that respects your child's natural curiosity and pace.
-              - generic:
-                - generic:
-                  - generic:
-                    - img
-                  - generic:
-                    - generic:
-                      - generic: "01"
-                      - heading [level=3]: Discover Your Path
-                    - paragraph: Begin with a gentle exploration that reveals how you naturally engage with learning. No tests, no pressure—just curious discovery.
-                - generic:
-                  - generic:
-                    - img
-                  - generic:
-                    - generic:
-                      - generic: "02"
-                      - heading [level=3]: Navigate the Landscape
-                    - paragraph: Enter an interconnected world of knowledge where subjects flow into each other. See relationships, not isolated facts.
-                - generic:
-                  - generic:
-                    - img
-                  - generic:
-                    - generic:
-                      - generic: "03"
-                      - heading [level=3]: Build Deep Understanding
-                    - paragraph: Engage with concepts at your own pace. The environment adapts to your rhythm, supporting focus without demanding it.
-                - generic:
-                  - generic:
-                    - img
-                  - generic:
-                    - generic:
-                      - generic: "04"
-                      - heading [level=3]: Watch Mastery Emerge
-                    - paragraph: Progress unfolds naturally over time. Confidence grows from genuine comprehension, not accumulated points.
-          - generic:
-            - generic:
-              - generic:
-                - generic: Knowledge Landscape
-                - heading [level=2]: Interconnected Learning
-                - paragraph: Knowledge is not a checklist of isolated facts. Explore a landscape where ideas connect, patterns emerge, and understanding deepens naturally.
-              - generic:
+                  - text: Start Learning Now - Free
+                  - img
+                - link "Watch Demo" [ref=e124] [cursor=pointer]:
+                  - /url: /demo
+              - generic [ref=e125]:
+                - img [ref=e126]
+                - generic [ref=e128]: No credit card required. Cancel anytime.
+              - generic [ref=e129]:
+                - generic [ref=e132]: Math
+                - generic [ref=e135]: Science
+                - generic [ref=e138]: Social Studies
+                - generic [ref=e141]: English
+                - generic [ref=e144]: Other
+            - generic [ref=e146]:
+              - generic [ref=e147]:
+                - img "Funfinity Academy Logo" [ref=e148]
+                - generic [ref=e149]: 50+ Courses
+              - generic [ref=e151]:
+                - generic [ref=e153] [cursor=pointer]:
+                  - generic [ref=e154]:
+                    - img "Funfinity Academy Logo" [ref=e156]
+                    - generic [ref=e157]:
+                      - heading "AP Calculus BC" [level=3] [ref=e158]
+                      - paragraph [ref=e159]: Advanced calculus
+                  - generic [ref=e161]:
+                    - generic [ref=e162]: Progress
+                    - generic [ref=e163]: 78%
+                  - generic [ref=e166]:
+                    - generic [ref=e167]: 2,450 XP
+                    - generic [ref=e168]:
+                      - text: "13"
+                      - img [ref=e169]
+                - generic [ref=e172] [cursor=pointer]:
+                  - generic [ref=e173]:
+                    - img "Funfinity Academy Logo" [ref=e175]
+                    - generic [ref=e176]:
+                      - heading "Physics I" [level=3] [ref=e177]
+                      - paragraph [ref=e178]: Mechanics & waves
+                  - generic [ref=e180]:
+                    - generic [ref=e181]: Progress
+                    - generic [ref=e182]: 62%
+                  - generic [ref=e185]:
+                    - generic [ref=e186]: 1,890 XP
+                    - generic [ref=e187]:
+                      - text: "10"
+                      - img [ref=e188]
+                - generic [ref=e191] [cursor=pointer]:
+                  - generic [ref=e192]:
+                    - img "Funfinity Academy Logo" [ref=e194]
+                    - generic [ref=e195]:
+                      - heading "World History" [level=3] [ref=e196]
+                      - paragraph [ref=e197]: Civilizations & empires
+                  - generic [ref=e199]:
+                    - generic [ref=e200]: Progress
+                    - generic [ref=e201]: 45%
+                  - generic [ref=e204]:
+                    - generic [ref=e205]: 1,200 XP
+                    - generic [ref=e206]:
+                      - text: "7"
+                      - img [ref=e207]
+                - generic [ref=e210] [cursor=pointer]:
+                  - generic [ref=e211]:
+                    - img "Funfinity Academy Logo" [ref=e213]
+                    - generic [ref=e214]:
+                      - heading "Creative Writing" [level=3] [ref=e215]
+                      - paragraph [ref=e216]: Stories & expression
+                  - generic [ref=e218]:
+                    - generic [ref=e219]: Progress
+                    - generic [ref=e220]: 88%
+                  - generic [ref=e223]:
+                    - generic [ref=e224]: 3,100 XP
+                    - generic [ref=e225]:
+                      - text: "14"
+                      - img [ref=e226]
+                - generic [ref=e229] [cursor=pointer]:
+                  - generic [ref=e230]:
+                    - img "Funfinity Academy Logo" [ref=e232]
+                    - generic [ref=e233]:
+                      - heading "Digital Art" [level=3] [ref=e234]
+                      - paragraph [ref=e235]: Design fundamentals
+                  - generic [ref=e237]:
+                    - generic [ref=e238]: Progress
+                    - generic [ref=e239]: 34%
+                  - generic [ref=e242]:
+                    - generic [ref=e243]: 890 XP
+                    - generic [ref=e244]:
+                      - text: "5"
+                      - img [ref=e245]
+                - generic [ref=e248] [cursor=pointer]:
+                  - generic [ref=e249]:
+                    - img "Funfinity Academy Logo" [ref=e251]
+                    - generic [ref=e252]:
+                      - heading "Computer Science" [level=3] [ref=e253]
+                      - paragraph [ref=e254]: Algorithms & logic
+                  - generic [ref=e256]:
+                    - generic [ref=e257]: Progress
+                    - generic [ref=e258]: 56%
+                  - generic [ref=e261]:
+                    - generic [ref=e262]: 1,650 XP
+                    - generic [ref=e263]:
+                      - text: "9"
+                      - img [ref=e264]
+                - generic [ref=e267] [cursor=pointer]:
+                  - generic [ref=e268]:
+                    - img "Funfinity Academy Logo" [ref=e270]
+                    - generic [ref=e271]:
+                      - heading "Chemistry" [level=3] [ref=e272]
+                      - paragraph [ref=e273]: Reactions & elements
+                  - generic [ref=e275]:
+                    - generic [ref=e276]: Progress
+                    - generic [ref=e277]: 71%
+                  - generic [ref=e280]:
+                    - generic [ref=e281]: 2,100 XP
+                    - generic [ref=e282]:
+                      - text: "11"
+                      - img [ref=e283]
+                - generic [ref=e286] [cursor=pointer]:
+                  - generic [ref=e287]:
+                    - img "Funfinity Academy Logo" [ref=e289]
+                    - generic [ref=e290]:
+                      - heading "Music Theory" [level=3] [ref=e291]
+                      - paragraph [ref=e292]: Rhythm & harmony
+                  - generic [ref=e294]:
+                    - generic [ref=e295]: Progress
+                    - generic [ref=e296]: 29%
+                  - generic [ref=e299]:
+                    - generic [ref=e300]: 720 XP
+                    - generic [ref=e301]:
+                      - text: "4"
+                      - img [ref=e302]
+          - generic "Trust statistics" [ref=e304]:
+            - generic [ref=e306]:
+              - generic [ref=e307]:
+                - img [ref=e309]
+                - generic [ref=e314]:
+                  - paragraph [ref=e315]:
+                    - generic [ref=e316]: 1,240+
+                  - paragraph [ref=e317]: Students
+              - generic [ref=e318]:
+                - img [ref=e320]
+                - generic [ref=e322]:
+                  - paragraph [ref=e323]:
+                    - generic [ref=e324]: 48+
+                  - paragraph [ref=e325]: Courses
+              - generic [ref=e326]:
+                - img [ref=e328]
+                - generic [ref=e331]:
+                  - paragraph [ref=e332]:
+                    - generic [ref=e333]: 4.9/5
+                  - paragraph [ref=e334]: Rating
+              - generic [ref=e335]:
+                - img [ref=e337]
+                - generic [ref=e339]:
+                  - paragraph [ref=e340]:
+                    - generic [ref=e341]: 14,880+
+                  - paragraph [ref=e342]: User Benefits
+          - generic [ref=e344]:
+            - paragraph [ref=e346]: Trusted by students worldwide
+            - generic [ref=e347]:
+              - generic [ref=e348]:
+                - generic [ref=e349]: 📰
+                - generic [ref=e350]: Featured in TechCrunch
+              - generic [ref=e351]:
+                - generic [ref=e352]: 🏆
+                - generic [ref=e353]: EdTech Award Winner
+              - generic [ref=e354]:
+                - generic [ref=e355]: ⭐
+                - generic [ref=e356]: 4.8/5 Rating
+              - generic [ref=e357]:
+                - generic [ref=e358]: 🔒
+                - generic [ref=e359]: GDPR Compliant
+              - generic [ref=e360]:
+                - generic [ref=e361]: 🛡️
+                - generic [ref=e362]: COPPA Safe
+        - generic [ref=e364]:
+          - generic [ref=e365]:
+            - heading "Trust & Transparency" [level=2] [ref=e366]
+            - paragraph [ref=e367]: Our commitment to legal excellence and ethical practices ensures a safe, reliable learning environment for everyone.
+          - generic [ref=e368]:
+            - button "Terms of Service Our commitment to transparency and fair practices Learn more" [ref=e369] [cursor=pointer]:
+              - generic [ref=e371]:
+                - img [ref=e373]
+                - heading "Terms of Service" [level=3] [ref=e376]
+                - paragraph [ref=e377]: Our commitment to transparency and fair practices
+                - generic [ref=e378]:
+                  - generic [ref=e379]: Learn more
+                  - img [ref=e380]
+            - button "Privacy Policy Your data security is our highest priority Learn more" [ref=e382] [cursor=pointer]:
+              - generic [ref=e384]:
+                - img [ref=e386]
+                - heading "Privacy Policy" [level=3] [ref=e388]
+                - paragraph [ref=e389]: Your data security is our highest priority
+                - generic [ref=e390]:
+                  - generic [ref=e391]: Learn more
+                  - img [ref=e392]
+            - button "Legal Compliance Operating within full regulatory frameworks Learn more" [ref=e394] [cursor=pointer]:
+              - generic [ref=e396]:
+                - img [ref=e398]
+                - heading "Legal Compliance" [level=3] [ref=e402]
+                - paragraph [ref=e403]: Operating within full regulatory frameworks
+                - generic [ref=e404]:
+                  - generic [ref=e405]: Learn more
+                  - img [ref=e406]
+            - button "Academic Integrity Upholding the highest standards of education Learn more" [ref=e408] [cursor=pointer]:
+              - generic [ref=e410]:
+                - img [ref=e412]
+                - heading "Academic Integrity" [level=3] [ref=e414]
+                - paragraph [ref=e415]: Upholding the highest standards of education
+                - generic [ref=e416]:
+                  - generic [ref=e417]: Learn more
+                  - img [ref=e418]
+            - button "Dispute Resolution Fair and transparent conflict resolution Learn more" [ref=e420] [cursor=pointer]:
+              - generic [ref=e422]:
+                - img [ref=e424]
+                - heading "Dispute Resolution" [level=3] [ref=e430]
+                - paragraph [ref=e431]: Fair and transparent conflict resolution
+                - generic [ref=e432]:
+                  - generic [ref=e433]: Learn more
+                  - img [ref=e434]
+            - button "Sign Up Free Begin your learning journey today Learn more" [ref=e436] [cursor=pointer]:
+              - generic [ref=e438]:
+                - img [ref=e440]
+                - heading "Sign Up Free" [level=3] [ref=e442]
+                - paragraph [ref=e443]: Begin your learning journey today
+                - generic [ref=e444]:
+                  - generic [ref=e445]: Learn more
+                  - img [ref=e446]
+            - button "Try Demo Experience the platform before committing Learn more" [ref=e448] [cursor=pointer]:
+              - generic [ref=e450]:
+                - img [ref=e452]
+                - heading "Try Demo" [level=3] [ref=e454]
+                - paragraph [ref=e455]: Experience the platform before committing
+                - generic [ref=e456]:
+                  - generic [ref=e457]: Learn more
+                  - img [ref=e458]
+          - paragraph [ref=e461]: By using FunFinity Academy, you agree to our Terms of Service and Privacy Policy. We are committed to protecting your rights and providing a transparent, fair learning environment.
+        - generic [ref=e462]:
+          - generic [ref=e465]:
+            - generic [ref=e466]:
+              - img [ref=e467]
+              - text: Social Proof
+            - heading "Loved by Visionary Students" [level=2] [ref=e472]
+            - paragraph [ref=e473]: See how the next generation of leaders is leveraging FunFinity to master complex subjects with ease.
+          - generic [ref=e474]:
+            - generic [ref=e476]:
+              - generic [ref=e479]:
+                - img [ref=e481]
+                - generic [ref=e484]:
+                  - generic [ref=e485]:
+                    - generic [ref=e487]: S
+                    - generic [ref=e488]:
+                      - generic [ref=e489]:
+                        - heading "Sarah Johnson" [level=4] [ref=e490]
+                        - img [ref=e491]
+                      - generic [ref=e494]:
+                        - img [ref=e495]
+                        - img [ref=e497]
+                        - img [ref=e499]
+                        - img [ref=e501]
+                        - img [ref=e503]
+                  - paragraph [ref=e505]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e506]:
+                  - generic [ref=e507]: Jul 15
+                  - generic [ref=e508]:
+                    - img [ref=e509]
+                    - text: Verified Success
+              - generic [ref=e513]:
+                - img [ref=e515]
+                - generic [ref=e518]:
+                  - generic [ref=e519]:
+                    - generic [ref=e521]: D
+                    - generic [ref=e522]:
+                      - generic [ref=e523]:
+                        - heading "David Kim" [level=4] [ref=e524]
+                        - img [ref=e525]
+                      - generic [ref=e528]:
+                        - img [ref=e529]
+                        - img [ref=e531]
+                        - img [ref=e533]
+                        - img [ref=e535]
+                        - img [ref=e537]
+                  - paragraph [ref=e539]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e540]:
+                  - generic [ref=e541]: Jul 21
+                  - generic [ref=e542]:
+                    - img [ref=e543]
+                    - text: Verified Success
+              - generic [ref=e547]:
+                - img [ref=e549]
+                - generic [ref=e552]:
+                  - generic [ref=e553]:
+                    - generic [ref=e555]: A
+                    - generic [ref=e556]:
+                      - generic [ref=e557]:
+                        - heading "Amanda Foster" [level=4] [ref=e558]
+                        - img [ref=e559]
+                      - generic [ref=e562]:
+                        - img [ref=e563]
+                        - img [ref=e565]
+                        - img [ref=e567]
+                        - img [ref=e569]
+                        - img [ref=e571]
+                  - paragraph [ref=e573]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e574]:
+                  - generic [ref=e575]: Jul 14
+                  - generic [ref=e576]:
+                    - img [ref=e577]
+                    - text: Verified Success
+              - generic [ref=e581]:
+                - img [ref=e583]
+                - generic [ref=e586]:
+                  - generic [ref=e587]:
+                    - generic [ref=e589]: B
+                    - generic [ref=e590]:
+                      - generic [ref=e591]:
+                        - heading "Brandon Scott" [level=4] [ref=e592]
+                        - img [ref=e593]
+                      - generic [ref=e596]:
+                        - img [ref=e597]
+                        - img [ref=e599]
+                        - img [ref=e601]
+                        - img [ref=e603]
+                        - img [ref=e605]
+                  - paragraph [ref=e607]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e608]:
+                  - generic [ref=e609]: Jul 17
+                  - generic [ref=e610]:
+                    - img [ref=e611]
+                    - text: Verified Success
+              - generic [ref=e615]:
+                - img [ref=e617]
+                - generic [ref=e620]:
+                  - generic [ref=e621]:
+                    - generic [ref=e623]: R
+                    - generic [ref=e624]:
+                      - generic [ref=e625]:
+                        - heading "Rachel Green" [level=4] [ref=e626]
+                        - img [ref=e627]
+                      - generic [ref=e630]:
+                        - img [ref=e631]
+                        - img [ref=e633]
+                        - img [ref=e635]
+                        - img [ref=e637]
+                        - img [ref=e639]
+                  - paragraph [ref=e641]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e642]:
+                  - generic [ref=e643]: Jul 13
+                  - generic [ref=e644]:
+                    - img [ref=e645]
+                    - text: Verified Success
+              - generic [ref=e649]:
+                - img [ref=e651]
+                - generic [ref=e654]:
+                  - generic [ref=e655]:
+                    - generic [ref=e657]: J
+                    - generic [ref=e658]:
+                      - generic [ref=e659]:
+                        - heading "James Wilson" [level=4] [ref=e660]
+                        - img [ref=e661]
+                      - generic [ref=e664]:
+                        - img [ref=e665]
+                        - img [ref=e667]
+                        - img [ref=e669]
+                        - img [ref=e671]
+                        - img [ref=e673]
+                  - paragraph [ref=e675]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e676]:
+                  - generic [ref=e677]: Jul 21
+                  - generic [ref=e678]:
+                    - img [ref=e679]
+                    - text: Verified Success
+              - generic [ref=e683]:
+                - img [ref=e685]
+                - generic [ref=e688]:
+                  - generic [ref=e689]:
+                    - generic [ref=e691]: M
+                    - generic [ref=e692]:
+                      - generic [ref=e693]:
+                        - heading "Megan Taylor" [level=4] [ref=e694]
+                        - img [ref=e695]
+                      - generic [ref=e698]:
+                        - img [ref=e699]
+                        - img [ref=e701]
+                        - img [ref=e703]
+                        - img [ref=e705]
+                        - img [ref=e707]
+                  - paragraph [ref=e709]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e710]:
+                  - generic [ref=e711]: Jul 20
+                  - generic [ref=e712]:
+                    - img [ref=e713]
+                    - text: Verified Success
+              - generic [ref=e717]:
+                - img [ref=e719]
+                - generic [ref=e722]:
+                  - generic [ref=e723]:
+                    - generic [ref=e725]: M
+                    - generic [ref=e726]:
+                      - generic [ref=e727]:
+                        - heading "Michael Chen" [level=4] [ref=e728]
+                        - img [ref=e729]
+                      - generic [ref=e732]:
+                        - img [ref=e733]
+                        - img [ref=e735]
+                        - img [ref=e737]
+                        - img [ref=e739]
+                        - img [ref=e741]
+                  - paragraph [ref=e743]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e744]:
+                  - generic [ref=e745]: Jul 15
+                  - generic [ref=e746]:
+                    - img [ref=e747]
+                    - text: Verified Success
+              - generic [ref=e751]:
+                - img [ref=e753]
+                - generic [ref=e756]:
+                  - generic [ref=e757]:
+                    - generic [ref=e759]: J
+                    - generic [ref=e760]:
+                      - generic [ref=e761]:
+                        - heading "Jessica Williams" [level=4] [ref=e762]
+                        - img [ref=e763]
+                      - generic [ref=e766]:
+                        - img [ref=e767]
+                        - img [ref=e769]
+                        - img [ref=e771]
+                        - img [ref=e773]
+                        - img [ref=e775]
+                  - paragraph [ref=e777]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e778]:
+                  - generic [ref=e779]: Jul 15
+                  - generic [ref=e780]:
+                    - img [ref=e781]
+                    - text: Verified Success
+              - generic [ref=e785]:
+                - img [ref=e787]
+                - generic [ref=e790]:
+                  - generic [ref=e791]:
+                    - generic [ref=e793]: C
+                    - generic [ref=e794]:
+                      - generic [ref=e795]:
+                        - heading "Christopher Lee" [level=4] [ref=e796]
+                        - img [ref=e797]
+                      - generic [ref=e800]:
+                        - img [ref=e801]
+                        - img [ref=e803]
+                        - img [ref=e805]
+                        - img [ref=e807]
+                        - img [ref=e809]
+                  - paragraph [ref=e811]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e812]:
+                  - generic [ref=e813]: Jul 13
+                  - generic [ref=e814]:
+                    - img [ref=e815]
+                    - text: Verified Success
+              - generic [ref=e819]:
+                - img [ref=e821]
+                - generic [ref=e824]:
+                  - generic [ref=e825]:
+                    - generic [ref=e827]: T
+                    - generic [ref=e828]:
+                      - generic [ref=e829]:
+                        - heading "Taylor Anderson" [level=4] [ref=e830]
+                        - img [ref=e831]
+                      - generic [ref=e834]:
+                        - img [ref=e835]
+                        - img [ref=e837]
+                        - img [ref=e839]
+                        - img [ref=e841]
+                        - img [ref=e843]
+                  - paragraph [ref=e845]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e846]:
+                  - generic [ref=e847]: Jul 23
+                  - generic [ref=e848]:
+                    - img [ref=e849]
+                    - text: Verified Success
+              - generic [ref=e853]:
+                - img [ref=e855]
+                - generic [ref=e858]:
+                  - generic [ref=e859]:
+                    - generic [ref=e861]: D
+                    - generic [ref=e862]:
+                      - generic [ref=e863]:
+                        - heading "Daniel Wright" [level=4] [ref=e864]
+                        - img [ref=e865]
+                      - generic [ref=e868]:
+                        - img [ref=e869]
+                        - img [ref=e871]
+                        - img [ref=e873]
+                        - img [ref=e875]
+                        - img [ref=e877]
+                  - paragraph [ref=e879]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e880]:
+                  - generic [ref=e881]: Jul 15
+                  - generic [ref=e882]:
+                    - img [ref=e883]
+                    - text: Verified Success
+              - generic [ref=e887]:
+                - img [ref=e889]
+                - generic [ref=e892]:
+                  - generic [ref=e893]:
+                    - generic [ref=e895]: S
+                    - generic [ref=e896]:
+                      - generic [ref=e897]:
+                        - heading "Sophie Davis" [level=4] [ref=e898]
+                        - img [ref=e899]
+                      - generic [ref=e902]:
+                        - img [ref=e903]
+                        - img [ref=e905]
+                        - img [ref=e907]
+                        - img [ref=e909]
+                        - img [ref=e911]
+                  - paragraph [ref=e913]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e914]:
+                  - generic [ref=e915]: Jul 15
+                  - generic [ref=e916]:
+                    - img [ref=e917]
+                    - text: Verified Success
+              - generic [ref=e921]:
+                - img [ref=e923]
+                - generic [ref=e926]:
+                  - generic [ref=e927]:
+                    - generic [ref=e929]: J
+                    - generic [ref=e930]:
+                      - generic [ref=e931]:
+                        - heading "Joshua Miller" [level=4] [ref=e932]
+                        - img [ref=e933]
+                      - generic [ref=e936]:
+                        - img [ref=e937]
+                        - img [ref=e939]
+                        - img [ref=e941]
+                        - img [ref=e943]
+                        - img [ref=e945]
+                  - paragraph [ref=e947]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e948]:
+                  - generic [ref=e949]: Jul 24
+                  - generic [ref=e950]:
+                    - img [ref=e951]
+                    - text: Verified Success
+              - generic [ref=e955]:
+                - img [ref=e957]
+                - generic [ref=e960]:
+                  - generic [ref=e961]:
+                    - generic [ref=e963]: E
+                    - generic [ref=e964]:
+                      - generic [ref=e965]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e966]
+                        - img [ref=e967]
+                      - generic [ref=e970]:
+                        - img [ref=e971]
+                        - img [ref=e973]
+                        - img [ref=e975]
+                        - img [ref=e977]
+                        - img [ref=e979]
+                  - paragraph [ref=e981]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e982]:
+                  - generic [ref=e983]: Jul 16
+                  - generic [ref=e984]:
+                    - img [ref=e985]
+                    - text: Verified Success
+              - generic [ref=e989]:
+                - img [ref=e991]
+                - generic [ref=e994]:
+                  - generic [ref=e995]:
+                    - generic [ref=e997]: R
+                    - generic [ref=e998]:
+                      - generic [ref=e999]:
+                        - heading "Ryan Thompson" [level=4] [ref=e1000]
+                        - img [ref=e1001]
+                      - generic [ref=e1004]:
+                        - img [ref=e1005]
+                        - img [ref=e1007]
+                        - img [ref=e1009]
+                        - img [ref=e1011]
+                        - img [ref=e1013]
+                  - paragraph [ref=e1015]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e1016]:
+                  - generic [ref=e1017]: Jul 22
+                  - generic [ref=e1018]:
+                    - img [ref=e1019]
+                    - text: Verified Success
+              - generic [ref=e1023]:
+                - img [ref=e1025]
+                - generic [ref=e1028]:
+                  - generic [ref=e1029]:
+                    - generic [ref=e1031]: "N"
+                    - generic [ref=e1032]:
+                      - generic [ref=e1033]:
+                        - heading "Nicole Martinez" [level=4] [ref=e1034]
+                        - img [ref=e1035]
+                      - generic [ref=e1038]:
+                        - img [ref=e1039]
+                        - img [ref=e1041]
+                        - img [ref=e1043]
+                        - img [ref=e1045]
+                        - img [ref=e1047]
+                  - paragraph [ref=e1049]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e1050]:
+                  - generic [ref=e1051]: Jul 22
+                  - generic [ref=e1052]:
+                    - img [ref=e1053]
+                    - text: Verified Success
+              - generic [ref=e1057]:
+                - img [ref=e1059]
+                - generic [ref=e1062]:
+                  - generic [ref=e1063]:
+                    - generic [ref=e1065]: K
+                    - generic [ref=e1066]:
+                      - generic [ref=e1067]:
+                        - heading "Kevin Patel" [level=4] [ref=e1068]
+                        - img [ref=e1069]
+                      - generic [ref=e1072]:
+                        - img [ref=e1073]
+                        - img [ref=e1075]
+                        - img [ref=e1077]
+                        - img [ref=e1079]
+                        - img [ref=e1081]
+                  - paragraph [ref=e1083]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e1084]:
+                  - generic [ref=e1085]: Jul 15
+                  - generic [ref=e1086]:
+                    - img [ref=e1087]
+                    - text: Verified Success
+              - generic [ref=e1091]:
+                - img [ref=e1093]
+                - generic [ref=e1096]:
+                  - generic [ref=e1097]:
+                    - generic [ref=e1099]: O
+                    - generic [ref=e1100]:
+                      - generic [ref=e1101]:
+                        - heading "Olivia Brown" [level=4] [ref=e1102]
+                        - img [ref=e1103]
+                      - generic [ref=e1106]:
+                        - img [ref=e1107]
+                        - img [ref=e1109]
+                        - img [ref=e1111]
+                        - img [ref=e1113]
+                        - img [ref=e1115]
+                  - paragraph [ref=e1117]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e1118]:
+                  - generic [ref=e1119]: Jul 20
+                  - generic [ref=e1120]:
+                    - img [ref=e1121]
+                    - text: Verified Success
+              - generic [ref=e1125]:
+                - img [ref=e1127]
+                - generic [ref=e1130]:
+                  - generic [ref=e1131]:
+                    - generic [ref=e1133]: A
+                    - generic [ref=e1134]:
+                      - generic [ref=e1135]:
+                        - heading "Andrew Garcia" [level=4] [ref=e1136]
+                        - img [ref=e1137]
+                      - generic [ref=e1140]:
+                        - img [ref=e1141]
+                        - img [ref=e1143]
+                        - img [ref=e1145]
+                        - img [ref=e1147]
+                        - img [ref=e1149]
+                  - paragraph [ref=e1151]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e1152]:
+                  - generic [ref=e1153]: Jul 23
+                  - generic [ref=e1154]:
+                    - img [ref=e1155]
+                    - text: Verified Success
+              - generic [ref=e1159]:
+                - img [ref=e1161]
+                - generic [ref=e1164]:
+                  - generic [ref=e1165]:
+                    - generic [ref=e1167]: S
+                    - generic [ref=e1168]:
+                      - generic [ref=e1169]:
+                        - heading "Sarah Johnson" [level=4] [ref=e1170]
+                        - img [ref=e1171]
+                      - generic [ref=e1174]:
+                        - img [ref=e1175]
+                        - img [ref=e1177]
+                        - img [ref=e1179]
+                        - img [ref=e1181]
+                        - img [ref=e1183]
+                  - paragraph [ref=e1185]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e1186]:
+                  - generic [ref=e1187]: Jul 18
+                  - generic [ref=e1188]:
+                    - img [ref=e1189]
+                    - text: Verified Success
+              - generic [ref=e1193]:
+                - img [ref=e1195]
+                - generic [ref=e1198]:
+                  - generic [ref=e1199]:
+                    - generic [ref=e1201]: D
+                    - generic [ref=e1202]:
+                      - generic [ref=e1203]:
+                        - heading "David Kim" [level=4] [ref=e1204]
+                        - img [ref=e1205]
+                      - generic [ref=e1208]:
+                        - img [ref=e1209]
+                        - img [ref=e1211]
+                        - img [ref=e1213]
+                        - img [ref=e1215]
+                        - img [ref=e1217]
+                  - paragraph [ref=e1219]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e1220]:
+                  - generic [ref=e1221]: Jul 21
+                  - generic [ref=e1222]:
+                    - img [ref=e1223]
+                    - text: Verified Success
+              - generic [ref=e1227]:
+                - img [ref=e1229]
+                - generic [ref=e1232]:
+                  - generic [ref=e1233]:
+                    - generic [ref=e1235]: A
+                    - generic [ref=e1236]:
+                      - generic [ref=e1237]:
+                        - heading "Amanda Foster" [level=4] [ref=e1238]
+                        - img [ref=e1239]
+                      - generic [ref=e1242]:
+                        - img [ref=e1243]
+                        - img [ref=e1245]
+                        - img [ref=e1247]
+                        - img [ref=e1249]
+                        - img [ref=e1251]
+                  - paragraph [ref=e1253]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e1254]:
+                  - generic [ref=e1255]: Jul 16
+                  - generic [ref=e1256]:
+                    - img [ref=e1257]
+                    - text: Verified Success
+              - generic [ref=e1261]:
+                - img [ref=e1263]
+                - generic [ref=e1266]:
+                  - generic [ref=e1267]:
+                    - generic [ref=e1269]: B
+                    - generic [ref=e1270]:
+                      - generic [ref=e1271]:
+                        - heading "Brandon Scott" [level=4] [ref=e1272]
+                        - img [ref=e1273]
+                      - generic [ref=e1276]:
+                        - img [ref=e1277]
+                        - img [ref=e1279]
+                        - img [ref=e1281]
+                        - img [ref=e1283]
+                        - img [ref=e1285]
+                  - paragraph [ref=e1287]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e1288]:
+                  - generic [ref=e1289]: Jul 14
+                  - generic [ref=e1290]:
+                    - img [ref=e1291]
+                    - text: Verified Success
+              - generic [ref=e1295]:
+                - img [ref=e1297]
+                - generic [ref=e1300]:
+                  - generic [ref=e1301]:
+                    - generic [ref=e1303]: R
+                    - generic [ref=e1304]:
+                      - generic [ref=e1305]:
+                        - heading "Rachel Green" [level=4] [ref=e1306]
+                        - img [ref=e1307]
+                      - generic [ref=e1310]:
+                        - img [ref=e1311]
+                        - img [ref=e1313]
+                        - img [ref=e1315]
+                        - img [ref=e1317]
+                        - img [ref=e1319]
+                  - paragraph [ref=e1321]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e1322]:
+                  - generic [ref=e1323]: Jul 14
+                  - generic [ref=e1324]:
+                    - img [ref=e1325]
+                    - text: Verified Success
+              - generic [ref=e1329]:
+                - img [ref=e1331]
+                - generic [ref=e1334]:
+                  - generic [ref=e1335]:
+                    - generic [ref=e1337]: J
+                    - generic [ref=e1338]:
+                      - generic [ref=e1339]:
+                        - heading "James Wilson" [level=4] [ref=e1340]
+                        - img [ref=e1341]
+                      - generic [ref=e1344]:
+                        - img [ref=e1345]
+                        - img [ref=e1347]
+                        - img [ref=e1349]
+                        - img [ref=e1351]
+                        - img [ref=e1353]
+                  - paragraph [ref=e1355]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e1356]:
+                  - generic [ref=e1357]: Jul 19
+                  - generic [ref=e1358]:
+                    - img [ref=e1359]
+                    - text: Verified Success
+              - generic [ref=e1363]:
+                - img [ref=e1365]
+                - generic [ref=e1368]:
+                  - generic [ref=e1369]:
+                    - generic [ref=e1371]: M
+                    - generic [ref=e1372]:
+                      - generic [ref=e1373]:
+                        - heading "Megan Taylor" [level=4] [ref=e1374]
+                        - img [ref=e1375]
+                      - generic [ref=e1378]:
+                        - img [ref=e1379]
+                        - img [ref=e1381]
+                        - img [ref=e1383]
+                        - img [ref=e1385]
+                        - img [ref=e1387]
+                  - paragraph [ref=e1389]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e1390]:
+                  - generic [ref=e1391]: Jul 17
+                  - generic [ref=e1392]:
+                    - img [ref=e1393]
+                    - text: Verified Success
+              - generic [ref=e1397]:
+                - img [ref=e1399]
+                - generic [ref=e1402]:
+                  - generic [ref=e1403]:
+                    - generic [ref=e1405]: M
+                    - generic [ref=e1406]:
+                      - generic [ref=e1407]:
+                        - heading "Michael Chen" [level=4] [ref=e1408]
+                        - img [ref=e1409]
+                      - generic [ref=e1412]:
+                        - img [ref=e1413]
+                        - img [ref=e1415]
+                        - img [ref=e1417]
+                        - img [ref=e1419]
+                        - img [ref=e1421]
+                  - paragraph [ref=e1423]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e1424]:
+                  - generic [ref=e1425]: Jul 23
+                  - generic [ref=e1426]:
+                    - img [ref=e1427]
+                    - text: Verified Success
+              - generic [ref=e1431]:
+                - img [ref=e1433]
+                - generic [ref=e1436]:
+                  - generic [ref=e1437]:
+                    - generic [ref=e1439]: J
+                    - generic [ref=e1440]:
+                      - generic [ref=e1441]:
+                        - heading "Jessica Williams" [level=4] [ref=e1442]
+                        - img [ref=e1443]
+                      - generic [ref=e1446]:
+                        - img [ref=e1447]
+                        - img [ref=e1449]
+                        - img [ref=e1451]
+                        - img [ref=e1453]
+                        - img [ref=e1455]
+                  - paragraph [ref=e1457]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e1458]:
+                  - generic [ref=e1459]: Jul 20
+                  - generic [ref=e1460]:
+                    - img [ref=e1461]
+                    - text: Verified Success
+              - generic [ref=e1465]:
+                - img [ref=e1467]
+                - generic [ref=e1470]:
+                  - generic [ref=e1471]:
+                    - generic [ref=e1473]: C
+                    - generic [ref=e1474]:
+                      - generic [ref=e1475]:
+                        - heading "Christopher Lee" [level=4] [ref=e1476]
+                        - img [ref=e1477]
+                      - generic [ref=e1480]:
+                        - img [ref=e1481]
+                        - img [ref=e1483]
+                        - img [ref=e1485]
+                        - img [ref=e1487]
+                        - img [ref=e1489]
+                  - paragraph [ref=e1491]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e1492]:
+                  - generic [ref=e1493]: Jul 21
+                  - generic [ref=e1494]:
+                    - img [ref=e1495]
+                    - text: Verified Success
+              - generic [ref=e1499]:
+                - img [ref=e1501]
+                - generic [ref=e1504]:
+                  - generic [ref=e1505]:
+                    - generic [ref=e1507]: S
+                    - generic [ref=e1508]:
+                      - generic [ref=e1509]:
+                        - heading "Sarah Johnson" [level=4] [ref=e1510]
+                        - img [ref=e1511]
+                      - generic [ref=e1514]:
+                        - img [ref=e1515]
+                        - img [ref=e1517]
+                        - img [ref=e1519]
+                        - img [ref=e1521]
+                        - img [ref=e1523]
+                  - paragraph [ref=e1525]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e1526]:
+                  - generic [ref=e1527]: Jul 15
+                  - generic [ref=e1528]:
+                    - img [ref=e1529]
+                    - text: Verified Success
+              - generic [ref=e1533]:
+                - img [ref=e1535]
+                - generic [ref=e1538]:
+                  - generic [ref=e1539]:
+                    - generic [ref=e1541]: D
+                    - generic [ref=e1542]:
+                      - generic [ref=e1543]:
+                        - heading "David Kim" [level=4] [ref=e1544]
+                        - img [ref=e1545]
+                      - generic [ref=e1548]:
+                        - img [ref=e1549]
+                        - img [ref=e1551]
+                        - img [ref=e1553]
+                        - img [ref=e1555]
+                        - img [ref=e1557]
+                  - paragraph [ref=e1559]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e1560]:
+                  - generic [ref=e1561]: Jul 21
+                  - generic [ref=e1562]:
+                    - img [ref=e1563]
+                    - text: Verified Success
+              - generic [ref=e1567]:
+                - img [ref=e1569]
+                - generic [ref=e1572]:
+                  - generic [ref=e1573]:
+                    - generic [ref=e1575]: A
+                    - generic [ref=e1576]:
+                      - generic [ref=e1577]:
+                        - heading "Amanda Foster" [level=4] [ref=e1578]
+                        - img [ref=e1579]
+                      - generic [ref=e1582]:
+                        - img [ref=e1583]
+                        - img [ref=e1585]
+                        - img [ref=e1587]
+                        - img [ref=e1589]
+                        - img [ref=e1591]
+                  - paragraph [ref=e1593]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e1594]:
+                  - generic [ref=e1595]: Jul 14
+                  - generic [ref=e1596]:
+                    - img [ref=e1597]
+                    - text: Verified Success
+              - generic [ref=e1601]:
+                - img [ref=e1603]
+                - generic [ref=e1606]:
+                  - generic [ref=e1607]:
+                    - generic [ref=e1609]: B
+                    - generic [ref=e1610]:
+                      - generic [ref=e1611]:
+                        - heading "Brandon Scott" [level=4] [ref=e1612]
+                        - img [ref=e1613]
+                      - generic [ref=e1616]:
+                        - img [ref=e1617]
+                        - img [ref=e1619]
+                        - img [ref=e1621]
+                        - img [ref=e1623]
+                        - img [ref=e1625]
+                  - paragraph [ref=e1627]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e1628]:
+                  - generic [ref=e1629]: Jul 17
+                  - generic [ref=e1630]:
+                    - img [ref=e1631]
+                    - text: Verified Success
+              - generic [ref=e1635]:
+                - img [ref=e1637]
+                - generic [ref=e1640]:
+                  - generic [ref=e1641]:
+                    - generic [ref=e1643]: R
+                    - generic [ref=e1644]:
+                      - generic [ref=e1645]:
+                        - heading "Rachel Green" [level=4] [ref=e1646]
+                        - img [ref=e1647]
+                      - generic [ref=e1650]:
+                        - img [ref=e1651]
+                        - img [ref=e1653]
+                        - img [ref=e1655]
+                        - img [ref=e1657]
+                        - img [ref=e1659]
+                  - paragraph [ref=e1661]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e1662]:
+                  - generic [ref=e1663]: Jul 13
+                  - generic [ref=e1664]:
+                    - img [ref=e1665]
+                    - text: Verified Success
+              - generic [ref=e1669]:
+                - img [ref=e1671]
+                - generic [ref=e1674]:
+                  - generic [ref=e1675]:
+                    - generic [ref=e1677]: J
+                    - generic [ref=e1678]:
+                      - generic [ref=e1679]:
+                        - heading "James Wilson" [level=4] [ref=e1680]
+                        - img [ref=e1681]
+                      - generic [ref=e1684]:
+                        - img [ref=e1685]
+                        - img [ref=e1687]
+                        - img [ref=e1689]
+                        - img [ref=e1691]
+                        - img [ref=e1693]
+                  - paragraph [ref=e1695]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e1696]:
+                  - generic [ref=e1697]: Jul 21
+                  - generic [ref=e1698]:
+                    - img [ref=e1699]
+                    - text: Verified Success
+              - generic [ref=e1703]:
+                - img [ref=e1705]
+                - generic [ref=e1708]:
+                  - generic [ref=e1709]:
+                    - generic [ref=e1711]: M
+                    - generic [ref=e1712]:
+                      - generic [ref=e1713]:
+                        - heading "Megan Taylor" [level=4] [ref=e1714]
+                        - img [ref=e1715]
+                      - generic [ref=e1718]:
+                        - img [ref=e1719]
+                        - img [ref=e1721]
+                        - img [ref=e1723]
+                        - img [ref=e1725]
+                        - img [ref=e1727]
+                  - paragraph [ref=e1729]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e1730]:
+                  - generic [ref=e1731]: Jul 20
+                  - generic [ref=e1732]:
+                    - img [ref=e1733]
+                    - text: Verified Success
+              - generic [ref=e1737]:
+                - img [ref=e1739]
+                - generic [ref=e1742]:
+                  - generic [ref=e1743]:
+                    - generic [ref=e1745]: M
+                    - generic [ref=e1746]:
+                      - generic [ref=e1747]:
+                        - heading "Michael Chen" [level=4] [ref=e1748]
+                        - img [ref=e1749]
+                      - generic [ref=e1752]:
+                        - img [ref=e1753]
+                        - img [ref=e1755]
+                        - img [ref=e1757]
+                        - img [ref=e1759]
+                        - img [ref=e1761]
+                  - paragraph [ref=e1763]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e1764]:
+                  - generic [ref=e1765]: Jul 15
+                  - generic [ref=e1766]:
+                    - img [ref=e1767]
+                    - text: Verified Success
+              - generic [ref=e1771]:
+                - img [ref=e1773]
+                - generic [ref=e1776]:
+                  - generic [ref=e1777]:
+                    - generic [ref=e1779]: J
+                    - generic [ref=e1780]:
+                      - generic [ref=e1781]:
+                        - heading "Jessica Williams" [level=4] [ref=e1782]
+                        - img [ref=e1783]
+                      - generic [ref=e1786]:
+                        - img [ref=e1787]
+                        - img [ref=e1789]
+                        - img [ref=e1791]
+                        - img [ref=e1793]
+                        - img [ref=e1795]
+                  - paragraph [ref=e1797]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e1798]:
+                  - generic [ref=e1799]: Jul 15
+                  - generic [ref=e1800]:
+                    - img [ref=e1801]
+                    - text: Verified Success
+              - generic [ref=e1805]:
+                - img [ref=e1807]
+                - generic [ref=e1810]:
+                  - generic [ref=e1811]:
+                    - generic [ref=e1813]: C
+                    - generic [ref=e1814]:
+                      - generic [ref=e1815]:
+                        - heading "Christopher Lee" [level=4] [ref=e1816]
+                        - img [ref=e1817]
+                      - generic [ref=e1820]:
+                        - img [ref=e1821]
+                        - img [ref=e1823]
+                        - img [ref=e1825]
+                        - img [ref=e1827]
+                        - img [ref=e1829]
+                  - paragraph [ref=e1831]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e1832]:
+                  - generic [ref=e1833]: Jul 13
+                  - generic [ref=e1834]:
+                    - img [ref=e1835]
+                    - text: Verified Success
+              - generic [ref=e1839]:
+                - img [ref=e1841]
+                - generic [ref=e1844]:
+                  - generic [ref=e1845]:
+                    - generic [ref=e1847]: T
+                    - generic [ref=e1848]:
+                      - generic [ref=e1849]:
+                        - heading "Taylor Anderson" [level=4] [ref=e1850]
+                        - img [ref=e1851]
+                      - generic [ref=e1854]:
+                        - img [ref=e1855]
+                        - img [ref=e1857]
+                        - img [ref=e1859]
+                        - img [ref=e1861]
+                        - img [ref=e1863]
+                  - paragraph [ref=e1865]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e1866]:
+                  - generic [ref=e1867]: Jul 23
+                  - generic [ref=e1868]:
+                    - img [ref=e1869]
+                    - text: Verified Success
+              - generic [ref=e1873]:
+                - img [ref=e1875]
+                - generic [ref=e1878]:
+                  - generic [ref=e1879]:
+                    - generic [ref=e1881]: D
+                    - generic [ref=e1882]:
+                      - generic [ref=e1883]:
+                        - heading "Daniel Wright" [level=4] [ref=e1884]
+                        - img [ref=e1885]
+                      - generic [ref=e1888]:
+                        - img [ref=e1889]
+                        - img [ref=e1891]
+                        - img [ref=e1893]
+                        - img [ref=e1895]
+                        - img [ref=e1897]
+                  - paragraph [ref=e1899]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e1900]:
+                  - generic [ref=e1901]: Jul 15
+                  - generic [ref=e1902]:
+                    - img [ref=e1903]
+                    - text: Verified Success
+              - generic [ref=e1907]:
+                - img [ref=e1909]
+                - generic [ref=e1912]:
+                  - generic [ref=e1913]:
+                    - generic [ref=e1915]: S
+                    - generic [ref=e1916]:
+                      - generic [ref=e1917]:
+                        - heading "Sophie Davis" [level=4] [ref=e1918]
+                        - img [ref=e1919]
+                      - generic [ref=e1922]:
+                        - img [ref=e1923]
+                        - img [ref=e1925]
+                        - img [ref=e1927]
+                        - img [ref=e1929]
+                        - img [ref=e1931]
+                  - paragraph [ref=e1933]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e1934]:
+                  - generic [ref=e1935]: Jul 15
+                  - generic [ref=e1936]:
+                    - img [ref=e1937]
+                    - text: Verified Success
+              - generic [ref=e1941]:
+                - img [ref=e1943]
+                - generic [ref=e1946]:
+                  - generic [ref=e1947]:
+                    - generic [ref=e1949]: J
+                    - generic [ref=e1950]:
+                      - generic [ref=e1951]:
+                        - heading "Joshua Miller" [level=4] [ref=e1952]
+                        - img [ref=e1953]
+                      - generic [ref=e1956]:
+                        - img [ref=e1957]
+                        - img [ref=e1959]
+                        - img [ref=e1961]
+                        - img [ref=e1963]
+                        - img [ref=e1965]
+                  - paragraph [ref=e1967]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e1968]:
+                  - generic [ref=e1969]: Jul 24
+                  - generic [ref=e1970]:
+                    - img [ref=e1971]
+                    - text: Verified Success
+              - generic [ref=e1975]:
+                - img [ref=e1977]
+                - generic [ref=e1980]:
+                  - generic [ref=e1981]:
+                    - generic [ref=e1983]: E
+                    - generic [ref=e1984]:
+                      - generic [ref=e1985]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e1986]
+                        - img [ref=e1987]
+                      - generic [ref=e1990]:
+                        - img [ref=e1991]
+                        - img [ref=e1993]
+                        - img [ref=e1995]
+                        - img [ref=e1997]
+                        - img [ref=e1999]
+                  - paragraph [ref=e2001]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e2002]:
+                  - generic [ref=e2003]: Jul 16
+                  - generic [ref=e2004]:
+                    - img [ref=e2005]
+                    - text: Verified Success
+              - generic [ref=e2009]:
+                - img [ref=e2011]
+                - generic [ref=e2014]:
+                  - generic [ref=e2015]:
+                    - generic [ref=e2017]: R
+                    - generic [ref=e2018]:
+                      - generic [ref=e2019]:
+                        - heading "Ryan Thompson" [level=4] [ref=e2020]
+                        - img [ref=e2021]
+                      - generic [ref=e2024]:
+                        - img [ref=e2025]
+                        - img [ref=e2027]
+                        - img [ref=e2029]
+                        - img [ref=e2031]
+                        - img [ref=e2033]
+                  - paragraph [ref=e2035]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e2036]:
+                  - generic [ref=e2037]: Jul 22
+                  - generic [ref=e2038]:
+                    - img [ref=e2039]
+                    - text: Verified Success
+              - generic [ref=e2043]:
+                - img [ref=e2045]
+                - generic [ref=e2048]:
+                  - generic [ref=e2049]:
+                    - generic [ref=e2051]: "N"
+                    - generic [ref=e2052]:
+                      - generic [ref=e2053]:
+                        - heading "Nicole Martinez" [level=4] [ref=e2054]
+                        - img [ref=e2055]
+                      - generic [ref=e2058]:
+                        - img [ref=e2059]
+                        - img [ref=e2061]
+                        - img [ref=e2063]
+                        - img [ref=e2065]
+                        - img [ref=e2067]
+                  - paragraph [ref=e2069]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e2070]:
+                  - generic [ref=e2071]: Jul 22
+                  - generic [ref=e2072]:
+                    - img [ref=e2073]
+                    - text: Verified Success
+              - generic [ref=e2077]:
+                - img [ref=e2079]
+                - generic [ref=e2082]:
+                  - generic [ref=e2083]:
+                    - generic [ref=e2085]: K
+                    - generic [ref=e2086]:
+                      - generic [ref=e2087]:
+                        - heading "Kevin Patel" [level=4] [ref=e2088]
+                        - img [ref=e2089]
+                      - generic [ref=e2092]:
+                        - img [ref=e2093]
+                        - img [ref=e2095]
+                        - img [ref=e2097]
+                        - img [ref=e2099]
+                        - img [ref=e2101]
+                  - paragraph [ref=e2103]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e2104]:
+                  - generic [ref=e2105]: Jul 15
+                  - generic [ref=e2106]:
+                    - img [ref=e2107]
+                    - text: Verified Success
+              - generic [ref=e2111]:
+                - img [ref=e2113]
+                - generic [ref=e2116]:
+                  - generic [ref=e2117]:
+                    - generic [ref=e2119]: O
+                    - generic [ref=e2120]:
+                      - generic [ref=e2121]:
+                        - heading "Olivia Brown" [level=4] [ref=e2122]
+                        - img [ref=e2123]
+                      - generic [ref=e2126]:
+                        - img [ref=e2127]
+                        - img [ref=e2129]
+                        - img [ref=e2131]
+                        - img [ref=e2133]
+                        - img [ref=e2135]
+                  - paragraph [ref=e2137]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e2138]:
+                  - generic [ref=e2139]: Jul 20
+                  - generic [ref=e2140]:
+                    - img [ref=e2141]
+                    - text: Verified Success
+              - generic [ref=e2145]:
+                - img [ref=e2147]
+                - generic [ref=e2150]:
+                  - generic [ref=e2151]:
+                    - generic [ref=e2153]: A
+                    - generic [ref=e2154]:
+                      - generic [ref=e2155]:
+                        - heading "Andrew Garcia" [level=4] [ref=e2156]
+                        - img [ref=e2157]
+                      - generic [ref=e2160]:
+                        - img [ref=e2161]
+                        - img [ref=e2163]
+                        - img [ref=e2165]
+                        - img [ref=e2167]
+                        - img [ref=e2169]
+                  - paragraph [ref=e2171]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e2172]:
+                  - generic [ref=e2173]: Jul 23
+                  - generic [ref=e2174]:
+                    - img [ref=e2175]
+                    - text: Verified Success
+              - generic [ref=e2179]:
+                - img [ref=e2181]
+                - generic [ref=e2184]:
+                  - generic [ref=e2185]:
+                    - generic [ref=e2187]: S
+                    - generic [ref=e2188]:
+                      - generic [ref=e2189]:
+                        - heading "Sarah Johnson" [level=4] [ref=e2190]
+                        - img [ref=e2191]
+                      - generic [ref=e2194]:
+                        - img [ref=e2195]
+                        - img [ref=e2197]
+                        - img [ref=e2199]
+                        - img [ref=e2201]
+                        - img [ref=e2203]
+                  - paragraph [ref=e2205]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e2206]:
+                  - generic [ref=e2207]: Jul 18
+                  - generic [ref=e2208]:
+                    - img [ref=e2209]
+                    - text: Verified Success
+              - generic [ref=e2213]:
+                - img [ref=e2215]
+                - generic [ref=e2218]:
+                  - generic [ref=e2219]:
+                    - generic [ref=e2221]: D
+                    - generic [ref=e2222]:
+                      - generic [ref=e2223]:
+                        - heading "David Kim" [level=4] [ref=e2224]
+                        - img [ref=e2225]
+                      - generic [ref=e2228]:
+                        - img [ref=e2229]
+                        - img [ref=e2231]
+                        - img [ref=e2233]
+                        - img [ref=e2235]
+                        - img [ref=e2237]
+                  - paragraph [ref=e2239]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e2240]:
+                  - generic [ref=e2241]: Jul 21
+                  - generic [ref=e2242]:
+                    - img [ref=e2243]
+                    - text: Verified Success
+              - generic [ref=e2247]:
+                - img [ref=e2249]
+                - generic [ref=e2252]:
+                  - generic [ref=e2253]:
+                    - generic [ref=e2255]: A
+                    - generic [ref=e2256]:
+                      - generic [ref=e2257]:
+                        - heading "Amanda Foster" [level=4] [ref=e2258]
+                        - img [ref=e2259]
+                      - generic [ref=e2262]:
+                        - img [ref=e2263]
+                        - img [ref=e2265]
+                        - img [ref=e2267]
+                        - img [ref=e2269]
+                        - img [ref=e2271]
+                  - paragraph [ref=e2273]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e2274]:
+                  - generic [ref=e2275]: Jul 16
+                  - generic [ref=e2276]:
+                    - img [ref=e2277]
+                    - text: Verified Success
+              - generic [ref=e2281]:
+                - img [ref=e2283]
+                - generic [ref=e2286]:
+                  - generic [ref=e2287]:
+                    - generic [ref=e2289]: B
+                    - generic [ref=e2290]:
+                      - generic [ref=e2291]:
+                        - heading "Brandon Scott" [level=4] [ref=e2292]
+                        - img [ref=e2293]
+                      - generic [ref=e2296]:
+                        - img [ref=e2297]
+                        - img [ref=e2299]
+                        - img [ref=e2301]
+                        - img [ref=e2303]
+                        - img [ref=e2305]
+                  - paragraph [ref=e2307]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e2308]:
+                  - generic [ref=e2309]: Jul 14
+                  - generic [ref=e2310]:
+                    - img [ref=e2311]
+                    - text: Verified Success
+              - generic [ref=e2315]:
+                - img [ref=e2317]
+                - generic [ref=e2320]:
+                  - generic [ref=e2321]:
+                    - generic [ref=e2323]: R
+                    - generic [ref=e2324]:
+                      - generic [ref=e2325]:
+                        - heading "Rachel Green" [level=4] [ref=e2326]
+                        - img [ref=e2327]
+                      - generic [ref=e2330]:
+                        - img [ref=e2331]
+                        - img [ref=e2333]
+                        - img [ref=e2335]
+                        - img [ref=e2337]
+                        - img [ref=e2339]
+                  - paragraph [ref=e2341]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e2342]:
+                  - generic [ref=e2343]: Jul 14
+                  - generic [ref=e2344]:
+                    - img [ref=e2345]
+                    - text: Verified Success
+              - generic [ref=e2349]:
+                - img [ref=e2351]
+                - generic [ref=e2354]:
+                  - generic [ref=e2355]:
+                    - generic [ref=e2357]: J
+                    - generic [ref=e2358]:
+                      - generic [ref=e2359]:
+                        - heading "James Wilson" [level=4] [ref=e2360]
+                        - img [ref=e2361]
+                      - generic [ref=e2364]:
+                        - img [ref=e2365]
+                        - img [ref=e2367]
+                        - img [ref=e2369]
+                        - img [ref=e2371]
+                        - img [ref=e2373]
+                  - paragraph [ref=e2375]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e2376]:
+                  - generic [ref=e2377]: Jul 19
+                  - generic [ref=e2378]:
+                    - img [ref=e2379]
+                    - text: Verified Success
+              - generic [ref=e2383]:
+                - img [ref=e2385]
+                - generic [ref=e2388]:
+                  - generic [ref=e2389]:
+                    - generic [ref=e2391]: M
+                    - generic [ref=e2392]:
+                      - generic [ref=e2393]:
+                        - heading "Megan Taylor" [level=4] [ref=e2394]
+                        - img [ref=e2395]
+                      - generic [ref=e2398]:
+                        - img [ref=e2399]
+                        - img [ref=e2401]
+                        - img [ref=e2403]
+                        - img [ref=e2405]
+                        - img [ref=e2407]
+                  - paragraph [ref=e2409]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e2410]:
+                  - generic [ref=e2411]: Jul 17
+                  - generic [ref=e2412]:
+                    - img [ref=e2413]
+                    - text: Verified Success
+              - generic [ref=e2417]:
+                - img [ref=e2419]
+                - generic [ref=e2422]:
+                  - generic [ref=e2423]:
+                    - generic [ref=e2425]: M
+                    - generic [ref=e2426]:
+                      - generic [ref=e2427]:
+                        - heading "Michael Chen" [level=4] [ref=e2428]
+                        - img [ref=e2429]
+                      - generic [ref=e2432]:
+                        - img [ref=e2433]
+                        - img [ref=e2435]
+                        - img [ref=e2437]
+                        - img [ref=e2439]
+                        - img [ref=e2441]
+                  - paragraph [ref=e2443]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e2444]:
+                  - generic [ref=e2445]: Jul 23
+                  - generic [ref=e2446]:
+                    - img [ref=e2447]
+                    - text: Verified Success
+              - generic [ref=e2451]:
+                - img [ref=e2453]
+                - generic [ref=e2456]:
+                  - generic [ref=e2457]:
+                    - generic [ref=e2459]: J
+                    - generic [ref=e2460]:
+                      - generic [ref=e2461]:
+                        - heading "Jessica Williams" [level=4] [ref=e2462]
+                        - img [ref=e2463]
+                      - generic [ref=e2466]:
+                        - img [ref=e2467]
+                        - img [ref=e2469]
+                        - img [ref=e2471]
+                        - img [ref=e2473]
+                        - img [ref=e2475]
+                  - paragraph [ref=e2477]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e2478]:
+                  - generic [ref=e2479]: Jul 20
+                  - generic [ref=e2480]:
+                    - img [ref=e2481]
+                    - text: Verified Success
+              - generic [ref=e2485]:
+                - img [ref=e2487]
+                - generic [ref=e2490]:
+                  - generic [ref=e2491]:
+                    - generic [ref=e2493]: C
+                    - generic [ref=e2494]:
+                      - generic [ref=e2495]:
+                        - heading "Christopher Lee" [level=4] [ref=e2496]
+                        - img [ref=e2497]
+                      - generic [ref=e2500]:
+                        - img [ref=e2501]
+                        - img [ref=e2503]
+                        - img [ref=e2505]
+                        - img [ref=e2507]
+                        - img [ref=e2509]
+                  - paragraph [ref=e2511]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e2512]:
+                  - generic [ref=e2513]: Jul 21
+                  - generic [ref=e2514]:
+                    - img [ref=e2515]
+                    - text: Verified Success
+              - generic [ref=e2519]:
+                - img [ref=e2521]
+                - generic [ref=e2524]:
+                  - generic [ref=e2525]:
+                    - generic [ref=e2527]: S
+                    - generic [ref=e2528]:
+                      - generic [ref=e2529]:
+                        - heading "Sarah Johnson" [level=4] [ref=e2530]
+                        - img [ref=e2531]
+                      - generic [ref=e2534]:
+                        - img [ref=e2535]
+                        - img [ref=e2537]
+                        - img [ref=e2539]
+                        - img [ref=e2541]
+                        - img [ref=e2543]
+                  - paragraph [ref=e2545]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e2546]:
+                  - generic [ref=e2547]: Jul 15
+                  - generic [ref=e2548]:
+                    - img [ref=e2549]
+                    - text: Verified Success
+              - generic [ref=e2553]:
+                - img [ref=e2555]
+                - generic [ref=e2558]:
+                  - generic [ref=e2559]:
+                    - generic [ref=e2561]: D
+                    - generic [ref=e2562]:
+                      - generic [ref=e2563]:
+                        - heading "David Kim" [level=4] [ref=e2564]
+                        - img [ref=e2565]
+                      - generic [ref=e2568]:
+                        - img [ref=e2569]
+                        - img [ref=e2571]
+                        - img [ref=e2573]
+                        - img [ref=e2575]
+                        - img [ref=e2577]
+                  - paragraph [ref=e2579]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e2580]:
+                  - generic [ref=e2581]: Jul 21
+                  - generic [ref=e2582]:
+                    - img [ref=e2583]
+                    - text: Verified Success
+              - generic [ref=e2587]:
+                - img [ref=e2589]
+                - generic [ref=e2592]:
+                  - generic [ref=e2593]:
+                    - generic [ref=e2595]: A
+                    - generic [ref=e2596]:
+                      - generic [ref=e2597]:
+                        - heading "Amanda Foster" [level=4] [ref=e2598]
+                        - img [ref=e2599]
+                      - generic [ref=e2602]:
+                        - img [ref=e2603]
+                        - img [ref=e2605]
+                        - img [ref=e2607]
+                        - img [ref=e2609]
+                        - img [ref=e2611]
+                  - paragraph [ref=e2613]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e2614]:
+                  - generic [ref=e2615]: Jul 14
+                  - generic [ref=e2616]:
+                    - img [ref=e2617]
+                    - text: Verified Success
+              - generic [ref=e2621]:
+                - img [ref=e2623]
+                - generic [ref=e2626]:
+                  - generic [ref=e2627]:
+                    - generic [ref=e2629]: B
+                    - generic [ref=e2630]:
+                      - generic [ref=e2631]:
+                        - heading "Brandon Scott" [level=4] [ref=e2632]
+                        - img [ref=e2633]
+                      - generic [ref=e2636]:
+                        - img [ref=e2637]
+                        - img [ref=e2639]
+                        - img [ref=e2641]
+                        - img [ref=e2643]
+                        - img [ref=e2645]
+                  - paragraph [ref=e2647]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e2648]:
+                  - generic [ref=e2649]: Jul 17
+                  - generic [ref=e2650]:
+                    - img [ref=e2651]
+                    - text: Verified Success
+              - generic [ref=e2655]:
+                - img [ref=e2657]
+                - generic [ref=e2660]:
+                  - generic [ref=e2661]:
+                    - generic [ref=e2663]: R
+                    - generic [ref=e2664]:
+                      - generic [ref=e2665]:
+                        - heading "Rachel Green" [level=4] [ref=e2666]
+                        - img [ref=e2667]
+                      - generic [ref=e2670]:
+                        - img [ref=e2671]
+                        - img [ref=e2673]
+                        - img [ref=e2675]
+                        - img [ref=e2677]
+                        - img [ref=e2679]
+                  - paragraph [ref=e2681]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e2682]:
+                  - generic [ref=e2683]: Jul 13
+                  - generic [ref=e2684]:
+                    - img [ref=e2685]
+                    - text: Verified Success
+              - generic [ref=e2689]:
+                - img [ref=e2691]
+                - generic [ref=e2694]:
+                  - generic [ref=e2695]:
+                    - generic [ref=e2697]: J
+                    - generic [ref=e2698]:
+                      - generic [ref=e2699]:
+                        - heading "James Wilson" [level=4] [ref=e2700]
+                        - img [ref=e2701]
+                      - generic [ref=e2704]:
+                        - img [ref=e2705]
+                        - img [ref=e2707]
+                        - img [ref=e2709]
+                        - img [ref=e2711]
+                        - img [ref=e2713]
+                  - paragraph [ref=e2715]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e2716]:
+                  - generic [ref=e2717]: Jul 21
+                  - generic [ref=e2718]:
+                    - img [ref=e2719]
+                    - text: Verified Success
+              - generic [ref=e2723]:
+                - img [ref=e2725]
+                - generic [ref=e2728]:
+                  - generic [ref=e2729]:
+                    - generic [ref=e2731]: M
+                    - generic [ref=e2732]:
+                      - generic [ref=e2733]:
+                        - heading "Megan Taylor" [level=4] [ref=e2734]
+                        - img [ref=e2735]
+                      - generic [ref=e2738]:
+                        - img [ref=e2739]
+                        - img [ref=e2741]
+                        - img [ref=e2743]
+                        - img [ref=e2745]
+                        - img [ref=e2747]
+                  - paragraph [ref=e2749]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e2750]:
+                  - generic [ref=e2751]: Jul 20
+                  - generic [ref=e2752]:
+                    - img [ref=e2753]
+                    - text: Verified Success
+              - generic [ref=e2757]:
+                - img [ref=e2759]
+                - generic [ref=e2762]:
+                  - generic [ref=e2763]:
+                    - generic [ref=e2765]: M
+                    - generic [ref=e2766]:
+                      - generic [ref=e2767]:
+                        - heading "Michael Chen" [level=4] [ref=e2768]
+                        - img [ref=e2769]
+                      - generic [ref=e2772]:
+                        - img [ref=e2773]
+                        - img [ref=e2775]
+                        - img [ref=e2777]
+                        - img [ref=e2779]
+                        - img [ref=e2781]
+                  - paragraph [ref=e2783]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e2784]:
+                  - generic [ref=e2785]: Jul 15
+                  - generic [ref=e2786]:
+                    - img [ref=e2787]
+                    - text: Verified Success
+              - generic [ref=e2791]:
+                - img [ref=e2793]
+                - generic [ref=e2796]:
+                  - generic [ref=e2797]:
+                    - generic [ref=e2799]: J
+                    - generic [ref=e2800]:
+                      - generic [ref=e2801]:
+                        - heading "Jessica Williams" [level=4] [ref=e2802]
+                        - img [ref=e2803]
+                      - generic [ref=e2806]:
+                        - img [ref=e2807]
+                        - img [ref=e2809]
+                        - img [ref=e2811]
+                        - img [ref=e2813]
+                        - img [ref=e2815]
+                  - paragraph [ref=e2817]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e2818]:
+                  - generic [ref=e2819]: Jul 15
+                  - generic [ref=e2820]:
+                    - img [ref=e2821]
+                    - text: Verified Success
+              - generic [ref=e2825]:
+                - img [ref=e2827]
+                - generic [ref=e2830]:
+                  - generic [ref=e2831]:
+                    - generic [ref=e2833]: C
+                    - generic [ref=e2834]:
+                      - generic [ref=e2835]:
+                        - heading "Christopher Lee" [level=4] [ref=e2836]
+                        - img [ref=e2837]
+                      - generic [ref=e2840]:
+                        - img [ref=e2841]
+                        - img [ref=e2843]
+                        - img [ref=e2845]
+                        - img [ref=e2847]
+                        - img [ref=e2849]
+                  - paragraph [ref=e2851]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e2852]:
+                  - generic [ref=e2853]: Jul 13
+                  - generic [ref=e2854]:
+                    - img [ref=e2855]
+                    - text: Verified Success
+              - generic [ref=e2859]:
+                - img [ref=e2861]
+                - generic [ref=e2864]:
+                  - generic [ref=e2865]:
+                    - generic [ref=e2867]: T
+                    - generic [ref=e2868]:
+                      - generic [ref=e2869]:
+                        - heading "Taylor Anderson" [level=4] [ref=e2870]
+                        - img [ref=e2871]
+                      - generic [ref=e2874]:
+                        - img [ref=e2875]
+                        - img [ref=e2877]
+                        - img [ref=e2879]
+                        - img [ref=e2881]
+                        - img [ref=e2883]
+                  - paragraph [ref=e2885]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e2886]:
+                  - generic [ref=e2887]: Jul 23
+                  - generic [ref=e2888]:
+                    - img [ref=e2889]
+                    - text: Verified Success
+              - generic [ref=e2893]:
+                - img [ref=e2895]
+                - generic [ref=e2898]:
+                  - generic [ref=e2899]:
+                    - generic [ref=e2901]: D
+                    - generic [ref=e2902]:
+                      - generic [ref=e2903]:
+                        - heading "Daniel Wright" [level=4] [ref=e2904]
+                        - img [ref=e2905]
+                      - generic [ref=e2908]:
+                        - img [ref=e2909]
+                        - img [ref=e2911]
+                        - img [ref=e2913]
+                        - img [ref=e2915]
+                        - img [ref=e2917]
+                  - paragraph [ref=e2919]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e2920]:
+                  - generic [ref=e2921]: Jul 15
+                  - generic [ref=e2922]:
+                    - img [ref=e2923]
+                    - text: Verified Success
+              - generic [ref=e2927]:
+                - img [ref=e2929]
+                - generic [ref=e2932]:
+                  - generic [ref=e2933]:
+                    - generic [ref=e2935]: S
+                    - generic [ref=e2936]:
+                      - generic [ref=e2937]:
+                        - heading "Sophie Davis" [level=4] [ref=e2938]
+                        - img [ref=e2939]
+                      - generic [ref=e2942]:
+                        - img [ref=e2943]
+                        - img [ref=e2945]
+                        - img [ref=e2947]
+                        - img [ref=e2949]
+                        - img [ref=e2951]
+                  - paragraph [ref=e2953]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e2954]:
+                  - generic [ref=e2955]: Jul 15
+                  - generic [ref=e2956]:
+                    - img [ref=e2957]
+                    - text: Verified Success
+              - generic [ref=e2961]:
+                - img [ref=e2963]
+                - generic [ref=e2966]:
+                  - generic [ref=e2967]:
+                    - generic [ref=e2969]: J
+                    - generic [ref=e2970]:
+                      - generic [ref=e2971]:
+                        - heading "Joshua Miller" [level=4] [ref=e2972]
+                        - img [ref=e2973]
+                      - generic [ref=e2976]:
+                        - img [ref=e2977]
+                        - img [ref=e2979]
+                        - img [ref=e2981]
+                        - img [ref=e2983]
+                        - img [ref=e2985]
+                  - paragraph [ref=e2987]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e2988]:
+                  - generic [ref=e2989]: Jul 24
+                  - generic [ref=e2990]:
+                    - img [ref=e2991]
+                    - text: Verified Success
+              - generic [ref=e2995]:
+                - img [ref=e2997]
+                - generic [ref=e3000]:
+                  - generic [ref=e3001]:
+                    - generic [ref=e3003]: E
+                    - generic [ref=e3004]:
+                      - generic [ref=e3005]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e3006]
+                        - img [ref=e3007]
+                      - generic [ref=e3010]:
+                        - img [ref=e3011]
+                        - img [ref=e3013]
+                        - img [ref=e3015]
+                        - img [ref=e3017]
+                        - img [ref=e3019]
+                  - paragraph [ref=e3021]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e3022]:
+                  - generic [ref=e3023]: Jul 16
+                  - generic [ref=e3024]:
+                    - img [ref=e3025]
+                    - text: Verified Success
+              - generic [ref=e3029]:
+                - img [ref=e3031]
+                - generic [ref=e3034]:
+                  - generic [ref=e3035]:
+                    - generic [ref=e3037]: R
+                    - generic [ref=e3038]:
+                      - generic [ref=e3039]:
+                        - heading "Ryan Thompson" [level=4] [ref=e3040]
+                        - img [ref=e3041]
+                      - generic [ref=e3044]:
+                        - img [ref=e3045]
+                        - img [ref=e3047]
+                        - img [ref=e3049]
+                        - img [ref=e3051]
+                        - img [ref=e3053]
+                  - paragraph [ref=e3055]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e3056]:
+                  - generic [ref=e3057]: Jul 22
+                  - generic [ref=e3058]:
+                    - img [ref=e3059]
+                    - text: Verified Success
+              - generic [ref=e3063]:
+                - img [ref=e3065]
+                - generic [ref=e3068]:
+                  - generic [ref=e3069]:
+                    - generic [ref=e3071]: "N"
+                    - generic [ref=e3072]:
+                      - generic [ref=e3073]:
+                        - heading "Nicole Martinez" [level=4] [ref=e3074]
+                        - img [ref=e3075]
+                      - generic [ref=e3078]:
+                        - img [ref=e3079]
+                        - img [ref=e3081]
+                        - img [ref=e3083]
+                        - img [ref=e3085]
+                        - img [ref=e3087]
+                  - paragraph [ref=e3089]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e3090]:
+                  - generic [ref=e3091]: Jul 22
+                  - generic [ref=e3092]:
+                    - img [ref=e3093]
+                    - text: Verified Success
+              - generic [ref=e3097]:
+                - img [ref=e3099]
+                - generic [ref=e3102]:
+                  - generic [ref=e3103]:
+                    - generic [ref=e3105]: K
+                    - generic [ref=e3106]:
+                      - generic [ref=e3107]:
+                        - heading "Kevin Patel" [level=4] [ref=e3108]
+                        - img [ref=e3109]
+                      - generic [ref=e3112]:
+                        - img [ref=e3113]
+                        - img [ref=e3115]
+                        - img [ref=e3117]
+                        - img [ref=e3119]
+                        - img [ref=e3121]
+                  - paragraph [ref=e3123]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e3124]:
+                  - generic [ref=e3125]: Jul 15
+                  - generic [ref=e3126]:
+                    - img [ref=e3127]
+                    - text: Verified Success
+              - generic [ref=e3131]:
+                - img [ref=e3133]
+                - generic [ref=e3136]:
+                  - generic [ref=e3137]:
+                    - generic [ref=e3139]: O
+                    - generic [ref=e3140]:
+                      - generic [ref=e3141]:
+                        - heading "Olivia Brown" [level=4] [ref=e3142]
+                        - img [ref=e3143]
+                      - generic [ref=e3146]:
+                        - img [ref=e3147]
+                        - img [ref=e3149]
+                        - img [ref=e3151]
+                        - img [ref=e3153]
+                        - img [ref=e3155]
+                  - paragraph [ref=e3157]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e3158]:
+                  - generic [ref=e3159]: Jul 20
+                  - generic [ref=e3160]:
+                    - img [ref=e3161]
+                    - text: Verified Success
+              - generic [ref=e3165]:
+                - img [ref=e3167]
+                - generic [ref=e3170]:
+                  - generic [ref=e3171]:
+                    - generic [ref=e3173]: A
+                    - generic [ref=e3174]:
+                      - generic [ref=e3175]:
+                        - heading "Andrew Garcia" [level=4] [ref=e3176]
+                        - img [ref=e3177]
+                      - generic [ref=e3180]:
+                        - img [ref=e3181]
+                        - img [ref=e3183]
+                        - img [ref=e3185]
+                        - img [ref=e3187]
+                        - img [ref=e3189]
+                  - paragraph [ref=e3191]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e3192]:
+                  - generic [ref=e3193]: Jul 23
+                  - generic [ref=e3194]:
+                    - img [ref=e3195]
+                    - text: Verified Success
+              - generic [ref=e3199]:
+                - img [ref=e3201]
+                - generic [ref=e3204]:
+                  - generic [ref=e3205]:
+                    - generic [ref=e3207]: S
+                    - generic [ref=e3208]:
+                      - generic [ref=e3209]:
+                        - heading "Sarah Johnson" [level=4] [ref=e3210]
+                        - img [ref=e3211]
+                      - generic [ref=e3214]:
+                        - img [ref=e3215]
+                        - img [ref=e3217]
+                        - img [ref=e3219]
+                        - img [ref=e3221]
+                        - img [ref=e3223]
+                  - paragraph [ref=e3225]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e3226]:
+                  - generic [ref=e3227]: Jul 18
+                  - generic [ref=e3228]:
+                    - img [ref=e3229]
+                    - text: Verified Success
+              - generic [ref=e3233]:
+                - img [ref=e3235]
+                - generic [ref=e3238]:
+                  - generic [ref=e3239]:
+                    - generic [ref=e3241]: D
+                    - generic [ref=e3242]:
+                      - generic [ref=e3243]:
+                        - heading "David Kim" [level=4] [ref=e3244]
+                        - img [ref=e3245]
+                      - generic [ref=e3248]:
+                        - img [ref=e3249]
+                        - img [ref=e3251]
+                        - img [ref=e3253]
+                        - img [ref=e3255]
+                        - img [ref=e3257]
+                  - paragraph [ref=e3259]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e3260]:
+                  - generic [ref=e3261]: Jul 21
+                  - generic [ref=e3262]:
+                    - img [ref=e3263]
+                    - text: Verified Success
+              - generic [ref=e3267]:
+                - img [ref=e3269]
+                - generic [ref=e3272]:
+                  - generic [ref=e3273]:
+                    - generic [ref=e3275]: A
+                    - generic [ref=e3276]:
+                      - generic [ref=e3277]:
+                        - heading "Amanda Foster" [level=4] [ref=e3278]
+                        - img [ref=e3279]
+                      - generic [ref=e3282]:
+                        - img [ref=e3283]
+                        - img [ref=e3285]
+                        - img [ref=e3287]
+                        - img [ref=e3289]
+                        - img [ref=e3291]
+                  - paragraph [ref=e3293]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e3294]:
+                  - generic [ref=e3295]: Jul 16
+                  - generic [ref=e3296]:
+                    - img [ref=e3297]
+                    - text: Verified Success
+              - generic [ref=e3301]:
+                - img [ref=e3303]
+                - generic [ref=e3306]:
+                  - generic [ref=e3307]:
+                    - generic [ref=e3309]: B
+                    - generic [ref=e3310]:
+                      - generic [ref=e3311]:
+                        - heading "Brandon Scott" [level=4] [ref=e3312]
+                        - img [ref=e3313]
+                      - generic [ref=e3316]:
+                        - img [ref=e3317]
+                        - img [ref=e3319]
+                        - img [ref=e3321]
+                        - img [ref=e3323]
+                        - img [ref=e3325]
+                  - paragraph [ref=e3327]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e3328]:
+                  - generic [ref=e3329]: Jul 14
+                  - generic [ref=e3330]:
+                    - img [ref=e3331]
+                    - text: Verified Success
+              - generic [ref=e3335]:
+                - img [ref=e3337]
+                - generic [ref=e3340]:
+                  - generic [ref=e3341]:
+                    - generic [ref=e3343]: R
+                    - generic [ref=e3344]:
+                      - generic [ref=e3345]:
+                        - heading "Rachel Green" [level=4] [ref=e3346]
+                        - img [ref=e3347]
+                      - generic [ref=e3350]:
+                        - img [ref=e3351]
+                        - img [ref=e3353]
+                        - img [ref=e3355]
+                        - img [ref=e3357]
+                        - img [ref=e3359]
+                  - paragraph [ref=e3361]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e3362]:
+                  - generic [ref=e3363]: Jul 14
+                  - generic [ref=e3364]:
+                    - img [ref=e3365]
+                    - text: Verified Success
+              - generic [ref=e3369]:
+                - img [ref=e3371]
+                - generic [ref=e3374]:
+                  - generic [ref=e3375]:
+                    - generic [ref=e3377]: J
+                    - generic [ref=e3378]:
+                      - generic [ref=e3379]:
+                        - heading "James Wilson" [level=4] [ref=e3380]
+                        - img [ref=e3381]
+                      - generic [ref=e3384]:
+                        - img [ref=e3385]
+                        - img [ref=e3387]
+                        - img [ref=e3389]
+                        - img [ref=e3391]
+                        - img [ref=e3393]
+                  - paragraph [ref=e3395]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e3396]:
+                  - generic [ref=e3397]: Jul 19
+                  - generic [ref=e3398]:
+                    - img [ref=e3399]
+                    - text: Verified Success
+              - generic [ref=e3403]:
+                - img [ref=e3405]
+                - generic [ref=e3408]:
+                  - generic [ref=e3409]:
+                    - generic [ref=e3411]: M
+                    - generic [ref=e3412]:
+                      - generic [ref=e3413]:
+                        - heading "Megan Taylor" [level=4] [ref=e3414]
+                        - img [ref=e3415]
+                      - generic [ref=e3418]:
+                        - img [ref=e3419]
+                        - img [ref=e3421]
+                        - img [ref=e3423]
+                        - img [ref=e3425]
+                        - img [ref=e3427]
+                  - paragraph [ref=e3429]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e3430]:
+                  - generic [ref=e3431]: Jul 17
+                  - generic [ref=e3432]:
+                    - img [ref=e3433]
+                    - text: Verified Success
+              - generic [ref=e3437]:
+                - img [ref=e3439]
+                - generic [ref=e3442]:
+                  - generic [ref=e3443]:
+                    - generic [ref=e3445]: M
+                    - generic [ref=e3446]:
+                      - generic [ref=e3447]:
+                        - heading "Michael Chen" [level=4] [ref=e3448]
+                        - img [ref=e3449]
+                      - generic [ref=e3452]:
+                        - img [ref=e3453]
+                        - img [ref=e3455]
+                        - img [ref=e3457]
+                        - img [ref=e3459]
+                        - img [ref=e3461]
+                  - paragraph [ref=e3463]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e3464]:
+                  - generic [ref=e3465]: Jul 23
+                  - generic [ref=e3466]:
+                    - img [ref=e3467]
+                    - text: Verified Success
+              - generic [ref=e3471]:
+                - img [ref=e3473]
+                - generic [ref=e3476]:
+                  - generic [ref=e3477]:
+                    - generic [ref=e3479]: J
+                    - generic [ref=e3480]:
+                      - generic [ref=e3481]:
+                        - heading "Jessica Williams" [level=4] [ref=e3482]
+                        - img [ref=e3483]
+                      - generic [ref=e3486]:
+                        - img [ref=e3487]
+                        - img [ref=e3489]
+                        - img [ref=e3491]
+                        - img [ref=e3493]
+                        - img [ref=e3495]
+                  - paragraph [ref=e3497]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e3498]:
+                  - generic [ref=e3499]: Jul 20
+                  - generic [ref=e3500]:
+                    - img [ref=e3501]
+                    - text: Verified Success
+              - generic [ref=e3505]:
+                - img [ref=e3507]
+                - generic [ref=e3510]:
+                  - generic [ref=e3511]:
+                    - generic [ref=e3513]: C
+                    - generic [ref=e3514]:
+                      - generic [ref=e3515]:
+                        - heading "Christopher Lee" [level=4] [ref=e3516]
+                        - img [ref=e3517]
+                      - generic [ref=e3520]:
+                        - img [ref=e3521]
+                        - img [ref=e3523]
+                        - img [ref=e3525]
+                        - img [ref=e3527]
+                        - img [ref=e3529]
+                  - paragraph [ref=e3531]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e3532]:
+                  - generic [ref=e3533]: Jul 21
+                  - generic [ref=e3534]:
+                    - img [ref=e3535]
+                    - text: Verified Success
+            - generic [ref=e3538]:
+              - generic [ref=e3541]:
+                - img [ref=e3543]
+                - generic [ref=e3546]:
+                  - generic [ref=e3547]:
+                    - generic [ref=e3549]: M
+                    - generic [ref=e3550]:
+                      - generic [ref=e3551]:
+                        - heading "Michael Chen" [level=4] [ref=e3552]
+                        - img [ref=e3553]
+                      - generic [ref=e3556]:
+                        - img [ref=e3557]
+                        - img [ref=e3559]
+                        - img [ref=e3561]
+                        - img [ref=e3563]
+                        - img [ref=e3565]
+                  - paragraph [ref=e3567]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e3568]:
+                  - generic [ref=e3569]: Jul 22
+                  - generic [ref=e3570]:
+                    - img [ref=e3571]
+                    - text: Verified Success
+              - generic [ref=e3575]:
+                - img [ref=e3577]
+                - generic [ref=e3580]:
+                  - generic [ref=e3581]:
+                    - generic [ref=e3583]: J
+                    - generic [ref=e3584]:
+                      - generic [ref=e3585]:
+                        - heading "Jessica Williams" [level=4] [ref=e3586]
+                        - img [ref=e3587]
+                      - generic [ref=e3590]:
+                        - img [ref=e3591]
+                        - img [ref=e3593]
+                        - img [ref=e3595]
+                        - img [ref=e3597]
+                        - img [ref=e3599]
+                  - paragraph [ref=e3601]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e3602]:
+                  - generic [ref=e3603]: Jul 20
+                  - generic [ref=e3604]:
+                    - img [ref=e3605]
+                    - text: Verified Success
+              - generic [ref=e3609]:
+                - img [ref=e3611]
+                - generic [ref=e3614]:
+                  - generic [ref=e3615]:
+                    - generic [ref=e3617]: C
+                    - generic [ref=e3618]:
+                      - generic [ref=e3619]:
+                        - heading "Christopher Lee" [level=4] [ref=e3620]
+                        - img [ref=e3621]
+                      - generic [ref=e3624]:
+                        - img [ref=e3625]
+                        - img [ref=e3627]
+                        - img [ref=e3629]
+                        - img [ref=e3631]
+                        - img [ref=e3633]
+                  - paragraph [ref=e3635]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e3636]:
+                  - generic [ref=e3637]: Jul 22
+                  - generic [ref=e3638]:
+                    - img [ref=e3639]
+                    - text: Verified Success
+              - generic [ref=e3643]:
+                - img [ref=e3645]
+                - generic [ref=e3648]:
+                  - generic [ref=e3649]:
+                    - generic [ref=e3651]: T
+                    - generic [ref=e3652]:
+                      - generic [ref=e3653]:
+                        - heading "Taylor Anderson" [level=4] [ref=e3654]
+                        - img [ref=e3655]
+                      - generic [ref=e3658]:
+                        - img [ref=e3659]
+                        - img [ref=e3661]
+                        - img [ref=e3663]
+                        - img [ref=e3665]
+                        - img [ref=e3667]
+                  - paragraph [ref=e3669]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e3670]:
+                  - generic [ref=e3671]: Jul 16
+                  - generic [ref=e3672]:
+                    - img [ref=e3673]
+                    - text: Verified Success
+              - generic [ref=e3677]:
+                - img [ref=e3679]
+                - generic [ref=e3682]:
+                  - generic [ref=e3683]:
+                    - generic [ref=e3685]: D
+                    - generic [ref=e3686]:
+                      - generic [ref=e3687]:
+                        - heading "Daniel Wright" [level=4] [ref=e3688]
+                        - img [ref=e3689]
+                      - generic [ref=e3692]:
+                        - img [ref=e3693]
+                        - img [ref=e3695]
+                        - img [ref=e3697]
+                        - img [ref=e3699]
+                        - img [ref=e3701]
+                  - paragraph [ref=e3703]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e3704]:
+                  - generic [ref=e3705]: Jul 14
+                  - generic [ref=e3706]:
+                    - img [ref=e3707]
+                    - text: Verified Success
+              - generic [ref=e3711]:
+                - img [ref=e3713]
+                - generic [ref=e3716]:
+                  - generic [ref=e3717]:
+                    - generic [ref=e3719]: S
+                    - generic [ref=e3720]:
+                      - generic [ref=e3721]:
+                        - heading "Sophie Davis" [level=4] [ref=e3722]
+                        - img [ref=e3723]
+                      - generic [ref=e3726]:
+                        - img [ref=e3727]
+                        - img [ref=e3729]
+                        - img [ref=e3731]
+                        - img [ref=e3733]
+                        - img [ref=e3735]
+                  - paragraph [ref=e3737]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e3738]:
+                  - generic [ref=e3739]: Jul 22
+                  - generic [ref=e3740]:
+                    - img [ref=e3741]
+                    - text: Verified Success
+              - generic [ref=e3745]:
+                - img [ref=e3747]
+                - generic [ref=e3750]:
+                  - generic [ref=e3751]:
+                    - generic [ref=e3753]: J
+                    - generic [ref=e3754]:
+                      - generic [ref=e3755]:
+                        - heading "Joshua Miller" [level=4] [ref=e3756]
+                        - img [ref=e3757]
+                      - generic [ref=e3760]:
+                        - img [ref=e3761]
+                        - img [ref=e3763]
+                        - img [ref=e3765]
+                        - img [ref=e3767]
+                        - img [ref=e3769]
+                  - paragraph [ref=e3771]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e3772]:
+                  - generic [ref=e3773]: Jul 24
+                  - generic [ref=e3774]:
+                    - img [ref=e3775]
+                    - text: Verified Success
+              - generic [ref=e3779]:
+                - img [ref=e3781]
+                - generic [ref=e3784]:
+                  - generic [ref=e3785]:
+                    - generic [ref=e3787]: E
+                    - generic [ref=e3788]:
+                      - generic [ref=e3789]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e3790]
+                        - img [ref=e3791]
+                      - generic [ref=e3794]:
+                        - img [ref=e3795]
+                        - img [ref=e3797]
+                        - img [ref=e3799]
+                        - img [ref=e3801]
+                        - img [ref=e3803]
+                  - paragraph [ref=e3805]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e3806]:
+                  - generic [ref=e3807]: Jul 19
+                  - generic [ref=e3808]:
+                    - img [ref=e3809]
+                    - text: Verified Success
+              - generic [ref=e3813]:
+                - img [ref=e3815]
+                - generic [ref=e3818]:
+                  - generic [ref=e3819]:
+                    - generic [ref=e3821]: R
+                    - generic [ref=e3822]:
+                      - generic [ref=e3823]:
+                        - heading "Ryan Thompson" [level=4] [ref=e3824]
+                        - img [ref=e3825]
+                      - generic [ref=e3828]:
+                        - img [ref=e3829]
+                        - img [ref=e3831]
+                        - img [ref=e3833]
+                        - img [ref=e3835]
+                        - img [ref=e3837]
+                  - paragraph [ref=e3839]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e3840]:
+                  - generic [ref=e3841]: Jul 15
+                  - generic [ref=e3842]:
+                    - img [ref=e3843]
+                    - text: Verified Success
+              - generic [ref=e3847]:
+                - img [ref=e3849]
+                - generic [ref=e3852]:
+                  - generic [ref=e3853]:
+                    - generic [ref=e3855]: "N"
+                    - generic [ref=e3856]:
+                      - generic [ref=e3857]:
+                        - heading "Nicole Martinez" [level=4] [ref=e3858]
+                        - img [ref=e3859]
+                      - generic [ref=e3862]:
+                        - img [ref=e3863]
+                        - img [ref=e3865]
+                        - img [ref=e3867]
+                        - img [ref=e3869]
+                        - img [ref=e3871]
+                  - paragraph [ref=e3873]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e3874]:
+                  - generic [ref=e3875]: Jul 19
+                  - generic [ref=e3876]:
+                    - img [ref=e3877]
+                    - text: Verified Success
+              - generic [ref=e3881]:
+                - img [ref=e3883]
+                - generic [ref=e3886]:
+                  - generic [ref=e3887]:
+                    - generic [ref=e3889]: K
+                    - generic [ref=e3890]:
+                      - generic [ref=e3891]:
+                        - heading "Kevin Patel" [level=4] [ref=e3892]
+                        - img [ref=e3893]
+                      - generic [ref=e3896]:
+                        - img [ref=e3897]
+                        - img [ref=e3899]
+                        - img [ref=e3901]
+                        - img [ref=e3903]
+                        - img [ref=e3905]
+                  - paragraph [ref=e3907]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e3908]:
+                  - generic [ref=e3909]: Jul 16
+                  - generic [ref=e3910]:
+                    - img [ref=e3911]
+                    - text: Verified Success
+              - generic [ref=e3915]:
+                - img [ref=e3917]
+                - generic [ref=e3920]:
+                  - generic [ref=e3921]:
+                    - generic [ref=e3923]: O
+                    - generic [ref=e3924]:
+                      - generic [ref=e3925]:
+                        - heading "Olivia Brown" [level=4] [ref=e3926]
+                        - img [ref=e3927]
+                      - generic [ref=e3930]:
+                        - img [ref=e3931]
+                        - img [ref=e3933]
+                        - img [ref=e3935]
+                        - img [ref=e3937]
+                        - img [ref=e3939]
+                  - paragraph [ref=e3941]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e3942]:
+                  - generic [ref=e3943]: Jul 24
+                  - generic [ref=e3944]:
+                    - img [ref=e3945]
+                    - text: Verified Success
+              - generic [ref=e3949]:
+                - img [ref=e3951]
+                - generic [ref=e3954]:
+                  - generic [ref=e3955]:
+                    - generic [ref=e3957]: A
+                    - generic [ref=e3958]:
+                      - generic [ref=e3959]:
+                        - heading "Andrew Garcia" [level=4] [ref=e3960]
+                        - img [ref=e3961]
+                      - generic [ref=e3964]:
+                        - img [ref=e3965]
+                        - img [ref=e3967]
+                        - img [ref=e3969]
+                        - img [ref=e3971]
+                        - img [ref=e3973]
+                  - paragraph [ref=e3975]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e3976]:
+                  - generic [ref=e3977]: Jul 19
+                  - generic [ref=e3978]:
+                    - img [ref=e3979]
+                    - text: Verified Success
+              - generic [ref=e3983]:
+                - img [ref=e3985]
+                - generic [ref=e3988]:
+                  - generic [ref=e3989]:
+                    - generic [ref=e3991]: S
+                    - generic [ref=e3992]:
+                      - generic [ref=e3993]:
+                        - heading "Sarah Johnson" [level=4] [ref=e3994]
+                        - img [ref=e3995]
+                      - generic [ref=e3998]:
+                        - img [ref=e3999]
+                        - img [ref=e4001]
+                        - img [ref=e4003]
+                        - img [ref=e4005]
+                        - img [ref=e4007]
+                  - paragraph [ref=e4009]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e4010]:
+                  - generic [ref=e4011]: Jul 18
+                  - generic [ref=e4012]:
+                    - img [ref=e4013]
+                    - text: Verified Success
+              - generic [ref=e4017]:
+                - img [ref=e4019]
+                - generic [ref=e4022]:
+                  - generic [ref=e4023]:
+                    - generic [ref=e4025]: D
+                    - generic [ref=e4026]:
+                      - generic [ref=e4027]:
+                        - heading "David Kim" [level=4] [ref=e4028]
+                        - img [ref=e4029]
+                      - generic [ref=e4032]:
+                        - img [ref=e4033]
+                        - img [ref=e4035]
+                        - img [ref=e4037]
+                        - img [ref=e4039]
+                        - img [ref=e4041]
+                  - paragraph [ref=e4043]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e4044]:
+                  - generic [ref=e4045]: Jul 17
+                  - generic [ref=e4046]:
+                    - img [ref=e4047]
+                    - text: Verified Success
+              - generic [ref=e4051]:
+                - img [ref=e4053]
+                - generic [ref=e4056]:
+                  - generic [ref=e4057]:
+                    - generic [ref=e4059]: A
+                    - generic [ref=e4060]:
+                      - generic [ref=e4061]:
+                        - heading "Amanda Foster" [level=4] [ref=e4062]
+                        - img [ref=e4063]
+                      - generic [ref=e4066]:
+                        - img [ref=e4067]
+                        - img [ref=e4069]
+                        - img [ref=e4071]
+                        - img [ref=e4073]
+                        - img [ref=e4075]
+                  - paragraph [ref=e4077]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e4078]:
+                  - generic [ref=e4079]: Jul 22
+                  - generic [ref=e4080]:
+                    - img [ref=e4081]
+                    - text: Verified Success
+              - generic [ref=e4085]:
+                - img [ref=e4087]
+                - generic [ref=e4090]:
+                  - generic [ref=e4091]:
+                    - generic [ref=e4093]: B
+                    - generic [ref=e4094]:
+                      - generic [ref=e4095]:
+                        - heading "Brandon Scott" [level=4] [ref=e4096]
+                        - img [ref=e4097]
+                      - generic [ref=e4100]:
+                        - img [ref=e4101]
+                        - img [ref=e4103]
+                        - img [ref=e4105]
+                        - img [ref=e4107]
+                        - img [ref=e4109]
+                  - paragraph [ref=e4111]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e4112]:
+                  - generic [ref=e4113]: Jul 15
+                  - generic [ref=e4114]:
+                    - img [ref=e4115]
+                    - text: Verified Success
+              - generic [ref=e4119]:
+                - img [ref=e4121]
+                - generic [ref=e4124]:
+                  - generic [ref=e4125]:
+                    - generic [ref=e4127]: R
+                    - generic [ref=e4128]:
+                      - generic [ref=e4129]:
+                        - heading "Rachel Green" [level=4] [ref=e4130]
+                        - img [ref=e4131]
+                      - generic [ref=e4134]:
+                        - img [ref=e4135]
+                        - img [ref=e4137]
+                        - img [ref=e4139]
+                        - img [ref=e4141]
+                        - img [ref=e4143]
+                  - paragraph [ref=e4145]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e4146]:
+                  - generic [ref=e4147]: Jul 24
+                  - generic [ref=e4148]:
+                    - img [ref=e4149]
+                    - text: Verified Success
+              - generic [ref=e4153]:
+                - img [ref=e4155]
+                - generic [ref=e4158]:
+                  - generic [ref=e4159]:
+                    - generic [ref=e4161]: J
+                    - generic [ref=e4162]:
+                      - generic [ref=e4163]:
+                        - heading "James Wilson" [level=4] [ref=e4164]
+                        - img [ref=e4165]
+                      - generic [ref=e4168]:
+                        - img [ref=e4169]
+                        - img [ref=e4171]
+                        - img [ref=e4173]
+                        - img [ref=e4175]
+                        - img [ref=e4177]
+                  - paragraph [ref=e4179]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e4180]:
+                  - generic [ref=e4181]: Jul 23
+                  - generic [ref=e4182]:
+                    - img [ref=e4183]
+                    - text: Verified Success
+              - generic [ref=e4187]:
+                - img [ref=e4189]
+                - generic [ref=e4192]:
+                  - generic [ref=e4193]:
+                    - generic [ref=e4195]: M
+                    - generic [ref=e4196]:
+                      - generic [ref=e4197]:
+                        - heading "Megan Taylor" [level=4] [ref=e4198]
+                        - img [ref=e4199]
+                      - generic [ref=e4202]:
+                        - img [ref=e4203]
+                        - img [ref=e4205]
+                        - img [ref=e4207]
+                        - img [ref=e4209]
+                        - img [ref=e4211]
+                  - paragraph [ref=e4213]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e4214]:
+                  - generic [ref=e4215]: Jul 20
+                  - generic [ref=e4216]:
+                    - img [ref=e4217]
+                    - text: Verified Success
+              - generic [ref=e4221]:
+                - img [ref=e4223]
+                - generic [ref=e4226]:
+                  - generic [ref=e4227]:
+                    - generic [ref=e4229]: M
+                    - generic [ref=e4230]:
+                      - generic [ref=e4231]:
+                        - heading "Michael Chen" [level=4] [ref=e4232]
+                        - img [ref=e4233]
+                      - generic [ref=e4236]:
+                        - img [ref=e4237]
+                        - img [ref=e4239]
+                        - img [ref=e4241]
+                        - img [ref=e4243]
+                        - img [ref=e4245]
+                  - paragraph [ref=e4247]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e4248]:
+                  - generic [ref=e4249]: Jul 19
+                  - generic [ref=e4250]:
+                    - img [ref=e4251]
+                    - text: Verified Success
+              - generic [ref=e4255]:
+                - img [ref=e4257]
+                - generic [ref=e4260]:
+                  - generic [ref=e4261]:
+                    - generic [ref=e4263]: J
+                    - generic [ref=e4264]:
+                      - generic [ref=e4265]:
+                        - heading "Jessica Williams" [level=4] [ref=e4266]
+                        - img [ref=e4267]
+                      - generic [ref=e4270]:
+                        - img [ref=e4271]
+                        - img [ref=e4273]
+                        - img [ref=e4275]
+                        - img [ref=e4277]
+                        - img [ref=e4279]
+                  - paragraph [ref=e4281]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e4282]:
+                  - generic [ref=e4283]: Jul 22
+                  - generic [ref=e4284]:
+                    - img [ref=e4285]
+                    - text: Verified Success
+              - generic [ref=e4289]:
+                - img [ref=e4291]
+                - generic [ref=e4294]:
+                  - generic [ref=e4295]:
+                    - generic [ref=e4297]: C
+                    - generic [ref=e4298]:
+                      - generic [ref=e4299]:
+                        - heading "Christopher Lee" [level=4] [ref=e4300]
+                        - img [ref=e4301]
+                      - generic [ref=e4304]:
+                        - img [ref=e4305]
+                        - img [ref=e4307]
+                        - img [ref=e4309]
+                        - img [ref=e4311]
+                        - img [ref=e4313]
+                  - paragraph [ref=e4315]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e4316]:
+                  - generic [ref=e4317]: Jul 19
+                  - generic [ref=e4318]:
+                    - img [ref=e4319]
+                    - text: Verified Success
+              - generic [ref=e4323]:
+                - img [ref=e4325]
+                - generic [ref=e4328]:
+                  - generic [ref=e4329]:
+                    - generic [ref=e4331]: T
+                    - generic [ref=e4332]:
+                      - generic [ref=e4333]:
+                        - heading "Taylor Anderson" [level=4] [ref=e4334]
+                        - img [ref=e4335]
+                      - generic [ref=e4338]:
+                        - img [ref=e4339]
+                        - img [ref=e4341]
+                        - img [ref=e4343]
+                        - img [ref=e4345]
+                        - img [ref=e4347]
+                  - paragraph [ref=e4349]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e4350]:
+                  - generic [ref=e4351]: Jul 21
+                  - generic [ref=e4352]:
+                    - img [ref=e4353]
+                    - text: Verified Success
+              - generic [ref=e4357]:
+                - img [ref=e4359]
+                - generic [ref=e4362]:
+                  - generic [ref=e4363]:
+                    - generic [ref=e4365]: D
+                    - generic [ref=e4366]:
+                      - generic [ref=e4367]:
+                        - heading "Daniel Wright" [level=4] [ref=e4368]
+                        - img [ref=e4369]
+                      - generic [ref=e4372]:
+                        - img [ref=e4373]
+                        - img [ref=e4375]
+                        - img [ref=e4377]
+                        - img [ref=e4379]
+                        - img [ref=e4381]
+                  - paragraph [ref=e4383]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e4384]:
+                  - generic [ref=e4385]: Jul 24
+                  - generic [ref=e4386]:
+                    - img [ref=e4387]
+                    - text: Verified Success
+              - generic [ref=e4391]:
+                - img [ref=e4393]
+                - generic [ref=e4396]:
+                  - generic [ref=e4397]:
+                    - generic [ref=e4399]: S
+                    - generic [ref=e4400]:
+                      - generic [ref=e4401]:
+                        - heading "Sophie Davis" [level=4] [ref=e4402]
+                        - img [ref=e4403]
+                      - generic [ref=e4406]:
+                        - img [ref=e4407]
+                        - img [ref=e4409]
+                        - img [ref=e4411]
+                        - img [ref=e4413]
+                        - img [ref=e4415]
+                  - paragraph [ref=e4417]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e4418]:
+                  - generic [ref=e4419]: Jul 19
+                  - generic [ref=e4420]:
+                    - img [ref=e4421]
+                    - text: Verified Success
+              - generic [ref=e4425]:
+                - img [ref=e4427]
+                - generic [ref=e4430]:
+                  - generic [ref=e4431]:
+                    - generic [ref=e4433]: J
+                    - generic [ref=e4434]:
+                      - generic [ref=e4435]:
+                        - heading "Joshua Miller" [level=4] [ref=e4436]
+                        - img [ref=e4437]
+                      - generic [ref=e4440]:
+                        - img [ref=e4441]
+                        - img [ref=e4443]
+                        - img [ref=e4445]
+                        - img [ref=e4447]
+                        - img [ref=e4449]
+                  - paragraph [ref=e4451]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e4452]:
+                  - generic [ref=e4453]: Jul 18
+                  - generic [ref=e4454]:
+                    - img [ref=e4455]
+                    - text: Verified Success
+              - generic [ref=e4459]:
+                - img [ref=e4461]
+                - generic [ref=e4464]:
+                  - generic [ref=e4465]:
+                    - generic [ref=e4467]: E
+                    - generic [ref=e4468]:
+                      - generic [ref=e4469]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e4470]
+                        - img [ref=e4471]
+                      - generic [ref=e4474]:
+                        - img [ref=e4475]
+                        - img [ref=e4477]
+                        - img [ref=e4479]
+                        - img [ref=e4481]
+                        - img [ref=e4483]
+                  - paragraph [ref=e4485]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e4486]:
+                  - generic [ref=e4487]: Jul 21
+                  - generic [ref=e4488]:
+                    - img [ref=e4489]
+                    - text: Verified Success
+              - generic [ref=e4493]:
+                - img [ref=e4495]
+                - generic [ref=e4498]:
+                  - generic [ref=e4499]:
+                    - generic [ref=e4501]: R
+                    - generic [ref=e4502]:
+                      - generic [ref=e4503]:
+                        - heading "Ryan Thompson" [level=4] [ref=e4504]
+                        - img [ref=e4505]
+                      - generic [ref=e4508]:
+                        - img [ref=e4509]
+                        - img [ref=e4511]
+                        - img [ref=e4513]
+                        - img [ref=e4515]
+                        - img [ref=e4517]
+                  - paragraph [ref=e4519]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e4520]:
+                  - generic [ref=e4521]: Jul 13
+                  - generic [ref=e4522]:
+                    - img [ref=e4523]
+                    - text: Verified Success
+              - generic [ref=e4527]:
+                - img [ref=e4529]
+                - generic [ref=e4532]:
+                  - generic [ref=e4533]:
+                    - generic [ref=e4535]: "N"
+                    - generic [ref=e4536]:
+                      - generic [ref=e4537]:
+                        - heading "Nicole Martinez" [level=4] [ref=e4538]
+                        - img [ref=e4539]
+                      - generic [ref=e4542]:
+                        - img [ref=e4543]
+                        - img [ref=e4545]
+                        - img [ref=e4547]
+                        - img [ref=e4549]
+                        - img [ref=e4551]
+                  - paragraph [ref=e4553]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e4554]:
+                  - generic [ref=e4555]: Jul 17
+                  - generic [ref=e4556]:
+                    - img [ref=e4557]
+                    - text: Verified Success
+              - generic [ref=e4561]:
+                - img [ref=e4563]
+                - generic [ref=e4566]:
+                  - generic [ref=e4567]:
+                    - generic [ref=e4569]: M
+                    - generic [ref=e4570]:
+                      - generic [ref=e4571]:
+                        - heading "Michael Chen" [level=4] [ref=e4572]
+                        - img [ref=e4573]
+                      - generic [ref=e4576]:
+                        - img [ref=e4577]
+                        - img [ref=e4579]
+                        - img [ref=e4581]
+                        - img [ref=e4583]
+                        - img [ref=e4585]
+                  - paragraph [ref=e4587]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e4588]:
+                  - generic [ref=e4589]: Jul 22
+                  - generic [ref=e4590]:
+                    - img [ref=e4591]
+                    - text: Verified Success
+              - generic [ref=e4595]:
+                - img [ref=e4597]
+                - generic [ref=e4600]:
+                  - generic [ref=e4601]:
+                    - generic [ref=e4603]: J
+                    - generic [ref=e4604]:
+                      - generic [ref=e4605]:
+                        - heading "Jessica Williams" [level=4] [ref=e4606]
+                        - img [ref=e4607]
+                      - generic [ref=e4610]:
+                        - img [ref=e4611]
+                        - img [ref=e4613]
+                        - img [ref=e4615]
+                        - img [ref=e4617]
+                        - img [ref=e4619]
+                  - paragraph [ref=e4621]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e4622]:
+                  - generic [ref=e4623]: Jul 20
+                  - generic [ref=e4624]:
+                    - img [ref=e4625]
+                    - text: Verified Success
+              - generic [ref=e4629]:
+                - img [ref=e4631]
+                - generic [ref=e4634]:
+                  - generic [ref=e4635]:
+                    - generic [ref=e4637]: C
+                    - generic [ref=e4638]:
+                      - generic [ref=e4639]:
+                        - heading "Christopher Lee" [level=4] [ref=e4640]
+                        - img [ref=e4641]
+                      - generic [ref=e4644]:
+                        - img [ref=e4645]
+                        - img [ref=e4647]
+                        - img [ref=e4649]
+                        - img [ref=e4651]
+                        - img [ref=e4653]
+                  - paragraph [ref=e4655]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e4656]:
+                  - generic [ref=e4657]: Jul 22
+                  - generic [ref=e4658]:
+                    - img [ref=e4659]
+                    - text: Verified Success
+              - generic [ref=e4663]:
+                - img [ref=e4665]
+                - generic [ref=e4668]:
+                  - generic [ref=e4669]:
+                    - generic [ref=e4671]: T
+                    - generic [ref=e4672]:
+                      - generic [ref=e4673]:
+                        - heading "Taylor Anderson" [level=4] [ref=e4674]
+                        - img [ref=e4675]
+                      - generic [ref=e4678]:
+                        - img [ref=e4679]
+                        - img [ref=e4681]
+                        - img [ref=e4683]
+                        - img [ref=e4685]
+                        - img [ref=e4687]
+                  - paragraph [ref=e4689]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e4690]:
+                  - generic [ref=e4691]: Jul 16
+                  - generic [ref=e4692]:
+                    - img [ref=e4693]
+                    - text: Verified Success
+              - generic [ref=e4697]:
+                - img [ref=e4699]
+                - generic [ref=e4702]:
+                  - generic [ref=e4703]:
+                    - generic [ref=e4705]: D
+                    - generic [ref=e4706]:
+                      - generic [ref=e4707]:
+                        - heading "Daniel Wright" [level=4] [ref=e4708]
+                        - img [ref=e4709]
+                      - generic [ref=e4712]:
+                        - img [ref=e4713]
+                        - img [ref=e4715]
+                        - img [ref=e4717]
+                        - img [ref=e4719]
+                        - img [ref=e4721]
+                  - paragraph [ref=e4723]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e4724]:
+                  - generic [ref=e4725]: Jul 14
+                  - generic [ref=e4726]:
+                    - img [ref=e4727]
+                    - text: Verified Success
+              - generic [ref=e4731]:
+                - img [ref=e4733]
+                - generic [ref=e4736]:
+                  - generic [ref=e4737]:
+                    - generic [ref=e4739]: S
+                    - generic [ref=e4740]:
+                      - generic [ref=e4741]:
+                        - heading "Sophie Davis" [level=4] [ref=e4742]
+                        - img [ref=e4743]
+                      - generic [ref=e4746]:
+                        - img [ref=e4747]
+                        - img [ref=e4749]
+                        - img [ref=e4751]
+                        - img [ref=e4753]
+                        - img [ref=e4755]
+                  - paragraph [ref=e4757]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e4758]:
+                  - generic [ref=e4759]: Jul 22
+                  - generic [ref=e4760]:
+                    - img [ref=e4761]
+                    - text: Verified Success
+              - generic [ref=e4765]:
+                - img [ref=e4767]
+                - generic [ref=e4770]:
+                  - generic [ref=e4771]:
+                    - generic [ref=e4773]: J
+                    - generic [ref=e4774]:
+                      - generic [ref=e4775]:
+                        - heading "Joshua Miller" [level=4] [ref=e4776]
+                        - img [ref=e4777]
+                      - generic [ref=e4780]:
+                        - img [ref=e4781]
+                        - img [ref=e4783]
+                        - img [ref=e4785]
+                        - img [ref=e4787]
+                        - img [ref=e4789]
+                  - paragraph [ref=e4791]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e4792]:
+                  - generic [ref=e4793]: Jul 24
+                  - generic [ref=e4794]:
+                    - img [ref=e4795]
+                    - text: Verified Success
+              - generic [ref=e4799]:
+                - img [ref=e4801]
+                - generic [ref=e4804]:
+                  - generic [ref=e4805]:
+                    - generic [ref=e4807]: E
+                    - generic [ref=e4808]:
+                      - generic [ref=e4809]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e4810]
+                        - img [ref=e4811]
+                      - generic [ref=e4814]:
+                        - img [ref=e4815]
+                        - img [ref=e4817]
+                        - img [ref=e4819]
+                        - img [ref=e4821]
+                        - img [ref=e4823]
+                  - paragraph [ref=e4825]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e4826]:
+                  - generic [ref=e4827]: Jul 19
+                  - generic [ref=e4828]:
+                    - img [ref=e4829]
+                    - text: Verified Success
+              - generic [ref=e4833]:
+                - img [ref=e4835]
+                - generic [ref=e4838]:
+                  - generic [ref=e4839]:
+                    - generic [ref=e4841]: R
+                    - generic [ref=e4842]:
+                      - generic [ref=e4843]:
+                        - heading "Ryan Thompson" [level=4] [ref=e4844]
+                        - img [ref=e4845]
+                      - generic [ref=e4848]:
+                        - img [ref=e4849]
+                        - img [ref=e4851]
+                        - img [ref=e4853]
+                        - img [ref=e4855]
+                        - img [ref=e4857]
+                  - paragraph [ref=e4859]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e4860]:
+                  - generic [ref=e4861]: Jul 15
+                  - generic [ref=e4862]:
+                    - img [ref=e4863]
+                    - text: Verified Success
+              - generic [ref=e4867]:
+                - img [ref=e4869]
+                - generic [ref=e4872]:
+                  - generic [ref=e4873]:
+                    - generic [ref=e4875]: "N"
+                    - generic [ref=e4876]:
+                      - generic [ref=e4877]:
+                        - heading "Nicole Martinez" [level=4] [ref=e4878]
+                        - img [ref=e4879]
+                      - generic [ref=e4882]:
+                        - img [ref=e4883]
+                        - img [ref=e4885]
+                        - img [ref=e4887]
+                        - img [ref=e4889]
+                        - img [ref=e4891]
+                  - paragraph [ref=e4893]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e4894]:
+                  - generic [ref=e4895]: Jul 19
+                  - generic [ref=e4896]:
+                    - img [ref=e4897]
+                    - text: Verified Success
+              - generic [ref=e4901]:
+                - img [ref=e4903]
+                - generic [ref=e4906]:
+                  - generic [ref=e4907]:
+                    - generic [ref=e4909]: K
+                    - generic [ref=e4910]:
+                      - generic [ref=e4911]:
+                        - heading "Kevin Patel" [level=4] [ref=e4912]
+                        - img [ref=e4913]
+                      - generic [ref=e4916]:
+                        - img [ref=e4917]
+                        - img [ref=e4919]
+                        - img [ref=e4921]
+                        - img [ref=e4923]
+                        - img [ref=e4925]
+                  - paragraph [ref=e4927]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e4928]:
+                  - generic [ref=e4929]: Jul 16
+                  - generic [ref=e4930]:
+                    - img [ref=e4931]
+                    - text: Verified Success
+              - generic [ref=e4935]:
+                - img [ref=e4937]
+                - generic [ref=e4940]:
+                  - generic [ref=e4941]:
+                    - generic [ref=e4943]: O
+                    - generic [ref=e4944]:
+                      - generic [ref=e4945]:
+                        - heading "Olivia Brown" [level=4] [ref=e4946]
+                        - img [ref=e4947]
+                      - generic [ref=e4950]:
+                        - img [ref=e4951]
+                        - img [ref=e4953]
+                        - img [ref=e4955]
+                        - img [ref=e4957]
+                        - img [ref=e4959]
+                  - paragraph [ref=e4961]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e4962]:
+                  - generic [ref=e4963]: Jul 24
+                  - generic [ref=e4964]:
+                    - img [ref=e4965]
+                    - text: Verified Success
+              - generic [ref=e4969]:
+                - img [ref=e4971]
+                - generic [ref=e4974]:
+                  - generic [ref=e4975]:
+                    - generic [ref=e4977]: A
+                    - generic [ref=e4978]:
+                      - generic [ref=e4979]:
+                        - heading "Andrew Garcia" [level=4] [ref=e4980]
+                        - img [ref=e4981]
+                      - generic [ref=e4984]:
+                        - img [ref=e4985]
+                        - img [ref=e4987]
+                        - img [ref=e4989]
+                        - img [ref=e4991]
+                        - img [ref=e4993]
+                  - paragraph [ref=e4995]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e4996]:
+                  - generic [ref=e4997]: Jul 19
+                  - generic [ref=e4998]:
+                    - img [ref=e4999]
+                    - text: Verified Success
+              - generic [ref=e5003]:
+                - img [ref=e5005]
+                - generic [ref=e5008]:
+                  - generic [ref=e5009]:
+                    - generic [ref=e5011]: S
+                    - generic [ref=e5012]:
+                      - generic [ref=e5013]:
+                        - heading "Sarah Johnson" [level=4] [ref=e5014]
+                        - img [ref=e5015]
+                      - generic [ref=e5018]:
+                        - img [ref=e5019]
+                        - img [ref=e5021]
+                        - img [ref=e5023]
+                        - img [ref=e5025]
+                        - img [ref=e5027]
+                  - paragraph [ref=e5029]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e5030]:
+                  - generic [ref=e5031]: Jul 18
+                  - generic [ref=e5032]:
+                    - img [ref=e5033]
+                    - text: Verified Success
+              - generic [ref=e5037]:
+                - img [ref=e5039]
+                - generic [ref=e5042]:
+                  - generic [ref=e5043]:
+                    - generic [ref=e5045]: D
+                    - generic [ref=e5046]:
+                      - generic [ref=e5047]:
+                        - heading "David Kim" [level=4] [ref=e5048]
+                        - img [ref=e5049]
+                      - generic [ref=e5052]:
+                        - img [ref=e5053]
+                        - img [ref=e5055]
+                        - img [ref=e5057]
+                        - img [ref=e5059]
+                        - img [ref=e5061]
+                  - paragraph [ref=e5063]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e5064]:
+                  - generic [ref=e5065]: Jul 17
+                  - generic [ref=e5066]:
+                    - img [ref=e5067]
+                    - text: Verified Success
+              - generic [ref=e5071]:
+                - img [ref=e5073]
+                - generic [ref=e5076]:
+                  - generic [ref=e5077]:
+                    - generic [ref=e5079]: A
+                    - generic [ref=e5080]:
+                      - generic [ref=e5081]:
+                        - heading "Amanda Foster" [level=4] [ref=e5082]
+                        - img [ref=e5083]
+                      - generic [ref=e5086]:
+                        - img [ref=e5087]
+                        - img [ref=e5089]
+                        - img [ref=e5091]
+                        - img [ref=e5093]
+                        - img [ref=e5095]
+                  - paragraph [ref=e5097]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e5098]:
+                  - generic [ref=e5099]: Jul 22
+                  - generic [ref=e5100]:
+                    - img [ref=e5101]
+                    - text: Verified Success
+              - generic [ref=e5105]:
+                - img [ref=e5107]
+                - generic [ref=e5110]:
+                  - generic [ref=e5111]:
+                    - generic [ref=e5113]: B
+                    - generic [ref=e5114]:
+                      - generic [ref=e5115]:
+                        - heading "Brandon Scott" [level=4] [ref=e5116]
+                        - img [ref=e5117]
+                      - generic [ref=e5120]:
+                        - img [ref=e5121]
+                        - img [ref=e5123]
+                        - img [ref=e5125]
+                        - img [ref=e5127]
+                        - img [ref=e5129]
+                  - paragraph [ref=e5131]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e5132]:
+                  - generic [ref=e5133]: Jul 15
+                  - generic [ref=e5134]:
+                    - img [ref=e5135]
+                    - text: Verified Success
+              - generic [ref=e5139]:
+                - img [ref=e5141]
+                - generic [ref=e5144]:
+                  - generic [ref=e5145]:
+                    - generic [ref=e5147]: R
+                    - generic [ref=e5148]:
+                      - generic [ref=e5149]:
+                        - heading "Rachel Green" [level=4] [ref=e5150]
+                        - img [ref=e5151]
+                      - generic [ref=e5154]:
+                        - img [ref=e5155]
+                        - img [ref=e5157]
+                        - img [ref=e5159]
+                        - img [ref=e5161]
+                        - img [ref=e5163]
+                  - paragraph [ref=e5165]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e5166]:
+                  - generic [ref=e5167]: Jul 24
+                  - generic [ref=e5168]:
+                    - img [ref=e5169]
+                    - text: Verified Success
+              - generic [ref=e5173]:
+                - img [ref=e5175]
+                - generic [ref=e5178]:
+                  - generic [ref=e5179]:
+                    - generic [ref=e5181]: J
+                    - generic [ref=e5182]:
+                      - generic [ref=e5183]:
+                        - heading "James Wilson" [level=4] [ref=e5184]
+                        - img [ref=e5185]
+                      - generic [ref=e5188]:
+                        - img [ref=e5189]
+                        - img [ref=e5191]
+                        - img [ref=e5193]
+                        - img [ref=e5195]
+                        - img [ref=e5197]
+                  - paragraph [ref=e5199]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e5200]:
+                  - generic [ref=e5201]: Jul 23
+                  - generic [ref=e5202]:
+                    - img [ref=e5203]
+                    - text: Verified Success
+              - generic [ref=e5207]:
+                - img [ref=e5209]
+                - generic [ref=e5212]:
+                  - generic [ref=e5213]:
+                    - generic [ref=e5215]: M
+                    - generic [ref=e5216]:
+                      - generic [ref=e5217]:
+                        - heading "Megan Taylor" [level=4] [ref=e5218]
+                        - img [ref=e5219]
+                      - generic [ref=e5222]:
+                        - img [ref=e5223]
+                        - img [ref=e5225]
+                        - img [ref=e5227]
+                        - img [ref=e5229]
+                        - img [ref=e5231]
+                  - paragraph [ref=e5233]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e5234]:
+                  - generic [ref=e5235]: Jul 20
+                  - generic [ref=e5236]:
+                    - img [ref=e5237]
+                    - text: Verified Success
+              - generic [ref=e5241]:
+                - img [ref=e5243]
+                - generic [ref=e5246]:
+                  - generic [ref=e5247]:
+                    - generic [ref=e5249]: M
+                    - generic [ref=e5250]:
+                      - generic [ref=e5251]:
+                        - heading "Michael Chen" [level=4] [ref=e5252]
+                        - img [ref=e5253]
+                      - generic [ref=e5256]:
+                        - img [ref=e5257]
+                        - img [ref=e5259]
+                        - img [ref=e5261]
+                        - img [ref=e5263]
+                        - img [ref=e5265]
+                  - paragraph [ref=e5267]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e5268]:
+                  - generic [ref=e5269]: Jul 19
+                  - generic [ref=e5270]:
+                    - img [ref=e5271]
+                    - text: Verified Success
+              - generic [ref=e5275]:
+                - img [ref=e5277]
+                - generic [ref=e5280]:
+                  - generic [ref=e5281]:
+                    - generic [ref=e5283]: J
+                    - generic [ref=e5284]:
+                      - generic [ref=e5285]:
+                        - heading "Jessica Williams" [level=4] [ref=e5286]
+                        - img [ref=e5287]
+                      - generic [ref=e5290]:
+                        - img [ref=e5291]
+                        - img [ref=e5293]
+                        - img [ref=e5295]
+                        - img [ref=e5297]
+                        - img [ref=e5299]
+                  - paragraph [ref=e5301]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e5302]:
+                  - generic [ref=e5303]: Jul 22
+                  - generic [ref=e5304]:
+                    - img [ref=e5305]
+                    - text: Verified Success
+              - generic [ref=e5309]:
+                - img [ref=e5311]
+                - generic [ref=e5314]:
+                  - generic [ref=e5315]:
+                    - generic [ref=e5317]: C
+                    - generic [ref=e5318]:
+                      - generic [ref=e5319]:
+                        - heading "Christopher Lee" [level=4] [ref=e5320]
+                        - img [ref=e5321]
+                      - generic [ref=e5324]:
+                        - img [ref=e5325]
+                        - img [ref=e5327]
+                        - img [ref=e5329]
+                        - img [ref=e5331]
+                        - img [ref=e5333]
+                  - paragraph [ref=e5335]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e5336]:
+                  - generic [ref=e5337]: Jul 19
+                  - generic [ref=e5338]:
+                    - img [ref=e5339]
+                    - text: Verified Success
+              - generic [ref=e5343]:
+                - img [ref=e5345]
+                - generic [ref=e5348]:
+                  - generic [ref=e5349]:
+                    - generic [ref=e5351]: T
+                    - generic [ref=e5352]:
+                      - generic [ref=e5353]:
+                        - heading "Taylor Anderson" [level=4] [ref=e5354]
+                        - img [ref=e5355]
+                      - generic [ref=e5358]:
+                        - img [ref=e5359]
+                        - img [ref=e5361]
+                        - img [ref=e5363]
+                        - img [ref=e5365]
+                        - img [ref=e5367]
+                  - paragraph [ref=e5369]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e5370]:
+                  - generic [ref=e5371]: Jul 21
+                  - generic [ref=e5372]:
+                    - img [ref=e5373]
+                    - text: Verified Success
+              - generic [ref=e5377]:
+                - img [ref=e5379]
+                - generic [ref=e5382]:
+                  - generic [ref=e5383]:
+                    - generic [ref=e5385]: D
+                    - generic [ref=e5386]:
+                      - generic [ref=e5387]:
+                        - heading "Daniel Wright" [level=4] [ref=e5388]
+                        - img [ref=e5389]
+                      - generic [ref=e5392]:
+                        - img [ref=e5393]
+                        - img [ref=e5395]
+                        - img [ref=e5397]
+                        - img [ref=e5399]
+                        - img [ref=e5401]
+                  - paragraph [ref=e5403]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e5404]:
+                  - generic [ref=e5405]: Jul 24
+                  - generic [ref=e5406]:
+                    - img [ref=e5407]
+                    - text: Verified Success
+              - generic [ref=e5411]:
+                - img [ref=e5413]
+                - generic [ref=e5416]:
+                  - generic [ref=e5417]:
+                    - generic [ref=e5419]: S
+                    - generic [ref=e5420]:
+                      - generic [ref=e5421]:
+                        - heading "Sophie Davis" [level=4] [ref=e5422]
+                        - img [ref=e5423]
+                      - generic [ref=e5426]:
+                        - img [ref=e5427]
+                        - img [ref=e5429]
+                        - img [ref=e5431]
+                        - img [ref=e5433]
+                        - img [ref=e5435]
+                  - paragraph [ref=e5437]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e5438]:
+                  - generic [ref=e5439]: Jul 19
+                  - generic [ref=e5440]:
+                    - img [ref=e5441]
+                    - text: Verified Success
+              - generic [ref=e5445]:
+                - img [ref=e5447]
+                - generic [ref=e5450]:
+                  - generic [ref=e5451]:
+                    - generic [ref=e5453]: J
+                    - generic [ref=e5454]:
+                      - generic [ref=e5455]:
+                        - heading "Joshua Miller" [level=4] [ref=e5456]
+                        - img [ref=e5457]
+                      - generic [ref=e5460]:
+                        - img [ref=e5461]
+                        - img [ref=e5463]
+                        - img [ref=e5465]
+                        - img [ref=e5467]
+                        - img [ref=e5469]
+                  - paragraph [ref=e5471]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e5472]:
+                  - generic [ref=e5473]: Jul 18
+                  - generic [ref=e5474]:
+                    - img [ref=e5475]
+                    - text: Verified Success
+              - generic [ref=e5479]:
+                - img [ref=e5481]
+                - generic [ref=e5484]:
+                  - generic [ref=e5485]:
+                    - generic [ref=e5487]: E
+                    - generic [ref=e5488]:
+                      - generic [ref=e5489]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e5490]
+                        - img [ref=e5491]
+                      - generic [ref=e5494]:
+                        - img [ref=e5495]
+                        - img [ref=e5497]
+                        - img [ref=e5499]
+                        - img [ref=e5501]
+                        - img [ref=e5503]
+                  - paragraph [ref=e5505]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e5506]:
+                  - generic [ref=e5507]: Jul 21
+                  - generic [ref=e5508]:
+                    - img [ref=e5509]
+                    - text: Verified Success
+              - generic [ref=e5513]:
+                - img [ref=e5515]
+                - generic [ref=e5518]:
+                  - generic [ref=e5519]:
+                    - generic [ref=e5521]: R
+                    - generic [ref=e5522]:
+                      - generic [ref=e5523]:
+                        - heading "Ryan Thompson" [level=4] [ref=e5524]
+                        - img [ref=e5525]
+                      - generic [ref=e5528]:
+                        - img [ref=e5529]
+                        - img [ref=e5531]
+                        - img [ref=e5533]
+                        - img [ref=e5535]
+                        - img [ref=e5537]
+                  - paragraph [ref=e5539]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e5540]:
+                  - generic [ref=e5541]: Jul 13
+                  - generic [ref=e5542]:
+                    - img [ref=e5543]
+                    - text: Verified Success
+              - generic [ref=e5547]:
+                - img [ref=e5549]
+                - generic [ref=e5552]:
+                  - generic [ref=e5553]:
+                    - generic [ref=e5555]: "N"
+                    - generic [ref=e5556]:
+                      - generic [ref=e5557]:
+                        - heading "Nicole Martinez" [level=4] [ref=e5558]
+                        - img [ref=e5559]
+                      - generic [ref=e5562]:
+                        - img [ref=e5563]
+                        - img [ref=e5565]
+                        - img [ref=e5567]
+                        - img [ref=e5569]
+                        - img [ref=e5571]
+                  - paragraph [ref=e5573]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e5574]:
+                  - generic [ref=e5575]: Jul 17
+                  - generic [ref=e5576]:
+                    - img [ref=e5577]
+                    - text: Verified Success
+              - generic [ref=e5581]:
+                - img [ref=e5583]
+                - generic [ref=e5586]:
+                  - generic [ref=e5587]:
+                    - generic [ref=e5589]: M
+                    - generic [ref=e5590]:
+                      - generic [ref=e5591]:
+                        - heading "Michael Chen" [level=4] [ref=e5592]
+                        - img [ref=e5593]
+                      - generic [ref=e5596]:
+                        - img [ref=e5597]
+                        - img [ref=e5599]
+                        - img [ref=e5601]
+                        - img [ref=e5603]
+                        - img [ref=e5605]
+                  - paragraph [ref=e5607]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e5608]:
+                  - generic [ref=e5609]: Jul 22
+                  - generic [ref=e5610]:
+                    - img [ref=e5611]
+                    - text: Verified Success
+              - generic [ref=e5615]:
+                - img [ref=e5617]
+                - generic [ref=e5620]:
+                  - generic [ref=e5621]:
+                    - generic [ref=e5623]: J
+                    - generic [ref=e5624]:
+                      - generic [ref=e5625]:
+                        - heading "Jessica Williams" [level=4] [ref=e5626]
+                        - img [ref=e5627]
+                      - generic [ref=e5630]:
+                        - img [ref=e5631]
+                        - img [ref=e5633]
+                        - img [ref=e5635]
+                        - img [ref=e5637]
+                        - img [ref=e5639]
+                  - paragraph [ref=e5641]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e5642]:
+                  - generic [ref=e5643]: Jul 20
+                  - generic [ref=e5644]:
+                    - img [ref=e5645]
+                    - text: Verified Success
+              - generic [ref=e5649]:
+                - img [ref=e5651]
+                - generic [ref=e5654]:
+                  - generic [ref=e5655]:
+                    - generic [ref=e5657]: C
+                    - generic [ref=e5658]:
+                      - generic [ref=e5659]:
+                        - heading "Christopher Lee" [level=4] [ref=e5660]
+                        - img [ref=e5661]
+                      - generic [ref=e5664]:
+                        - img [ref=e5665]
+                        - img [ref=e5667]
+                        - img [ref=e5669]
+                        - img [ref=e5671]
+                        - img [ref=e5673]
+                  - paragraph [ref=e5675]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e5676]:
+                  - generic [ref=e5677]: Jul 22
+                  - generic [ref=e5678]:
+                    - img [ref=e5679]
+                    - text: Verified Success
+              - generic [ref=e5683]:
+                - img [ref=e5685]
+                - generic [ref=e5688]:
+                  - generic [ref=e5689]:
+                    - generic [ref=e5691]: T
+                    - generic [ref=e5692]:
+                      - generic [ref=e5693]:
+                        - heading "Taylor Anderson" [level=4] [ref=e5694]
+                        - img [ref=e5695]
+                      - generic [ref=e5698]:
+                        - img [ref=e5699]
+                        - img [ref=e5701]
+                        - img [ref=e5703]
+                        - img [ref=e5705]
+                        - img [ref=e5707]
+                  - paragraph [ref=e5709]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e5710]:
+                  - generic [ref=e5711]: Jul 16
+                  - generic [ref=e5712]:
+                    - img [ref=e5713]
+                    - text: Verified Success
+              - generic [ref=e5717]:
+                - img [ref=e5719]
+                - generic [ref=e5722]:
+                  - generic [ref=e5723]:
+                    - generic [ref=e5725]: D
+                    - generic [ref=e5726]:
+                      - generic [ref=e5727]:
+                        - heading "Daniel Wright" [level=4] [ref=e5728]
+                        - img [ref=e5729]
+                      - generic [ref=e5732]:
+                        - img [ref=e5733]
+                        - img [ref=e5735]
+                        - img [ref=e5737]
+                        - img [ref=e5739]
+                        - img [ref=e5741]
+                  - paragraph [ref=e5743]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e5744]:
+                  - generic [ref=e5745]: Jul 14
+                  - generic [ref=e5746]:
+                    - img [ref=e5747]
+                    - text: Verified Success
+              - generic [ref=e5751]:
+                - img [ref=e5753]
+                - generic [ref=e5756]:
+                  - generic [ref=e5757]:
+                    - generic [ref=e5759]: S
+                    - generic [ref=e5760]:
+                      - generic [ref=e5761]:
+                        - heading "Sophie Davis" [level=4] [ref=e5762]
+                        - img [ref=e5763]
+                      - generic [ref=e5766]:
+                        - img [ref=e5767]
+                        - img [ref=e5769]
+                        - img [ref=e5771]
+                        - img [ref=e5773]
+                        - img [ref=e5775]
+                  - paragraph [ref=e5777]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e5778]:
+                  - generic [ref=e5779]: Jul 22
+                  - generic [ref=e5780]:
+                    - img [ref=e5781]
+                    - text: Verified Success
+              - generic [ref=e5785]:
+                - img [ref=e5787]
+                - generic [ref=e5790]:
+                  - generic [ref=e5791]:
+                    - generic [ref=e5793]: J
+                    - generic [ref=e5794]:
+                      - generic [ref=e5795]:
+                        - heading "Joshua Miller" [level=4] [ref=e5796]
+                        - img [ref=e5797]
+                      - generic [ref=e5800]:
+                        - img [ref=e5801]
+                        - img [ref=e5803]
+                        - img [ref=e5805]
+                        - img [ref=e5807]
+                        - img [ref=e5809]
+                  - paragraph [ref=e5811]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e5812]:
+                  - generic [ref=e5813]: Jul 24
+                  - generic [ref=e5814]:
+                    - img [ref=e5815]
+                    - text: Verified Success
+              - generic [ref=e5819]:
+                - img [ref=e5821]
+                - generic [ref=e5824]:
+                  - generic [ref=e5825]:
+                    - generic [ref=e5827]: E
+                    - generic [ref=e5828]:
+                      - generic [ref=e5829]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e5830]
+                        - img [ref=e5831]
+                      - generic [ref=e5834]:
+                        - img [ref=e5835]
+                        - img [ref=e5837]
+                        - img [ref=e5839]
+                        - img [ref=e5841]
+                        - img [ref=e5843]
+                  - paragraph [ref=e5845]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e5846]:
+                  - generic [ref=e5847]: Jul 19
+                  - generic [ref=e5848]:
+                    - img [ref=e5849]
+                    - text: Verified Success
+              - generic [ref=e5853]:
+                - img [ref=e5855]
+                - generic [ref=e5858]:
+                  - generic [ref=e5859]:
+                    - generic [ref=e5861]: R
+                    - generic [ref=e5862]:
+                      - generic [ref=e5863]:
+                        - heading "Ryan Thompson" [level=4] [ref=e5864]
+                        - img [ref=e5865]
+                      - generic [ref=e5868]:
+                        - img [ref=e5869]
+                        - img [ref=e5871]
+                        - img [ref=e5873]
+                        - img [ref=e5875]
+                        - img [ref=e5877]
+                  - paragraph [ref=e5879]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e5880]:
+                  - generic [ref=e5881]: Jul 15
+                  - generic [ref=e5882]:
+                    - img [ref=e5883]
+                    - text: Verified Success
+              - generic [ref=e5887]:
+                - img [ref=e5889]
+                - generic [ref=e5892]:
+                  - generic [ref=e5893]:
+                    - generic [ref=e5895]: "N"
+                    - generic [ref=e5896]:
+                      - generic [ref=e5897]:
+                        - heading "Nicole Martinez" [level=4] [ref=e5898]
+                        - img [ref=e5899]
+                      - generic [ref=e5902]:
+                        - img [ref=e5903]
+                        - img [ref=e5905]
+                        - img [ref=e5907]
+                        - img [ref=e5909]
+                        - img [ref=e5911]
+                  - paragraph [ref=e5913]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e5914]:
+                  - generic [ref=e5915]: Jul 19
+                  - generic [ref=e5916]:
+                    - img [ref=e5917]
+                    - text: Verified Success
+              - generic [ref=e5921]:
+                - img [ref=e5923]
+                - generic [ref=e5926]:
+                  - generic [ref=e5927]:
+                    - generic [ref=e5929]: K
+                    - generic [ref=e5930]:
+                      - generic [ref=e5931]:
+                        - heading "Kevin Patel" [level=4] [ref=e5932]
+                        - img [ref=e5933]
+                      - generic [ref=e5936]:
+                        - img [ref=e5937]
+                        - img [ref=e5939]
+                        - img [ref=e5941]
+                        - img [ref=e5943]
+                        - img [ref=e5945]
+                  - paragraph [ref=e5947]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e5948]:
+                  - generic [ref=e5949]: Jul 16
+                  - generic [ref=e5950]:
+                    - img [ref=e5951]
+                    - text: Verified Success
+              - generic [ref=e5955]:
+                - img [ref=e5957]
+                - generic [ref=e5960]:
+                  - generic [ref=e5961]:
+                    - generic [ref=e5963]: O
+                    - generic [ref=e5964]:
+                      - generic [ref=e5965]:
+                        - heading "Olivia Brown" [level=4] [ref=e5966]
+                        - img [ref=e5967]
+                      - generic [ref=e5970]:
+                        - img [ref=e5971]
+                        - img [ref=e5973]
+                        - img [ref=e5975]
+                        - img [ref=e5977]
+                        - img [ref=e5979]
+                  - paragraph [ref=e5981]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e5982]:
+                  - generic [ref=e5983]: Jul 24
+                  - generic [ref=e5984]:
+                    - img [ref=e5985]
+                    - text: Verified Success
+              - generic [ref=e5989]:
+                - img [ref=e5991]
+                - generic [ref=e5994]:
+                  - generic [ref=e5995]:
+                    - generic [ref=e5997]: A
+                    - generic [ref=e5998]:
+                      - generic [ref=e5999]:
+                        - heading "Andrew Garcia" [level=4] [ref=e6000]
+                        - img [ref=e6001]
+                      - generic [ref=e6004]:
+                        - img [ref=e6005]
+                        - img [ref=e6007]
+                        - img [ref=e6009]
+                        - img [ref=e6011]
+                        - img [ref=e6013]
+                  - paragraph [ref=e6015]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e6016]:
+                  - generic [ref=e6017]: Jul 19
+                  - generic [ref=e6018]:
+                    - img [ref=e6019]
+                    - text: Verified Success
+              - generic [ref=e6023]:
+                - img [ref=e6025]
+                - generic [ref=e6028]:
+                  - generic [ref=e6029]:
+                    - generic [ref=e6031]: S
+                    - generic [ref=e6032]:
+                      - generic [ref=e6033]:
+                        - heading "Sarah Johnson" [level=4] [ref=e6034]
+                        - img [ref=e6035]
+                      - generic [ref=e6038]:
+                        - img [ref=e6039]
+                        - img [ref=e6041]
+                        - img [ref=e6043]
+                        - img [ref=e6045]
+                        - img [ref=e6047]
+                  - paragraph [ref=e6049]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e6050]:
+                  - generic [ref=e6051]: Jul 18
+                  - generic [ref=e6052]:
+                    - img [ref=e6053]
+                    - text: Verified Success
+              - generic [ref=e6057]:
+                - img [ref=e6059]
+                - generic [ref=e6062]:
+                  - generic [ref=e6063]:
+                    - generic [ref=e6065]: D
+                    - generic [ref=e6066]:
+                      - generic [ref=e6067]:
+                        - heading "David Kim" [level=4] [ref=e6068]
+                        - img [ref=e6069]
+                      - generic [ref=e6072]:
+                        - img [ref=e6073]
+                        - img [ref=e6075]
+                        - img [ref=e6077]
+                        - img [ref=e6079]
+                        - img [ref=e6081]
+                  - paragraph [ref=e6083]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e6084]:
+                  - generic [ref=e6085]: Jul 17
+                  - generic [ref=e6086]:
+                    - img [ref=e6087]
+                    - text: Verified Success
+              - generic [ref=e6091]:
+                - img [ref=e6093]
+                - generic [ref=e6096]:
+                  - generic [ref=e6097]:
+                    - generic [ref=e6099]: A
+                    - generic [ref=e6100]:
+                      - generic [ref=e6101]:
+                        - heading "Amanda Foster" [level=4] [ref=e6102]
+                        - img [ref=e6103]
+                      - generic [ref=e6106]:
+                        - img [ref=e6107]
+                        - img [ref=e6109]
+                        - img [ref=e6111]
+                        - img [ref=e6113]
+                        - img [ref=e6115]
+                  - paragraph [ref=e6117]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e6118]:
+                  - generic [ref=e6119]: Jul 22
+                  - generic [ref=e6120]:
+                    - img [ref=e6121]
+                    - text: Verified Success
+              - generic [ref=e6125]:
+                - img [ref=e6127]
+                - generic [ref=e6130]:
+                  - generic [ref=e6131]:
+                    - generic [ref=e6133]: B
+                    - generic [ref=e6134]:
+                      - generic [ref=e6135]:
+                        - heading "Brandon Scott" [level=4] [ref=e6136]
+                        - img [ref=e6137]
+                      - generic [ref=e6140]:
+                        - img [ref=e6141]
+                        - img [ref=e6143]
+                        - img [ref=e6145]
+                        - img [ref=e6147]
+                        - img [ref=e6149]
+                  - paragraph [ref=e6151]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e6152]:
+                  - generic [ref=e6153]: Jul 15
+                  - generic [ref=e6154]:
+                    - img [ref=e6155]
+                    - text: Verified Success
+              - generic [ref=e6159]:
+                - img [ref=e6161]
+                - generic [ref=e6164]:
+                  - generic [ref=e6165]:
+                    - generic [ref=e6167]: R
+                    - generic [ref=e6168]:
+                      - generic [ref=e6169]:
+                        - heading "Rachel Green" [level=4] [ref=e6170]
+                        - img [ref=e6171]
+                      - generic [ref=e6174]:
+                        - img [ref=e6175]
+                        - img [ref=e6177]
+                        - img [ref=e6179]
+                        - img [ref=e6181]
+                        - img [ref=e6183]
+                  - paragraph [ref=e6185]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e6186]:
+                  - generic [ref=e6187]: Jul 24
+                  - generic [ref=e6188]:
+                    - img [ref=e6189]
+                    - text: Verified Success
+              - generic [ref=e6193]:
+                - img [ref=e6195]
+                - generic [ref=e6198]:
+                  - generic [ref=e6199]:
+                    - generic [ref=e6201]: J
+                    - generic [ref=e6202]:
+                      - generic [ref=e6203]:
+                        - heading "James Wilson" [level=4] [ref=e6204]
+                        - img [ref=e6205]
+                      - generic [ref=e6208]:
+                        - img [ref=e6209]
+                        - img [ref=e6211]
+                        - img [ref=e6213]
+                        - img [ref=e6215]
+                        - img [ref=e6217]
+                  - paragraph [ref=e6219]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e6220]:
+                  - generic [ref=e6221]: Jul 23
+                  - generic [ref=e6222]:
+                    - img [ref=e6223]
+                    - text: Verified Success
+              - generic [ref=e6227]:
+                - img [ref=e6229]
+                - generic [ref=e6232]:
+                  - generic [ref=e6233]:
+                    - generic [ref=e6235]: M
+                    - generic [ref=e6236]:
+                      - generic [ref=e6237]:
+                        - heading "Megan Taylor" [level=4] [ref=e6238]
+                        - img [ref=e6239]
+                      - generic [ref=e6242]:
+                        - img [ref=e6243]
+                        - img [ref=e6245]
+                        - img [ref=e6247]
+                        - img [ref=e6249]
+                        - img [ref=e6251]
+                  - paragraph [ref=e6253]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e6254]:
+                  - generic [ref=e6255]: Jul 20
+                  - generic [ref=e6256]:
+                    - img [ref=e6257]
+                    - text: Verified Success
+              - generic [ref=e6261]:
+                - img [ref=e6263]
+                - generic [ref=e6266]:
+                  - generic [ref=e6267]:
+                    - generic [ref=e6269]: M
+                    - generic [ref=e6270]:
+                      - generic [ref=e6271]:
+                        - heading "Michael Chen" [level=4] [ref=e6272]
+                        - img [ref=e6273]
+                      - generic [ref=e6276]:
+                        - img [ref=e6277]
+                        - img [ref=e6279]
+                        - img [ref=e6281]
+                        - img [ref=e6283]
+                        - img [ref=e6285]
+                  - paragraph [ref=e6287]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e6288]:
+                  - generic [ref=e6289]: Jul 19
+                  - generic [ref=e6290]:
+                    - img [ref=e6291]
+                    - text: Verified Success
+              - generic [ref=e6295]:
+                - img [ref=e6297]
+                - generic [ref=e6300]:
+                  - generic [ref=e6301]:
+                    - generic [ref=e6303]: J
+                    - generic [ref=e6304]:
+                      - generic [ref=e6305]:
+                        - heading "Jessica Williams" [level=4] [ref=e6306]
+                        - img [ref=e6307]
+                      - generic [ref=e6310]:
+                        - img [ref=e6311]
+                        - img [ref=e6313]
+                        - img [ref=e6315]
+                        - img [ref=e6317]
+                        - img [ref=e6319]
+                  - paragraph [ref=e6321]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e6322]:
+                  - generic [ref=e6323]: Jul 22
+                  - generic [ref=e6324]:
+                    - img [ref=e6325]
+                    - text: Verified Success
+              - generic [ref=e6329]:
+                - img [ref=e6331]
+                - generic [ref=e6334]:
+                  - generic [ref=e6335]:
+                    - generic [ref=e6337]: C
+                    - generic [ref=e6338]:
+                      - generic [ref=e6339]:
+                        - heading "Christopher Lee" [level=4] [ref=e6340]
+                        - img [ref=e6341]
+                      - generic [ref=e6344]:
+                        - img [ref=e6345]
+                        - img [ref=e6347]
+                        - img [ref=e6349]
+                        - img [ref=e6351]
+                        - img [ref=e6353]
+                  - paragraph [ref=e6355]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e6356]:
+                  - generic [ref=e6357]: Jul 19
+                  - generic [ref=e6358]:
+                    - img [ref=e6359]
+                    - text: Verified Success
+              - generic [ref=e6363]:
+                - img [ref=e6365]
+                - generic [ref=e6368]:
+                  - generic [ref=e6369]:
+                    - generic [ref=e6371]: T
+                    - generic [ref=e6372]:
+                      - generic [ref=e6373]:
+                        - heading "Taylor Anderson" [level=4] [ref=e6374]
+                        - img [ref=e6375]
+                      - generic [ref=e6378]:
+                        - img [ref=e6379]
+                        - img [ref=e6381]
+                        - img [ref=e6383]
+                        - img [ref=e6385]
+                        - img [ref=e6387]
+                  - paragraph [ref=e6389]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e6390]:
+                  - generic [ref=e6391]: Jul 21
+                  - generic [ref=e6392]:
+                    - img [ref=e6393]
+                    - text: Verified Success
+              - generic [ref=e6397]:
+                - img [ref=e6399]
+                - generic [ref=e6402]:
+                  - generic [ref=e6403]:
+                    - generic [ref=e6405]: D
+                    - generic [ref=e6406]:
+                      - generic [ref=e6407]:
+                        - heading "Daniel Wright" [level=4] [ref=e6408]
+                        - img [ref=e6409]
+                      - generic [ref=e6412]:
+                        - img [ref=e6413]
+                        - img [ref=e6415]
+                        - img [ref=e6417]
+                        - img [ref=e6419]
+                        - img [ref=e6421]
+                  - paragraph [ref=e6423]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e6424]:
+                  - generic [ref=e6425]: Jul 24
+                  - generic [ref=e6426]:
+                    - img [ref=e6427]
+                    - text: Verified Success
+              - generic [ref=e6431]:
+                - img [ref=e6433]
+                - generic [ref=e6436]:
+                  - generic [ref=e6437]:
+                    - generic [ref=e6439]: S
+                    - generic [ref=e6440]:
+                      - generic [ref=e6441]:
+                        - heading "Sophie Davis" [level=4] [ref=e6442]
+                        - img [ref=e6443]
+                      - generic [ref=e6446]:
+                        - img [ref=e6447]
+                        - img [ref=e6449]
+                        - img [ref=e6451]
+                        - img [ref=e6453]
+                        - img [ref=e6455]
+                  - paragraph [ref=e6457]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e6458]:
+                  - generic [ref=e6459]: Jul 19
+                  - generic [ref=e6460]:
+                    - img [ref=e6461]
+                    - text: Verified Success
+              - generic [ref=e6465]:
+                - img [ref=e6467]
+                - generic [ref=e6470]:
+                  - generic [ref=e6471]:
+                    - generic [ref=e6473]: J
+                    - generic [ref=e6474]:
+                      - generic [ref=e6475]:
+                        - heading "Joshua Miller" [level=4] [ref=e6476]
+                        - img [ref=e6477]
+                      - generic [ref=e6480]:
+                        - img [ref=e6481]
+                        - img [ref=e6483]
+                        - img [ref=e6485]
+                        - img [ref=e6487]
+                        - img [ref=e6489]
+                  - paragraph [ref=e6491]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e6492]:
+                  - generic [ref=e6493]: Jul 18
+                  - generic [ref=e6494]:
+                    - img [ref=e6495]
+                    - text: Verified Success
+              - generic [ref=e6499]:
+                - img [ref=e6501]
+                - generic [ref=e6504]:
+                  - generic [ref=e6505]:
+                    - generic [ref=e6507]: E
+                    - generic [ref=e6508]:
+                      - generic [ref=e6509]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e6510]
+                        - img [ref=e6511]
+                      - generic [ref=e6514]:
+                        - img [ref=e6515]
+                        - img [ref=e6517]
+                        - img [ref=e6519]
+                        - img [ref=e6521]
+                        - img [ref=e6523]
+                  - paragraph [ref=e6525]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e6526]:
+                  - generic [ref=e6527]: Jul 21
+                  - generic [ref=e6528]:
+                    - img [ref=e6529]
+                    - text: Verified Success
+              - generic [ref=e6533]:
+                - img [ref=e6535]
+                - generic [ref=e6538]:
+                  - generic [ref=e6539]:
+                    - generic [ref=e6541]: R
+                    - generic [ref=e6542]:
+                      - generic [ref=e6543]:
+                        - heading "Ryan Thompson" [level=4] [ref=e6544]
+                        - img [ref=e6545]
+                      - generic [ref=e6548]:
+                        - img [ref=e6549]
+                        - img [ref=e6551]
+                        - img [ref=e6553]
+                        - img [ref=e6555]
+                        - img [ref=e6557]
+                  - paragraph [ref=e6559]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e6560]:
+                  - generic [ref=e6561]: Jul 13
+                  - generic [ref=e6562]:
+                    - img [ref=e6563]
+                    - text: Verified Success
+              - generic [ref=e6567]:
+                - img [ref=e6569]
+                - generic [ref=e6572]:
+                  - generic [ref=e6573]:
+                    - generic [ref=e6575]: "N"
+                    - generic [ref=e6576]:
+                      - generic [ref=e6577]:
+                        - heading "Nicole Martinez" [level=4] [ref=e6578]
+                        - img [ref=e6579]
+                      - generic [ref=e6582]:
+                        - img [ref=e6583]
+                        - img [ref=e6585]
+                        - img [ref=e6587]
+                        - img [ref=e6589]
+                        - img [ref=e6591]
+                  - paragraph [ref=e6593]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e6594]:
+                  - generic [ref=e6595]: Jul 17
+                  - generic [ref=e6596]:
+                    - img [ref=e6597]
+                    - text: Verified Success
+            - generic [ref=e6600]:
+              - generic [ref=e6603]:
+                - img [ref=e6605]
+                - generic [ref=e6608]:
+                  - generic [ref=e6609]:
+                    - generic [ref=e6611]: E
+                    - generic [ref=e6612]:
+                      - generic [ref=e6613]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e6614]
+                        - img [ref=e6615]
+                      - generic [ref=e6618]:
+                        - img [ref=e6619]
+                        - img [ref=e6621]
+                        - img [ref=e6623]
+                        - img [ref=e6625]
+                        - img [ref=e6627]
+                  - paragraph [ref=e6629]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e6630]:
+                  - generic [ref=e6631]: Jul 22
+                  - generic [ref=e6632]:
+                    - img [ref=e6633]
+                    - text: Verified Success
+              - generic [ref=e6637]:
+                - img [ref=e6639]
+                - generic [ref=e6642]:
+                  - generic [ref=e6643]:
+                    - generic [ref=e6645]: R
+                    - generic [ref=e6646]:
+                      - generic [ref=e6647]:
+                        - heading "Ryan Thompson" [level=4] [ref=e6648]
+                        - img [ref=e6649]
+                      - generic [ref=e6652]:
+                        - img [ref=e6653]
+                        - img [ref=e6655]
+                        - img [ref=e6657]
+                        - img [ref=e6659]
+                        - img [ref=e6661]
+                  - paragraph [ref=e6663]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e6664]:
+                  - generic [ref=e6665]: Jul 16
+                  - generic [ref=e6666]:
+                    - img [ref=e6667]
+                    - text: Verified Success
+              - generic [ref=e6671]:
+                - img [ref=e6673]
+                - generic [ref=e6676]:
+                  - generic [ref=e6677]:
+                    - generic [ref=e6679]: "N"
+                    - generic [ref=e6680]:
+                      - generic [ref=e6681]:
+                        - heading "Nicole Martinez" [level=4] [ref=e6682]
+                        - img [ref=e6683]
+                      - generic [ref=e6686]:
+                        - img [ref=e6687]
+                        - img [ref=e6689]
+                        - img [ref=e6691]
+                        - img [ref=e6693]
+                        - img [ref=e6695]
+                  - paragraph [ref=e6697]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e6698]:
+                  - generic [ref=e6699]: Jul 13
+                  - generic [ref=e6700]:
+                    - img [ref=e6701]
+                    - text: Verified Success
+              - generic [ref=e6705]:
+                - img [ref=e6707]
+                - generic [ref=e6710]:
+                  - generic [ref=e6711]:
+                    - generic [ref=e6713]: K
+                    - generic [ref=e6714]:
+                      - generic [ref=e6715]:
+                        - heading "Kevin Patel" [level=4] [ref=e6716]
+                        - img [ref=e6717]
+                      - generic [ref=e6720]:
+                        - img [ref=e6721]
+                        - img [ref=e6723]
+                        - img [ref=e6725]
+                        - img [ref=e6727]
+                        - img [ref=e6729]
+                  - paragraph [ref=e6731]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e6732]:
+                  - generic [ref=e6733]: Jul 15
+                  - generic [ref=e6734]:
+                    - img [ref=e6735]
+                    - text: Verified Success
+              - generic [ref=e6739]:
+                - img [ref=e6741]
+                - generic [ref=e6744]:
+                  - generic [ref=e6745]:
+                    - generic [ref=e6747]: O
+                    - generic [ref=e6748]:
+                      - generic [ref=e6749]:
+                        - heading "Olivia Brown" [level=4] [ref=e6750]
+                        - img [ref=e6751]
+                      - generic [ref=e6754]:
+                        - img [ref=e6755]
+                        - img [ref=e6757]
+                        - img [ref=e6759]
+                        - img [ref=e6761]
+                        - img [ref=e6763]
+                  - paragraph [ref=e6765]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e6766]:
+                  - generic [ref=e6767]: Jul 21
+                  - generic [ref=e6768]:
+                    - img [ref=e6769]
+                    - text: Verified Success
+              - generic [ref=e6773]:
+                - img [ref=e6775]
+                - generic [ref=e6778]:
+                  - generic [ref=e6779]:
+                    - generic [ref=e6781]: A
+                    - generic [ref=e6782]:
+                      - generic [ref=e6783]:
+                        - heading "Andrew Garcia" [level=4] [ref=e6784]
+                        - img [ref=e6785]
+                      - generic [ref=e6788]:
+                        - img [ref=e6789]
+                        - img [ref=e6791]
+                        - img [ref=e6793]
+                        - img [ref=e6795]
+                        - img [ref=e6797]
+                  - paragraph [ref=e6799]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e6800]:
+                  - generic [ref=e6801]: Jul 15
+                  - generic [ref=e6802]:
+                    - img [ref=e6803]
+                    - text: Verified Success
+              - generic [ref=e6807]:
+                - img [ref=e6809]
+                - generic [ref=e6812]:
+                  - generic [ref=e6813]:
+                    - generic [ref=e6815]: S
+                    - generic [ref=e6816]:
+                      - generic [ref=e6817]:
+                        - heading "Sarah Johnson" [level=4] [ref=e6818]
+                        - img [ref=e6819]
+                      - generic [ref=e6822]:
+                        - img [ref=e6823]
+                        - img [ref=e6825]
+                        - img [ref=e6827]
+                        - img [ref=e6829]
+                        - img [ref=e6831]
+                  - paragraph [ref=e6833]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e6834]:
+                  - generic [ref=e6835]: Jul 14
+                  - generic [ref=e6836]:
+                    - img [ref=e6837]
+                    - text: Verified Success
+              - generic [ref=e6841]:
+                - img [ref=e6843]
+                - generic [ref=e6846]:
+                  - generic [ref=e6847]:
+                    - generic [ref=e6849]: D
+                    - generic [ref=e6850]:
+                      - generic [ref=e6851]:
+                        - heading "David Kim" [level=4] [ref=e6852]
+                        - img [ref=e6853]
+                      - generic [ref=e6856]:
+                        - img [ref=e6857]
+                        - img [ref=e6859]
+                        - img [ref=e6861]
+                        - img [ref=e6863]
+                        - img [ref=e6865]
+                  - paragraph [ref=e6867]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e6868]:
+                  - generic [ref=e6869]: Jul 22
+                  - generic [ref=e6870]:
+                    - img [ref=e6871]
+                    - text: Verified Success
+              - generic [ref=e6875]:
+                - img [ref=e6877]
+                - generic [ref=e6880]:
+                  - generic [ref=e6881]:
+                    - generic [ref=e6883]: A
+                    - generic [ref=e6884]:
+                      - generic [ref=e6885]:
+                        - heading "Amanda Foster" [level=4] [ref=e6886]
+                        - img [ref=e6887]
+                      - generic [ref=e6890]:
+                        - img [ref=e6891]
+                        - img [ref=e6893]
+                        - img [ref=e6895]
+                        - img [ref=e6897]
+                        - img [ref=e6899]
+                  - paragraph [ref=e6901]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e6902]:
+                  - generic [ref=e6903]: Jul 18
+                  - generic [ref=e6904]:
+                    - img [ref=e6905]
+                    - text: Verified Success
+              - generic [ref=e6909]:
+                - img [ref=e6911]
+                - generic [ref=e6914]:
+                  - generic [ref=e6915]:
+                    - generic [ref=e6917]: B
+                    - generic [ref=e6918]:
+                      - generic [ref=e6919]:
+                        - heading "Brandon Scott" [level=4] [ref=e6920]
+                        - img [ref=e6921]
+                      - generic [ref=e6924]:
+                        - img [ref=e6925]
+                        - img [ref=e6927]
+                        - img [ref=e6929]
+                        - img [ref=e6931]
+                        - img [ref=e6933]
+                  - paragraph [ref=e6935]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e6936]:
+                  - generic [ref=e6937]: Jul 23
+                  - generic [ref=e6938]:
+                    - img [ref=e6939]
+                    - text: Verified Success
+              - generic [ref=e6943]:
+                - img [ref=e6945]
+                - generic [ref=e6948]:
+                  - generic [ref=e6949]:
+                    - generic [ref=e6951]: R
+                    - generic [ref=e6952]:
+                      - generic [ref=e6953]:
+                        - heading "Rachel Green" [level=4] [ref=e6954]
+                        - img [ref=e6955]
+                      - generic [ref=e6958]:
+                        - img [ref=e6959]
+                        - img [ref=e6961]
+                        - img [ref=e6963]
+                        - img [ref=e6965]
+                        - img [ref=e6967]
+                  - paragraph [ref=e6969]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e6970]:
+                  - generic [ref=e6971]: Jul 23
+                  - generic [ref=e6972]:
+                    - img [ref=e6973]
+                    - text: Verified Success
+              - generic [ref=e6977]:
+                - img [ref=e6979]
+                - generic [ref=e6982]:
+                  - generic [ref=e6983]:
+                    - generic [ref=e6985]: J
+                    - generic [ref=e6986]:
+                      - generic [ref=e6987]:
+                        - heading "James Wilson" [level=4] [ref=e6988]
+                        - img [ref=e6989]
+                      - generic [ref=e6992]:
+                        - img [ref=e6993]
+                        - img [ref=e6995]
+                        - img [ref=e6997]
+                        - img [ref=e6999]
+                        - img [ref=e7001]
+                  - paragraph [ref=e7003]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e7004]:
+                  - generic [ref=e7005]: Jul 18
+                  - generic [ref=e7006]:
+                    - img [ref=e7007]
+                    - text: Verified Success
+              - generic [ref=e7011]:
+                - img [ref=e7013]
+                - generic [ref=e7016]:
+                  - generic [ref=e7017]:
+                    - generic [ref=e7019]: M
+                    - generic [ref=e7020]:
+                      - generic [ref=e7021]:
+                        - heading "Megan Taylor" [level=4] [ref=e7022]
+                        - img [ref=e7023]
+                      - generic [ref=e7026]:
+                        - img [ref=e7027]
+                        - img [ref=e7029]
+                        - img [ref=e7031]
+                        - img [ref=e7033]
+                        - img [ref=e7035]
+                  - paragraph [ref=e7037]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e7038]:
+                  - generic [ref=e7039]: Jul 13
+                  - generic [ref=e7040]:
+                    - img [ref=e7041]
+                    - text: Verified Success
+              - generic [ref=e7045]:
+                - img [ref=e7047]
+                - generic [ref=e7050]:
+                  - generic [ref=e7051]:
+                    - generic [ref=e7053]: M
+                    - generic [ref=e7054]:
+                      - generic [ref=e7055]:
+                        - heading "Michael Chen" [level=4] [ref=e7056]
+                        - img [ref=e7057]
+                      - generic [ref=e7060]:
+                        - img [ref=e7061]
+                        - img [ref=e7063]
+                        - img [ref=e7065]
+                        - img [ref=e7067]
+                        - img [ref=e7069]
+                  - paragraph [ref=e7071]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e7072]:
+                  - generic [ref=e7073]: Jul 15
+                  - generic [ref=e7074]:
+                    - img [ref=e7075]
+                    - text: Verified Success
+              - generic [ref=e7079]:
+                - img [ref=e7081]
+                - generic [ref=e7084]:
+                  - generic [ref=e7085]:
+                    - generic [ref=e7087]: J
+                    - generic [ref=e7088]:
+                      - generic [ref=e7089]:
+                        - heading "Jessica Williams" [level=4] [ref=e7090]
+                        - img [ref=e7091]
+                      - generic [ref=e7094]:
+                        - img [ref=e7095]
+                        - img [ref=e7097]
+                        - img [ref=e7099]
+                        - img [ref=e7101]
+                        - img [ref=e7103]
+                  - paragraph [ref=e7105]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e7106]:
+                  - generic [ref=e7107]: Jul 20
+                  - generic [ref=e7108]:
+                    - img [ref=e7109]
+                    - text: Verified Success
+              - generic [ref=e7113]:
+                - img [ref=e7115]
+                - generic [ref=e7118]:
+                  - generic [ref=e7119]:
+                    - generic [ref=e7121]: C
+                    - generic [ref=e7122]:
+                      - generic [ref=e7123]:
+                        - heading "Christopher Lee" [level=4] [ref=e7124]
+                        - img [ref=e7125]
+                      - generic [ref=e7128]:
+                        - img [ref=e7129]
+                        - img [ref=e7131]
+                        - img [ref=e7133]
+                        - img [ref=e7135]
+                        - img [ref=e7137]
+                  - paragraph [ref=e7139]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e7140]:
+                  - generic [ref=e7141]: Jul 20
+                  - generic [ref=e7142]:
+                    - img [ref=e7143]
+                    - text: Verified Success
+              - generic [ref=e7147]:
+                - img [ref=e7149]
+                - generic [ref=e7152]:
+                  - generic [ref=e7153]:
+                    - generic [ref=e7155]: T
+                    - generic [ref=e7156]:
+                      - generic [ref=e7157]:
+                        - heading "Taylor Anderson" [level=4] [ref=e7158]
+                        - img [ref=e7159]
+                      - generic [ref=e7162]:
+                        - img [ref=e7163]
+                        - img [ref=e7165]
+                        - img [ref=e7167]
+                        - img [ref=e7169]
+                        - img [ref=e7171]
+                  - paragraph [ref=e7173]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e7174]:
+                  - generic [ref=e7175]: Jul 21
+                  - generic [ref=e7176]:
+                    - img [ref=e7177]
+                    - text: Verified Success
+              - generic [ref=e7181]:
+                - img [ref=e7183]
+                - generic [ref=e7186]:
+                  - generic [ref=e7187]:
+                    - generic [ref=e7189]: D
+                    - generic [ref=e7190]:
+                      - generic [ref=e7191]:
+                        - heading "Daniel Wright" [level=4] [ref=e7192]
+                        - img [ref=e7193]
+                      - generic [ref=e7196]:
+                        - img [ref=e7197]
+                        - img [ref=e7199]
+                        - img [ref=e7201]
+                        - img [ref=e7203]
+                        - img [ref=e7205]
+                  - paragraph [ref=e7207]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e7208]:
+                  - generic [ref=e7209]: Jul 20
+                  - generic [ref=e7210]:
+                    - img [ref=e7211]
+                    - text: Verified Success
+              - generic [ref=e7215]:
+                - img [ref=e7217]
+                - generic [ref=e7220]:
+                  - generic [ref=e7221]:
+                    - generic [ref=e7223]: S
+                    - generic [ref=e7224]:
+                      - generic [ref=e7225]:
+                        - heading "Sophie Davis" [level=4] [ref=e7226]
+                        - img [ref=e7227]
+                      - generic [ref=e7230]:
+                        - img [ref=e7231]
+                        - img [ref=e7233]
+                        - img [ref=e7235]
+                        - img [ref=e7237]
+                        - img [ref=e7239]
+                  - paragraph [ref=e7241]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e7242]:
+                  - generic [ref=e7243]: Jul 19
+                  - generic [ref=e7244]:
+                    - img [ref=e7245]
+                    - text: Verified Success
+              - generic [ref=e7249]:
+                - img [ref=e7251]
+                - generic [ref=e7254]:
+                  - generic [ref=e7255]:
+                    - generic [ref=e7257]: J
+                    - generic [ref=e7258]:
+                      - generic [ref=e7259]:
+                        - heading "Joshua Miller" [level=4] [ref=e7260]
+                        - img [ref=e7261]
+                      - generic [ref=e7264]:
+                        - img [ref=e7265]
+                        - img [ref=e7267]
+                        - img [ref=e7269]
+                        - img [ref=e7271]
+                        - img [ref=e7273]
+                  - paragraph [ref=e7275]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e7276]:
+                  - generic [ref=e7277]: Jul 19
+                  - generic [ref=e7278]:
+                    - img [ref=e7279]
+                    - text: Verified Success
+              - generic [ref=e7283]:
+                - img [ref=e7285]
+                - generic [ref=e7288]:
+                  - generic [ref=e7289]:
+                    - generic [ref=e7291]: E
+                    - generic [ref=e7292]:
+                      - generic [ref=e7293]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e7294]
+                        - img [ref=e7295]
+                      - generic [ref=e7298]:
+                        - img [ref=e7299]
+                        - img [ref=e7301]
+                        - img [ref=e7303]
+                        - img [ref=e7305]
+                        - img [ref=e7307]
+                  - paragraph [ref=e7309]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e7310]:
+                  - generic [ref=e7311]: Jul 17
+                  - generic [ref=e7312]:
+                    - img [ref=e7313]
+                    - text: Verified Success
+              - generic [ref=e7317]:
+                - img [ref=e7319]
+                - generic [ref=e7322]:
+                  - generic [ref=e7323]:
+                    - generic [ref=e7325]: R
+                    - generic [ref=e7326]:
+                      - generic [ref=e7327]:
+                        - heading "Ryan Thompson" [level=4] [ref=e7328]
+                        - img [ref=e7329]
+                      - generic [ref=e7332]:
+                        - img [ref=e7333]
+                        - img [ref=e7335]
+                        - img [ref=e7337]
+                        - img [ref=e7339]
+                        - img [ref=e7341]
+                  - paragraph [ref=e7343]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e7344]:
+                  - generic [ref=e7345]: Jul 18
+                  - generic [ref=e7346]:
+                    - img [ref=e7347]
+                    - text: Verified Success
+              - generic [ref=e7351]:
+                - img [ref=e7353]
+                - generic [ref=e7356]:
+                  - generic [ref=e7357]:
+                    - generic [ref=e7359]: "N"
+                    - generic [ref=e7360]:
+                      - generic [ref=e7361]:
+                        - heading "Nicole Martinez" [level=4] [ref=e7362]
+                        - img [ref=e7363]
+                      - generic [ref=e7366]:
+                        - img [ref=e7367]
+                        - img [ref=e7369]
+                        - img [ref=e7371]
+                        - img [ref=e7373]
+                        - img [ref=e7375]
+                  - paragraph [ref=e7377]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e7378]:
+                  - generic [ref=e7379]: Jul 24
+                  - generic [ref=e7380]:
+                    - img [ref=e7381]
+                    - text: Verified Success
+              - generic [ref=e7385]:
+                - img [ref=e7387]
+                - generic [ref=e7390]:
+                  - generic [ref=e7391]:
+                    - generic [ref=e7393]: K
+                    - generic [ref=e7394]:
+                      - generic [ref=e7395]:
+                        - heading "Kevin Patel" [level=4] [ref=e7396]
+                        - img [ref=e7397]
+                      - generic [ref=e7400]:
+                        - img [ref=e7401]
+                        - img [ref=e7403]
+                        - img [ref=e7405]
+                        - img [ref=e7407]
+                        - img [ref=e7409]
+                  - paragraph [ref=e7411]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e7412]:
+                  - generic [ref=e7413]: Jul 23
+                  - generic [ref=e7414]:
+                    - img [ref=e7415]
+                    - text: Verified Success
+              - generic [ref=e7419]:
+                - img [ref=e7421]
+                - generic [ref=e7424]:
+                  - generic [ref=e7425]:
+                    - generic [ref=e7427]: O
+                    - generic [ref=e7428]:
+                      - generic [ref=e7429]:
+                        - heading "Olivia Brown" [level=4] [ref=e7430]
+                        - img [ref=e7431]
+                      - generic [ref=e7434]:
+                        - img [ref=e7435]
+                        - img [ref=e7437]
+                        - img [ref=e7439]
+                        - img [ref=e7441]
+                        - img [ref=e7443]
+                  - paragraph [ref=e7445]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e7446]:
+                  - generic [ref=e7447]: Jul 23
+                  - generic [ref=e7448]:
+                    - img [ref=e7449]
+                    - text: Verified Success
+              - generic [ref=e7453]:
+                - img [ref=e7455]
+                - generic [ref=e7458]:
+                  - generic [ref=e7459]:
+                    - generic [ref=e7461]: A
+                    - generic [ref=e7462]:
+                      - generic [ref=e7463]:
+                        - heading "Andrew Garcia" [level=4] [ref=e7464]
+                        - img [ref=e7465]
+                      - generic [ref=e7468]:
+                        - img [ref=e7469]
+                        - img [ref=e7471]
+                        - img [ref=e7473]
+                        - img [ref=e7475]
+                        - img [ref=e7477]
+                  - paragraph [ref=e7479]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e7480]:
+                  - generic [ref=e7481]: Jul 14
+                  - generic [ref=e7482]:
+                    - img [ref=e7483]
+                    - text: Verified Success
+              - generic [ref=e7487]:
+                - img [ref=e7489]
+                - generic [ref=e7492]:
+                  - generic [ref=e7493]:
+                    - generic [ref=e7495]: S
+                    - generic [ref=e7496]:
+                      - generic [ref=e7497]:
+                        - heading "Sarah Johnson" [level=4] [ref=e7498]
+                        - img [ref=e7499]
+                      - generic [ref=e7502]:
+                        - img [ref=e7503]
+                        - img [ref=e7505]
+                        - img [ref=e7507]
+                        - img [ref=e7509]
+                        - img [ref=e7511]
+                  - paragraph [ref=e7513]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e7514]:
+                  - generic [ref=e7515]: Jul 13
+                  - generic [ref=e7516]:
+                    - img [ref=e7517]
+                    - text: Verified Success
+              - generic [ref=e7521]:
+                - img [ref=e7523]
+                - generic [ref=e7526]:
+                  - generic [ref=e7527]:
+                    - generic [ref=e7529]: D
+                    - generic [ref=e7530]:
+                      - generic [ref=e7531]:
+                        - heading "David Kim" [level=4] [ref=e7532]
+                        - img [ref=e7533]
+                      - generic [ref=e7536]:
+                        - img [ref=e7537]
+                        - img [ref=e7539]
+                        - img [ref=e7541]
+                        - img [ref=e7543]
+                        - img [ref=e7545]
+                  - paragraph [ref=e7547]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e7548]:
+                  - generic [ref=e7549]: Jul 14
+                  - generic [ref=e7550]:
+                    - img [ref=e7551]
+                    - text: Verified Success
+              - generic [ref=e7555]:
+                - img [ref=e7557]
+                - generic [ref=e7560]:
+                  - generic [ref=e7561]:
+                    - generic [ref=e7563]: A
+                    - generic [ref=e7564]:
+                      - generic [ref=e7565]:
+                        - heading "Amanda Foster" [level=4] [ref=e7566]
+                        - img [ref=e7567]
+                      - generic [ref=e7570]:
+                        - img [ref=e7571]
+                        - img [ref=e7573]
+                        - img [ref=e7575]
+                        - img [ref=e7577]
+                        - img [ref=e7579]
+                  - paragraph [ref=e7581]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e7582]:
+                  - generic [ref=e7583]: Jul 22
+                  - generic [ref=e7584]:
+                    - img [ref=e7585]
+                    - text: Verified Success
+              - generic [ref=e7589]:
+                - img [ref=e7591]
+                - generic [ref=e7594]:
+                  - generic [ref=e7595]:
+                    - generic [ref=e7597]: B
+                    - generic [ref=e7598]:
+                      - generic [ref=e7599]:
+                        - heading "Brandon Scott" [level=4] [ref=e7600]
+                        - img [ref=e7601]
+                      - generic [ref=e7604]:
+                        - img [ref=e7605]
+                        - img [ref=e7607]
+                        - img [ref=e7609]
+                        - img [ref=e7611]
+                        - img [ref=e7613]
+                  - paragraph [ref=e7615]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e7616]:
+                  - generic [ref=e7617]: Jul 18
+                  - generic [ref=e7618]:
+                    - img [ref=e7619]
+                    - text: Verified Success
+              - generic [ref=e7623]:
+                - img [ref=e7625]
+                - generic [ref=e7628]:
+                  - generic [ref=e7629]:
+                    - generic [ref=e7631]: E
+                    - generic [ref=e7632]:
+                      - generic [ref=e7633]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e7634]
+                        - img [ref=e7635]
+                      - generic [ref=e7638]:
+                        - img [ref=e7639]
+                        - img [ref=e7641]
+                        - img [ref=e7643]
+                        - img [ref=e7645]
+                        - img [ref=e7647]
+                  - paragraph [ref=e7649]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e7650]:
+                  - generic [ref=e7651]: Jul 22
+                  - generic [ref=e7652]:
+                    - img [ref=e7653]
+                    - text: Verified Success
+              - generic [ref=e7657]:
+                - img [ref=e7659]
+                - generic [ref=e7662]:
+                  - generic [ref=e7663]:
+                    - generic [ref=e7665]: R
+                    - generic [ref=e7666]:
+                      - generic [ref=e7667]:
+                        - heading "Ryan Thompson" [level=4] [ref=e7668]
+                        - img [ref=e7669]
+                      - generic [ref=e7672]:
+                        - img [ref=e7673]
+                        - img [ref=e7675]
+                        - img [ref=e7677]
+                        - img [ref=e7679]
+                        - img [ref=e7681]
+                  - paragraph [ref=e7683]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e7684]:
+                  - generic [ref=e7685]: Jul 16
+                  - generic [ref=e7686]:
+                    - img [ref=e7687]
+                    - text: Verified Success
+              - generic [ref=e7691]:
+                - img [ref=e7693]
+                - generic [ref=e7696]:
+                  - generic [ref=e7697]:
+                    - generic [ref=e7699]: "N"
+                    - generic [ref=e7700]:
+                      - generic [ref=e7701]:
+                        - heading "Nicole Martinez" [level=4] [ref=e7702]
+                        - img [ref=e7703]
+                      - generic [ref=e7706]:
+                        - img [ref=e7707]
+                        - img [ref=e7709]
+                        - img [ref=e7711]
+                        - img [ref=e7713]
+                        - img [ref=e7715]
+                  - paragraph [ref=e7717]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e7718]:
+                  - generic [ref=e7719]: Jul 13
+                  - generic [ref=e7720]:
+                    - img [ref=e7721]
+                    - text: Verified Success
+              - generic [ref=e7725]:
+                - img [ref=e7727]
+                - generic [ref=e7730]:
+                  - generic [ref=e7731]:
+                    - generic [ref=e7733]: K
+                    - generic [ref=e7734]:
+                      - generic [ref=e7735]:
+                        - heading "Kevin Patel" [level=4] [ref=e7736]
+                        - img [ref=e7737]
+                      - generic [ref=e7740]:
+                        - img [ref=e7741]
+                        - img [ref=e7743]
+                        - img [ref=e7745]
+                        - img [ref=e7747]
+                        - img [ref=e7749]
+                  - paragraph [ref=e7751]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e7752]:
+                  - generic [ref=e7753]: Jul 15
+                  - generic [ref=e7754]:
+                    - img [ref=e7755]
+                    - text: Verified Success
+              - generic [ref=e7759]:
+                - img [ref=e7761]
+                - generic [ref=e7764]:
+                  - generic [ref=e7765]:
+                    - generic [ref=e7767]: O
+                    - generic [ref=e7768]:
+                      - generic [ref=e7769]:
+                        - heading "Olivia Brown" [level=4] [ref=e7770]
+                        - img [ref=e7771]
+                      - generic [ref=e7774]:
+                        - img [ref=e7775]
+                        - img [ref=e7777]
+                        - img [ref=e7779]
+                        - img [ref=e7781]
+                        - img [ref=e7783]
+                  - paragraph [ref=e7785]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e7786]:
+                  - generic [ref=e7787]: Jul 21
+                  - generic [ref=e7788]:
+                    - img [ref=e7789]
+                    - text: Verified Success
+              - generic [ref=e7793]:
+                - img [ref=e7795]
+                - generic [ref=e7798]:
+                  - generic [ref=e7799]:
+                    - generic [ref=e7801]: A
+                    - generic [ref=e7802]:
+                      - generic [ref=e7803]:
+                        - heading "Andrew Garcia" [level=4] [ref=e7804]
+                        - img [ref=e7805]
+                      - generic [ref=e7808]:
+                        - img [ref=e7809]
+                        - img [ref=e7811]
+                        - img [ref=e7813]
+                        - img [ref=e7815]
+                        - img [ref=e7817]
+                  - paragraph [ref=e7819]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e7820]:
+                  - generic [ref=e7821]: Jul 15
+                  - generic [ref=e7822]:
+                    - img [ref=e7823]
+                    - text: Verified Success
+              - generic [ref=e7827]:
+                - img [ref=e7829]
+                - generic [ref=e7832]:
+                  - generic [ref=e7833]:
+                    - generic [ref=e7835]: S
+                    - generic [ref=e7836]:
+                      - generic [ref=e7837]:
+                        - heading "Sarah Johnson" [level=4] [ref=e7838]
+                        - img [ref=e7839]
+                      - generic [ref=e7842]:
+                        - img [ref=e7843]
+                        - img [ref=e7845]
+                        - img [ref=e7847]
+                        - img [ref=e7849]
+                        - img [ref=e7851]
+                  - paragraph [ref=e7853]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e7854]:
+                  - generic [ref=e7855]: Jul 14
+                  - generic [ref=e7856]:
+                    - img [ref=e7857]
+                    - text: Verified Success
+              - generic [ref=e7861]:
+                - img [ref=e7863]
+                - generic [ref=e7866]:
+                  - generic [ref=e7867]:
+                    - generic [ref=e7869]: D
+                    - generic [ref=e7870]:
+                      - generic [ref=e7871]:
+                        - heading "David Kim" [level=4] [ref=e7872]
+                        - img [ref=e7873]
+                      - generic [ref=e7876]:
+                        - img [ref=e7877]
+                        - img [ref=e7879]
+                        - img [ref=e7881]
+                        - img [ref=e7883]
+                        - img [ref=e7885]
+                  - paragraph [ref=e7887]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e7888]:
+                  - generic [ref=e7889]: Jul 22
+                  - generic [ref=e7890]:
+                    - img [ref=e7891]
+                    - text: Verified Success
+              - generic [ref=e7895]:
+                - img [ref=e7897]
+                - generic [ref=e7900]:
+                  - generic [ref=e7901]:
+                    - generic [ref=e7903]: A
+                    - generic [ref=e7904]:
+                      - generic [ref=e7905]:
+                        - heading "Amanda Foster" [level=4] [ref=e7906]
+                        - img [ref=e7907]
+                      - generic [ref=e7910]:
+                        - img [ref=e7911]
+                        - img [ref=e7913]
+                        - img [ref=e7915]
+                        - img [ref=e7917]
+                        - img [ref=e7919]
+                  - paragraph [ref=e7921]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e7922]:
+                  - generic [ref=e7923]: Jul 18
+                  - generic [ref=e7924]:
+                    - img [ref=e7925]
+                    - text: Verified Success
+              - generic [ref=e7929]:
+                - img [ref=e7931]
+                - generic [ref=e7934]:
+                  - generic [ref=e7935]:
+                    - generic [ref=e7937]: B
+                    - generic [ref=e7938]:
+                      - generic [ref=e7939]:
+                        - heading "Brandon Scott" [level=4] [ref=e7940]
+                        - img [ref=e7941]
+                      - generic [ref=e7944]:
+                        - img [ref=e7945]
+                        - img [ref=e7947]
+                        - img [ref=e7949]
+                        - img [ref=e7951]
+                        - img [ref=e7953]
+                  - paragraph [ref=e7955]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e7956]:
+                  - generic [ref=e7957]: Jul 23
+                  - generic [ref=e7958]:
+                    - img [ref=e7959]
+                    - text: Verified Success
+              - generic [ref=e7963]:
+                - img [ref=e7965]
+                - generic [ref=e7968]:
+                  - generic [ref=e7969]:
+                    - generic [ref=e7971]: R
+                    - generic [ref=e7972]:
+                      - generic [ref=e7973]:
+                        - heading "Rachel Green" [level=4] [ref=e7974]
+                        - img [ref=e7975]
+                      - generic [ref=e7978]:
+                        - img [ref=e7979]
+                        - img [ref=e7981]
+                        - img [ref=e7983]
+                        - img [ref=e7985]
+                        - img [ref=e7987]
+                  - paragraph [ref=e7989]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e7990]:
+                  - generic [ref=e7991]: Jul 23
+                  - generic [ref=e7992]:
+                    - img [ref=e7993]
+                    - text: Verified Success
+              - generic [ref=e7997]:
+                - img [ref=e7999]
+                - generic [ref=e8002]:
+                  - generic [ref=e8003]:
+                    - generic [ref=e8005]: J
+                    - generic [ref=e8006]:
+                      - generic [ref=e8007]:
+                        - heading "James Wilson" [level=4] [ref=e8008]
+                        - img [ref=e8009]
+                      - generic [ref=e8012]:
+                        - img [ref=e8013]
+                        - img [ref=e8015]
+                        - img [ref=e8017]
+                        - img [ref=e8019]
+                        - img [ref=e8021]
+                  - paragraph [ref=e8023]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e8024]:
+                  - generic [ref=e8025]: Jul 18
+                  - generic [ref=e8026]:
+                    - img [ref=e8027]
+                    - text: Verified Success
+              - generic [ref=e8031]:
+                - img [ref=e8033]
+                - generic [ref=e8036]:
+                  - generic [ref=e8037]:
+                    - generic [ref=e8039]: M
+                    - generic [ref=e8040]:
+                      - generic [ref=e8041]:
+                        - heading "Megan Taylor" [level=4] [ref=e8042]
+                        - img [ref=e8043]
+                      - generic [ref=e8046]:
+                        - img [ref=e8047]
+                        - img [ref=e8049]
+                        - img [ref=e8051]
+                        - img [ref=e8053]
+                        - img [ref=e8055]
+                  - paragraph [ref=e8057]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e8058]:
+                  - generic [ref=e8059]: Jul 13
+                  - generic [ref=e8060]:
+                    - img [ref=e8061]
+                    - text: Verified Success
+              - generic [ref=e8065]:
+                - img [ref=e8067]
+                - generic [ref=e8070]:
+                  - generic [ref=e8071]:
+                    - generic [ref=e8073]: M
+                    - generic [ref=e8074]:
+                      - generic [ref=e8075]:
+                        - heading "Michael Chen" [level=4] [ref=e8076]
+                        - img [ref=e8077]
+                      - generic [ref=e8080]:
+                        - img [ref=e8081]
+                        - img [ref=e8083]
+                        - img [ref=e8085]
+                        - img [ref=e8087]
+                        - img [ref=e8089]
+                  - paragraph [ref=e8091]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e8092]:
+                  - generic [ref=e8093]: Jul 15
+                  - generic [ref=e8094]:
+                    - img [ref=e8095]
+                    - text: Verified Success
+              - generic [ref=e8099]:
+                - img [ref=e8101]
+                - generic [ref=e8104]:
+                  - generic [ref=e8105]:
+                    - generic [ref=e8107]: J
+                    - generic [ref=e8108]:
+                      - generic [ref=e8109]:
+                        - heading "Jessica Williams" [level=4] [ref=e8110]
+                        - img [ref=e8111]
+                      - generic [ref=e8114]:
+                        - img [ref=e8115]
+                        - img [ref=e8117]
+                        - img [ref=e8119]
+                        - img [ref=e8121]
+                        - img [ref=e8123]
+                  - paragraph [ref=e8125]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e8126]:
+                  - generic [ref=e8127]: Jul 20
+                  - generic [ref=e8128]:
+                    - img [ref=e8129]
+                    - text: Verified Success
+              - generic [ref=e8133]:
+                - img [ref=e8135]
+                - generic [ref=e8138]:
+                  - generic [ref=e8139]:
+                    - generic [ref=e8141]: C
+                    - generic [ref=e8142]:
+                      - generic [ref=e8143]:
+                        - heading "Christopher Lee" [level=4] [ref=e8144]
+                        - img [ref=e8145]
+                      - generic [ref=e8148]:
+                        - img [ref=e8149]
+                        - img [ref=e8151]
+                        - img [ref=e8153]
+                        - img [ref=e8155]
+                        - img [ref=e8157]
+                  - paragraph [ref=e8159]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e8160]:
+                  - generic [ref=e8161]: Jul 20
+                  - generic [ref=e8162]:
+                    - img [ref=e8163]
+                    - text: Verified Success
+              - generic [ref=e8167]:
+                - img [ref=e8169]
+                - generic [ref=e8172]:
+                  - generic [ref=e8173]:
+                    - generic [ref=e8175]: T
+                    - generic [ref=e8176]:
+                      - generic [ref=e8177]:
+                        - heading "Taylor Anderson" [level=4] [ref=e8178]
+                        - img [ref=e8179]
+                      - generic [ref=e8182]:
+                        - img [ref=e8183]
+                        - img [ref=e8185]
+                        - img [ref=e8187]
+                        - img [ref=e8189]
+                        - img [ref=e8191]
+                  - paragraph [ref=e8193]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e8194]:
+                  - generic [ref=e8195]: Jul 21
+                  - generic [ref=e8196]:
+                    - img [ref=e8197]
+                    - text: Verified Success
+              - generic [ref=e8201]:
+                - img [ref=e8203]
+                - generic [ref=e8206]:
+                  - generic [ref=e8207]:
+                    - generic [ref=e8209]: D
+                    - generic [ref=e8210]:
+                      - generic [ref=e8211]:
+                        - heading "Daniel Wright" [level=4] [ref=e8212]
+                        - img [ref=e8213]
+                      - generic [ref=e8216]:
+                        - img [ref=e8217]
+                        - img [ref=e8219]
+                        - img [ref=e8221]
+                        - img [ref=e8223]
+                        - img [ref=e8225]
+                  - paragraph [ref=e8227]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e8228]:
+                  - generic [ref=e8229]: Jul 20
+                  - generic [ref=e8230]:
+                    - img [ref=e8231]
+                    - text: Verified Success
+              - generic [ref=e8235]:
+                - img [ref=e8237]
+                - generic [ref=e8240]:
+                  - generic [ref=e8241]:
+                    - generic [ref=e8243]: S
+                    - generic [ref=e8244]:
+                      - generic [ref=e8245]:
+                        - heading "Sophie Davis" [level=4] [ref=e8246]
+                        - img [ref=e8247]
+                      - generic [ref=e8250]:
+                        - img [ref=e8251]
+                        - img [ref=e8253]
+                        - img [ref=e8255]
+                        - img [ref=e8257]
+                        - img [ref=e8259]
+                  - paragraph [ref=e8261]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e8262]:
+                  - generic [ref=e8263]: Jul 19
+                  - generic [ref=e8264]:
+                    - img [ref=e8265]
+                    - text: Verified Success
+              - generic [ref=e8269]:
+                - img [ref=e8271]
+                - generic [ref=e8274]:
+                  - generic [ref=e8275]:
+                    - generic [ref=e8277]: J
+                    - generic [ref=e8278]:
+                      - generic [ref=e8279]:
+                        - heading "Joshua Miller" [level=4] [ref=e8280]
+                        - img [ref=e8281]
+                      - generic [ref=e8284]:
+                        - img [ref=e8285]
+                        - img [ref=e8287]
+                        - img [ref=e8289]
+                        - img [ref=e8291]
+                        - img [ref=e8293]
+                  - paragraph [ref=e8295]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e8296]:
+                  - generic [ref=e8297]: Jul 19
+                  - generic [ref=e8298]:
+                    - img [ref=e8299]
+                    - text: Verified Success
+              - generic [ref=e8303]:
+                - img [ref=e8305]
+                - generic [ref=e8308]:
+                  - generic [ref=e8309]:
+                    - generic [ref=e8311]: E
+                    - generic [ref=e8312]:
+                      - generic [ref=e8313]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e8314]
+                        - img [ref=e8315]
+                      - generic [ref=e8318]:
+                        - img [ref=e8319]
+                        - img [ref=e8321]
+                        - img [ref=e8323]
+                        - img [ref=e8325]
+                        - img [ref=e8327]
+                  - paragraph [ref=e8329]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e8330]:
+                  - generic [ref=e8331]: Jul 17
+                  - generic [ref=e8332]:
+                    - img [ref=e8333]
+                    - text: Verified Success
+              - generic [ref=e8337]:
+                - img [ref=e8339]
+                - generic [ref=e8342]:
+                  - generic [ref=e8343]:
+                    - generic [ref=e8345]: R
+                    - generic [ref=e8346]:
+                      - generic [ref=e8347]:
+                        - heading "Ryan Thompson" [level=4] [ref=e8348]
+                        - img [ref=e8349]
+                      - generic [ref=e8352]:
+                        - img [ref=e8353]
+                        - img [ref=e8355]
+                        - img [ref=e8357]
+                        - img [ref=e8359]
+                        - img [ref=e8361]
+                  - paragraph [ref=e8363]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e8364]:
+                  - generic [ref=e8365]: Jul 18
+                  - generic [ref=e8366]:
+                    - img [ref=e8367]
+                    - text: Verified Success
+              - generic [ref=e8371]:
+                - img [ref=e8373]
+                - generic [ref=e8376]:
+                  - generic [ref=e8377]:
+                    - generic [ref=e8379]: "N"
+                    - generic [ref=e8380]:
+                      - generic [ref=e8381]:
+                        - heading "Nicole Martinez" [level=4] [ref=e8382]
+                        - img [ref=e8383]
+                      - generic [ref=e8386]:
+                        - img [ref=e8387]
+                        - img [ref=e8389]
+                        - img [ref=e8391]
+                        - img [ref=e8393]
+                        - img [ref=e8395]
+                  - paragraph [ref=e8397]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e8398]:
+                  - generic [ref=e8399]: Jul 24
+                  - generic [ref=e8400]:
+                    - img [ref=e8401]
+                    - text: Verified Success
+              - generic [ref=e8405]:
+                - img [ref=e8407]
+                - generic [ref=e8410]:
+                  - generic [ref=e8411]:
+                    - generic [ref=e8413]: K
+                    - generic [ref=e8414]:
+                      - generic [ref=e8415]:
+                        - heading "Kevin Patel" [level=4] [ref=e8416]
+                        - img [ref=e8417]
+                      - generic [ref=e8420]:
+                        - img [ref=e8421]
+                        - img [ref=e8423]
+                        - img [ref=e8425]
+                        - img [ref=e8427]
+                        - img [ref=e8429]
+                  - paragraph [ref=e8431]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e8432]:
+                  - generic [ref=e8433]: Jul 23
+                  - generic [ref=e8434]:
+                    - img [ref=e8435]
+                    - text: Verified Success
+              - generic [ref=e8439]:
+                - img [ref=e8441]
+                - generic [ref=e8444]:
+                  - generic [ref=e8445]:
+                    - generic [ref=e8447]: O
+                    - generic [ref=e8448]:
+                      - generic [ref=e8449]:
+                        - heading "Olivia Brown" [level=4] [ref=e8450]
+                        - img [ref=e8451]
+                      - generic [ref=e8454]:
+                        - img [ref=e8455]
+                        - img [ref=e8457]
+                        - img [ref=e8459]
+                        - img [ref=e8461]
+                        - img [ref=e8463]
+                  - paragraph [ref=e8465]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e8466]:
+                  - generic [ref=e8467]: Jul 23
+                  - generic [ref=e8468]:
+                    - img [ref=e8469]
+                    - text: Verified Success
+              - generic [ref=e8473]:
+                - img [ref=e8475]
+                - generic [ref=e8478]:
+                  - generic [ref=e8479]:
+                    - generic [ref=e8481]: A
+                    - generic [ref=e8482]:
+                      - generic [ref=e8483]:
+                        - heading "Andrew Garcia" [level=4] [ref=e8484]
+                        - img [ref=e8485]
+                      - generic [ref=e8488]:
+                        - img [ref=e8489]
+                        - img [ref=e8491]
+                        - img [ref=e8493]
+                        - img [ref=e8495]
+                        - img [ref=e8497]
+                  - paragraph [ref=e8499]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e8500]:
+                  - generic [ref=e8501]: Jul 14
+                  - generic [ref=e8502]:
+                    - img [ref=e8503]
+                    - text: Verified Success
+              - generic [ref=e8507]:
+                - img [ref=e8509]
+                - generic [ref=e8512]:
+                  - generic [ref=e8513]:
+                    - generic [ref=e8515]: S
+                    - generic [ref=e8516]:
+                      - generic [ref=e8517]:
+                        - heading "Sarah Johnson" [level=4] [ref=e8518]
+                        - img [ref=e8519]
+                      - generic [ref=e8522]:
+                        - img [ref=e8523]
+                        - img [ref=e8525]
+                        - img [ref=e8527]
+                        - img [ref=e8529]
+                        - img [ref=e8531]
+                  - paragraph [ref=e8533]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e8534]:
+                  - generic [ref=e8535]: Jul 13
+                  - generic [ref=e8536]:
+                    - img [ref=e8537]
+                    - text: Verified Success
+              - generic [ref=e8541]:
+                - img [ref=e8543]
+                - generic [ref=e8546]:
+                  - generic [ref=e8547]:
+                    - generic [ref=e8549]: D
+                    - generic [ref=e8550]:
+                      - generic [ref=e8551]:
+                        - heading "David Kim" [level=4] [ref=e8552]
+                        - img [ref=e8553]
+                      - generic [ref=e8556]:
+                        - img [ref=e8557]
+                        - img [ref=e8559]
+                        - img [ref=e8561]
+                        - img [ref=e8563]
+                        - img [ref=e8565]
+                  - paragraph [ref=e8567]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e8568]:
+                  - generic [ref=e8569]: Jul 14
+                  - generic [ref=e8570]:
+                    - img [ref=e8571]
+                    - text: Verified Success
+              - generic [ref=e8575]:
+                - img [ref=e8577]
+                - generic [ref=e8580]:
+                  - generic [ref=e8581]:
+                    - generic [ref=e8583]: A
+                    - generic [ref=e8584]:
+                      - generic [ref=e8585]:
+                        - heading "Amanda Foster" [level=4] [ref=e8586]
+                        - img [ref=e8587]
+                      - generic [ref=e8590]:
+                        - img [ref=e8591]
+                        - img [ref=e8593]
+                        - img [ref=e8595]
+                        - img [ref=e8597]
+                        - img [ref=e8599]
+                  - paragraph [ref=e8601]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e8602]:
+                  - generic [ref=e8603]: Jul 22
+                  - generic [ref=e8604]:
+                    - img [ref=e8605]
+                    - text: Verified Success
+              - generic [ref=e8609]:
+                - img [ref=e8611]
+                - generic [ref=e8614]:
+                  - generic [ref=e8615]:
+                    - generic [ref=e8617]: B
+                    - generic [ref=e8618]:
+                      - generic [ref=e8619]:
+                        - heading "Brandon Scott" [level=4] [ref=e8620]
+                        - img [ref=e8621]
+                      - generic [ref=e8624]:
+                        - img [ref=e8625]
+                        - img [ref=e8627]
+                        - img [ref=e8629]
+                        - img [ref=e8631]
+                        - img [ref=e8633]
+                  - paragraph [ref=e8635]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e8636]:
+                  - generic [ref=e8637]: Jul 18
+                  - generic [ref=e8638]:
+                    - img [ref=e8639]
+                    - text: Verified Success
+              - generic [ref=e8643]:
+                - img [ref=e8645]
+                - generic [ref=e8648]:
+                  - generic [ref=e8649]:
+                    - generic [ref=e8651]: E
+                    - generic [ref=e8652]:
+                      - generic [ref=e8653]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e8654]
+                        - img [ref=e8655]
+                      - generic [ref=e8658]:
+                        - img [ref=e8659]
+                        - img [ref=e8661]
+                        - img [ref=e8663]
+                        - img [ref=e8665]
+                        - img [ref=e8667]
+                  - paragraph [ref=e8669]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e8670]:
+                  - generic [ref=e8671]: Jul 22
+                  - generic [ref=e8672]:
+                    - img [ref=e8673]
+                    - text: Verified Success
+              - generic [ref=e8677]:
+                - img [ref=e8679]
+                - generic [ref=e8682]:
+                  - generic [ref=e8683]:
+                    - generic [ref=e8685]: R
+                    - generic [ref=e8686]:
+                      - generic [ref=e8687]:
+                        - heading "Ryan Thompson" [level=4] [ref=e8688]
+                        - img [ref=e8689]
+                      - generic [ref=e8692]:
+                        - img [ref=e8693]
+                        - img [ref=e8695]
+                        - img [ref=e8697]
+                        - img [ref=e8699]
+                        - img [ref=e8701]
+                  - paragraph [ref=e8703]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e8704]:
+                  - generic [ref=e8705]: Jul 16
+                  - generic [ref=e8706]:
+                    - img [ref=e8707]
+                    - text: Verified Success
+              - generic [ref=e8711]:
+                - img [ref=e8713]
+                - generic [ref=e8716]:
+                  - generic [ref=e8717]:
+                    - generic [ref=e8719]: "N"
+                    - generic [ref=e8720]:
+                      - generic [ref=e8721]:
+                        - heading "Nicole Martinez" [level=4] [ref=e8722]
+                        - img [ref=e8723]
+                      - generic [ref=e8726]:
+                        - img [ref=e8727]
+                        - img [ref=e8729]
+                        - img [ref=e8731]
+                        - img [ref=e8733]
+                        - img [ref=e8735]
+                  - paragraph [ref=e8737]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e8738]:
+                  - generic [ref=e8739]: Jul 13
+                  - generic [ref=e8740]:
+                    - img [ref=e8741]
+                    - text: Verified Success
+              - generic [ref=e8745]:
+                - img [ref=e8747]
+                - generic [ref=e8750]:
+                  - generic [ref=e8751]:
+                    - generic [ref=e8753]: K
+                    - generic [ref=e8754]:
+                      - generic [ref=e8755]:
+                        - heading "Kevin Patel" [level=4] [ref=e8756]
+                        - img [ref=e8757]
+                      - generic [ref=e8760]:
+                        - img [ref=e8761]
+                        - img [ref=e8763]
+                        - img [ref=e8765]
+                        - img [ref=e8767]
+                        - img [ref=e8769]
+                  - paragraph [ref=e8771]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e8772]:
+                  - generic [ref=e8773]: Jul 15
+                  - generic [ref=e8774]:
+                    - img [ref=e8775]
+                    - text: Verified Success
+              - generic [ref=e8779]:
+                - img [ref=e8781]
+                - generic [ref=e8784]:
+                  - generic [ref=e8785]:
+                    - generic [ref=e8787]: O
+                    - generic [ref=e8788]:
+                      - generic [ref=e8789]:
+                        - heading "Olivia Brown" [level=4] [ref=e8790]
+                        - img [ref=e8791]
+                      - generic [ref=e8794]:
+                        - img [ref=e8795]
+                        - img [ref=e8797]
+                        - img [ref=e8799]
+                        - img [ref=e8801]
+                        - img [ref=e8803]
+                  - paragraph [ref=e8805]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e8806]:
+                  - generic [ref=e8807]: Jul 21
+                  - generic [ref=e8808]:
+                    - img [ref=e8809]
+                    - text: Verified Success
+              - generic [ref=e8813]:
+                - img [ref=e8815]
+                - generic [ref=e8818]:
+                  - generic [ref=e8819]:
+                    - generic [ref=e8821]: A
+                    - generic [ref=e8822]:
+                      - generic [ref=e8823]:
+                        - heading "Andrew Garcia" [level=4] [ref=e8824]
+                        - img [ref=e8825]
+                      - generic [ref=e8828]:
+                        - img [ref=e8829]
+                        - img [ref=e8831]
+                        - img [ref=e8833]
+                        - img [ref=e8835]
+                        - img [ref=e8837]
+                  - paragraph [ref=e8839]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e8840]:
+                  - generic [ref=e8841]: Jul 15
+                  - generic [ref=e8842]:
+                    - img [ref=e8843]
+                    - text: Verified Success
+              - generic [ref=e8847]:
+                - img [ref=e8849]
+                - generic [ref=e8852]:
+                  - generic [ref=e8853]:
+                    - generic [ref=e8855]: S
+                    - generic [ref=e8856]:
+                      - generic [ref=e8857]:
+                        - heading "Sarah Johnson" [level=4] [ref=e8858]
+                        - img [ref=e8859]
+                      - generic [ref=e8862]:
+                        - img [ref=e8863]
+                        - img [ref=e8865]
+                        - img [ref=e8867]
+                        - img [ref=e8869]
+                        - img [ref=e8871]
+                  - paragraph [ref=e8873]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e8874]:
+                  - generic [ref=e8875]: Jul 14
+                  - generic [ref=e8876]:
+                    - img [ref=e8877]
+                    - text: Verified Success
+              - generic [ref=e8881]:
+                - img [ref=e8883]
+                - generic [ref=e8886]:
+                  - generic [ref=e8887]:
+                    - generic [ref=e8889]: D
+                    - generic [ref=e8890]:
+                      - generic [ref=e8891]:
+                        - heading "David Kim" [level=4] [ref=e8892]
+                        - img [ref=e8893]
+                      - generic [ref=e8896]:
+                        - img [ref=e8897]
+                        - img [ref=e8899]
+                        - img [ref=e8901]
+                        - img [ref=e8903]
+                        - img [ref=e8905]
+                  - paragraph [ref=e8907]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e8908]:
+                  - generic [ref=e8909]: Jul 22
+                  - generic [ref=e8910]:
+                    - img [ref=e8911]
+                    - text: Verified Success
+              - generic [ref=e8915]:
+                - img [ref=e8917]
+                - generic [ref=e8920]:
+                  - generic [ref=e8921]:
+                    - generic [ref=e8923]: A
+                    - generic [ref=e8924]:
+                      - generic [ref=e8925]:
+                        - heading "Amanda Foster" [level=4] [ref=e8926]
+                        - img [ref=e8927]
+                      - generic [ref=e8930]:
+                        - img [ref=e8931]
+                        - img [ref=e8933]
+                        - img [ref=e8935]
+                        - img [ref=e8937]
+                        - img [ref=e8939]
+                  - paragraph [ref=e8941]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e8942]:
+                  - generic [ref=e8943]: Jul 18
+                  - generic [ref=e8944]:
+                    - img [ref=e8945]
+                    - text: Verified Success
+              - generic [ref=e8949]:
+                - img [ref=e8951]
+                - generic [ref=e8954]:
+                  - generic [ref=e8955]:
+                    - generic [ref=e8957]: B
+                    - generic [ref=e8958]:
+                      - generic [ref=e8959]:
+                        - heading "Brandon Scott" [level=4] [ref=e8960]
+                        - img [ref=e8961]
+                      - generic [ref=e8964]:
+                        - img [ref=e8965]
+                        - img [ref=e8967]
+                        - img [ref=e8969]
+                        - img [ref=e8971]
+                        - img [ref=e8973]
+                  - paragraph [ref=e8975]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e8976]:
+                  - generic [ref=e8977]: Jul 23
+                  - generic [ref=e8978]:
+                    - img [ref=e8979]
+                    - text: Verified Success
+              - generic [ref=e8983]:
+                - img [ref=e8985]
+                - generic [ref=e8988]:
+                  - generic [ref=e8989]:
+                    - generic [ref=e8991]: R
+                    - generic [ref=e8992]:
+                      - generic [ref=e8993]:
+                        - heading "Rachel Green" [level=4] [ref=e8994]
+                        - img [ref=e8995]
+                      - generic [ref=e8998]:
+                        - img [ref=e8999]
+                        - img [ref=e9001]
+                        - img [ref=e9003]
+                        - img [ref=e9005]
+                        - img [ref=e9007]
+                  - paragraph [ref=e9009]: "\"The AI doesn't just give answers - it teaches you how to think. That's the real value here.\""
+                - generic [ref=e9010]:
+                  - generic [ref=e9011]: Jul 23
+                  - generic [ref=e9012]:
+                    - img [ref=e9013]
+                    - text: Verified Success
+              - generic [ref=e9017]:
+                - img [ref=e9019]
+                - generic [ref=e9022]:
+                  - generic [ref=e9023]:
+                    - generic [ref=e9025]: J
+                    - generic [ref=e9026]:
+                      - generic [ref=e9027]:
+                        - heading "James Wilson" [level=4] [ref=e9028]
+                        - img [ref=e9029]
+                      - generic [ref=e9032]:
+                        - img [ref=e9033]
+                        - img [ref=e9035]
+                        - img [ref=e9037]
+                        - img [ref=e9039]
+                        - img [ref=e9041]
+                  - paragraph [ref=e9043]: "\"I was skeptical about AI learning, but this proved me wrong. It's like having a personal tutor 24/7.\""
+                - generic [ref=e9044]:
+                  - generic [ref=e9045]: Jul 18
+                  - generic [ref=e9046]:
+                    - img [ref=e9047]
+                    - text: Verified Success
+              - generic [ref=e9051]:
+                - img [ref=e9053]
+                - generic [ref=e9056]:
+                  - generic [ref=e9057]:
+                    - generic [ref=e9059]: M
+                    - generic [ref=e9060]:
+                      - generic [ref=e9061]:
+                        - heading "Megan Taylor" [level=4] [ref=e9062]
+                        - img [ref=e9063]
+                      - generic [ref=e9066]:
+                        - img [ref=e9067]
+                        - img [ref=e9069]
+                        - img [ref=e9071]
+                        - img [ref=e9073]
+                        - img [ref=e9075]
+                  - paragraph [ref=e9077]: "\"My son has autism and this platform accommodates his needs perfectly. He's thriving academically now.\""
+                - generic [ref=e9078]:
+                  - generic [ref=e9079]: Jul 13
+                  - generic [ref=e9080]:
+                    - img [ref=e9081]
+                    - text: Verified Success
+              - generic [ref=e9085]:
+                - img [ref=e9087]
+                - generic [ref=e9090]:
+                  - generic [ref=e9091]:
+                    - generic [ref=e9093]: M
+                    - generic [ref=e9094]:
+                      - generic [ref=e9095]:
+                        - heading "Michael Chen" [level=4] [ref=e9096]
+                        - img [ref=e9097]
+                      - generic [ref=e9100]:
+                        - img [ref=e9101]
+                        - img [ref=e9103]
+                        - img [ref=e9105]
+                        - img [ref=e9107]
+                        - img [ref=e9109]
+                  - paragraph [ref=e9111]: "\"Learning DNA assessment was spot-on. The personalized study plan actually works for my ADHD.\""
+                - generic [ref=e9112]:
+                  - generic [ref=e9113]: Jul 15
+                  - generic [ref=e9114]:
+                    - img [ref=e9115]
+                    - text: Verified Success
+              - generic [ref=e9119]:
+                - img [ref=e9121]
+                - generic [ref=e9124]:
+                  - generic [ref=e9125]:
+                    - generic [ref=e9127]: J
+                    - generic [ref=e9128]:
+                      - generic [ref=e9129]:
+                        - heading "Jessica Williams" [level=4] [ref=e9130]
+                        - img [ref=e9131]
+                      - generic [ref=e9134]:
+                        - img [ref=e9135]
+                        - img [ref=e9137]
+                        - img [ref=e9139]
+                        - img [ref=e9141]
+                        - img [ref=e9143]
+                  - paragraph [ref=e9145]: "\"As a working student, the flexible scheduling is perfect. I can study during lunch breaks and actually retain information.\""
+                - generic [ref=e9146]:
+                  - generic [ref=e9147]: Jul 20
+                  - generic [ref=e9148]:
+                    - img [ref=e9149]
+                    - text: Verified Success
+              - generic [ref=e9153]:
+                - img [ref=e9155]
+                - generic [ref=e9158]:
+                  - generic [ref=e9159]:
+                    - generic [ref=e9161]: C
+                    - generic [ref=e9162]:
+                      - generic [ref=e9163]:
+                        - heading "Christopher Lee" [level=4] [ref=e9164]
+                        - img [ref=e9165]
+                      - generic [ref=e9168]:
+                        - img [ref=e9169]
+                        - img [ref=e9171]
+                        - img [ref=e9173]
+                        - img [ref=e9175]
+                        - img [ref=e9177]
+                  - paragraph [ref=e9179]: "\"The career matching feature helped me discover my passion for data science. Now I'm pursuing a degree in it!\""
+                - generic [ref=e9180]:
+                  - generic [ref=e9181]: Jul 20
+                  - generic [ref=e9182]:
+                    - img [ref=e9183]
+                    - text: Verified Success
+              - generic [ref=e9187]:
+                - img [ref=e9189]
+                - generic [ref=e9192]:
+                  - generic [ref=e9193]:
+                    - generic [ref=e9195]: T
+                    - generic [ref=e9196]:
+                      - generic [ref=e9197]:
+                        - heading "Taylor Anderson" [level=4] [ref=e9198]
+                        - img [ref=e9199]
+                      - generic [ref=e9202]:
+                        - img [ref=e9203]
+                        - img [ref=e9205]
+                        - img [ref=e9207]
+                        - img [ref=e9209]
+                        - img [ref=e9211]
+                  - paragraph [ref=e9213]: "\"The mobile app is perfect for studying on the go. I use it during my commute every day.\""
+                - generic [ref=e9214]:
+                  - generic [ref=e9215]: Jul 21
+                  - generic [ref=e9216]:
+                    - img [ref=e9217]
+                    - text: Verified Success
+              - generic [ref=e9221]:
+                - img [ref=e9223]
+                - generic [ref=e9226]:
+                  - generic [ref=e9227]:
+                    - generic [ref=e9229]: D
+                    - generic [ref=e9230]:
+                      - generic [ref=e9231]:
+                        - heading "Daniel Wright" [level=4] [ref=e9232]
+                        - img [ref=e9233]
+                      - generic [ref=e9236]:
+                        - img [ref=e9237]
+                        - img [ref=e9239]
+                        - img [ref=e9241]
+                        - img [ref=e9243]
+                        - img [ref=e9245]
+                  - paragraph [ref=e9247]: "\"As someone with dyslexia, the accessibility features are game-changing. I can finally learn at my own pace.\""
+                - generic [ref=e9248]:
+                  - generic [ref=e9249]: Jul 20
+                  - generic [ref=e9250]:
+                    - img [ref=e9251]
+                    - text: Verified Success
+              - generic [ref=e9255]:
+                - img [ref=e9257]
+                - generic [ref=e9260]:
+                  - generic [ref=e9261]:
+                    - generic [ref=e9263]: S
+                    - generic [ref=e9264]:
+                      - generic [ref=e9265]:
+                        - heading "Sophie Davis" [level=4] [ref=e9266]
+                        - img [ref=e9267]
+                      - generic [ref=e9270]:
+                        - img [ref=e9271]
+                        - img [ref=e9273]
+                        - img [ref=e9275]
+                        - img [ref=e9277]
+                        - img [ref=e9279]
+                  - paragraph [ref=e9281]: "\"The college matching feature found universities I never would have considered. Perfect fit for my learning style.\""
+                - generic [ref=e9282]:
+                  - generic [ref=e9283]: Jul 19
+                  - generic [ref=e9284]:
+                    - img [ref=e9285]
+                    - text: Verified Success
+              - generic [ref=e9289]:
+                - img [ref=e9291]
+                - generic [ref=e9294]:
+                  - generic [ref=e9295]:
+                    - generic [ref=e9297]: J
+                    - generic [ref=e9298]:
+                      - generic [ref=e9299]:
+                        - heading "Joshua Miller" [level=4] [ref=e9300]
+                        - img [ref=e9301]
+                      - generic [ref=e9304]:
+                        - img [ref=e9305]
+                        - img [ref=e9307]
+                        - img [ref=e9309]
+                        - img [ref=e9311]
+                        - img [ref=e9313]
+                  - paragraph [ref=e9315]: "\"The achievement system keeps me coming back. I've earned 50+ badges and I'm still going strong.\""
+                - generic [ref=e9316]:
+                  - generic [ref=e9317]: Jul 19
+                  - generic [ref=e9318]:
+                    - img [ref=e9319]
+                    - text: Verified Success
+              - generic [ref=e9323]:
+                - img [ref=e9325]
+                - generic [ref=e9328]:
+                  - generic [ref=e9329]:
+                    - generic [ref=e9331]: E
+                    - generic [ref=e9332]:
+                      - generic [ref=e9333]:
+                        - heading "Emily Rodriguez" [level=4] [ref=e9334]
+                        - img [ref=e9335]
+                      - generic [ref=e9338]:
+                        - img [ref=e9339]
+                        - img [ref=e9341]
+                        - img [ref=e9343]
+                        - img [ref=e9345]
+                        - img [ref=e9347]
+                  - paragraph [ref=e9349]: "\"Finally found a platform that adapts to my learning style. The 3D visualizations make physics so much easier.\""
+                - generic [ref=e9350]:
+                  - generic [ref=e9351]: Jul 17
+                  - generic [ref=e9352]:
+                    - img [ref=e9353]
+                    - text: Verified Success
+              - generic [ref=e9357]:
+                - img [ref=e9359]
+                - generic [ref=e9362]:
+                  - generic [ref=e9363]:
+                    - generic [ref=e9365]: R
+                    - generic [ref=e9366]:
+                      - generic [ref=e9367]:
+                        - heading "Ryan Thompson" [level=4] [ref=e9368]
+                        - img [ref=e9369]
+                      - generic [ref=e9372]:
+                        - img [ref=e9373]
+                        - img [ref=e9375]
+                        - img [ref=e9377]
+                        - img [ref=e9379]
+                        - img [ref=e9381]
+                  - paragraph [ref=e9383]: "\"The community features helped me find study partners. We aced our finals together!\""
+                - generic [ref=e9384]:
+                  - generic [ref=e9385]: Jul 18
+                  - generic [ref=e9386]:
+                    - img [ref=e9387]
+                    - text: Verified Success
+              - generic [ref=e9391]:
+                - img [ref=e9393]
+                - generic [ref=e9396]:
+                  - generic [ref=e9397]:
+                    - generic [ref=e9399]: "N"
+                    - generic [ref=e9400]:
+                      - generic [ref=e9401]:
+                        - heading "Nicole Martinez" [level=4] [ref=e9402]
+                        - img [ref=e9403]
+                      - generic [ref=e9406]:
+                        - img [ref=e9407]
+                        - img [ref=e9409]
+                        - img [ref=e9411]
+                        - img [ref=e9413]
+                        - img [ref=e9415]
+                  - paragraph [ref=e9417]: "\"I tried 5 different learning platforms before FunFinity. This one actually understands how I learn.\""
+                - generic [ref=e9418]:
+                  - generic [ref=e9419]: Jul 24
+                  - generic [ref=e9420]:
+                    - img [ref=e9421]
+                    - text: Verified Success
+              - generic [ref=e9425]:
+                - img [ref=e9427]
+                - generic [ref=e9430]:
+                  - generic [ref=e9431]:
+                    - generic [ref=e9433]: K
+                    - generic [ref=e9434]:
+                      - generic [ref=e9435]:
+                        - heading "Kevin Patel" [level=4] [ref=e9436]
+                        - img [ref=e9437]
+                      - generic [ref=e9440]:
+                        - img [ref=e9441]
+                        - img [ref=e9443]
+                        - img [ref=e9445]
+                        - img [ref=e9447]
+                        - img [ref=e9449]
+                  - paragraph [ref=e9451]: "\"My grades improved by 2 letter grades in one semester. The personalized learning paths are no joke.\""
+                - generic [ref=e9452]:
+                  - generic [ref=e9453]: Jul 23
+                  - generic [ref=e9454]:
+                    - img [ref=e9455]
+                    - text: Verified Success
+              - generic [ref=e9459]:
+                - img [ref=e9461]
+                - generic [ref=e9464]:
+                  - generic [ref=e9465]:
+                    - generic [ref=e9467]: O
+                    - generic [ref=e9468]:
+                      - generic [ref=e9469]:
+                        - heading "Olivia Brown" [level=4] [ref=e9470]
+                        - img [ref=e9471]
+                      - generic [ref=e9474]:
+                        - img [ref=e9475]
+                        - img [ref=e9477]
+                        - img [ref=e9479]
+                        - img [ref=e9481]
+                        - img [ref=e9483]
+                  - paragraph [ref=e9485]: "\"The live classes are amazing. Real teachers who actually care and use the AI tools to enhance learning.\""
+                - generic [ref=e9486]:
+                  - generic [ref=e9487]: Jul 23
+                  - generic [ref=e9488]:
+                    - img [ref=e9489]
+                    - text: Verified Success
+              - generic [ref=e9493]:
+                - img [ref=e9495]
+                - generic [ref=e9498]:
+                  - generic [ref=e9499]:
+                    - generic [ref=e9501]: A
+                    - generic [ref=e9502]:
+                      - generic [ref=e9503]:
+                        - heading "Andrew Garcia" [level=4] [ref=e9504]
+                        - img [ref=e9505]
+                      - generic [ref=e9508]:
+                        - img [ref=e9509]
+                        - img [ref=e9511]
+                        - img [ref=e9513]
+                        - img [ref=e9515]
+                        - img [ref=e9517]
+                  - paragraph [ref=e9519]: "\"The spaced repetition system actually works. I remember everything I learn now.\""
+                - generic [ref=e9520]:
+                  - generic [ref=e9521]: Jul 14
+                  - generic [ref=e9522]:
+                    - img [ref=e9523]
+                    - text: Verified Success
+              - generic [ref=e9527]:
+                - img [ref=e9529]
+                - generic [ref=e9532]:
+                  - generic [ref=e9533]:
+                    - generic [ref=e9535]: S
+                    - generic [ref=e9536]:
+                      - generic [ref=e9537]:
+                        - heading "Sarah Johnson" [level=4] [ref=e9538]
+                        - img [ref=e9539]
+                      - generic [ref=e9542]:
+                        - img [ref=e9543]
+                        - img [ref=e9545]
+                        - img [ref=e9547]
+                        - img [ref=e9549]
+                        - img [ref=e9551]
+                  - paragraph [ref=e9553]: "\"The AI Tutor completely changed how I study calculus. I went from failing to getting A's in just 3 weeks!\""
+                - generic [ref=e9554]:
+                  - generic [ref=e9555]: Jul 13
+                  - generic [ref=e9556]:
+                    - img [ref=e9557]
+                    - text: Verified Success
+              - generic [ref=e9561]:
+                - img [ref=e9563]
+                - generic [ref=e9566]:
+                  - generic [ref=e9567]:
+                    - generic [ref=e9569]: D
+                    - generic [ref=e9570]:
+                      - generic [ref=e9571]:
+                        - heading "David Kim" [level=4] [ref=e9572]
+                        - img [ref=e9573]
+                      - generic [ref=e9576]:
+                        - img [ref=e9577]
+                        - img [ref=e9579]
+                        - img [ref=e9581]
+                        - img [ref=e9583]
+                        - img [ref=e9585]
+                  - paragraph [ref=e9587]: "\"The gamification keeps me motivated. I've completed more lessons in 2 months than I did all last year.\""
+                - generic [ref=e9588]:
+                  - generic [ref=e9589]: Jul 14
+                  - generic [ref=e9590]:
+                    - img [ref=e9591]
+                    - text: Verified Success
+              - generic [ref=e9595]:
+                - img [ref=e9597]
+                - generic [ref=e9600]:
+                  - generic [ref=e9601]:
+                    - generic [ref=e9603]: A
+                    - generic [ref=e9604]:
+                      - generic [ref=e9605]:
+                        - heading "Amanda Foster" [level=4] [ref=e9606]
+                        - img [ref=e9607]
+                      - generic [ref=e9610]:
+                        - img [ref=e9611]
+                        - img [ref=e9613]
+                        - img [ref=e9615]
+                        - img [ref=e9617]
+                        - img [ref=e9619]
+                  - paragraph [ref=e9621]: "\"My daughter went from hating math to loving it. The AI explanations are so clear and patient.\""
+                - generic [ref=e9622]:
+                  - generic [ref=e9623]: Jul 22
+                  - generic [ref=e9624]:
+                    - img [ref=e9625]
+                    - text: Verified Success
+              - generic [ref=e9629]:
+                - img [ref=e9631]
+                - generic [ref=e9634]:
+                  - generic [ref=e9635]:
+                    - generic [ref=e9637]: B
+                    - generic [ref=e9638]:
+                      - generic [ref=e9639]:
+                        - heading "Brandon Scott" [level=4] [ref=e9640]
+                        - img [ref=e9641]
+                      - generic [ref=e9644]:
+                        - img [ref=e9645]
+                        - img [ref=e9647]
+                        - img [ref=e9649]
+                        - img [ref=e9651]
+                        - img [ref=e9653]
+                  - paragraph [ref=e9655]: "\"The progress tracking is incredible. I can see exactly where I need to improve and the platform adapts accordingly.\""
+                - generic [ref=e9656]:
+                  - generic [ref=e9657]: Jul 18
+                  - generic [ref=e9658]:
+                    - img [ref=e9659]
+                    - text: Verified Success
+          - generic [ref=e9662]:
+            - img [ref=e9664]
+            - generic [ref=e9669]:
+              - paragraph [ref=e9670]: Join the elite learning community
+              - paragraph [ref=e9671]: Start your personalized journey today
+            - link "Sign Up Now — It's Free" [ref=e9672] [cursor=pointer]:
+              - /url: /auth
+        - generic [ref=e9675]:
+          - generic [ref=e9676]:
+            - generic [ref=e9677]: The Journey
+            - heading "How the adventure unfolds" [level=2] [ref=e9678]
+            - paragraph [ref=e9679]: Learning is not a race to completion. It's an ongoing exploration that respects your child's natural curiosity and pace.
+          - generic [ref=e9680]:
+            - generic [ref=e9681]:
+              - img [ref=e9684]
+              - generic [ref=e9687]:
+                - generic [ref=e9688]:
+                  - generic [ref=e9689]: "01"
+                  - heading "Discover Your Path" [level=3] [ref=e9690]
+                - paragraph [ref=e9691]: Begin with a gentle exploration that reveals how you naturally engage with learning. No tests, no pressure—just curious discovery.
+            - generic [ref=e9692]:
+              - img [ref=e9695]
+              - generic [ref=e9697]:
+                - generic [ref=e9698]:
+                  - generic [ref=e9699]: "02"
+                  - heading "Navigate the Landscape" [level=3] [ref=e9700]
+                - paragraph [ref=e9701]: Enter an interconnected world of knowledge where subjects flow into each other. See relationships, not isolated facts.
+            - generic [ref=e9702]:
+              - img [ref=e9705]
+              - generic [ref=e9707]:
+                - generic [ref=e9708]:
+                  - generic [ref=e9709]: "03"
+                  - heading "Build Deep Understanding" [level=3] [ref=e9710]
+                - paragraph [ref=e9711]: Engage with concepts at your own pace. The environment adapts to your rhythm, supporting focus without demanding it.
+            - generic [ref=e9712]:
+              - img [ref=e9714]
+              - generic [ref=e9719]:
+                - generic [ref=e9720]:
+                  - generic [ref=e9721]: "04"
+                  - heading "Watch Mastery Emerge" [level=3] [ref=e9722]
+                - paragraph [ref=e9723]: Progress unfolds naturally over time. Confidence grows from genuine comprehension, not accumulated points.
+        - generic [ref=e9727]:
+          - generic [ref=e9728]:
+            - generic [ref=e9729]: Knowledge Landscape
+            - heading "Interconnected Learning" [level=2] [ref=e9730]
+            - paragraph [ref=e9731]: Knowledge is not a checklist of isolated facts. Explore a landscape where ideas connect, patterns emerge, and understanding deepens naturally.
+          - generic [ref=e9732]:
+            - generic [ref=e9733]:
+              - img [ref=e9734]
+              - button "Mathematics":
                 - generic:
                   - img
+                - generic: Mathematics
+              - button "Physics":
                 - generic:
-                  - generic:
-                    - generic:
-                      - generic:
-                        - generic:
-                          - img
-                      - heading [level=3]: Discover Connections
-                      - paragraph: Click or hover over any subject node to explore its topics and connections
-                  - generic:
-                    - generic:
-                      - generic: 11+
-                      - generic: Subjects
-                    - generic:
-                      - generic: 40+
-                      - generic: Topics
-                    - generic:
-                      - generic: ∞
-                      - generic: Connections
-          - generic:
-            - generic:
-              - generic:
-                - generic: Our Philosophy
-                - heading [level=2]: Designed for how learning actually works
-                - paragraph: Traditional platforms fragment attention. We create conditions where understanding can genuinely thrive.
-              - generic:
+                  - img
+                - generic: Physics
+              - button "Chemistry":
                 - generic:
-                  - generic:
-                    - img
-                  - heading [level=3]: Presence Over Pages
-                  - paragraph: Learning happens in a continuous, navigable space—not fragmented screens. Build mental maps of knowledge that stick.
+                  - img
+                - generic: Chemistry
+              - button "Biology":
                 - generic:
-                  - generic:
-                    - img
-                  - heading [level=3]: Cognitive Design
-                  - paragraph: Attention is treated as precious. Silence, spacing, and restraint allow understanding to settle naturally.
+                  - img
+                - generic: Biology
+              - button "Coding":
                 - generic:
-                  - generic:
-                    - img
-                  - heading [level=3]: Time Awareness
-                  - paragraph: Sessions feel complete and satisfying. Progress unfolds over weeks without pressure or artificial urgency.
+                  - img
+                - generic: Coding
+              - button "Logic & Reasoning":
                 - generic:
-                  - generic:
-                    - img
-                  - heading [level=3]: Knowledge Landscape
-                  - paragraph: Ideas connect across domains. Mastery emerges through pattern recognition, not isolated memorization.
+                  - img
+                - generic: Logic & Reasoning
+              - button "Environment":
                 - generic:
-                  - generic:
-                    - img
-                  - heading [level=3]: Understated Joy
-                  - paragraph: Motivation feels internal and earned. Rewards appear when meaningful, never dominating attention.
+                  - img
+                - generic: Environment
+              - button "Geography":
                 - generic:
-                  - generic:
-                    - img
-                  - heading [level=3]: Trust by Design
-                  - paragraph: Every interaction is evaluated for psychological impact. Manipulative patterns are avoided entirely.
-          - generic:
-            - generic:
-              - generic:
+                  - img
+                - generic: Geography
+              - button "History":
                 - generic:
-                  - generic: Personalization
-                  - heading [level=2]: Your Learning DNA
-                  - paragraph: Our AI adapts to your unique learning style, creating a personalized experience that evolves with you.
+                  - img
+                - generic: History
+              - button "Philosophy":
                 - generic:
-                  - generic:
-                    - img
-                    - heading [level=3]: Evolving Understanding
-                    - paragraph: Your learning profile grows with you, adapting to how you engage, not just what you complete.
-                  - generic:
-                    - img
-                    - heading [level=3]: Transparent Control
-                    - paragraph: See exactly how personalization works. Adjust, reset, or explore manually anytime.
-                  - generic:
-                    - img
-                    - heading [level=3]: Rhythm Recognition
-                    - paragraph: Discover your natural focus patterns. The system supports your rhythm, never fights it.
-                  - generic:
-                    - img
-                    - heading [level=3]: Agency First
-                    - paragraph: Personalization amplifies your choices, never restricts them. You're always in control.
-          - generic:
-            - generic:
-              - generic:
-                - heading [level=2]: Ready to transform how your child experiences learning?
-                - paragraph: Join a growing community of families who believe learning should be calm, deep, and joyful. No credit card required to start.
+                  - img
+                - generic: Philosophy
+              - button "Engineering":
                 - generic:
-                  - link:
-                    - /url: /auth
-                    - text: Begin the Adventure
-                    - img
-                  - link:
-                    - /url: /demo
-                    - text: Demo Simulation
-                - paragraph: Free exploration period • No manipulative patterns • Cancel anytime
-        - contentinfo:
-          - generic:
-            - generic:
-              - generic:
-                - img
-                - paragraph: Turning learning into adventure. A calm, immersive space for deep understanding.
-              - generic:
-                - heading [level=4]: Learn
-                - list:
-                  - listitem:
-                    - button: How It Works
-                  - listitem:
-                    - button: Subjects
-                  - listitem:
-                    - button: Pricing
-                  - listitem:
-                    - button: For Schools
-              - generic:
-                - heading [level=4]: Company
-                - list:
-                  - listitem:
-                    - button: About Us
-                  - listitem:
-                    - button: Our Philosophy
-                  - listitem:
-                    - button: Careers
-                  - listitem:
-                    - button: Press
-              - generic:
-                - heading [level=4]: Support
-                - list:
-                  - listitem:
-                    - button: Help Center
-                  - listitem:
-                    - button: Contact
-                  - listitem:
-                    - button: Community
-                  - listitem:
-                    - button: Status
-              - generic:
-                - heading [level=4]: Legal
-                - list:
-                  - listitem:
-                    - button: Privacy
-                  - listitem:
-                    - button: Terms
-                  - listitem:
-                    - button: Refunds
-                  - listitem:
-                    - button: Accessibility
-                  - listitem:
-                    - button: Do Not Sell/Share My Info
-                  - listitem:
-                    - button: Cookie Policy
-            - generic:
-              - generic:
-                - paragraph: © 2026 FunFinity Academy, Inc. All rights reserved.
-                - paragraph: "Corporate Address: 123 Innovation Way, Suite 400, San Francisco, CA 94107"
-                - paragraph: "Contact: academyfunfinity@gmail.com | Response Time: < 24 Hours"
-                - paragraph: "Billing Terms: 14-Day Money-Back Guarantee. Cancel anytime via account settings."
-              - generic:
-                - button: Privacy Policy
-                - button: Terms of Service
-                - button: Do Not Sell/Share My Info
-        - generic:
-          - generic:
-            - generic:
-              - generic:
-                - generic:
-                  - generic:
-                    - generic:
-                      - img
-                  - generic:
-                    - heading [level=3]: Cookie Preferences
-                    - paragraph: We use cookies to enhance your experience. Please choose which cookies you allow us to use.
-                  - button:
-                    - img
-                - generic:
-                  - generic:
-                    - generic:
-                      - img
-                      - generic:
-                        - paragraph: Essential Cookies
-                        - paragraph: Required for basic functionality and security
-                    - generic:
-                      - generic: Always Active
-                  - generic:
-                    - generic:
-                      - img
-                      - generic:
-                        - paragraph: Analytics Cookies
-                        - paragraph: Help us improve the platform by understanding usage
-                    - button
-                  - generic:
-                    - generic:
-                      - img
-                      - generic:
-                        - paragraph: Marketing Cookies
-                        - paragraph: Used for personalized content and advertising
-                    - button
-                - generic:
-                  - text: By continuing, you agree to our use of cookies. View our
-                  - link:
-                    - /url: /privacy
-                    - text: Privacy Policy
-                  - text: and
-                  - link:
-                    - /url: /terms
-                    - text: Terms of Service
-                - generic:
-                  - button: Save Preferences
-                  - button: Accept All
-                  - button: Decline All
-  - dialog "Age Verification Required" [ref=e2]:
-    - generic [ref=e3]:
-      - generic [ref=e4]:
-        - img [ref=e6]
-        - heading "Age Verification Required" [level=2] [ref=e8]
-      - paragraph [ref=e9]: To comply with COPPA and GDPR regulations, we need to verify your age before you can access our platform.
-    - generic [ref=e10]:
-      - generic [ref=e11]:
-        - generic [ref=e12]:
-          - img [ref=e13]
-          - text: Date of Birth
-        - textbox "Date of Birth" [active] [ref=e15]
-        - paragraph [ref=e16]: You must be at least 13 years old to use this platform.
-      - generic [ref=e17]:
-        - button "Verify Age" [ref=e18] [cursor=pointer]
-        - button "I am under 13 (Parental Consent Required)" [ref=e19] [cursor=pointer]
-      - generic [ref=e21]:
-        - img [ref=e22]
-        - generic [ref=e25]:
-          - paragraph [ref=e26]: Your privacy matters
-          - paragraph [ref=e27]: We comply with COPPA and GDPR regulations. Your information is encrypted and never shared with third parties without consent.
-    - button "Close" [ref=e28] [cursor=pointer]:
-      - img [ref=e29]
-      - generic [ref=e32]: Close
+                  - img
+                - generic: Engineering
+            - generic [ref=e9749]:
+              - generic [ref=e9751]:
+                - generic [ref=e9753]:
+                  - img "Educational visual"
+                - heading "Discover Connections" [level=3] [ref=e9754]
+                - paragraph [ref=e9755]: Click or hover over any subject node to explore its topics and connections
+              - generic [ref=e9756]:
+                - generic [ref=e9757]:
+                  - generic [ref=e9758]: 11+
+                  - generic [ref=e9759]: Subjects
+                - generic [ref=e9760]:
+                  - generic [ref=e9761]: 40+
+                  - generic [ref=e9762]: Topics
+                - generic [ref=e9763]:
+                  - generic [ref=e9764]: ∞
+                  - generic [ref=e9765]: Connections
+        - generic [ref=e9768]:
+          - generic [ref=e9769]:
+            - generic [ref=e9770]: Our Philosophy
+            - heading "Designed for how learning actually works" [level=2] [ref=e9771]
+            - paragraph [ref=e9772]: Traditional platforms fragment attention. We create conditions where understanding can genuinely thrive.
+          - generic [ref=e9773]:
+            - generic [ref=e9774]:
+              - img [ref=e9776]
+              - heading "Presence Over Pages" [level=3] [ref=e9779]
+              - paragraph [ref=e9780]: Learning happens in a continuous, navigable space—not fragmented screens. Build mental maps of knowledge that stick.
+            - generic [ref=e9781]:
+              - img [ref=e9783]
+              - heading "Cognitive Design" [level=3] [ref=e9793]
+              - paragraph [ref=e9794]: Attention is treated as precious. Silence, spacing, and restraint allow understanding to settle naturally.
+            - generic [ref=e9795]:
+              - img [ref=e9797]
+              - heading "Time Awareness" [level=3] [ref=e9800]
+              - paragraph [ref=e9801]: Sessions feel complete and satisfying. Progress unfolds over weeks without pressure or artificial urgency.
+            - generic [ref=e9802]:
+              - img [ref=e9804]
+              - heading "Knowledge Landscape" [level=3] [ref=e9808]
+              - paragraph [ref=e9809]: Ideas connect across domains. Mastery emerges through pattern recognition, not isolated memorization.
+            - generic [ref=e9810]:
+              - img [ref=e9812]
+              - heading "Understated Joy" [level=3] [ref=e9814]
+              - paragraph [ref=e9815]: Motivation feels internal and earned. Rewards appear when meaningful, never dominating attention.
+            - generic [ref=e9816]:
+              - img [ref=e9818]
+              - heading "Trust by Design" [level=3] [ref=e9820]
+              - paragraph [ref=e9821]: Every interaction is evaluated for psychological impact. Manipulative patterns are avoided entirely.
+        - generic [ref=e9826]:
+          - generic [ref=e9827]:
+            - generic [ref=e9828]: Personalization
+            - heading "Your Learning DNA" [level=2] [ref=e9829]
+            - paragraph [ref=e9830]: Our AI adapts to your unique learning style, creating a personalized experience that evolves with you.
+          - generic [ref=e9831]:
+            - generic [ref=e9832]:
+              - img [ref=e9833]
+              - heading "Evolving Understanding" [level=3] [ref=e9845]
+              - paragraph [ref=e9846]: Your learning profile grows with you, adapting to how you engage, not just what you complete.
+            - generic [ref=e9847]:
+              - img [ref=e9848]
+              - heading "Transparent Control" [level=3] [ref=e9849]
+              - paragraph [ref=e9850]: See exactly how personalization works. Adjust, reset, or explore manually anytime.
+            - generic [ref=e9851]:
+              - img [ref=e9852]
+              - heading "Rhythm Recognition" [level=3] [ref=e9857]
+              - paragraph [ref=e9858]: Discover your natural focus patterns. The system supports your rhythm, never fights it.
+            - generic [ref=e9859]:
+              - img [ref=e9860]
+              - heading "Interconnected Learning" [level=3] [ref=e9865]
+              - paragraph [ref=e9866]: Connect concepts across subjects. Build a knowledge network that strengthens over time.
+        - generic [ref=e9871] [cursor=pointer]:
+          - heading "Ready to transform how your child experiences learning?" [level=2] [ref=e9872]
+          - paragraph [ref=e9873]: Join a growing community of families who believe learning should be calm, deep, and joyful. No credit card required to start.
+          - generic [ref=e9874]:
+            - link "Begin the Adventure" [ref=e9875]:
+              - /url: /auth
+              - text: Begin the Adventure
+              - img
+            - link "Demo Simulation" [ref=e9876]:
+              - /url: /demo
+          - paragraph [ref=e9877]: Free exploration period • No manipulative patterns • Cancel anytime
+      - contentinfo "Site footer" [ref=e9878] [cursor=pointer]:
+        - generic [ref=e9879]:
+          - generic [ref=e9880]:
+            - generic [ref=e9881]:
+              - img "Funfinity Academy Logo" [ref=e9882]
+              - paragraph [ref=e9883]: Turning learning into adventure. A calm, immersive space for deep understanding.
+            - generic [ref=e9884]:
+              - heading "Learn" [level=4] [ref=e9885]
+              - list [ref=e9886]:
+                - listitem [ref=e9887]:
+                  - button "How It Works" [ref=e9888]
+                - listitem [ref=e9889]:
+                  - button "Subjects" [ref=e9890]
+                - listitem [ref=e9891]:
+                  - button "Pricing" [ref=e9892]
+                - listitem [ref=e9893]:
+                  - button "For Schools" [ref=e9894]
+            - generic [ref=e9895]:
+              - heading "Company" [level=4] [ref=e9896]
+              - list [ref=e9897]:
+                - listitem [ref=e9898]:
+                  - button "About Us" [ref=e9899]
+                - listitem [ref=e9900]:
+                  - button "Our Philosophy" [ref=e9901]
+                - listitem [ref=e9902]:
+                  - button "Careers" [ref=e9903]
+                - listitem [ref=e9904]:
+                  - button "Press" [ref=e9905]
+            - generic [ref=e9906]:
+              - heading "Support" [level=4] [ref=e9907]
+              - list [ref=e9908]:
+                - listitem [ref=e9909]:
+                  - button "Help Center" [ref=e9910]
+                - listitem [ref=e9911]:
+                  - button "Contact" [ref=e9912]
+                - listitem [ref=e9913]:
+                  - button "Community" [ref=e9914]
+                - listitem [ref=e9915]:
+                  - button "Status" [ref=e9916]
+            - generic [ref=e9917]:
+              - heading "Legal" [level=4] [ref=e9918]
+              - list [ref=e9919]:
+                - listitem [ref=e9920]:
+                  - button "Privacy" [ref=e9921]
+                - listitem [ref=e9922]:
+                  - button "Terms" [ref=e9923]
+                - listitem [ref=e9924]:
+                  - button "Refunds" [ref=e9925]
+                - listitem [ref=e9926]:
+                  - button "Accessibility" [ref=e9927]
+                - listitem [ref=e9928]:
+                  - button "Do Not Sell/Share My Info" [ref=e9929]
+                - listitem [ref=e9930]:
+                  - button "Cookie Policy" [ref=e9931]
+          - generic [ref=e9932]:
+            - generic [ref=e9933]:
+              - paragraph [ref=e9934]: © 2026 FunFinity Academy, Inc. All rights reserved.
+              - paragraph [ref=e9935]: "Corporate Address: 123 Innovation Way, Suite 400, San Francisco, CA 94107"
+              - paragraph [ref=e9936]: "Contact: academyfunfinity@gmail.com | Response Time: < 24 Hours"
+              - paragraph [ref=e9937]: "Billing Terms: 14-Day Money-Back Guarantee. Cancel anytime via account settings."
+            - generic [ref=e9938]:
+              - button "Privacy Policy" [ref=e9939]
+              - button "Terms of Service" [ref=e9940]
+              - button "Do Not Sell/Share My Info" [ref=e9941]
+      - generic [ref=e9945]:
+        - generic [ref=e9946]:
+          - img [ref=e9949]
+          - generic [ref=e9951]:
+            - heading "Cookie Preferences" [level=3] [ref=e9952]
+            - paragraph [ref=e9953]: We use cookies to enhance your experience. Please choose which cookies you allow us to use.
+          - button "Close cookie consent" [ref=e9954] [cursor=pointer]:
+            - img [ref=e9955]
+        - generic [ref=e9958]:
+          - generic [ref=e9959]:
+            - generic [ref=e9960]:
+              - img [ref=e9961]
+              - generic [ref=e9963]:
+                - paragraph [ref=e9964]: Essential Cookies
+                - paragraph [ref=e9965]: Required for basic functionality and security
+            - generic [ref=e9967]: Always Active
+          - generic [ref=e9970]:
+            - generic [ref=e9971]:
+              - img [ref=e9972]
+              - generic [ref=e9974]:
+                - paragraph [ref=e9975]: Analytics Cookies
+                - paragraph [ref=e9976]: Help us improve the platform by understanding usage
+            - button "Toggle analytics cookies" [ref=e9977] [cursor=pointer]
+          - generic [ref=e9979]:
+            - generic [ref=e9980]:
+              - img [ref=e9981]
+              - generic [ref=e9983]:
+                - paragraph [ref=e9984]: Marketing Cookies
+                - paragraph [ref=e9985]: Used for personalized content and advertising
+            - button "Toggle marketing cookies" [ref=e9986] [cursor=pointer]
+        - generic [ref=e9988]:
+          - text: By continuing, you agree to our use of cookies. View our
+          - link "Privacy Policy" [ref=e9989] [cursor=pointer]:
+            - /url: /privacy
+          - text: and
+          - link "Terms of Service" [ref=e9990] [cursor=pointer]:
+            - /url: /terms
+        - generic [ref=e9991]:
+          - button "Save Preferences" [ref=e9992] [cursor=pointer]
+          - button "Accept All" [ref=e9993] [cursor=pointer]
+          - button "Decline All" [ref=e9994] [cursor=pointer]
 ```
 
 # Test source
@@ -7197,107 +6364,114 @@ Call log:
   11  |   });
   12  | 
   13  |   test('should navigate to auth page and display login form', async ({ page }) => {
-  14  |     // Click on login button
-> 15  |     await page.click('text=Start Learning Now');
+  14  |     // Dismiss any modal overlays (cookie consent, etc.)
+  15  |     const modal = page.locator('[data-state="open"][aria-hidden="true"]');
+  16  |     if (await modal.isVisible({ timeout: 3000 }).catch(() => false)) {
+  17  |       await page.keyboard.press('Escape');
+  18  |       await page.waitForTimeout(500);
+  19  |     }
+  20  |
+  21  |     // Click on login button
+> 22  |     await page.click('text=Start Learning Now');
       |                ^ TimeoutError: page.click: Timeout 10000ms exceeded.
-  16  |     
-  17  |     // Wait for navigation to auth page
-  18  |     await page.waitForURL('**/auth');
-  19  |     
-  20  |     // Verify auth page elements
-  21  |     await expect(page.locator('h1')).toContainText('Welcome Back');
-  22  |     await expect(page.locator('input[type="email"]')).toBeVisible();
-  23  |     await expect(page.locator('input[type="password"]')).toBeVisible();
-  24  |     await expect(page.locator('button[type="submit"]')).toBeVisible();
-  25  |   });
-  26  | 
-  27  |   test('should show validation error for invalid email', async ({ page }) => {
-  28  |     await page.goto('/auth');
-  29  |     
-  30  |     // Enter invalid email
-  31  |     await page.fill('input[type="email"]', 'invalid-email');
-  32  |     await page.fill('input[type="password"]', 'password123');
-  33  |     await page.click('button[type="submit"]');
-  34  |     
-  35  |     // Wait for error message
-  36  |     await expect(page.locator('text=invalid email')).toBeVisible({ timeout: 5000 });
-  37  |   });
-  38  | 
-  39  |   test('should show validation error for short password', async ({ page }) => {
-  40  |     await page.goto('/auth');
+  23  |
+  24  |     // Wait for navigation to auth page
+  25  |     await page.waitForURL('**/auth');
+  26  |
+  27  |     // Verify auth page elements
+  28  |     await expect(page.locator('h1')).toContainText('Welcome Back');
+  29  |     await expect(page.locator('input[type="email"]')).toBeVisible();
+  30  |     await expect(page.locator('input[type="password"]')).toBeVisible();
+  31  |     await expect(page.locator('button[type="submit"]')).toBeVisible();
+  32  |   });
+  33  |
+  34  |   test('should show validation error for invalid email', async ({ page }) => {
+  35  |     await page.goto('/auth');
+  36  |
+  37  |     // Enter invalid email
+  38  |     await page.fill('input[type="email"]', 'invalid-email');
+  39  |     await page.fill('input[type="password"]', 'password123');
+  40  |     await page.click('button[type="submit"]');
   41  |     
-  42  |     // Enter short password
-  43  |     await page.fill('input[type="email"]', 'test@example.com');
-  44  |     await page.fill('input[type="password"]', 'short');
-  45  |     await page.click('button[type="submit"]');
-  46  |     
-  47  |     // Wait for error message
-  48  |     await expect(page.locator('text=at least 8 characters')).toBeVisible({ timeout: 5000 });
-  49  |   });
-  50  | 
-  51  |   test('should switch between login and signup modes', async ({ page }) => {
-  52  |     await page.goto('/auth');
+  42  |     // Wait for error message
+  43  |     await expect(page.locator('text=invalid email')).toBeVisible({ timeout: 5000 });
+  44  |   });
+  45  |
+  46  |   test('should show validation error for short password', async ({ page }) => {
+  47  |     await page.goto('/auth');
+  48  |
+  49  |     // Enter short password
+  50  |     await page.fill('input[type="email"]', 'test@example.com');
+  51  |     await page.fill('input[type="password"]', 'short');
+  52  |     await page.click('button[type="submit"]');
   53  |     
-  54  |     // Verify login mode is active
-  55  |     await expect(page.locator('h1')).toContainText('Welcome Back');
-  56  |     
-  57  |     // Click on signup link
-  58  |     await page.click('text=Create account');
-  59  |     
-  60  |     // Verify signup mode is active
-  61  |     await expect(page.locator('h1')).toContainText('Create Account');
-  62  |     await expect(page.locator('input[placeholder*="name"]')).toBeVisible();
-  63  |   });
-  64  | 
-  65  |   test('should handle password reset flow', async ({ page }) => {
-  66  |     await page.goto('/auth');
-  67  |     
-  68  |     // Click on forgot password
-  69  |     await page.click('text=Forgot password?');
-  70  |     
-  71  |     // Verify reset form is visible
-  72  |     await expect(page.locator('h1')).toContainText('Reset Password');
-  73  |     await expect(page.locator('input[type="email"]')).toBeVisible();
+  54  |     // Wait for error message
+  55  |     await expect(page.locator('text=at least 8 characters')).toBeVisible({ timeout: 5000 });
+  56  |   });
+  57  |
+  58  |   test('should switch between login and signup modes', async ({ page }) => {
+  59  |     await page.goto('/auth');
+  60  |
+  61  |     // Verify login mode is active
+  62  |     await expect(page.locator('h1')).toContainText('Welcome Back');
+  63  |
+  64  |     // Click on signup link
+  65  |     await page.click('text=Create account');
+  66  |
+  67  |     // Verify signup mode is active
+  68  |     await expect(page.locator('h1')).toContainText('Create Account');
+  69  |     await expect(page.locator('input[placeholder*="name"]')).toBeVisible();
+  70  |   });
+  71  |
+  72  |   test('should handle password reset flow', async ({ page }) => {
+  73  |     await page.goto('/auth');
   74  |     
-  75  |     // Enter email and submit
-  76  |     await page.fill('input[type="email"]', 'test@example.com');
-  77  |     await page.click('button[type="submit"]');
-  78  |     
-  79  |     // Wait for success message
-  80  |     await expect(page.locator('text=Reset link sent')).toBeVisible({ timeout: 5000 });
-  81  |   });
-  82  | 
-  83  |   test('should have proper autocomplete attributes on auth forms', async ({ page }) => {
-  84  |     await page.goto('/auth');
+  75  |     // Click on forgot password
+  76  |     await page.click('text=Forgot password?');
+  77  |
+  78  |     // Verify reset form is visible
+  79  |     await expect(page.locator('h1')).toContainText('Reset Password');
+  80  |     await expect(page.locator('input[type="email"]')).toBeVisible();
+  81  |
+  82  |     // Enter email and submit
+  83  |     await page.fill('input[type="email"]', 'test@example.com');
+  84  |     await page.click('button[type="submit"]');
   85  |     
-  86  |     // Verify email autocomplete
-  87  |     const emailInput = page.locator('input[type="email"]');
-  88  |     await expect(emailInput).toHaveAttribute('autoComplete', 'email');
-  89  |     
-  90  |     // Verify password autocomplete
-  91  |     const passwordInput = page.locator('input[type="password"]');
-  92  |     await expect(passwordInput).toHaveAttribute('autoComplete', 'current-password');
-  93  |   });
-  94  | 
-  95  |   test('should prevent form submission during loading state', async ({ page }) => {
-  96  |     await page.goto('/auth');
-  97  |     
-  98  |     // Fill form
-  99  |     await page.fill('input[type="email"]', 'test@example.com');
-  100 |     await page.fill('input[type="password"]', 'password123');
-  101 |     
-  102 |     // Click submit
-  103 |     await page.click('button[type="submit"]');
+  86  |     // Wait for success message
+  87  |     await expect(page.locator('text=Reset link sent')).toBeVisible({ timeout: 5000 });
+  88  |   });
+  89  |
+  90  |   test('should have proper autocomplete attributes on auth forms', async ({ page }) => {
+  91  |     await page.goto('/auth');
+  92  |
+  93  |     // Verify email autocomplete
+  94  |     const emailInput = page.locator('input[type="email"]');
+  95  |     await expect(emailInput).toHaveAttribute('autoComplete', 'email');
+  96  |
+  97  |     // Verify password autocomplete
+  98  |     const passwordInput = page.locator('input[type="password"]');
+  99  |     await expect(passwordInput).toHaveAttribute('autoComplete', 'current-password');
+  100 |   });
+  101 |
+  102 |   test('should prevent form submission during loading state', async ({ page }) => {
+  103 |     await page.goto('/auth');
   104 |     
-  105 |     // Verify button is disabled during loading
-  106 |     const submitButton = page.locator('button[type="submit"]');
-  107 |     await expect(submitButton).toBeDisabled();
-  108 |   });
-  109 | 
-  110 |   test('should redirect to dashboard after successful login', async ({ page }) => {
-  111 |     await page.goto('/auth');
-  112 |     
-  113 |     // Note: This test requires valid test credentials
-  114 |     // In production, use test account credentials from environment variables
-  115 |     
+  105 |     // Fill form
+  106 |     await page.fill('input[type="email"]', 'test@example.com');
+  107 |     await page.fill('input[type="password"]', 'password123');
+  108 |
+  109 |     // Click submit
+  110 |     await page.click('button[type="submit"]');
+  111 |
+  112 |     // Verify button is disabled during loading
+  113 |     const submitButton = page.locator('button[type="submit"]');
+  114 |     await expect(submitButton).toBeDisabled();
+  115 |   });
+  116 |
+  117 |   test('should redirect to dashboard after successful login', async ({ page }) => {
+  118 |     await page.goto('/auth');
+  119 |
+  120 |     // Note: This test requires valid test credentials
+  121 |     // In production, use test account credentials from environment variables
+  122 |
 ```
