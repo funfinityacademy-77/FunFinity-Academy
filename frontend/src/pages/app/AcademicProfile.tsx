@@ -13,6 +13,33 @@ import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
 import { apiClient } from "@/lib/api-client";
 import { AcademicProfileSkeleton } from "@/components/skeletons/AcademicProfileSkeleton";
+import { z } from "zod";
+
+// Zod validation schemas for XSS prevention and data integrity
+const academicProfileSchema = z.object({
+  school_name: z.string().min(2, "School name must be at least 2 characters").max(100, "School name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "School name contains invalid characters"),
+  school_type: z.enum(["Public", "Private", "Charter", "Homeschool"]),
+  grade_level: z.enum(["9th Grade", "10th Grade", "11th Grade", "12th Grade", "Post-Graduate"]),
+  gpa: z.number().min(0, "GPA cannot be negative").max(4.0, "GPA cannot exceed 4.0"),
+  sat_score: z.number().min(400, "SAT score must be at least 400").max(1600, "SAT score cannot exceed 1600").optional(),
+  act_score: z.number().min(1, "ACT score must be at least 1").max(36, "ACT score cannot exceed 36").optional(),
+  intended_major: z.string().min(2, "Intended major must be at least 2 characters").max(50, "Intended major too long").regex(/^[a-zA-Z\s\-',.]+$/, "Intended major contains invalid characters"),
+  extracurriculars: z.array(z.string().min(2, "Activity name too short").max(100, "Activity name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "Activity name contains invalid characters")).max(20, "Too many extracurricular activities"),
+  achievements: z.array(z.string().min(2, "Achievement name too short").max(100, "Achievement name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "Achievement name contains invalid characters")).max(20, "Too many achievements"),
+  courses: z.array(z.object({
+    name: z.string().min(2, "Course name too short").max(50, "Course name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "Course name contains invalid characters"),
+    level: z.enum(["Regular", "Honors", "AP", "IB", "Dual Enrollment"]),
+    grade: z.enum(["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"]),
+    credits: z.number().min(0.5, "Credits must be at least 0.5").max(10, "Credits cannot exceed 10")
+  })).max(30, "Too many courses")
+});
+
+const courseSchema = z.object({
+  name: z.string().min(2, "Course name too short").max(50, "Course name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "Course name contains invalid characters"),
+  level: z.enum(["Regular", "Honors", "AP", "IB", "Dual Enrollment"]),
+  grade: z.enum(["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"]),
+  credits: z.number().min(0.5, "Credits must be at least 0.5").max(10, "Credits cannot exceed 10")
+});
 
 interface AcademicProfile {
   id?: string;
@@ -91,8 +118,22 @@ export default function AcademicProfile() {
     if (!user) return;
     setSaving(true);
     try {
+      // Validate profile data with Zod schema before saving
+      const validationResult = academicProfileSchema.safeParse(profile);
+      
+      if (!validationResult.success) {
+        const errors = validationResult.error.errors.map(err => err.message).join(', ');
+        toast({
+          title: "Validation Error",
+          description: errors,
+          variant: "destructive"
+        });
+        setSaving(false);
+        return;
+      }
+      
       const profileData = {
-        ...profile,
+        ...validationResult.data,
         user_id: user.id
       };
       
@@ -121,9 +162,21 @@ export default function AcademicProfile() {
 
   const addExtracurricular = () => {
     if (newExtracurricular.trim()) {
+      // Validate with Zod
+      const validationResult = z.string().min(2, "Activity name too short").max(100, "Activity name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "Activity name contains invalid characters").safeParse(newExtracurricular.trim());
+      
+      if (!validationResult.success) {
+        toast({
+          title: "Invalid Activity",
+          description: validationResult.error.errors[0].message,
+          variant: "destructive"
+        });
+        return;
+      }
+      
       setProfile(prev => ({
         ...prev,
-        extracurriculars: [...prev.extracurriculars, newExtracurricular.trim()]
+        extracurriculars: [...prev.extracurriculars, validationResult.data]
       }));
       setNewExtracurricular("");
     }
@@ -138,9 +191,21 @@ export default function AcademicProfile() {
 
   const addAchievement = () => {
     if (newAchievement.trim()) {
+      // Validate with Zod
+      const validationResult = z.string().min(2, "Achievement name too short").max(100, "Achievement name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "Achievement name contains invalid characters").safeParse(newAchievement.trim());
+      
+      if (!validationResult.success) {
+        toast({
+          title: "Invalid Achievement",
+          description: validationResult.error.errors[0].message,
+          variant: "destructive"
+        });
+        return;
+      }
+      
       setProfile(prev => ({
         ...prev,
-        achievements: [...prev.achievements, newAchievement.trim()]
+        achievements: [...prev.achievements, validationResult.data]
       }));
       setNewAchievement("");
     }
@@ -155,6 +220,19 @@ export default function AcademicProfile() {
 
   const addCourse = () => {
     if (newCourse.name && newCourse.grade) {
+      // Validate with Zod
+      const validationResult = courseSchema.safeParse(newCourse);
+      
+      if (!validationResult.success) {
+        const errors = validationResult.error.errors.map(err => err.message).join(', ');
+        toast({
+          title: "Invalid Course",
+          description: errors,
+          variant: "destructive"
+        });
+        return;
+      }
+      
       setProfile(prev => ({
         ...prev,
         courses: [...prev.courses, { ...newCourse, id: Date.now().toString() }]

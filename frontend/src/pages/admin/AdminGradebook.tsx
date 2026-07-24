@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Search, Download, TrendingUp, TrendingDown, Minus, Loader2 } from "lucide-react";
+import { Search, Download, TrendingUp, TrendingDown, Minus, Loader2, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api-client";
 import { useAuth } from "@/hooks/use-auth";
+import { Navigate } from "react-router-dom";
 
 const scoreColor = (score: number) => {
   if (score >= 85) return "text-green-600";
@@ -14,7 +15,12 @@ const scoreColor = (score: number) => {
 };
 
 export default function TeacherGradebook() {
-  const { user } = useAuth();
+  const { user, role } = useAuth();
+  
+  // FERPA compliance: Only admin users can access student educational records
+  if (role !== 'admin') {
+    return <Navigate to="/app" replace />;
+  }
 
   const { data: courses = [] } = useQuery({
     queryKey: ["teacher-courses-list", user?.id],

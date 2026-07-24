@@ -16,6 +16,7 @@ import { apiClient } from "@/lib/api-client";
 import { toast as sonnerToast } from "sonner";
 import { BackupManager } from "@/components/BackupManager";
 import { DataDeletionRequest } from "@/components/compliance/DataDeletionRequest";
+import { DataExport } from "@/components/compliance/DataExport";
 
 const sections = [
   { id: "account", label: "Account", icon: User },
@@ -59,6 +60,7 @@ export default function Settings() {
   const navigate = useNavigate();
   const qc = useQueryClient();
   const [showDataDeletion, setShowDataDeletion] = useState(false);
+  const [showDataExport, setShowDataExport] = useState(false);
 
   const { data: profileData, isLoading: loadingProfile } = useQuery({
     queryKey: ["settings-profile", user?.id],
@@ -416,6 +418,20 @@ export default function Settings() {
                         Delete Data
                       </Button>
                     </div>
+                    <div className="flex items-center justify-between p-6 rounded-2xl bg-blue-500/5 border border-blue-500/20 hover:border-blue-500/40 transition-all group">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-blue-500/10 items-center justify-center group-hover:bg-blue-500/20 transition-colors flex">
+                          <Download className="w-5 h-5 text-blue-500" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-foreground">Data Export</p>
+                          <p className="text-xs text-muted-foreground">Exercise your GDPR right to data portability</p>
+                        </div>
+                      </div>
+                      <Button variant="outline" className="h-9 px-4 rounded-xl text-xs font-bold bg-white/5 border-white/10 hover:bg-white/10" onClick={() => setShowDataExport(true)}>
+                        Export Data
+                      </Button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -518,6 +534,10 @@ export default function Settings() {
         isOpen={showDataDeletion}
         onClose={() => setShowDataDeletion(false)}
         userId={user?.id}
+      />
+      <DataExport
+        isOpen={showDataExport}
+        onClose={() => setShowDataExport(false)}
       />
     </div>
   );

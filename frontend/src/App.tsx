@@ -13,97 +13,101 @@ import { LearningDNAProvider } from "@/hooks/use-learning-dna";
 import { StudentPreferencesProvider } from "@/hooks/use-student-preferences";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { SkeletonLoader } from "@/components/ui/skeleton-loader";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState, lazy } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { AgeGate } from "@/components/AgeGate";
 import { CookieConsent } from "@/components/CookieConsent";
-import Index from "./pages/Index";
-import Auth from "./pages/Auth";
-import ResetPassword from "./pages/ResetPassword";
-import DemoSimulation from "./pages/DemoSimulation";
-import NotFound from "./pages/NotFound";
-import ErrorPage from "./pages/ErrorPage";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
-import RefundPolicy from "./pages/RefundPolicy";
-import Contact from "./pages/Contact";
-import AccountBanned from "./pages/AccountBanned";
-import StudentResources from "./pages/StudentResources";
 import { AppLayout } from "./components/layout/AppLayout";
 import { AdminLayout } from "./components/layout/AdminLayout";
 
-// Student App pages
-import Dashboard from "./pages/app/Dashboard";
-import Courses from "./pages/app/Courses";
-import CourseDetail from "./pages/app/CourseDetail";
-import VideoPlayer from "./pages/app/VideoPlayer";
-import CodingConsole from "./pages/app/CodingConsole";
-import MyLearning from "./pages/app/MyLearning";
-import Quizzes from "./pages/app/Quizzes";
-import LiveClasses from "./pages/app/LiveClasses";
-import Chat from "./pages/app/Chat";
-import Leaderboard from "./pages/app/Leaderboard";
-import Forums from "./pages/app/Forums";
-import MasterCalendar from "./pages/app/MasterCalendar";
-import Analytics from "./pages/app/Analytics";
-import Bookmarks from "./pages/app/Bookmarks";
-import Profile from "./pages/app/Profile";
-import StudentSettings from "./pages/app/StudentSettings";
-import HelpCenter from "./pages/app/HelpCenter";
-import Notes from "./pages/app/Notes";
-import AIToolkit from "./pages/app/AIToolkit";
-import CareerPathfinder from "./pages/app/CareerPathfinder";
-import CareerOpportunities from "./pages/app/CareerOpportunities";
-import CareerExperience from "./pages/app/CareerExperience";
-import CareerRoadmap from "./pages/app/CareerRoadmap";
-import CareerPortfolio from "./pages/app/CareerPortfolio";
-import LearningDNAQuestionnaire from "./pages/app/LearningDNAQuestionnaire";
-import Badges from "./pages/app/Badges";
-import Announcements from "./pages/app/Announcements";
-import BugReport from "./pages/app/BugReport";
-import CalendarPage from "./pages/app/CalendarPage";
-import CourseMap from "./pages/app/CourseMap";
-import CollegeUniversity from "./pages/app/CollegeUniversity";
-import AcademicProfile from "./pages/app/AcademicProfile";
-import StudyPlanner from "./pages/app/StudyPlanner";
-import BackupSettings from "./pages/app/settings/BackupSettings";
-import WelcomeGateway from "./pages/app/WelcomeGateway";
-import CompactProfileQuiz from "./pages/app/CompactProfileQuiz";
-import ProfileSummary from "./pages/app/ProfileSummary";
-import InteractiveTour from "./pages/app/InteractiveTour";
-import SecurityHold from "./pages/app/SecurityHold";
+// Core pages (keep static for immediate loading)
+import Index from "./pages/Index";
+import Auth from "./pages/Auth";
+import NotFound from "./pages/NotFound";
+import ErrorPage from "./pages/ErrorPage";
 
-// Admin pages
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminUsers from "./pages/admin/AdminUsers";
-import AdminAnalytics from "./pages/admin/AdminAnalytics";
-import AdminCourses from "./pages/admin/AdminCourses";
-import AdminAnnouncements from "./pages/admin/AdminAnnouncements";
-import AdminActivityLogs from "./pages/admin/AdminActivityLogs";
-import AdminEnrollments from "./pages/admin/AdminEnrollments";
-import AdminReports from "./pages/admin/AdminReports";
-import AdminBilling from "./pages/admin/AdminBilling";
-import AdminLocalization from "./pages/admin/AdminLocalization";
-import AdminRestrictions from "./pages/admin/AdminRestrictions";
-import AdminClasses from "./pages/admin/AdminClasses";
-import AdminGradebook from "./pages/admin/AdminGradebook";
-import AdminLive from "./pages/admin/AdminLive";
-import AdminStudentProgress from "./pages/admin/AdminStudentProgress";
-import AdminCourseBuilder from "./pages/admin/AdminCourseBuilder";
-import AdminResources from "./pages/admin/AdminResources";
-import AdminSettings from "./pages/admin/AdminSettings";
-import AdminMessages from "./pages/admin/AdminMessages";
-import AdminSecurity from "./pages/admin/AdminSecurity";
-import AdminMapEditor from "./pages/admin/AdminMapEditor";
-import AdminQuizManager from "./pages/admin/AdminQuizManager";
-import AdminAutomation from "./pages/admin/AdminAutomation";
-import AdminBugReports from "./pages/admin/AdminBugReports";
-import AdminCollegeUniversity from "./pages/admin/AdminCollegeUniversity";
-import AdminAcademicProfiles from "./pages/admin/AdminAcademicProfiles";
-import AdminFeedback from "./pages/admin/AdminFeedback";
-import AdminBackgrounds from "./pages/admin/AdminBackgrounds";
-import AdminNotifications from "./pages/admin/AdminNotifications";
+// Lazy load less frequently used pages to improve INP
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const DemoSimulation = lazy(() => import("./pages/DemoSimulation"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+const RefundPolicy = lazy(() => import("./pages/RefundPolicy"));
+const Contact = lazy(() => import("./pages/Contact"));
+const AccountBanned = lazy(() => import("./pages/AccountBanned"));
+const StudentResources = lazy(() => import("./pages/StudentResources"));
+
+// Student App pages (lazy load to reduce initial bundle)
+const Dashboard = lazy(() => import("./pages/app/Dashboard"));
+const Courses = lazy(() => import("./pages/app/Courses"));
+const CourseDetail = lazy(() => import("./pages/app/CourseDetail"));
+const VideoPlayer = lazy(() => import("./pages/app/VideoPlayer"));
+const CodingConsole = lazy(() => import("./pages/app/CodingConsole"));
+const MyLearning = lazy(() => import("./pages/app/MyLearning"));
+const Quizzes = lazy(() => import("./pages/app/Quizzes"));
+const LiveClasses = lazy(() => import("./pages/app/LiveClasses"));
+const Chat = lazy(() => import("./pages/app/Chat"));
+const Leaderboard = lazy(() => import("./pages/app/Leaderboard"));
+const Forums = lazy(() => import("./pages/app/Forums"));
+const MasterCalendar = lazy(() => import("./pages/app/MasterCalendar"));
+const Analytics = lazy(() => import("./pages/app/Analytics"));
+const Bookmarks = lazy(() => import("./pages/app/Bookmarks"));
+const Profile = lazy(() => import("./pages/app/Profile"));
+const StudentSettings = lazy(() => import("./pages/app/StudentSettings"));
+const HelpCenter = lazy(() => import("./pages/app/HelpCenter"));
+const Notes = lazy(() => import("./pages/app/Notes"));
+const AIToolkit = lazy(() => import("./pages/app/AIToolkit"));
+const CareerPathfinder = lazy(() => import("./pages/app/CareerPathfinder"));
+const CareerOpportunities = lazy(() => import("./pages/app/CareerOpportunities"));
+const CareerExperience = lazy(() => import("./pages/app/CareerExperience"));
+const CareerRoadmap = lazy(() => import("./pages/app/CareerRoadmap"));
+const CareerPortfolio = lazy(() => import("./pages/app/CareerPortfolio"));
+const LearningDNAQuestionnaire = lazy(() => import("./pages/app/LearningDNAQuestionnaire"));
+const Badges = lazy(() => import("./pages/app/Badges"));
+const Announcements = lazy(() => import("./pages/app/Announcements"));
+const BugReport = lazy(() => import("./pages/app/BugReport"));
+const CalendarPage = lazy(() => import("./pages/app/CalendarPage"));
+const CourseMap = lazy(() => import("./pages/app/CourseMap"));
+const CollegeUniversity = lazy(() => import("./pages/app/CollegeUniversity"));
+const AcademicProfile = lazy(() => import("./pages/app/AcademicProfile"));
+const StudyPlanner = lazy(() => import("./pages/app/StudyPlanner"));
+const BackupSettings = lazy(() => import("./pages/app/settings/BackupSettings"));
+const WelcomeGateway = lazy(() => import("./pages/app/WelcomeGateway"));
+const CompactProfileQuiz = lazy(() => import("./pages/app/CompactProfileQuiz"));
+const ProfileSummary = lazy(() => import("./pages/app/ProfileSummary"));
+const InteractiveTour = lazy(() => import("./pages/app/InteractiveTour"));
+const SecurityHold = lazy(() => import("./pages/app/SecurityHold"));
+
+// Admin pages (lazy load for better performance)
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminUsers = lazy(() => import("./pages/admin/AdminUsers"));
+const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics"));
+const AdminCourses = lazy(() => import("./pages/admin/AdminCourses"));
+const AdminAnnouncements = lazy(() => import("./pages/admin/AdminAnnouncements"));
+const AdminActivityLogs = lazy(() => import("./pages/admin/AdminActivityLogs"));
+const AdminEnrollments = lazy(() => import("./pages/admin/AdminEnrollments"));
+const AdminReports = lazy(() => import("./pages/admin/AdminReports"));
+const AdminBilling = lazy(() => import("./pages/admin/AdminBilling"));
+const AdminLocalization = lazy(() => import("./pages/admin/AdminLocalization"));
+const AdminRestrictions = lazy(() => import("./pages/admin/AdminRestrictions"));
+const AdminClasses = lazy(() => import("./pages/admin/AdminClasses"));
+const AdminGradebook = lazy(() => import("./pages/admin/AdminGradebook"));
+const AdminLive = lazy(() => import("./pages/admin/AdminLive"));
+const AdminStudentProgress = lazy(() => import("./pages/admin/AdminStudentProgress"));
+const AdminCourseBuilder = lazy(() => import("./pages/admin/AdminCourseBuilder"));
+const AdminResources = lazy(() => import("./pages/admin/AdminResources"));
+const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
+const AdminMessages = lazy(() => import("./pages/admin/AdminMessages"));
+const AdminSecurity = lazy(() => import("./pages/admin/AdminSecurity"));
+const AdminMapEditor = lazy(() => import("./pages/admin/AdminMapEditor"));
+const AdminQuizManager = lazy(() => import("./pages/admin/AdminQuizManager"));
+const AdminAutomation = lazy(() => import("./pages/admin/AdminAutomation"));
+const AdminBugReports = lazy(() => import("./pages/admin/AdminBugReports"));
+const AdminCollegeUniversity = lazy(() => import("./pages/admin/AdminCollegeUniversity"));
+const AdminAcademicProfiles = lazy(() => import("./pages/admin/AdminAcademicProfiles"));
+const AdminFeedback = lazy(() => import("./pages/admin/AdminFeedback"));
+const AdminBackgrounds = lazy(() => import("./pages/admin/AdminBackgrounds"));
+const AdminNotifications = lazy(() => import("./pages/admin/AdminNotifications"));
 
 const queryClient = new QueryClient();
 
@@ -290,7 +294,7 @@ const App = () => {
         </ThemeProvider>
       </QueryClientProvider>
       <SpeedInsights />
-      <Analytics />
+      <VercelAnalytics />
     </>
   );
 };

@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
-import { Users, TrendingUp, TrendingDown, AlertTriangle, Star, Target } from "lucide-react";
+import { Users, TrendingUp, TrendingDown, AlertTriangle, Star, Target, Shield } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api-client";
+import { useAuth } from "@/hooks/use-auth";
+import { Navigate } from "react-router-dom";
 
 const classPerformance = [
   { name: "Algebra", avgScore: 0, submissions: 0, atRisk: 0 },
@@ -30,6 +32,13 @@ const scoreDistribution = [
 ];
 
 export default function TeacherProgress() {
+  const { user, role } = useAuth();
+  
+  // FERPA compliance: Only admin users can access student educational records
+  if (role !== 'admin') {
+    return <Navigate to="/app" replace />;
+  }
+  
   const { data: enrollments, isLoading } = useQuery({
     queryKey: ["admin-enrollments-progress"],
     queryFn: async () => {

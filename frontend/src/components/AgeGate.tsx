@@ -226,8 +226,18 @@ export function AgeGate() {
   const handleParentEmailSubmit = async () => {
     setError("");
 
-    if (!parentEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(parentEmail)) {
+    // Enhanced email validation with domain checking
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!parentEmail || !emailRegex.test(parentEmail)) {
       setError("Please enter a valid parent email address");
+      return;
+    }
+
+    // Check for disposable email domains (basic list)
+    const disposableDomains = ['tempmail.com', 'throwaway.com', 'fake.com', 'test.com'];
+    const emailDomain = parentEmail.split('@')[1]?.toLowerCase();
+    if (disposableDomains.some(domain => emailDomain?.includes(domain))) {
+      setError("Please use a valid, permanent email address");
       return;
     }
 
@@ -236,15 +246,24 @@ export function AgeGate() {
       return;
     }
 
+    // Validate child name contains only letters and spaces
+    if (!/^[a-zA-Z\s]+$/.test(childName.trim())) {
+      setError("Name should only contain letters");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const birthDateStr = `${birthYear}-${birthMonth.padStart(2, '0')}-${birthDay.padStart(2, '0')}`;
       const resp = await requestParentalConsent(childName.trim(), parentEmail.trim(), birthDateStr);
-      // Store that parental consent was requested
+      // Store that parental consent was requested with timestamp
       localStorage.setItem('parental-consent-requested', 'true');
+      localStorage.setItem('parental-consent-requested-timestamp', Date.now().toString());
       localStorage.setItem('parental-consent-email', parentEmail);
       localStorage.setItem('child-name', childName.trim());
       localStorage.setItem('child-birthdate', birthDateStr);
+      // Store consent status as pending
+      localStorage.setItem('parental-consent-status', 'pending');
       // Optionally store token for later verification
       if (resp?.token) localStorage.setItem('parental-consent-token', resp.token);
       setIsSubmitting(false);

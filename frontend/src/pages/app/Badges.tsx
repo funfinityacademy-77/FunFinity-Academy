@@ -204,11 +204,14 @@ export default function Badges() {
             >
               <button
                 onClick={() => setExpandedCategory(isExpanded ? null : category)}
-                className="w-full p-4 flex items-center justify-between hover:bg-secondary/20 transition-colors"
+                className="w-full p-4 flex items-center justify-between hover:bg-secondary/20 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-expanded={isExpanded}
+                aria-controls={`category-${category.replace(/\s+/g, '-')}`}
+                id={`${category.replace(/\s+/g, '-')}-header`}
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <CategoryIcon className="w-5 h-5 text-primary" />
+                    <CategoryIcon className="w-5 h-5 text-primary" aria-hidden="true" />
                   </div>
                   <div className="text-left">
                     <h3 className="font-semibold text-foreground">{category}</h3>
@@ -217,7 +220,7 @@ export default function Badges() {
                     </p>
                   </div>
                 </div>
-                {isExpanded ? <ChevronUp className="w-5 h-5 text-muted-foreground" /> : <ChevronDown className="w-5 h-5 text-muted-foreground" />}
+                {isExpanded ? <ChevronUp className="w-5 h-5 text-muted-foreground" aria-hidden="true" /> : <ChevronDown className="w-5 h-5 text-muted-foreground" aria-hidden="true" />}
               </button>
 
               <AnimatePresence>
@@ -226,6 +229,9 @@ export default function Badges() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
+                    id={`category-${category.replace(/\s+/g, '-')}`}
+                    role="region"
+                    aria-labelledby={`${category.replace(/\s+/g, '-')}-header`}
                     className="border-t border-border/20"
                   >
                     <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -279,7 +285,14 @@ export default function Badges() {
                                   <span>Progress</span>
                                   <span>{badge.progress} / {badge.maxProgress}</span>
                                 </div>
-                                <div className="h-2 rounded-full bg-border/50 overflow-hidden">
+                                <div 
+                                  className="h-2 rounded-full bg-border/50 overflow-hidden"
+                                  role="progressbar"
+                                  aria-valuenow={badge.progress}
+                                  aria-valuemin={0}
+                                  aria-valuemax={badge.maxProgress}
+                                  aria-label={`Progress towards ${badge.name}: ${badge.progress} of ${badge.maxProgress}`}
+                                >
                                   <motion.div
                                     initial={{ width: 0 }}
                                     animate={{ width: `${progress}%` }}
