@@ -13,15 +13,11 @@ export function CookieConsent() {
   });
 
   useEffect(() => {
-    // Check if user has already responded to cookie consent
-    const consent = localStorage.getItem('funfinity_cookie_consent');
-    if (!consent) {
-      // Small delay to ensure page is fully loaded before showing
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
+    // Always show cookie consent on page load (removed "accepted once" functionality)
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleSavePreferences = () => {
