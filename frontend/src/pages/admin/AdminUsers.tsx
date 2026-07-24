@@ -4,18 +4,24 @@ import {
   Search, Users, UserPlus, Shield, User,
   MoreVertical, CheckCircle, XCircle, X, Mail, User as UserIcon,
   Ban, Trash2, Eye, Lock, FileText, Download, Clock, Activity,
-  Brain, Sparkles, Lightbulb, Target, BookOpen, Zap, Award
+  Brain, Sparkles, Lightbulb, Target, BookOpen, Zap, Award, Filter,
+  SortAsc, Grid, List, ChevronRight, Calendar, Globe
 } from "lucide-react";
 import { FunfinityIcon } from "@/components/brand/FunfinityLogo";
 import { Button } from "@/components/ui/button";
 import { SkeletonLoader } from "@/components/ui/skeleton-loader";
 import { AdminUsersSkeleton } from "@/components/skeletons/AdminUsersSkeleton";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchUsers, createUser, restrictUser, banUser, deleteUser, generateLearningPlan } from "@/lib/data-service";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
+import { useTheme } from "@/hooks/use-theme";
 
 const roleIcon: Record<string, React.ReactNode> = {
   Admin:           <Shield className="w-3 h-3" />,
@@ -88,8 +94,11 @@ type RestrictModal = { isOpen: boolean; userId: string; type: 'restrict' | 'ban'
 type LearningPlanState = { isGenerating: boolean; plan: any; error: string | null };
 
 export default function AdminUsers() {
+  const { theme } = useTheme();
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("All");
+  const [sortBy, setSortBy] = useState("name");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const [menu, setMenu] = useState<ActionMenu>(null);
   const [addUserModal, setAddUserModal] = useState<AddUserModal>({ isOpen: false });
   const [profileModal, setProfileModal] = useState<ProfileModal>(null);
@@ -253,25 +262,83 @@ export default function AdminUsers() {
           </Button>
         </div>
 
-        {/* Filters */}
-        <div className="platform-card p-4 flex flex-wrap items-center gap-3 mb-4">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-secondary/50 border border-border/30 flex-1 min-w-[200px]">
-            <Search className="w-4 h-4 text-muted-foreground shrink-0" />
-            <input value={search} onChange={e => setSearch(e.target.value)} type="text" placeholder="Search users..." className="bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none w-full" />
-          </div>
-          <div className="flex gap-2 flex-wrap">
-            {["All", "Student", "Teacher", "Parent", "Admin-Instructor", "Admin"].map(r => (
-              <button key={r} onClick={() => setRoleFilter(r)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all ${roleFilter === r ? "bg-primary/10 text-primary border-primary/30" : "border-border/30 text-muted-foreground hover:text-foreground hover:bg-secondary/50"}`}>
-                {r}
-              </button>
-            ))}
-          </div>
-          <Button variant="outline" size="sm" onClick={() => setShowPermissionsMatrix(!showPermissionsMatrix)} className="ml-auto">
-            <Shield className="w-4 h-4 mr-2" />
-            {showPermissionsMatrix ? "Hide" : "View"} Permissions
-          </Button>
-        </div>
+        {/* Enhanced Filters */}
+        <Card className="border-border/30">
+          <CardContent className="p-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-secondary/50 border border-border/30 flex-1 min-w-[200px]">
+                <Search className="w-4 h-4 text-muted-foreground shrink-0" />
+                <input value={search} onChange={e => setSearch(e.target.value)} type="text" placeholder="Search users by name or email..." className="bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none w-full" />
+              </div>
+              
+              <Select value={roleFilter} onValueChange={setRoleFilter}>
+                <SelectTrigger className="w-32">
+                  <SelectValue placeholder="Role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="All">All Roles</SelectItem>
+                  <SelectItem value="Student">Student</SelectItem>
+                  <SelectItem value="Teacher">Teacher</SelectItem>
+                  <SelectItem value="Parent">Parent</SelectItem>
+                  <SelectItem value="Admin-Instructor">Admin-Instructor</SelectItem>
+                  <SelectItem value="Admin">Admin</SelectItem>
+                </SelectContent>
+              </Select>
+
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="w-32">
+                  <SelectValue placeholder="Sort" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="name">Name</SelectItem>
+                  <SelectItem value="email">Email</SelectItem>
+                  <SelectItem value="role">Role</SelectItem>
+                  <SelectItem value="created">Created</SelectItem>
+                </SelectContent>
+              </Select>
+
+              <div className="flex items-center gap-1 border-l border-border/30 pl-3">
+                <Button
+                  variant={viewMode === "list" ? "secondary" : "ghost"}
+                  size="sm"
+                  onClick={() => setViewMode("list")}
+                  className="h-8 w-8 p-0"
+                >
+                  <List className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant={viewMode === "grid" ? "secondary" : "ghost"}
+                  size="sm"
+                  onClick={() => setViewMode("grid")}
+                  className="h-8 w-8 p-0"
+                >
+                  <Grid className="w-4 h-4" />
+                </Button>
+              </div>
+
+              <Button variant="outline" size="sm" onClick={() => setShowPermissionsMatrix(!showPermissionsMatrix)} className="ml-auto gap-2">
+                <Shield className="w-4 h-4" />
+                {showPermissionsMatrix ? "Hide" : "View"} Permissions
+              </Button>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border/30">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-foreground">{filtered.length} users</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-emerald-500" />
+                <span className="text-sm text-muted-foreground">{(users || []).filter((u: any) => u.user_roles?.role === 'Student').length} students</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-cyan-500" />
+                <span className="text-sm text-muted-foreground">{(users || []).filter((u: any) => u.user_roles?.role === 'Teacher').length} teachers</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Permissions Matrix */}
         {showPermissionsMatrix && (
@@ -339,80 +406,160 @@ export default function AdminUsers() {
           </motion.div>
         )}
 
-        {/* Table */}
-        <div className="platform-card overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-border/30 bg-secondary/20">
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">User</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Role</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden md:table-cell">Info</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden sm:table-cell">Status</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden lg:table-cell">Joined</th>
-                  <th className="px-4 py-3 w-10" />
-                </tr>
-              </thead>
-              <tbody>
+        {/* Users Table/Grid */}
+        <Card className="border-border/30 overflow-hidden">
+          <CardContent className="p-0">
+            {viewMode === "list" ? (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-border/30 bg-secondary/20">
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">User</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Role</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden md:table-cell">Info</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden sm:table-cell">Status</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden lg:table-cell">Joined</th>
+                      <th className="px-4 py-3 w-10" />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filtered.length === 0 ? (
+                      <tr>
+                        <td colSpan={6} className="px-4 py-12 text-center">
+                          <div className="flex flex-col items-center justify-center">
+                            <Users className="w-12 h-12 text-muted-foreground/30 mb-3" />
+                            <p className="text-muted-foreground text-sm">No users found</p>
+                          </div>
+                        </td>
+                      </tr>
+                    ) : (
+                      filtered.map((user: any, i) => {
+                        const role = user.user_roles?.role || "Student";
+                        return (
+                          <motion.tr key={user.user_id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.04 }}
+                            className="border-b border-border/20 hover:bg-secondary/20 transition-colors cursor-pointer"
+                            onClick={() => setProfileModal({ isOpen: true, userId: user.user_id, activeTab: 'overview' })}
+                          >
+                            <td className="px-4 py-3">
+                              <div className="flex items-center gap-3">
+                                <div className={cn(
+                                  "w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0",
+                                  theme === 'dark' ? "bg-gradient-brand" : "bg-gradient-to-br from-primary to-accent"
+                                )}>
+                                  {user.display_name?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase()}
+                                </div>
+                                <div className="min-w-0">
+                                  <p className="text-sm font-medium text-foreground truncate">{user.display_name || "Unknown"}</p>
+                                  <p className="text-[10px] text-muted-foreground truncate">{user.email || "No email"}</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-4 py-3">
+                              <Badge className={cn("text-[10px] font-medium", roleColor[role])}>
+                                {roleIcon[role]}
+                                <span className="ml-1">{role}</span>
+                              </Badge>
+                            </td>
+                            <td className="px-4 py-3 hidden md:table-cell">
+                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <Calendar className="w-3 h-3" />
+                                <span>{user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}</span>
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 hidden sm:table-cell">
+                              <div className="flex items-center gap-2">
+                                <div className={cn(
+                                  "w-2 h-2 rounded-full",
+                                  user.is_banned ? "bg-destructive" : "bg-emerald-500"
+                                )} />
+                                <span className="text-xs text-muted-foreground">
+                                  {user.is_banned ? "Banned" : "Active"}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 hidden lg:table-cell">
+                              <span className="text-xs text-muted-foreground">
+                                {user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={(e) => openMenu(e, user.user_id)}
+                                className="h-8 w-8 p-0"
+                              >
+                                <MoreVertical className="w-4 h-4" />
+                              </Button>
+                            </td>
+                          </motion.tr>
+                        );
+                      })
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {filtered.length === 0 ? (
-                  <tr>
-                    <td colSpan={6} className="px-4 py-12 text-center">
-                      <div className="flex flex-col items-center justify-center">
-                        <Users className="w-12 h-12 text-muted-foreground/30 mb-3" />
-                        <p className="text-muted-foreground text-sm">No users found</p>
-                      </div>
-                    </td>
-                  </tr>
+                  <div className="col-span-full flex flex-col items-center justify-center py-12">
+                    <Users className="w-12 h-12 text-muted-foreground/30 mb-3" />
+                    <p className="text-muted-foreground text-sm">No users found</p>
+                  </div>
                 ) : (
                   filtered.map((user: any, i) => {
                     const role = user.user_roles?.role || "Student";
                     return (
-                      <motion.tr key={user.user_id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.04 }}
-                        className="border-b border-border/20 hover:bg-secondary/20 transition-colors">
-                        <td className="px-4 py-3">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0 bg-gradient-brand">
-                              {user.display_name?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase()}
+                      <motion.div
+                        key={user.user_id}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: i * 0.05 }}
+                        className="relative group"
+                      >
+                        <Card className="cursor-pointer hover:shadow-medium transition-all overflow-hidden">
+                          <CardContent className="p-4">
+                            <div className="flex items-start justify-between mb-3">
+                              <div className={cn(
+                                "w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-bold",
+                                theme === 'dark' ? "bg-gradient-brand" : "bg-gradient-to-br from-primary to-accent"
+                              )}>
+                                {user.display_name?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase()}
+                              </div>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={(e) => openMenu(e, user.user_id)}
+                                className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                              >
+                                <MoreVertical className="w-4 h-4" />
+                              </Button>
                             </div>
-                            <div className="min-w-0">
-                              <p className="text-sm font-medium text-foreground truncate">{user.display_name || "Unknown"}</p>
-                              <p className="text-[10px] text-muted-foreground truncate">{user.email || "No email"}</p>
+                            <p className="font-medium text-foreground truncate">{user.display_name || "Unknown"}</p>
+                            <p className="text-xs text-muted-foreground truncate mb-2">{user.email || "No email"}</p>
+                            <Badge className={cn("text-[10px] font-medium", roleColor[role])}>
+                              {roleIcon[role]}
+                              <span className="ml-1">{role}</span>
+                            </Badge>
+                            <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border/30">
+                              <div className={cn(
+                                "w-2 h-2 rounded-full",
+                                user.is_banned ? "bg-destructive" : "bg-emerald-500"
+                              )} />
+                              <span className="text-[10px] text-muted-foreground">
+                                {user.is_banned ? "Banned" : "Active"}
+                              </span>
                             </div>
-                          </div>
-                        </td>
-                        <td className="px-4 py-3">
-                          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border ${roleColor[role]}`}>
-                            {roleIcon[role]} {role}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 hidden md:table-cell">
-                          <span className="text-xs text-muted-foreground">{user.grade || "N/A"}</span>
-                        </td>
-                        <td className="px-4 py-3 hidden sm:table-cell">
-                          <span className="inline-flex items-center gap-1 text-xs font-medium text-green-600">
-                            <CheckCircle className="w-3 h-3" /> Active
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 hidden lg:table-cell">
-                          <span className="text-xs text-muted-foreground">{user.created_at ? new Date(user.created_at).toLocaleDateString() : "N/A"}</span>
-                        </td>
-                        <td className="px-4 py-3 relative">
-                          <button onClick={e => openMenu(e, user.user_id)}
-                            className="p-1.5 rounded-lg hover:bg-secondary/60 text-muted-foreground transition-colors">
-                            <MoreVertical className="w-4 h-4" />
-                          </button>
-                        </td>
-                      </motion.tr>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
                     );
                   })
                 )}
-              </tbody>
-            </table>
-          </div>
-          <div className="px-4 py-3 border-t border-border/20 bg-secondary/10">
-            <p className="text-xs text-muted-foreground">Showing {filtered.length} of {users?.length || 0} users</p>
-          </div>
-        </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </motion.div>
 
       {/* ── Floating action menu ── */}

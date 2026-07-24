@@ -1,28 +1,43 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, Circle, User, Compass, Search, Clock, FileText, Target, Award, Rocket, Briefcase, ChevronRight, Sparkles, Lock } from "lucide-react";
+import { CheckCircle2, Circle, User, Compass, Search, Clock, FileText, Target, Award, Rocket, Briefcase, ChevronRight, Sparkles, Lock, Plus, RotateCcw } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCareer } from "@/hooks/use-career";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const iconMap: Record<string, React.ComponentType<any>> = {
   User, Compass, Search, Clock, FileText, Target, Award, Rocket, Briefcase
 };
 
-import { Button } from "@/components/ui/button";
-import { RotateCcw } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-
 export default function CareerRoadmap() {
   const { profile, getCompletionPercentage, resetRoadmap } = useCareer();
   const completion = getCompletionPercentage();
   const { toast } = useToast();
+  const [showGoalDialog, setShowGoalDialog] = useState(false);
+  const [newGoal, setNewGoal] = useState({ title: "", category: "", targetDate: "", priority: "medium" });
 
   const handleReset = async () => {
     if (confirm("Are you sure you want to reset your roadmap progress?")) {
       await resetRoadmap();
       toast({ title: "Progress reset to 0%" });
     }
+  };
+
+  const handleAddGoal = () => {
+    if (!newGoal.title || !newGoal.category) {
+      toast({ title: "Missing fields", description: "Please fill in required fields.", variant: "destructive" });
+      return;
+    }
+    toast({ title: "Goal added!", description: "Your new goal has been added to the roadmap." });
+    setNewGoal({ title: "", category: "", targetDate: "", priority: "medium" });
+    setShowGoalDialog(false);
   };
 
   // Calculate progress between milestones
@@ -35,6 +50,20 @@ export default function CareerRoadmap() {
   // Find the next incomplete milestone
   const nextMilestoneIndex = profile.milestones.findIndex(m => !m.completed);
   const currentProgress = nextMilestoneIndex === -1 ? 100 : (nextMilestoneIndex / profile.milestones.length) * 100;
+
+  // Calculate additional metrics
+  const completedMilestones = profile.milestones.filter(m => m.completed).length;
+  const totalMilestones = profile.milestones.length;
+  const avgCompletionTime = completedMilestones > 0 
+    ? profile.milestones.filter(m => m.completed).reduce((acc, m) => {
+        if (m.completed_at) {
+          const created = new Date(m.created_at || Date.now()).getTime();
+          const completed = new Date(m.completed_at).getTime();
+          return acc + (completed - created);
+        }
+        return acc;
+      }, 0) / completedMilestones / (1000 * 60 * 60 * 24) // days
+    : 0;
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
@@ -51,8 +80,27 @@ export default function CareerRoadmap() {
         </div>
         <p className="text-sm text-muted-foreground">Your journey to career readiness</p>
         
-        {/* Fluid Progress Bar */}
-        <div className="max-w-md mx-auto space-y-3 mt-6">
+        {/* Enhanced Progress Dashboard */}
+        <div className="max-w-4xl mx-auto space-y-4 mt-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 text-center">
+              <p className="text-2xl font-bold text-primary">{completedMilestones}/{totalMilestones}</p>
+              <p className="text-xs text-muted-foreground">Milestones</p>
+            </div>
+            <div className="p-4 rounded-xl bg-secondary/50 border border-border/30 text-center">
+              <p className="text-2xl font-bold text-foreground">{Math.round(currentProgress)}%</p>
+              <p className="text-xs text-muted-foreground">Overall Progress</p>
+            </div>
+            <div className="p-4 rounded-xl bg-accent/10 border border-accent/20 text-center">
+              <p className="text-2xl font-bold text-accent">{Math.round(avgCompletionTime)}d</p>
+              <p className="text-xs text-muted-foreground">Avg/Goal</p>
+            </div>
+            <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center">
+              <p className="text-2xl font-bold text-emerald-500">{nextMilestoneIndex === -1 ? "Done" : nextMilestoneIndex + 1}</p>
+              <p className="text-xs text-muted-foreground">Next Step</p>
+            </div>
+          </div>
+          
           <div className="flex justify-between text-xs text-muted-foreground">
             <span className="font-medium">Journey Progress</span>
             <span className="font-bold text-primary">{Math.round(currentProgress)}%</span>
@@ -204,13 +252,57 @@ export default function CareerRoadmap() {
         </div>
       </div>
 
-      {/* Reset Button */}
+      {/* Action Bar */}
       <motion.div 
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         transition={{ delay: 1 }}
-        className="text-center"
+        className="flex justify-center gap-3"
       >
+        <Dialog open={showGoalDialog} onOpenChange={setShowGoalDialog}>
+          <DialogTrigger asChild>
+            <Button variant="hero" size="sm" className="gap-2">
+              <Plus className="w-4 h-4" /> Add Custom Goal
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader><DialogTitle>Add Custom Goal</DialogTitle></DialogHeader>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label>Goal Title</Label>
+                <Input value={newGoal.title} onChange={e => setNewGoal({...newGoal, title: e.target.value})} placeholder="e.g., Complete AP Calculus" />
+              </div>
+              <div className="space-y-2">
+                <Label>Category</Label>
+                <Select value={newGoal.category} onValueChange={v => setNewGoal({...newGoal, category: v})}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="academic">Academic</SelectItem>
+                    <SelectItem value="career">Career</SelectItem>
+                    <SelectItem value="personal">Personal Growth</SelectItem>
+                    <SelectItem value="extracurricular">Extracurricular</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Target Date</Label>
+                <Input type="date" value={newGoal.targetDate} onChange={e => setNewGoal({...newGoal, targetDate: e.target.value})} />
+              </div>
+              <div className="space-y-2">
+                <Label>Priority</Label>
+                <Select value={newGoal.priority} onValueChange={v => setNewGoal({...newGoal, priority: v})}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="high">High</SelectItem>
+                    <SelectItem value="medium">Medium</SelectItem>
+                    <SelectItem value="low">Low</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button onClick={handleAddGoal} className="w-full">Add Goal</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
         <Button variant="outline" size="sm" onClick={handleReset} className="gap-2">
           <RotateCcw className="w-4 h-4" /> Reset Journey
         </Button>

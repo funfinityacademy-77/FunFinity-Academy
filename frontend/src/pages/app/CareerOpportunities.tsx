@@ -1,14 +1,18 @@
 import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
-import { Search, Heart, MapPin, Tag, Filter, Sparkles, Microscope, Palette, BarChart3, HeartPulse, Hammer, Building2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, Heart, MapPin, Tag, Filter, Sparkles, Microscope, Palette, BarChart3, HeartPulse, Hammer, Building2, X, Calendar, Clock, ExternalLink, Users, DollarSign, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useCareer, CareerCluster, allOpportunities } from "@/hooks/use-career";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useCareer, CareerCluster } from "@/hooks/use-career";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
+import { toast } from "sonner";
 
 const clusterColors: Record<CareerCluster, string> = {
   STEM: "bg-cyan/10 text-cyan border-cyan/30",
@@ -24,20 +28,37 @@ const clusterIcons: Record<CareerCluster, typeof Microscope> = {
 };
 
 export default function CareerOpportunities() {
-  const { profile, toggleSaveOpportunity, getRecommendedOpportunities } = useCareer();
+  const { profile, toggleSaveOpportunity } = useCareer();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [typeFilter, setTypeFilter] = useState<string>("all");
-  const [loading, setLoading] = useState(false);
+  const [selectedOpportunity, setSelectedOpportunity] = useState<any>(null);
 
-  const opportunities = useMemo(() => {
-    let list = getRecommendedOpportunities();
+  // Fetch opportunities from API
+  const { data: opportunities = [], isLoading } = useQuery({
+    queryKey: ["opportunities"],
+    queryFn: async () => {
+      try {
+        const data = await apiClient.get<any[]>('/api/opportunities');
+        return data;
+      } catch (error) {
+        console.error('Failed to fetch opportunities, using fallback data');
+        // Fallback to hook data if API fails
+        const { getRecommendedOpportunities } = useCareer();
+        return getRecommendedOpportunities();
+      }
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+
+  const filteredOpportunities = useMemo(() => {
+    let list = opportunities;
     if (search) list = list.filter(o => o.title.toLowerCase().includes(search.toLowerCase()) || o.description.toLowerCase().includes(search.toLowerCase()));
     if (categoryFilter !== "all") list = list.filter(o => o.category === categoryFilter);
     if (typeFilter !== "all") list = list.filter(o => o.type === typeFilter);
     return list;
-  }, [search, categoryFilter, typeFilter, profile.quizCompleted]);
+  }, [search, categoryFilter, typeFilter, opportunities]);
 
   const isRecommended = (category: CareerCluster) => profile.quizCompleted && profile.careerInterests.includes(category);
 
@@ -96,7 +117,9 @@ export default function CareerOpportunities() {
             const saved = profile.savedOpportunities.includes(opp.id);
             return (
               <motion.div key={opp.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
-                <Card className={cn("glass-card border-border/30 h-full flex flex-col transition-all hover:shadow-medium", isRecommended(opp.category) && "ring-2 ring-primary/20")}>
+                <Card className={cn("glass-card border-border/30 h-full flex flex-col transition-all hover:shadow-medium cursor-pointer", isRecommended(opp.category) && "ring-2 ring-primary/20")}
+                  onClick={() => setSelectedOpportunity(opp)}
+                >
                   <CardContent className="p-5 flex flex-col flex-1">
                     <div className="flex items-start justify-between gap-2 mb-3">
                       <div className="flex flex-wrap gap-1.5">
@@ -135,6 +158,140 @@ export default function CareerOpportunities() {
           })}
         </div>
       )}
+
+      {/* Opportunity Detail Modal */}
+      <AnimatePresence>
+        {selectedOpportunity && (
+          <Dialog open={!!selectedOpportunity} onOpenChange={() => setSelectedOpportunity(null)}>
+            <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto rounded-[2rem]">
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-display font-bold">{selectedOpportunity.title}</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-6 mt-4">
+                {/* Header Info */}
+                <div className="flex flex-wrap gap-3">
+                  <Badge className={cn("flex items-center gap-1 text-sm", clusterColors[selectedOpportunity.category])}>
+                    {(() => {
+                      const ClusterIcon = clusterIcons[selectedOpportunity.category];
+                      return <ClusterIcon className="w-4 h-4" />;
+                    })()}
+                    {selectedOpportunity.category}
+                  </Badge>
+                  <Badge variant="secondary" className="text-sm">{selectedOpportunity.type}</Badge>
+                  {isRecommended(selectedOpportunity.category) && (
+                    <Badge className="bg-gradient-brand text-primary-foreground border-0">
+                      <Sparkles className="w-4 h-4 mr-1" /> Recommended For You
+                    </Badge>
+                  )}
+                </div>
+
+                {/* Key Details */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-secondary/30">
+                    <MapPin className="w-4 h-4 text-primary" />
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase">Location</p>
+                      <p className="text-sm font-medium">{selectedOpportunity.location}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-secondary/30">
+                    <Clock className="w-4 h-4 text-primary" />
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase">Duration</p>
+                      <p className="text-sm font-medium">{selectedOpportunity.duration || "Flexible"}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-secondary/30">
+                    <DollarSign className="w-4 h-4 text-primary" />
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase">Compensation</p>
+                      <p className="text-sm font-medium">{selectedOpportunity.compensation || "Unpaid"}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-secondary/30">
+                    <Users className="w-4 h-4 text-primary" />
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase">Spots</p>
+                      <p className="text-sm font-medium">{selectedOpportunity.spots || "Open"}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div className="p-4 rounded-xl bg-primary/5 border border-primary/20">
+                  <h3 className="font-semibold text-foreground mb-2">About This Opportunity</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{selectedOpportunity.description}</p>
+                </div>
+
+                {/* Requirements */}
+                <div>
+                  <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary" />
+                    Requirements
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedOpportunity.requirements.map((req: string, i: number) => (
+                      <Badge key={i} variant="outline" className="bg-secondary/50 border-border/30">{req}</Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Skills Gained */}
+                {selectedOpportunity.skills && (
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-3">Skills You'll Gain</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedOpportunity.skills.map((skill: string, i: number) => (
+                        <Badge key={i} className="bg-primary/10 text-primary border-primary/20">{skill}</Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Application Deadline */}
+                {selectedOpportunity.deadline && (
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-orange-500/10 border border-orange-500/20">
+                    <Calendar className="w-4 h-4 text-orange-500" />
+                    <div>
+                      <p className="text-[10px] text-orange-500 uppercase font-bold">Application Deadline</p>
+                      <p className="text-sm font-medium text-foreground">{new Date(selectedOpportunity.deadline).toLocaleDateString()}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Actions */}
+                <div className="flex gap-3 pt-4 border-t border-border/30">
+                  <Button 
+                    variant="hero" 
+                    className="flex-1"
+                    onClick={() => {
+                      toast.success("Application started! Check your email for next steps.");
+                      setSelectedOpportunity(null);
+                    }}
+                  >
+                    Apply Now
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => toggleSaveOpportunity(selectedOpportunity.id)}
+                    className={profile.savedOpportunities.includes(selectedOpportunity.id) ? "border-magenta text-magenta" : ""}
+                  >
+                    <Heart className={cn("w-4 h-4 mr-2", profile.savedOpportunities.includes(selectedOpportunity.id) && "fill-magenta")} />
+                    {profile.savedOpportunities.includes(selectedOpportunity.id) ? "Saved" : "Save"}
+                  </Button>
+                  {selectedOpportunity.website && (
+                    <Button variant="ghost" asChild>
+                      <a href={selectedOpportunity.website} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

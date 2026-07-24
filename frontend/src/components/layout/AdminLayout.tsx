@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, Users, BookOpen, BarChart3, Settings, Menu, Shield, Megaphone, FileText, Globe,
   Activity, HelpCircle, Search, ChevronRight, Sun, Moon, LogOut, Ban,
-  ClipboardList, Video, PlusCircle, Library, TrendingUp, MessageSquare, Sparkles, Bug, Settings as SettingsIcon, Zap, Award
+  ClipboardList, Video, PlusCircle, Library, TrendingUp, MessageSquare, Sparkles, Bug, Settings as SettingsIcon, Zap, Award, X
 } from "lucide-react";
 import { FunfinityIcon } from "@/components/brand/FunfinityLogo";
-
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
 import { NotificationDropdown } from "@/components/NotificationDropdown";
 import { useAuth } from "@/hooks/use-auth";
+import { useQuery } from "@tanstack/react-query";
+import { fetchUsers } from "@/lib/data-service";
+import { useSupabaseRealtime } from "@/hooks/useSupabaseRealtime";
 
 const navGroups = [
   {
@@ -67,9 +69,34 @@ const navGroups = [
 export function AdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSearchResults, setShowSearchResults] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
   const { signOut } = useAuth();
+
+  // Fetch data for search
+  const { data: users } = useQuery({
+    queryKey: ["admin-search-users"],
+    queryFn: async () => {
+      const result = await fetchUsers();
+      return result.data || [];
+    },
+  });
+
+  const { data: courses } = useSupabaseRealtime('courses');
+
+  // Filter search results
+  const searchResults = [
+    ...(users?.filter(u => 
+      u.display_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      u.email?.toLowerCase().includes(searchQuery.toLowerCase())
+    ).map(u => ({ type: 'user', id: u.id, label: u.display_name || u.email, href: `/admin/users` })) || []),
+    ...(courses?.filter(c => 
+      c.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      c.description?.toLowerCase().includes(searchQuery.toLowerCase())
+    ).map(c => ({ type: 'course', id: c.id, label: c.title, href: `/admin/courses` })) || []),
+  ].slice(0, 8);
 
   const handleLogout = async () => {
     try {
@@ -167,9 +194,57 @@ export function AdminLayout() {
             <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 rounded-lg hover:bg-secondary/50 transition-colors" aria-label="Toggle sidebar">
               <Menu className="w-5 h-5 text-muted-foreground" />
             </button>
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-secondary/50 border border-border/30 w-64">
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-secondary/50 border border-border/30 w-80 relative">
               <Search className="w-4 h-4 text-muted-foreground" />
-              <input type="text" placeholder="Search users, courses..." className="bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none w-full" aria-label="Search" />
+              <input 
+                type="text" 
+                placeholder="Search users, courses..." 
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSearchResults(e.target.value.length > 0);
+                }}
+                onFocus={() => setShowSearchResults(searchQuery.length > 0)}
+                onBlur={() => setTimeout(() => setShowSearchResults(false), 200)}
+                className="bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none w-full" 
+                aria-label="Search" 
+              />
+              {searchQuery && (
+                <button 
+                  onClick={() => setSearchQuery("")}
+                  className="p-1 rounded hover:bg-secondary transition-colors"
+                >
+                  <X className="w-3 h-3 text-muted-foreground" />
+                </button>
+              )}
+              
+              {/* Search Results Dropdown */}
+              {showSearchResults && searchResults.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-background border border-border/30 rounded-xl shadow-xl overflow-hidden z-50">
+                  {searchResults.map((result) => (
+                    <Link
+                      key={`${result.type}-${result.id}`}
+                      to={result.href}
+                      onClick={() => {
+                        setSearchQuery("");
+                        setShowSearchResults(false);
+                      }}
+                      className="flex items-center gap-3 px-3 py-2 hover:bg-secondary/50 transition-colors"
+                    >
+                      {result.type === 'user' && <Users className="w-4 h-4 text-primary" />}
+                      {result.type === 'course' && <BookOpen className="w-4 h-4 text-accent" />}
+                      <span className="text-sm">{result.label}</span>
+                      <Badge variant="outline" className="text-[10px] ml-auto">{result.type}</Badge>
+                    </Link>
+                  ))}
+                </div>
+              )}
+              
+              {showSearchResults && searchResults.length === 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-background border border-border/30 rounded-xl shadow-xl p-3 z-50">
+                  <p className="text-sm text-muted-foreground text-center">No results found</p>
+                </div>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-1">

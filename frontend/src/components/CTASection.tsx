@@ -28,12 +28,11 @@ export function CTASection() {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-foreground">
-              Ready to transform how your child{" "}
-              <span className="text-gradient-brand">experiences learning</span>?
+              Ready to transform how you{" "}
+              <span className="text-gradient-brand">experience learning</span>?
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
-              Join a growing community of families who believe learning should be
-              calm, deep, and joyful. No credit card required to start.
+              Join a growing community of students who believe learning should be calm, deep, and joyful. Designed for ages 13+. 14-day free trial, no credit card required.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
@@ -90,14 +89,14 @@ export function CTASection() {
               >
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="absolute top-4 right-4 p-2 rounded-lg hover:bg-secondary/60 transition-colors"
+                  className="absolute top-4 right-4 w-10 h-10 rounded-full bg-secondary/60 hover:bg-secondary/80 transition-colors flex items-center justify-center shadow-soft"
                 >
-                  <X className="w-5 h-5 text-muted-foreground" />
+                  <X className="w-5 h-5 text-foreground" />
                 </button>
                 
                 <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-gradient-brand flex items-center justify-center mx-auto mb-6">
-                    <ArrowRight className="w-8 h-8 text-white" />
+                  <div className="w-20 h-20 rounded-full bg-gradient-brand flex items-center justify-center mx-auto mb-6 shadow-medium">
+                    <ArrowRight className="w-10 h-10 text-white" />
                   </div>
                   
                   <h3 className="font-display text-2xl font-bold text-foreground mb-3">
@@ -105,13 +104,13 @@ export function CTASection() {
                   </h3>
                   
                   <p className="text-muted-foreground mb-6 leading-relaxed">
-                    Join thousands of students experiencing personalized, AI-powered education that adapts to their unique learning style.
+                    Join thousands of students experiencing personalized, AI-powered education that adapts to their unique learning style. Designed for ages 13+.
                   </p>
                   
                   <div className="space-y-3">
                     <Button variant="hero" size="lg" className="w-full" asChild>
                       <Link to="/auth" onClick={() => setIsModalOpen(false)}>
-                        Sign Up Free
+                        Sign Up Free - 14 Day Trial
                       </Link>
                     </Button>
                     <Button variant="outline" size="lg" className="w-full border-2 border-border/30 text-muted-foreground hover:text-foreground hover:bg-secondary/30" asChild>
@@ -122,7 +121,7 @@ export function CTASection() {
                   </div>
                   
                   <p className="mt-6 text-xs text-muted-foreground">
-                    No credit card required • Cancel anytime
+                    No credit card required • Cancel anytime • COPPA & GDPR compliant
                   </p>
                 </div>
               </div>

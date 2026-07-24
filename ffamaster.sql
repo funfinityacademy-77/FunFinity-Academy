@@ -1,4 +1,28 @@
--- ============================================================================
+================================================================================
+AI ARCHITECT DIRECTIVE: PART 3 - STUDENT ECOSYSTEM (CORE & COMMUNICATIONS)
+================================================================================
+ROLE: Full-Stack Engineer and React Performance Expert
+CRITICAL MANDATE - EDIT IN PLACE: Refactor existing files to maximum code depth. NO MOCK DATA.
+
+MISSION: 
+Optimize the Student Dashboard, wire up global accessibility, and build out the communication features to 100% functionality.
+
+1. DASHBOARD OPTIMIZATION & AVATAR
+- Drastically reduce the load time of the Student Dashboard. Implement React `Suspense`, lazy loading, or memoization to fix current bottlenecks.
+- Next to the "Welcome [USERNAME]" text, generate a dynamic Profile Picture Avatar displaying the user's First Name initial (capitalized) inside a styled, theme-compliant circle.
+
+2. GLOBAL ACCESSIBILITY TOP BAR
+- Wire up the Accessibility button in the Top Bar. Every feature inside (text sizing, contrast toggles, screen reader optimization) must execute actual DOM/CSS state changes globally across the entire ecosystem.
+
+3. DISCUSSION FORUM & CHAT SYSTEM (MAX DEPTH)
+- Discussion Page: Wire this to the backend state. When a user submits a discussion, it MUST display immediately. Build out threaded replies, timestamps, and actual working logic. 
+- Chat Page: Refactor the currently broken Chat Page. Implement real-time or simulated real-time state logic, contact selection, and message arrays.
+
+4. PAGE FIXES & RENAMING
+- Rename the page currently called "Calendar Page" strictly to "Calendar" in both the UI and the router.
+- AI Assistant Page: Fix the broken UI and wire up the logic to handle chat inputs, loading states, and response formatting cleanly.
+- College & University Page: Fix broken layouts, populate with realistic interactive components, and ensure the UI fits the screen perfectly.
+================================================================================-- ============================================================================
 -- FunFinity Academy - MASTER DATABASE SETUP
 -- ============================================================================
 -- This is the complete database setup for FunFinity Academy

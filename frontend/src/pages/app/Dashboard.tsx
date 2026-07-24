@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   BookOpen, Clock, Trophy, TrendingUp, Play, Target,
   Calendar, Star, ArrowRight, Flame, CheckCircle2, Brain, Zap, Award, Users, Sparkles,
-  BarChart3, FileText, Download, Upload, Lock, Shield, AlertTriangle
+  BarChart3, FileText, Download, Upload, Lock, Shield, AlertTriangle, User
 } from "lucide-react";
 import { FunfinityIcon } from "@/components/brand/FunfinityLogo";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { SkeletonLoader } from "@/components/ui/skeleton-loader";
 import { DashboardCharts } from "@/components/charts/DashboardCharts";
 import { DashboardSkeleton } from "@/components/skeletons/DashboardSkeleton";
-import { useState } from "react";
+import { useState, useMemo, memo } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useEnrollments } from "@/hooks/use-courses";
 import { useGamificationBackend } from "@/hooks/use-gamification-backend";
@@ -24,6 +24,9 @@ import { supabase } from "@/lib/supabase";
 import { AIAsset } from "@/components/AIAsset";
 import { VIS } from "@/lib/visual-intelligence";
 import { cn } from "@/lib/utils";
+
+// Memoized components for performance optimization
+const MemoizedDashboardCharts = memo(DashboardCharts);
 
 const fadeIn = (delay: number) => ({
   initial: { opacity: 0, y: 20 },
@@ -92,6 +95,8 @@ export default function Dashboard() {
   const isLoading = profileLoading || enrollmentsLoading || quizLoading || learningDNALoading || gamificationLoading || calendarLoading;
 
   const displayName = profileData?.display_name || user?.email?.split("@")[0] || "Learner";
+  const firstName = displayName.split(" ")[0] || displayName;
+  const userInitial = firstName.charAt(0).toUpperCase();
   const enrolledCourses = enrollments || [];
   const totalXP = gamificationStats?.total_points_earned || quizSubmissions?.reduce((acc, sub) => acc + (sub.score || 0), 0) || 0;
   const coursesCount = enrolledCourses.length;
@@ -143,12 +148,22 @@ export default function Dashboard() {
         <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1 min-h-[24px]">
-              <AIAsset
-                context={{ action: 'welcome', state: 'info', mood: 'playful' }}
-                type="emoji"
-                size="sm"
-              />
-              <span className="text-sm text-muted-foreground">Welcome back, {displayName}</span>
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-lg font-bold text-primary-foreground shadow-lg shadow-primary/30 border-2 border-primary/20"
+              >
+                {userInitial}
+              </motion.div>
+              <div className="flex items-center gap-2">
+                <AIAsset
+                  context={{ action: 'welcome', state: 'info', mood: 'playful' }}
+                  type="emoji"
+                  size="sm"
+                />
+                <span className="text-sm text-muted-foreground">Welcome back, {displayName}</span>
+              </div>
             </div>
 
             {/* Learning DNA Adaptation Tags */}
@@ -206,7 +221,7 @@ export default function Dashboard() {
 
       {/* Modern Charts Section */}
       <motion.div {...fadeIn(0.1)} className="min-h-[650px]">
-        <DashboardCharts 
+        <MemoizedDashboardCharts 
           quizSubmissions={quizSubmissions || []}
           studyTimeData={undefined}
           courseProgress={undefined}

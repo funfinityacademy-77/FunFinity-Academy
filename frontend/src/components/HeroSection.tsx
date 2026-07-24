@@ -231,9 +231,9 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4 md:mb-6 leading-[1.15] sm:leading-[1.2]"
             >
-              AI-Powered Coding Academy
+              Interactive Learning Platform
               <br />
-              <span className="text-gradient-brand">For Kids Ages 10-16</span>
+              <span className="text-gradient-brand">For Students Ages 13+</span>
             </motion.h1>
 
             <motion.p
@@ -242,7 +242,7 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-xs sm:text-sm md:text-base lg:text-lg text-foreground/90 max-w-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed font-medium"
             >
-              Master coding, math, and science through interactive AI-powered lessons designed specifically for students ages 10-16.
+              Explore coding, mathematics, science, and more through adaptive, AI-assisted lessons designed for middle school, high school, and beyond. COPPA and GDPR compliant.
             </motion.p>
 
             <motion.div
@@ -282,7 +282,7 @@ export function HeroSection() {
               className="flex items-center gap-2 text-xs text-foreground/80"
             >
               <Shield className="w-3.5 h-3.5 text-green-500" />
-              <span>No credit card required. Cancel anytime.</span>
+              <span>14-day free trial. No credit card required. Cancel anytime.</span>
             </motion.div>
 
             {/* Subject color legend */}

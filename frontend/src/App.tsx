@@ -48,6 +48,14 @@ const Quizzes = lazy(() => import("./pages/app/Quizzes"));
 const LiveClasses = lazy(() => import("./pages/app/LiveClasses"));
 const Chat = lazy(() => import("./pages/app/Chat"));
 const Leaderboard = lazy(() => import("./pages/app/Leaderboard"));
+
+// Onboarding pages
+const OnboardingWizard = lazy(() => import("./pages/app/OnboardingWizard"));
+const WelcomeGateway = lazy(() => import("./pages/app/WelcomeGateway"));
+const CompactProfileQuiz = lazy(() => import("./pages/app/CompactProfileQuiz"));
+const ProfileSummary = lazy(() => import("./pages/app/ProfileSummary"));
+const InteractiveTour = lazy(() => import("./pages/app/InteractiveTour"));
+const SecurityHold = lazy(() => import("./pages/app/SecurityHold"));
 const Forums = lazy(() => import("./pages/app/Forums"));
 const MasterCalendar = lazy(() => import("./pages/app/MasterCalendar"));
 const Analytics = lazy(() => import("./pages/app/Analytics"));
@@ -72,11 +80,6 @@ const CollegeUniversity = lazy(() => import("./pages/app/CollegeUniversity"));
 const AcademicProfile = lazy(() => import("./pages/app/AcademicProfile"));
 const StudyPlanner = lazy(() => import("./pages/app/StudyPlanner"));
 const BackupSettings = lazy(() => import("./pages/app/settings/BackupSettings"));
-const WelcomeGateway = lazy(() => import("./pages/app/WelcomeGateway"));
-const CompactProfileQuiz = lazy(() => import("./pages/app/CompactProfileQuiz"));
-const ProfileSummary = lazy(() => import("./pages/app/ProfileSummary"));
-const InteractiveTour = lazy(() => import("./pages/app/InteractiveTour"));
-const SecurityHold = lazy(() => import("./pages/app/SecurityHold"));
 
 // Admin pages (lazy load for better performance)
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -184,7 +187,7 @@ const App = () => {
                           <InitConsentScripts />
                           <ScrollRestoration />
                           <Suspense fallback={<RouteSkeleton />}>
-                            <div className="min-h-screen flex flex-col" role="application">
+                            <div className="min-h-screen flex flex-col" role="application" style={{ paddingTop: 0 }}>
                               <Routes>
                                 <Route path="/" element={<Index />} />
                                 <Route path="/auth" element={<Auth />} />
@@ -200,7 +203,8 @@ const App = () => {
 
 
 
-                              {/* Student Platform - Welcome Gateway (no onboarding check) */}
+                              {/* Student Platform - Onboarding Flow (no onboarding check) */}
+                              <Route path="/app/onboarding" element={<ProtectedRoute allowedRoles={['student', 'admin']} requireOnboarding={false}><OnboardingWizard /></ProtectedRoute>} />
                               <Route path="/app/welcome-gateway" element={<ProtectedRoute allowedRoles={['student', 'admin']} requireOnboarding={false}><WelcomeGateway /></ProtectedRoute>} />
                               <Route path="/app/compact-profile-quiz" element={<ProtectedRoute allowedRoles={['student', 'admin']} requireOnboarding={false}><CompactProfileQuiz /></ProtectedRoute>} />
                               <Route path="/app/profile-summary" element={<ProtectedRoute allowedRoles={['student', 'admin']} requireOnboarding={false}><ProfileSummary /></ProtectedRoute>} />
@@ -222,8 +226,7 @@ const App = () => {
                                 <Route path="chat" element={<Chat />} />
                                 <Route path="leaderboard" element={<Leaderboard />} />
                                 <Route path="forums" element={<Forums />} />
-                                <Route path="calendar" element={<MasterCalendar />} />
-                                <Route path="calendar-page" element={<CalendarPage />} />
+                                <Route path="calendar" element={<CalendarPage />} />
                                 <Route path="analytics" element={<Analytics />} />
                                 <Route path="bookmarks" element={<Bookmarks />} />
                                 <Route path="profile" element={<Profile />} />

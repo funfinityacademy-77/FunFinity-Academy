@@ -255,7 +255,7 @@ export default function AcademicProfile() {
   };
 
   const calculateGPA = () => {
-    if (profile.courses.length === 0) return 0;
+    if (profile.courses.length === 0) return { weighted: "0.00", unweighted: "0.00", totalCredits: 0, totalPoints: 0 };
     
     const gradePoints: Record<string, number> = {
       "A": 4.0, "A-": 3.7, "B+": 3.3, "B": 3.0, "B-": 2.7,
@@ -266,17 +266,27 @@ export default function AcademicProfile() {
       "Regular": 1.0, "Honors": 1.05, "AP": 1.1, "IB": 1.1, "Dual Enrollment": 1.15
     };
     
-    let totalPoints = 0;
+    let weightedPoints = 0;
+    let unweightedPoints = 0;
     let totalCredits = 0;
     
     profile.courses.forEach(course => {
-      const points = (gradePoints[course.grade] || 0) * (levelMultipliers[course.level] || 1.0);
-      totalPoints += points * course.credits;
+      const basePoints = gradePoints[course.grade] || 0;
+      const multiplier = levelMultipliers[course.level] || 1.0;
+      weightedPoints += basePoints * multiplier * course.credits;
+      unweightedPoints += basePoints * course.credits;
       totalCredits += course.credits;
     });
     
-    return totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : "0.00";
+    return {
+      weighted: totalCredits > 0 ? (weightedPoints / totalCredits).toFixed(2) : "0.00",
+      unweighted: totalCredits > 0 ? (unweightedPoints / totalCredits).toFixed(2) : "0.00",
+      totalCredits,
+      totalPoints: weightedPoints
+    };
   };
+
+  const gpaData = calculateGPA();
 
   if (loading) {
     return <AcademicProfileSkeleton />;
@@ -366,30 +376,109 @@ export default function AcademicProfile() {
         </CardContent>
       </Card>
 
-      {/* Academic Performance */}
-      <Card className="glass-card border-border/30">
+      {/* GPA Calculator Dashboard */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="glass-card border-border/30 rounded-[2rem] overflow-hidden relative"
+      >
+        <div className="absolute inset-0 bg-gradient-brand-soft opacity-30" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-glow-cyan opacity-20 blur-3xl" />
+        
+        <CardHeader className="relative z-10 pb-4">
+          <CardTitle className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/30">
+              <Calculator className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-foreground">GPA Calculator</h2>
+              <p className="text-xs text-muted-foreground">Real-time weighted & unweighted calculations</p>
+            </div>
+          </CardTitle>
+        </CardHeader>
+        
+        <CardContent className="relative z-10 space-y-6">
+          {/* GPA Display Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-center">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-primary/70 mb-2">Weighted GPA</p>
+              <p className="text-4xl font-display font-bold text-gradient-brand">{gpaData.weighted}</p>
+              <p className="text-xs text-muted-foreground mt-1">With course level bonuses</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-secondary/50 border border-border/30 text-center">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2">Unweighted GPA</p>
+              <p className="text-4xl font-display font-bold text-foreground">{gpaData.unweighted}</p>
+              <p className="text-xs text-muted-foreground mt-1">Standard 4.0 scale</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-secondary/50 border border-border/30 text-center">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2">Total Credits</p>
+              <p className="text-4xl font-display font-bold text-foreground">{gpaData.totalCredits}</p>
+              <p className="text-xs text-muted-foreground mt-1">Cumulative credits</p>
+            </div>
+          </div>
+
+          {/* Grade Scale Reference */}
+          <div className="p-4 rounded-xl bg-secondary/30 border border-border/20">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">Grade Point Scale</p>
+            <div className="grid grid-cols-6 gap-2 text-center">
+              {[
+                { grade: "A", points: 4.0 },
+                { grade: "A-", points: 3.7 },
+                { grade: "B+", points: 3.3 },
+                { grade: "B", points: 3.0 },
+                { grade: "B-", points: 2.7 },
+                { grade: "C+", points: 2.3 },
+                { grade: "C", points: 2.0 },
+                { grade: "C-", points: 1.7 },
+                { grade: "D+", points: 1.3 },
+                { grade: "D", points: 1.0 },
+                { grade: "F", points: 0.0 },
+              ].map(({ grade, points }) => (
+                <div key={grade} className="p-2 rounded-lg bg-background/50 border border-border/30">
+                  <p className="text-sm font-bold text-foreground">{grade}</p>
+                  <p className="text-[10px] text-muted-foreground">{points}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Course Level Multipliers */}
+          <div className="p-4 rounded-xl bg-secondary/30 border border-border/20">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">Course Level Multipliers</p>
+            <div className="grid grid-cols-5 gap-2 text-center">
+              {[
+                { level: "Regular", mult: "1.0x" },
+                { level: "Honors", mult: "1.05x" },
+                { level: "AP", mult: "1.1x" },
+                { level: "IB", mult: "1.1x" },
+                { level: "Dual Enrollment", mult: "1.15x" },
+              ].map(({ level, mult }) => (
+                <div key={level} className="p-2 rounded-lg bg-background/50 border border-border/30">
+                  <p className="text-[10px] font-bold text-foreground">{level}</p>
+                  <p className="text-xs text-primary font-medium">{mult}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </CardContent>
+      </motion.div>
+
+      {/* Test Scores */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="glass-card border-border/30"
+      >
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Calculator className="w-5 h-5 text-primary" />
-            Academic Performance
+            <Target className="w-5 h-5 text-primary" />
+            Standardized Test Scores
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="gpa">GPA</Label>
-              <Input
-                id="gpa"
-                type="number"
-                step="0.01"
-                min="0"
-                max="4.0"
-                value={profile.gpa || ""}
-                onChange={(e) => setProfile(prev => ({ ...prev, gpa: parseFloat(e.target.value) || 0 }))}
-                placeholder="0.00 - 4.00"
-                className="bg-secondary/50 border-border/30"
-              />
-            </div>
+          <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="sat_score">SAT Score (Optional)</Label>
               <Input
@@ -417,19 +506,8 @@ export default function AcademicProfile() {
               />
             </div>
           </div>
-          
-          {profile.courses.length > 0 && (
-            <div className="mt-4 p-4 rounded-xl bg-primary/5 border border-primary/20">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Calculated GPA from courses:</span>
-                <span className="text-2xl font-bold text-primary">{calculateGPA()}</span>
-              </div>
-            </div>
-          )}
         </CardContent>
-      </Card>
-
-      {/* Current Courses */}
+      </motion.div>
       <Card className="glass-card border-border/30">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">

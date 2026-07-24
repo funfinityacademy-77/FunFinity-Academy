@@ -129,8 +129,7 @@ export function PhilosophySection() {
             <span className="text-gradient-brand">actually works</span>
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
-            Traditional platforms fragment attention. We create conditions where
-            understanding can genuinely thrive.
+            Traditional platforms fragment attention. We create conditions where understanding can genuinely thrive. Built for students aged 13+ with research-backed learning design.
           </p>
         </motion.div>
 

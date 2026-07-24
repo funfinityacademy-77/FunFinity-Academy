@@ -17,7 +17,7 @@ const Index = () => {
     <div className="min-h-screen bg-background flex flex-col">
       <NotificationBanner />
       <Navbar />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" className="flex-1 pt-14 sm:pt-16">
         <HeroSection />
         <LegalPopupSection />
         <RollingExperienceWall />

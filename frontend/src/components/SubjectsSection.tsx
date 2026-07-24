@@ -233,9 +233,7 @@ export function SubjectsSection() {
             Interconnected <span className="text-gradient-brand">Learning</span>
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Knowledge is not a checklist of isolated facts. Explore a landscape
-            where ideas connect, patterns emerge, and understanding deepens
-            naturally.
+            Knowledge is not a checklist of isolated facts. Explore a landscape where ideas connect, patterns emerge, and understanding deepens naturally. Curriculum designed for students aged 13+.
           </p>
         </motion.div>
 

@@ -77,7 +77,6 @@ const navGroups = [
     label: "Progress",
     items: [
       { label: "Calendar", href: "/app/calendar", icon: Calendar },
-      { label: "Calendar Page", href: "/app/calendar-page", icon: Calendar },
       { label: "Performance", href: "/app/analytics", icon: BarChart3 },
       { label: "Bookmarks", href: "/app/bookmarks", icon: Bookmark },
       { label: "Notes", href: "/app/notes", icon: StickyNote },

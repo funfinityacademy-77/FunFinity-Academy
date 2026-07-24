@@ -238,8 +238,8 @@ export default function AdminDashboard() {
         </div>
       </motion.div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
-        <motion.div {...fadeIn(0.2)} className="lg:col-span-2 space-y-4">
+      <div className="grid lg:grid-cols-2 gap-6">
+        <motion.div {...fadeIn(0.2)} className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-base font-bold text-foreground">Recent Users</h2>
             <Link to="/admin/users" className="text-xs font-semibold text-primary hover:underline flex items-center gap-1">
@@ -260,7 +260,7 @@ export default function AdminDashboard() {
               </>
             ) : profiles && profiles.length > 0 ? (
               <div className="w-full space-y-3">
-                {profiles.map((profile) => (
+                {profiles.slice(0, 5).map((profile) => (
                   <div key={profile.id} className="flex items-center justify-between p-3 rounded-xl bg-secondary/30 border border-border/30">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-cyan/20 flex items-center justify-center text-cyan text-xs font-bold">

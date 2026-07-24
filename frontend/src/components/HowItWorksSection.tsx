@@ -68,8 +68,7 @@ export function HowItWorksSection() {
             How the <span className="text-gradient-brand">adventure unfolds</span>
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
-            Learning is not a race to completion. It's an ongoing exploration that
-            respects your child's natural curiosity and pace.
+            Learning is not a race to completion. It's an ongoing exploration that respects your natural curiosity and pace. Designed for students aged 13 and above.
           </p>
         </motion.div>
 

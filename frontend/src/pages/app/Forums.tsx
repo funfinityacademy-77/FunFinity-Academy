@@ -12,10 +12,16 @@ import { formatDistanceToNow } from "date-fns";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "@/hooks/use-auth";
+import { useQuery } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
 
 const categories = ["All Topics", "Mathematics", "Science", "Coding", "General", "Study Tips"];
 
 export default function Forums() {
+  const { user } = useAuth();
+  const qc = useQueryClient();
   const [activeCategory, setActiveCategory] = useState("All Topics");
   const [searchQuery, setSearchQuery] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -25,6 +31,20 @@ export default function Forums() {
 
   const { data: posts, isLoading } = useForumPosts(activeCategory);
   const createPost = useCreateForumPost();
+
+  const { data: profileData } = useQuery({
+    queryKey: ["profile", user?.id],
+    queryFn: async () => {
+      try {
+        const data = await apiClient.get<any | null>(`/api/users/${user!.id}/profile`);
+        return data;
+      } catch (error) {
+        console.error('Failed to load profile:', error);
+        return null;
+      }
+    },
+    enabled: !!user,
+  });
 
   const filtered = posts?.filter((p: any) =>
     p.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -41,6 +61,39 @@ export default function Forums() {
           setNewContent("");
           toast.success("Discussion topic published!");
         },
+      }
+    );
+  };
+
+  // Optimistic update for immediate display
+  const handleCreateOptimistic = () => {
+    if (!newTitle.trim() || !newContent.trim()) return;
+    const tempPost = {
+      id: `temp-${Date.now()}`,
+      title: newTitle,
+      content: newContent,
+      category: newCategory,
+      created_at: new Date().toISOString(),
+      profiles: { display_name: profileData?.display_name || user?.email?.split("@")[0] || "You" },
+      pinned: false
+    };
+    // Optimistically add to posts list
+    qc.setQueryData(["forum_posts", activeCategory], (old: any[] = []) => [tempPost, ...old]);
+    
+    createPost.mutate(
+      { title: newTitle, content: newContent, category: newCategory },
+      {
+        onSuccess: () => {
+          setDialogOpen(false);
+          setNewTitle("");
+          setNewContent("");
+          toast.success("Discussion topic published!");
+        },
+        onError: () => {
+          // Revert on error
+          qc.invalidateQueries({ queryKey: ["forum_posts"] });
+          toast.error("Failed to publish discussion. Please try again.");
+        }
       }
     );
   };
@@ -117,7 +170,7 @@ export default function Forums() {
                 <Button 
                   variant="hero" 
                   className="w-full h-14 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20" 
-                  onClick={handleCreate} 
+                  onClick={handleCreateOptimistic} 
                   disabled={createPost.isPending}
                 >
                   {createPost.isPending ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : "Publish Topic"}
@@ -214,13 +267,31 @@ function ForumPost({ post }: { post: any }) {
   const [replyContent, setReplyContent] = useState("");
   const { data: replies, isLoading: loadingReplies } = useForumReplies(post.id);
   const createReply = useCreateForumReply();
+  const qc = useQueryClient();
+  const { user } = useAuth();
 
   const handleReply = () => {
     if (!replyContent.trim()) return;
+    
+    // Optimistic update for reply
+    const tempReply = {
+      id: `temp-reply-${Date.now()}`,
+      content: replyContent,
+      created_at: new Date().toISOString(),
+      profiles: { display_name: user?.email?.split("@")[0] || "You" }
+    };
+    
+    qc.setQueryData(["forum_replies", post.id], (old: any[] = []) => [...old, tempReply]);
+    
     createReply.mutate({ postId: post.id, content: replyContent }, {
       onSuccess: () => {
         setReplyContent("");
         toast.success("Contribution recorded.");
+      },
+      onError: () => {
+        // Revert on error
+        qc.invalidateQueries({ queryKey: ["forum_replies", post.id] });
+        toast.error("Failed to post reply. Please try again.");
       }
     });
   };

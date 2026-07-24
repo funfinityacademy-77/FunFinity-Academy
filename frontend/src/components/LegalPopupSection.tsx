@@ -196,7 +196,7 @@ export function LegalPopupSection() {
                 transition={{ duration: 0.3 }}
                 className="fixed inset-0 z-50 flex items-center justify-center p-4"
               >
-                <div className="bg-background rounded-3xl border border-border/50 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto w-full max-w-2xl">
+                <div className="platform-card rounded-3xl border border-border/50 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto w-full max-w-2xl">
                   {(() => {
                     const card = popupCards.find(c => c.id === activePopup);
                     if (!card) return null;
@@ -206,13 +206,13 @@ export function LegalPopupSection() {
                         <div className={`relative p-8 bg-gradient-to-br ${card.color}`}>
                           <button
                             onClick={() => setActivePopup(null)}
-                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
+                            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors shadow-soft"
                           >
-                            <X className="w-4 h-4" />
+                            <X className="w-5 h-5 text-foreground" />
                           </button>
                           <div className="flex items-center gap-4 mb-4">
-                            <div className="w-16 h-16 rounded-2xl bg-background/80 backdrop-blur-sm flex items-center justify-center">
-                              <Icon className="w-8 h-8 text-primary" />
+                            <div className="w-20 h-20 rounded-2xl bg-background/90 backdrop-blur-sm flex items-center justify-center shadow-soft border border-border/30">
+                              <Icon className="w-10 h-10 text-primary" />
                             </div>
                             <div>
                               <h3 className="font-display text-2xl font-bold text-foreground">
