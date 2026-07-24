@@ -164,6 +164,8 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
+          <AgeGate />
+          <CookieConsent />
           <AuthProvider>
             <NotificationProvider>
               <AccessibilityProvider>
@@ -289,8 +291,6 @@ const App = () => {
       </QueryClientProvider>
       <SpeedInsights />
       <Analytics />
-      <AgeGate />
-      <CookieConsent />
     </>
   );
 };

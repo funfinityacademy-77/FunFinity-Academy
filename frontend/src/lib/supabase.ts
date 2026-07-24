@@ -37,12 +37,13 @@ if (supabaseUrl) {
 
 // Validate anon key format (non-blocking)
 let isValidKey = false;
-if (supabaseAnonKey && supabaseAnonKey.length >= 100) {
+if (supabaseAnonKey && supabaseAnonKey.length >= 50) {
   isValidKey = true;
 } else if (supabaseAnonKey) {
-  console.error(
-    `⚠️ Invalid VITE_SUPABASE_ANON_KEY format. ` +
+  console.warn(
+    `⚠️ VITE_SUPABASE_ANON_KEY may be invalid. ` +
     `Supabase anon keys are typically 200+ characters. ` +
+    `Current length: ${supabaseAnonKey.length}. ` +
     `Please verify your Supabase project settings.`
   );
 }
