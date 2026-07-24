@@ -168,20 +168,20 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
-          <AgeGate />
-          <CookieConsent />
-          <AuthProvider>
-            <NotificationProvider>
-              <AccessibilityProvider>
-                <AnnouncementProvider>
-                  <CareerProvider>
-                    <LearningDNAProvider>
-                      <StudentPreferencesProvider>
-                        <Toaster />
-                        <Sonner />
-                        {/* Initialize consent-aware third-party scripts */}
-                        <InitConsentScripts />
-                        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <AgeGate />
+            <CookieConsent />
+            <AuthProvider>
+              <NotificationProvider>
+                <AccessibilityProvider>
+                  <AnnouncementProvider>
+                    <CareerProvider>
+                      <LearningDNAProvider>
+                        <StudentPreferencesProvider>
+                          <Toaster />
+                          <Sonner />
+                          {/* Initialize consent-aware third-party scripts */}
+                          <InitConsentScripts />
                           <ScrollRestoration />
                           <Suspense fallback={<RouteSkeleton />}>
                             <div className="min-h-screen flex flex-col" role="application">
@@ -283,7 +283,6 @@ const App = () => {
                             </Routes>
                         </div>
                           </Suspense>
-                        </BrowserRouter>
                       </StudentPreferencesProvider>
                     </LearningDNAProvider>
                   </CareerProvider>
@@ -291,6 +290,7 @@ const App = () => {
               </AccessibilityProvider>
             </NotificationProvider>
           </AuthProvider>
+        </BrowserRouter>
         </ThemeProvider>
       </QueryClientProvider>
       <SpeedInsights />
