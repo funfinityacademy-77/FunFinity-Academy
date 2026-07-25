@@ -2844,5 +2844,382 @@ CREATE POLICY "Service role can manage deletion_audit_log" ON public.deletion_au
   WITH CHECK (true);
 
 -- ============================================================================
+-- SECTION 16: STORAGE QUOTA AND DATA PERSISTENCE ADDITIONS
+-- ============================================================================
+-- This section adds storage quota tracking and ensures all student data is persisted
+
+-- User Preferences Table (for theme, animations, etc.)
+CREATE TABLE IF NOT EXISTS public.user_preferences (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  theme TEXT DEFAULT 'dark' CHECK (theme IN ('light', 'dark')),
+  animations_enabled BOOLEAN DEFAULT true,
+  sidebar_collapsed BOOLEAN DEFAULT false,
+  language TEXT DEFAULT 'en',
+  timezone TEXT DEFAULT 'UTC',
+  notification_preferences JSONB DEFAULT '{"email": true, "push": true, "sms": false}',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(user_id)
+);
+
+-- Storage Quota Table
+CREATE TABLE IF NOT EXISTS public.storage_quotas (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  storage_used_bytes BIGINT DEFAULT 0,
+  storage_limit_bytes BIGINT DEFAULT 5368709120, -- 5GB default
+  notes_count INTEGER DEFAULT 0,
+  notes_limit INTEGER DEFAULT 1000,
+  files_count INTEGER DEFAULT 0,
+  files_limit INTEGER DEFAULT 100,
+  calendar_events_count INTEGER DEFAULT 0,
+  calendar_events_limit INTEGER DEFAULT 500,
+  last_calculated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(user_id)
+);
+
+-- Calendar Events Table
+CREATE TABLE IF NOT EXISTS public.calendar_events (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  description TEXT,
+  start_date TIMESTAMP WITH TIME ZONE NOT NULL,
+  end_date TIMESTAMP WITH TIME ZONE,
+  event_type TEXT DEFAULT 'general' CHECK (event_type IN ('general', 'course', 'exam', 'assignment', 'live_class', 'personal')),
+  location TEXT,
+  is_recurring BOOLEAN DEFAULT false,
+  recurrence_pattern JSONB,
+  course_id UUID REFERENCES public.courses(id),
+  lesson_id UUID REFERENCES public.lessons(id),
+  reminder_minutes_before INTEGER DEFAULT 15,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Gamification Stats Table (centralized stats)
+CREATE TABLE IF NOT EXISTS public.gamification_stats (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  total_points_earned INTEGER DEFAULT 0,
+  current_streak INTEGER DEFAULT 0,
+  longest_streak INTEGER DEFAULT 0,
+  courses_completed INTEGER DEFAULT 0,
+  lessons_completed INTEGER DEFAULT 0,
+  quizzes_completed INTEGER DEFAULT 0,
+  perfect_quizzes INTEGER DEFAULT 0,
+  total_study_time_minutes INTEGER DEFAULT 0,
+  last_login_date DATE,
+  login_count INTEGER DEFAULT 0,
+  level INTEGER DEFAULT 1,
+  xp_to_next_level INTEGER DEFAULT 100,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(user_id)
+);
+
+-- Indexes for new tables
+CREATE INDEX IF NOT EXISTS idx_user_preferences_user_id ON public.user_preferences(user_id);
+CREATE INDEX IF NOT EXISTS idx_storage_quotas_user_id ON public.storage_quotas(user_id);
+CREATE INDEX IF NOT EXISTS idx_calendar_events_user_id ON public.calendar_events(user_id);
+CREATE INDEX IF NOT EXISTS idx_calendar_events_start_date ON public.calendar_events(start_date);
+CREATE INDEX IF NOT EXISTS idx_calendar_events_user_start ON public.calendar_events(user_id, start_date);
+CREATE INDEX IF NOT EXISTS idx_gamification_stats_user_id ON public.gamification_stats(user_id);
+
+-- Triggers for updated_at on new tables
+DROP TRIGGER IF EXISTS user_preferences_updated_at ON public.user_preferences;
+CREATE TRIGGER user_preferences_updated_at BEFORE UPDATE ON public.user_preferences
+  FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+
+DROP TRIGGER IF EXISTS storage_quotas_updated_at ON public.storage_quotas;
+CREATE TRIGGER storage_quotas_updated_at BEFORE UPDATE ON public.storage_quotas
+  FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+
+DROP TRIGGER IF EXISTS calendar_events_updated_at ON public.calendar_events;
+CREATE TRIGGER calendar_events_updated_at BEFORE UPDATE ON public.calendar_events
+  FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+
+DROP TRIGGER IF EXISTS gamification_stats_updated_at ON public.gamification_stats;
+CREATE TRIGGER gamification_stats_updated_at BEFORE UPDATE ON public.gamification_stats
+  FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+
+-- RLS Policies for new tables
+ALTER TABLE public.user_preferences ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.storage_quotas ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.calendar_events ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.gamification_stats ENABLE ROW LEVEL SECURITY;
+
+-- User Preferences Policies
+DROP POLICY IF EXISTS "Users can manage own preferences" ON public.user_preferences;
+CREATE POLICY "Users can manage own preferences" ON public.user_preferences
+  FOR ALL TO authenticated USING (user_id = auth.uid());
+
+DROP POLICY IF EXISTS "Service role can manage preferences" ON public.user_preferences;
+CREATE POLICY "Service role can manage preferences" ON public.user_preferences
+  FOR ALL TO service_role USING (true);
+
+-- Storage Quotas Policies
+DROP POLICY IF EXISTS "Users can view own quota" ON public.storage_quotas;
+CREATE POLICY "Users can view own quota" ON public.storage_quotas
+  FOR SELECT TO authenticated USING (user_id = auth.uid());
+
+DROP POLICY IF EXISTS "Service role can manage quotas" ON public.storage_quotas;
+CREATE POLICY "Service role can manage quotas" ON public.storage_quotas
+  FOR ALL TO service_role USING (true);
+
+-- Calendar Events Policies
+DROP POLICY IF EXISTS "Users can manage own calendar events" ON public.calendar_events;
+CREATE POLICY "Users can manage own calendar events" ON public.calendar_events
+  FOR ALL TO authenticated USING (user_id = auth.uid());
+
+DROP POLICY IF EXISTS "Service role can manage calendar events" ON public.calendar_events;
+CREATE POLICY "Service role can manage calendar events" ON public.calendar_events
+  FOR ALL TO service_role USING (true);
+
+-- Gamification Stats Policies
+DROP POLICY IF EXISTS "Users can view own stats" ON public.gamification_stats;
+CREATE POLICY "Users can view own stats" ON public.gamification_stats
+  FOR SELECT TO authenticated USING (user_id = auth.uid());
+
+DROP POLICY IF EXISTS "Service role can manage stats" ON public.gamification_stats;
+CREATE POLICY "Service role can manage stats" ON public.gamification_stats
+  FOR ALL TO service_role USING (true);
+
+-- Function to initialize user quota on signup
+CREATE OR REPLACE FUNCTION initialize_user_quota()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO public.storage_quotas (user_id)
+  VALUES (NEW.id)
+  ON CONFLICT (user_id) DO NOTHING;
+  
+  INSERT INTO public.user_preferences (user_id)
+  VALUES (NEW.id)
+  ON CONFLICT (user_id) DO NOTHING;
+  
+  INSERT INTO public.gamification_stats (user_id)
+  VALUES (NEW.id)
+  ON CONFLICT (user_id) DO NOTHING;
+  
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Trigger to initialize quota on profile creation
+DROP TRIGGER IF EXISTS initialize_quota_on_profile ON public.profiles;
+CREATE TRIGGER initialize_quota_on_profile
+  AFTER INSERT ON public.profiles
+  FOR EACH ROW
+  EXECUTE FUNCTION initialize_user_quota();
+
+-- Function to check storage quota before insert
+CREATE OR REPLACE FUNCTION check_storage_quota(p_user_id UUID, p_operation TEXT)
+RETURNS BOOLEAN AS $$
+DECLARE
+  v_quota RECORD;
+  v_allowed BOOLEAN := true;
+BEGIN
+  SELECT * INTO v_quota
+  FROM public.storage_quotas
+  WHERE user_id = p_user_id;
+  
+  IF NOT FOUND THEN
+    RETURN false;
+  END IF;
+  
+  IF p_operation = 'note' THEN
+    v_allowed := v_quota.notes_count < v_quota.notes_limit;
+  ELSIF p_operation = 'file' THEN
+    v_allowed := v_quota.files_count < v_quota.files_limit;
+  ELSIF p_operation = 'calendar_event' THEN
+    v_allowed := v_quota.calendar_events_count < v_quota.calendar_events_limit;
+  END IF;
+  
+  RETURN v_allowed;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Function to update storage usage
+CREATE OR REPLACE FUNCTION update_storage_usage(p_user_id UUID, p_operation TEXT, p_bytes BIGINT DEFAULT 0)
+RETURNS void AS $$
+BEGIN
+  UPDATE public.storage_quotas
+  SET 
+    storage_used_bytes = storage_used_bytes + p_bytes,
+    notes_count = CASE WHEN p_operation = 'note' THEN notes_count + 1 ELSE notes_count END,
+    files_count = CASE WHEN p_operation = 'file' THEN files_count + 1 ELSE files_count END,
+    calendar_events_count = CASE WHEN p_operation = 'calendar_event' THEN calendar_events_count + 1 ELSE calendar_events_count END,
+    last_calculated_at = NOW(),
+    updated_at = NOW()
+  WHERE user_id = p_user_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Function to get user storage info
+CREATE OR REPLACE FUNCTION get_user_storage_info(p_user_id UUID)
+RETURNS TABLE (
+  storage_used_bytes BIGINT,
+  storage_limit_bytes BIGINT,
+  storage_percentage DECIMAL,
+  notes_count INTEGER,
+  notes_limit INTEGER,
+  files_count INTEGER,
+  files_limit INTEGER,
+  calendar_events_count INTEGER,
+  calendar_events_limit INTEGER
+) AS $$
+BEGIN
+  RETURN QUERY
+  SELECT 
+    sq.storage_used_bytes,
+    sq.storage_limit_bytes,
+    ROUND((sq.storage_used_bytes::DECIMAL / sq.storage_limit_bytes) * 100, 2),
+    sq.notes_count,
+    sq.notes_limit,
+    sq.files_count,
+    sq.files_limit,
+    sq.calendar_events_count,
+    sq.calendar_events_limit
+  FROM public.storage_quotas sq
+  WHERE sq.user_id = p_user_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Function to add gamification points
+CREATE OR REPLACE FUNCTION add_gamification_points(p_user_id UUID, p_points INTEGER)
+RETURNS void AS $$
+DECLARE
+  v_current_stats RECORD;
+  v_new_xp INTEGER;
+  v_new_level INTEGER;
+BEGIN
+  SELECT * INTO v_current_stats
+  FROM public.gamification_stats
+  WHERE user_id = p_user_id;
+  
+  IF NOT FOUND THEN
+    INSERT INTO public.gamification_stats (user_id, total_points_earned)
+    VALUES (p_user_id, p_points);
+    RETURN;
+  END IF;
+  
+  v_new_xp := v_current_stats.total_points_earned + p_points;
+  v_new_level := FLOOR(v_new_xp / 100) + 1;
+  
+  UPDATE public.gamification_stats
+  SET 
+    total_points_earned = v_new_xp,
+    level = v_new_level,
+    xp_to_next_level = (v_new_level * 100) - v_new_xp,
+    updated_at = NOW()
+  WHERE user_id = p_user_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Grant permissions for new functions
+GRANT EXECUTE ON FUNCTION check_storage_quota TO authenticated;
+GRANT EXECUTE ON FUNCTION update_storage_usage TO authenticated;
+GRANT EXECUTE ON FUNCTION get_user_storage_info TO authenticated;
+GRANT EXECUTE ON FUNCTION add_gamification_points TO authenticated;
+GRANT EXECUTE ON FUNCTION initialize_user_quota TO service_role;
+
+-- ============================================================================
+-- SECTION 17: SUPPORT MESSAGES TABLE
+-- ============================================================================
+
+-- Support Messages Table
+CREATE TABLE IF NOT EXISTS public.support_messages (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  message TEXT NOT NULL,
+  is_support BOOLEAN DEFAULT FALSE,
+  read BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Index for faster queries
+CREATE INDEX IF NOT EXISTS idx_support_messages_user_id ON public.support_messages(user_id);
+CREATE INDEX IF NOT EXISTS idx_support_messages_created_at ON public.support_messages(created_at DESC);
+
+-- Grant permissions
+GRANT SELECT, INSERT, UPDATE ON public.support_messages TO authenticated;
+GRANT SELECT, INSERT, UPDATE ON public.support_messages TO service_role;
+
+-- Enable Realtime for support_messages (skip if already added)
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_publication_tables 
+    WHERE pubname = 'supabase_realtime' 
+    AND schemaname = 'public' 
+    AND tablename = 'support_messages'
+  ) THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE public.support_messages;
+  END IF;
+END $$;
+
+-- RLS Policies for support_messages
+ALTER TABLE public.support_messages ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Students can view own support messages" ON public.support_messages;
+CREATE POLICY "Students can view own support messages" ON public.support_messages
+  FOR SELECT TO authenticated
+  USING (user_id = auth.uid() OR is_admin());
+
+DROP POLICY IF EXISTS "Students can create own support messages" ON public.support_messages;
+CREATE POLICY "Students can create own support messages" ON public.support_messages
+  FOR INSERT TO authenticated
+  WITH CHECK (user_id = auth.uid());
+
+DROP POLICY IF EXISTS "Admins can view all support messages" ON public.support_messages;
+CREATE POLICY "Admins can view all support messages" ON public.support_messages
+  FOR SELECT TO authenticated
+  USING (is_admin());
+
+DROP POLICY IF EXISTS "Service role can manage support_messages" ON public.support_messages;
+CREATE POLICY "Service role can manage support_messages" ON public.support_messages
+  FOR ALL TO service_role
+  USING (true)
+  WITH CHECK (true);
+
+-- Additional RLS policies for user_preferences (create/update)
+DROP POLICY IF EXISTS "Students can create own preferences" ON public.user_preferences;
+CREATE POLICY "Students can create own preferences" ON public.user_preferences
+  FOR INSERT TO authenticated
+  WITH CHECK (user_id = auth.uid());
+
+DROP POLICY IF EXISTS "Students can update own preferences" ON public.user_preferences;
+CREATE POLICY "Students can update own preferences" ON public.user_preferences
+  FOR UPDATE TO authenticated
+  USING (user_id = auth.uid() OR is_admin())
+  WITH CHECK (user_id = auth.uid() OR is_admin());
+
+-- Additional RLS policies for calendar_events (create/update/delete)
+DROP POLICY IF EXISTS "Students can create own calendar events" ON public.calendar_events;
+CREATE POLICY "Students can create own calendar events" ON public.calendar_events
+  FOR INSERT TO authenticated
+  WITH CHECK (user_id = auth.uid());
+
+DROP POLICY IF EXISTS "Students can update own calendar events" ON public.calendar_events;
+CREATE POLICY "Students can update own calendar events" ON public.calendar_events
+  FOR UPDATE TO authenticated
+  USING (user_id = auth.uid() OR is_admin())
+  WITH CHECK (user_id = auth.uid() OR is_admin());
+
+DROP POLICY IF EXISTS "Students can delete own calendar events" ON public.calendar_events;
+CREATE POLICY "Students can delete own calendar events" ON public.calendar_events
+  FOR DELETE TO authenticated
+  USING (user_id = auth.uid() OR is_admin());
+
+-- Additional RLS policies for gamification_stats (view)
+DROP POLICY IF EXISTS "Students can view own stats" ON public.gamification_stats;
+CREATE POLICY "Students can view own stats" ON public.gamification_stats
+  FOR SELECT TO authenticated
+  USING (user_id = auth.uid() OR is_admin());
+
+-- ============================================================================
 -- SETUP COMPLETE
 -- ============================================================================

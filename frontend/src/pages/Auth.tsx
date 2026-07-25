@@ -19,7 +19,7 @@ import { SupportChatWidget } from "@/components/chat/SupportChatWidget";
 import { z } from "zod";
 
 type Role = "student";
-type AuthMode = "signin" | "signup" | "reset";
+type AuthMode = "signin" | "signup" | "reset" | "age-verification" | "parental-consent";
 
 // Zod validation schemas for secure form validation
 const SignupSchema = z.object({

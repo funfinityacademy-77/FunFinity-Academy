@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Sparkles, Wand2, X, ChevronRight, Download, 
   Palette, Star, Zap, Heart, Flame, Crown, Gem,
-  Search, Filter, Grid, List, Plus, Trash2
+  Search, Filter, Grid, List, Plus, Trash2, Check
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
+import { useStickerPipeline } from "@/hooks/useStickerPipeline";
 
 interface GeneratedAsset {
   id: string;
@@ -25,7 +26,9 @@ interface GeneratedAsset {
 interface AIAssetGeneratorProps {
   isOpen: boolean;
   onClose: () => void;
-  onAssetGenerated: (asset: GeneratedAsset) => void;
+  onAssetGenerated?: (asset: GeneratedAsset) => void;
+  onAssetInsert?: (asset: GeneratedAsset, position: { x: number; y: number }) => void;
+  canvasCenter?: { x: number; y: number };
 }
 
 const styles = [
@@ -48,45 +51,40 @@ const promptTemplates = [
   "An elegant {category} decoration with gradient",
 ];
 
-export default function AIAssetGenerator({ isOpen, onClose, onAssetGenerated }: AIAssetGeneratorProps) {
+export default function AIAssetGenerator({ isOpen, onClose, onAssetGenerated, onAssetInsert, canvasCenter }: AIAssetGeneratorProps) {
   const [prompt, setPrompt] = useState("");
   const [selectedStyle, setSelectedStyle] = useState("sticker");
   const [selectedCategory, setSelectedCategory] = useState("Academic");
-  const [isGenerating, setIsGenerating] = useState(false);
   const [generatedAssets, setGeneratedAssets] = useState<GeneratedAsset[]>([]);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [creativity, setCreativity] = useState([50]);
+  const [autoInject, setAutoInject] = useState(true);
+  const [lastInsertedId, setLastInsertedId] = useState<string | null>(null);
+
+  const { state: pipelineState, generateSticker, injectStickerToCanvas, resetState } = useStickerPipeline();
 
   const handleGenerate = async () => {
     if (!prompt.trim()) return;
     
-    setIsGenerating(true);
-    
-    // Simulate AI generation
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    const newAsset: GeneratedAsset = {
-      id: Date.now().toString(),
-      prompt: prompt,
-      style: selectedStyle,
-      imageUrl: `data:image/svg+xml,${encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
-          <defs>
-            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <rect width="128" height="128" rx="20" fill="url(#grad)" />
-          <text x="64" y="64" font-size="48" text-anchor="middle" fill="white" font-family="Arial">✨</text>
-        </svg>
-      `)}`,
-      createdAt: new Date(),
-    };
-    
-    setGeneratedAssets([newAsset, ...generatedAssets]);
-    onAssetGenerated(newAsset);
-    setIsGenerating(false);
+    try {
+      const newAsset = await generateSticker(prompt, selectedStyle, creativity[0]);
+      setGeneratedAssets([newAsset, ...generatedAssets]);
+      
+      if (onAssetGenerated) {
+        onAssetGenerated(newAsset);
+      }
+
+      // Auto-inject to canvas if enabled and position available
+      if (autoInject && onAssetInsert && canvasCenter) {
+        onAssetInsert(newAsset, canvasCenter);
+        setLastInsertedId(newAsset.id);
+        
+        // Clear the success indicator after 2 seconds
+        setTimeout(() => setLastInsertedId(null), 2000);
+      }
+    } catch (error) {
+      console.error('Failed to generate sticker:', error);
+    }
   };
 
   const handleUseTemplate = (template: string) => {
@@ -98,10 +96,28 @@ export default function AIAssetGenerator({ isOpen, onClose, onAssetGenerated }: 
     setGeneratedAssets(generatedAssets.filter(a => a.id !== id));
   };
 
-  const handleInsertAsset = (asset: GeneratedAsset) => {
-    onAssetGenerated(asset);
-    onClose();
-  };
+  const handleInsertAsset = useCallback((asset: GeneratedAsset) => {
+    if (onAssetInsert && canvasCenter) {
+      onAssetInsert(asset, canvasCenter);
+      setLastInsertedId(asset.id);
+      setTimeout(() => setLastInsertedId(null), 2000);
+    }
+  }, [onAssetInsert, canvasCenter]);
+
+  // Listen for sticker injection events from the hook
+  useEffect(() => {
+    const handleStickerInjected = (event: CustomEvent) => {
+      const { sticker, position } = event.detail;
+      if (onAssetInsert) {
+        onAssetInsert(sticker, position);
+      }
+    };
+
+    window.addEventListener('sticker-injected', handleStickerInjected as EventListener);
+    return () => {
+      window.removeEventListener('sticker-injected', handleStickerInjected as EventListener);
+    };
+  }, [onAssetInsert]);
 
   return (
     <AnimatePresence>
@@ -218,17 +234,40 @@ export default function AIAssetGenerator({ isOpen, onClose, onAssetGenerated }: 
                 />
               </div>
 
+              {/* Auto-inject Toggle */}
+              <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/30 border border-border/30">
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    id="auto-inject"
+                    checked={autoInject}
+                    onChange={(e) => setAutoInject(e.target.checked)}
+                    className="w-4 h-4 rounded border-border/30"
+                  />
+                  <label htmlFor="auto-inject" className="text-xs text-foreground">
+                    Auto-inject to canvas center
+                  </label>
+                </div>
+                {canvasCenter ? (
+                  <span className="text-[10px] text-muted-foreground">
+                    Center: ({Math.round(canvasCenter.x)}, {Math.round(canvasCenter.y)})
+                  </span>
+                ) : (
+                  <span className="text-[10px] text-muted-foreground">No canvas position</span>
+                )}
+              </div>
+
               {/* Generate Button */}
               <Button
                 onClick={handleGenerate}
-                disabled={isGenerating || !prompt.trim()}
+                disabled={pipelineState.isGenerating || !prompt.trim()}
                 className="w-full gap-2"
                 variant="hero"
               >
-                {isGenerating ? (
+                {pipelineState.isGenerating ? (
                   <>
                     <Wand2 className="w-4 h-4 animate-spin" />
-                    Generating...
+                    Generating... {pipelineState.progress}%
                   </>
                 ) : (
                   <>
@@ -237,6 +276,13 @@ export default function AIAssetGenerator({ isOpen, onClose, onAssetGenerated }: 
                   </>
                 )}
               </Button>
+
+              {/* Error Display */}
+              {pipelineState.error && (
+                <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-xs">
+                  {pipelineState.error}
+                </div>
+              )}
 
               {/* Generated Assets */}
               {generatedAssets.length > 0 && (
@@ -296,6 +342,12 @@ export default function AIAssetGenerator({ isOpen, onClose, onAssetGenerated }: 
                                 <Trash2 className="w-3 h-3" />
                               </Button>
                             </div>
+                            {/* Success indicator for auto-injected stickers */}
+                            {lastInsertedId === asset.id && (
+                              <div className="absolute top-2 right-2 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
+                                <Check className="w-3 h-3 text-white" />
+                              </div>
+                            )}
                           </div>
                           <p className="text-[10px] text-muted-foreground mt-2 line-clamp-2">
                             {asset.prompt}

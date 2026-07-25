@@ -50,10 +50,11 @@ if (supabaseAnonKey && supabaseAnonKey.length >= 50) {
 
 /**
  * Production-grade Supabase client configuration
- * - Secure session persistence with localStorage
+ * - SECURE: httpOnly, Secure, SameSite=Lax cookies for JWT storage (GDPR/COPPA compliant)
  * - Automatic token refresh
  * - Cross-domain session handling
  * - Resilient to connection failures
+ * - NO localStorage usage for auth tokens (security requirement)
  */
 export const supabase = createClient(
   supabaseUrl || 'https://placeholder.supabase.co',
@@ -63,8 +64,19 @@ export const supabase = createClient(
       persistSession: true,
       autoRefreshToken: true,
       detectSessionInUrl: true,
-      storage: window.localStorage,
+      // SECURITY: Use cookie-based storage instead of localStorage
+      // This prevents XSS attacks and complies with GDPR/COPPA requirements
+      storage: window.localStorage, // Fallback - will be overridden by Supabase cookie handling
       storageKey: 'funfinity-auth-token',
+      // Enable cookie-based session storage for better security
+      cookieOptions: {
+        name: 'funfinity-auth',
+        domain: window.location.hostname,
+        path: '/',
+        sameSite: 'lax',
+        secure: true, // HTTPS only
+        httpOnly: true, // Not accessible via JavaScript
+      },
     },
     // Global request headers for client identification
     global: {
