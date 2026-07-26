@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useAIReactions } from "@/components/ReactionSystem";
 import { FirstTimeTour } from "@/components/onboarding/FirstTimeTour";
-import SupportChatWidget from "@/components/support-chat/SupportChatWidget";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { supabase } from "@/lib/supabase";
@@ -837,15 +836,6 @@ export default function LearningDNAQuestionnaire() {
           </Button>
         )}
       </div>
-
-      {/* Support Chat for Learning DNA assistance */}
-      <SupportChatWidget
-        supabaseUrl={import.meta.env.VITE_SUPABASE_URL || ''}
-        supabaseKey={import.meta.env.VITE_SUPABASE_ANON_KEY || ''}
-        primaryColor="#3B82F6"
-        textColor="#1F2937"
-        bubbleBackground="#F3F4F6"
-      />
     </div>
   );
 }
