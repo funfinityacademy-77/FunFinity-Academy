@@ -587,8 +587,9 @@ export default function AdminUsers() {
         <Card className="border-border/30 overflow-hidden">
           <CardContent className="p-0">
             {viewMode === "list" ? (
-              <div className="overflow-x-auto">
-                <table className="w-full">
+              <>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
                   <thead>
                     <tr className="border-b border-border/30 bg-secondary/20">
                       <th 
@@ -705,7 +706,6 @@ export default function AdminUsers() {
                 </table>
               </div>
               
-              {/* Pagination Controls */}
               {totalPages > 1 && (
                 <div className="flex items-center justify-between px-4 py-3 border-t border-border/30 bg-secondary/20">
                   <div className="text-xs text-muted-foreground">
@@ -749,6 +749,7 @@ export default function AdminUsers() {
                   </div>
                 </div>
               )}
+              </>
             ) : (
               <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {paginatedUsers.length === 0 ? (
