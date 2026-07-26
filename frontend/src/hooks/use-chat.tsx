@@ -160,3 +160,16 @@ export function useCreateConversation() {
     onError: (e: any) => toast.error(e.message),
   });
 }
+
+export function useUserPresence(userId: string | undefined) {
+  return useQuery({
+    queryKey: ["user_presence", userId],
+    queryFn: async () => {
+      if (!userId) return null;
+      // TODO: Implement presence tracking via WebSocket to Durable Objects
+      return { online: false, last_seen: null };
+    },
+    enabled: !!userId,
+    refetchInterval: 30000, // Check every 30 seconds
+  });
+}
