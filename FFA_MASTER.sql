@@ -2629,7 +2629,6 @@ CREATE POLICY "Admins can view activity logs" ON public.activity_logs
 
 -- Additional RLS policies for notifications (admin access)
 DROP POLICY IF EXISTS "Admins can manage notifications" ON public.notifications;
-CREATE POLICY "Admins can manage notifications" ON public.notifications;
 CREATE POLICY "Admins can manage notifications" ON public.notifications
   FOR ALL TO authenticated
   USING (is_admin())
