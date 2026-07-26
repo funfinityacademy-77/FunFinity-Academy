@@ -340,6 +340,8 @@ export default function EliteAI() {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [isRecording, setIsRecording] = useState(false);
   const [processingTime, setProcessingTime] = useState<number>(0);
+  const [streamingMessage, setStreamingMessage] = useState<string>("");
+  const [isStreaming, setIsStreaming] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const activeMessages = messages[activeMode];
@@ -376,6 +378,8 @@ export default function EliteAI() {
     setModeInput(activeMode, "");
     setLoadingMode(activeMode);
     setProcessingTime(0);
+    setIsStreaming(true);
+    setStreamingMessage("");
 
     const startTime = Date.now();
 
@@ -385,11 +389,24 @@ export default function EliteAI() {
     const assistantResponse = generateEliteResponse(userPrompt, activeMode, visibleMessages);
     setProcessingTime(Date.now() - startTime);
 
+    // Stream the response character by character
+    let currentContent = "";
+    const chars = assistantResponse.content.split("");
+    const streamDelay = 10; // ms per character
+
+    for (let i = 0; i < chars.length; i++) {
+      currentContent += chars[i];
+      setStreamingMessage(currentContent);
+      await new Promise(resolve => setTimeout(resolve, streamDelay));
+    }
+
     setMessages((current) => ({
       ...current,
-      [activeMode]: [...visibleMessages, assistantResponse]
+      [activeMode]: [...visibleMessages, { ...assistantResponse, content: currentContent }]
     }));
 
+    setIsStreaming(false);
+    setStreamingMessage("");
     setLoadingMode(null);
     toast.success("Elite AI response generated");
   };
@@ -600,7 +617,7 @@ export default function EliteAI() {
                     </div>
 
                     <div ref={scrollRef} className="flex-1 space-y-4 overflow-y-auto p-6 scroll-smooth">
-                      {messages[mode].length === 0 ? (
+                      {messages[mode].length === 0 && !isStreaming ? (
                         <div className="h-full flex flex-col items-center justify-center text-center p-8">
                           <div className="relative mb-6">
                             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 via-purple-500/30 to-pink-500/30 blur-2xl rounded-full animate-pulse" />

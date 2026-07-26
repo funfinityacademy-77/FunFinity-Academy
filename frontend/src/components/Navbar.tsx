@@ -16,8 +16,8 @@ export function Navbar() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/70 backdrop-blur-lg border-b border-border/40" role="banner">
-      <nav className="container mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between" aria-label="Main navigation">
+    <header className="fixed top-0 left-0 right-0 z-50 glass-card-heavy border-b border-border/50" role="banner">
+      <nav className="container mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between" aria-label="Main navigation">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2.5 group" onClick={(e) => {
           e.preventDefault();

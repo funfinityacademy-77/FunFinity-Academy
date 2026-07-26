@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { 
   Brain, Target, BookOpen, Sparkles, ChevronRight, 
-  CheckCircle2, ArrowRight, User, GraduationCap
+  CheckCircle2, ArrowRight, User, GraduationCap, Globe, 
+  Calendar, MessageSquare, Award, Settings, Zap
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +23,10 @@ interface OnboardingData {
   interests?: string[];
   goals?: string[];
   timeCommitment?: string;
+  gradeLevel?: string;
+  country?: string;
+  timezone?: string;
+  notificationPreferences?: string[];
 }
 
 const STEPS: OnboardingStep[] = [
@@ -50,6 +56,27 @@ const STEPS: OnboardingStep[] = [
     title: "Your Goals",
     description: "What do you want to achieve?",
     icon: <Target className="w-6 h-6" />,
+    component: null,
+  },
+  {
+    id: "academic-info",
+    title: "Academic Information",
+    description: "Tell us about your education",
+    icon: <GraduationCap className="w-6 h-6" />,
+    component: null,
+  },
+  {
+    id: "location",
+    title: "Your Location",
+    description: "Help us serve you better",
+    icon: <Globe className="w-6 h-6" />,
+    component: null,
+  },
+  {
+    id: "preferences",
+    title: "Preferences",
+    description: "Customize your experience",
+    icon: <Settings className="w-6 h-6" />,
     component: null,
   },
   {
@@ -97,6 +124,10 @@ export default function PostSignupOnboarding() {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [selectedTimeCommitment, setSelectedTimeCommitment] = useState<string>("");
+  const [selectedGradeLevel, setSelectedGradeLevel] = useState<string>("");
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
+  const [selectedTimezone, setSelectedTimezone] = useState<string>("");
+  const [selectedNotifications, setSelectedNotifications] = useState<string[]>([]);
 
   const toggleInterest = (interestId: string) => {
     setSelectedInterests(prev =>
@@ -114,6 +145,14 @@ export default function PostSignupOnboarding() {
     );
   };
 
+  const toggleNotification = (notificationId: string) => {
+    setSelectedNotifications(prev =>
+      prev.includes(notificationId)
+        ? prev.filter(id => id !== notificationId)
+        : [...prev, notificationId]
+    );
+  };
+
   const handleNext = () => {
     if (currentStep === 1) {
       setData({ ...data, learningStyle: selectedLearningStyle });
@@ -121,6 +160,12 @@ export default function PostSignupOnboarding() {
       setData({ ...data, interests: selectedInterests });
     } else if (currentStep === 3) {
       setData({ ...data, goals: selectedGoals, timeCommitment: selectedTimeCommitment });
+    } else if (currentStep === 4) {
+      setData({ ...data, gradeLevel: selectedGradeLevel });
+    } else if (currentStep === 5) {
+      setData({ ...data, country: selectedCountry, timezone: selectedTimezone });
+    } else if (currentStep === 6) {
+      setData({ ...data, notificationPreferences: selectedNotifications });
     }
 
     if (currentStep < STEPS.length - 1) {

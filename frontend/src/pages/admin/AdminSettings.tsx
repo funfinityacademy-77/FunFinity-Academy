@@ -3,9 +3,16 @@ import { motion } from "framer-motion";
 import {
   User, Bell, Shield, Palette, Globe, Accessibility, Moon,
   Lock, Smartphone, Mail, ShieldAlert, Database, Server,
-  Users, Key, Activity, Loader2, Globe2, AlertTriangle
+  Users, Key, Activity, Loader2, Globe2, AlertTriangle, Zap,
+  ToggleLeft, ToggleRight, Settings, Clock, Ban, CheckCircle, XCircle,
+  MessageSquare, Video, Award
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -13,6 +20,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api-client";
 import { toast as sonnerToast } from "sonner";
+import { supabase } from "@/lib/supabase";
 
 const sections = [
   { id: "account", label: "Account", icon: User },
@@ -21,7 +29,8 @@ const sections = [
   { id: "appearance", label: "Appearance", icon: Palette },
   { id: "accessibility", label: "Accessibility", icon: Accessibility },
   { id: "system", label: "System Configuration", icon: Server },
-  { id: "language", label: "Maintenance Mode", icon: Globe },
+  { id: "maintenance", label: "Maintenance Mode", icon: Globe },
+  { id: "features", label: "Feature Flags", icon: Zap },
 ];
 
 function Toggle({ enabled, onChange, label }: { enabled: boolean; onChange: () => void; label: string }) {
@@ -39,7 +48,7 @@ function Toggle({ enabled, onChange, label }: { enabled: boolean; onChange: () =
 }
 
 export default function AdminSettings() {
-  const [activeSection, setActiveSection] = useState("account");
+  const [activeSection, setActiveSection] = useState("system");
   const [darkMode, setDarkMode] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [emailNotifs, setEmailNotifs] = useState(true);
@@ -49,10 +58,20 @@ export default function AdminSettings() {
   const [largeText, setLargeText] = useState(false);
   const [keyboardNav, setKeyboardNav] = useState(true);
   const [maintenanceMode, setMaintenanceMode] = useState(false);
+  const [maintenanceMessage, setMaintenanceMessage] = useState("System under maintenance. Please check back later.");
   const [apiRateLimit, setApiRateLimit] = useState(true);
+  const [apiRateLimitValue, setApiRateLimitValue] = useState(100);
   const [auditLogging, setAuditLogging] = useState(true);
   const [ipWhitelist, setIpWhitelist] = useState(false);
   const [sessionTimeout, setSessionTimeout] = useState(true);
+  
+  // Feature flags
+  const [enableAIChat, setEnableAIChat] = useState(true);
+  const [enableForum, setEnableForum] = useState(true);
+  const [enableLiveClasses, setEnableLiveClasses] = useState(true);
+  const [enableCollegeDirectory, setEnableCollegeDirectory] = useState(true);
+  const [enableGamification, setEnableGamification] = useState(true);
+  const [enableParentalControls, setEnableParentalControls] = useState(true);
 
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -237,7 +256,6 @@ export default function AdminSettings() {
             <div className="platform-card p-6 space-y-4">
               <h2 className="font-display text-lg font-semibold text-foreground">System Configuration</h2>
               {[
-                { label: "Maintenance Mode", desc: "Disable platform for maintenance", enabled: maintenanceMode, toggle: () => setMaintenanceMode(!maintenanceMode), icon: AlertTriangle },
                 { label: "API Rate Limiting", desc: "Limit API requests per user", enabled: apiRateLimit, toggle: () => setApiRateLimit(!apiRateLimit), icon: Server },
                 { label: "Audit Logging", desc: "Log all admin actions", enabled: auditLogging, toggle: () => setAuditLogging(!auditLogging), icon: Activity },
                 { label: "IP Whitelist", desc: "Restrict access by IP address", enabled: ipWhitelist, toggle: () => setIpWhitelist(!ipWhitelist), icon: ShieldAlert },
@@ -253,12 +271,100 @@ export default function AdminSettings() {
                   <Toggle enabled={item.enabled} onChange={item.toggle} label={item.label} />
                 </div>
               ))}
+              
+              {apiRateLimit && (
+                <div className="pt-4 space-y-2">
+                  <Label className="text-sm text-muted-foreground">API Rate Limit (requests per minute)</Label>
+                  <Input
+                    type="number"
+                    value={apiRateLimitValue}
+                    onChange={(e) => setApiRateLimitValue(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </div>
+              )}
+              
               <div className="pt-4 space-y-3">
                 <Button variant="outline" size="sm" onClick={() => navigate("/admin/users")}>
                   <Users className="w-3 h-3 mr-1" /> Manage Users
                 </Button>
                 <Button variant="outline" size="sm" onClick={() => navigate("/admin/localization")}>
                   <Globe2 className="w-3 h-3 mr-1" /> Localization Settings
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {activeSection === "maintenance" && (
+            <div className="platform-card p-6 space-y-4">
+              <div className="flex items-center justify-between border-b border-border/20 pb-4">
+                <div>
+                  <h2 className="font-display text-lg font-semibold text-foreground">Maintenance Mode System</h2>
+                  <p className="text-xs text-muted-foreground mt-1">Restrict platform access for updates</p>
+                </div>
+                <Toggle enabled={maintenanceMode} onChange={() => setMaintenanceMode(!maintenanceMode)} label="Toggle Maintenance Mode" />
+              </div>
+              
+              {maintenanceMode && (
+                <div className="space-y-4 pt-4 animate-in fade-in slide-in-from-top-4">
+                  <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-xl mb-4">
+                    <p className="text-sm font-medium text-destructive flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4" /> Warning: Activating this blocks all non-admin users.
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label className="text-sm text-muted-foreground">Maintenance Message</Label>
+                    <Input
+                      value={maintenanceMessage}
+                      onChange={(e) => setMaintenanceMessage(e.target.value)}
+                      placeholder="System under maintenance..."
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <div className="flex items-center gap-2 pt-2">
+                    <Badge variant={maintenanceMode ? "destructive" : "secondary"} className="text-xs">
+                      {maintenanceMode ? "Active" : "Inactive"}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">
+                      {maintenanceMode ? "Platform is in maintenance mode" : "Platform is operational"}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeSection === "features" && (
+            <div className="platform-card p-6 space-y-4">
+              <h2 className="font-display text-lg font-semibold text-foreground">Feature Flags</h2>
+              <p className="text-xs text-muted-foreground">Enable or disable platform features globally</p>
+              
+              {[
+                { label: "AI Chat Assistant", desc: "Enable AI-powered chat functionality", enabled: enableAIChat, toggle: () => setEnableAIChat(!enableAIChat), icon: Zap },
+                { label: "Discussion Forums", desc: "Enable community forums", enabled: enableForum, toggle: () => setEnableForum(!enableForum), icon: MessageSquare },
+                { label: "Live Classes", desc: "Enable real-time video classes", enabled: enableLiveClasses, toggle: () => setEnableLiveClasses(!enableLiveClasses), icon: Video },
+                { label: "College Directory", desc: "Enable college & university directory", enabled: enableCollegeDirectory, toggle: () => setEnableCollegeDirectory(!enableCollegeDirectory), icon: Globe },
+                { label: "Gamification", desc: "Enable points, badges, and rewards", enabled: enableGamification, toggle: () => setEnableGamification(!enableGamification), icon: Award },
+                { label: "Parental Controls", desc: "Enable parental account features", enabled: enableParentalControls, toggle: () => setEnableParentalControls(!enableParentalControls), icon: Shield },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center justify-between py-3 border-b border-border/20 last:border-0">
+                  <div className="flex items-center gap-3">
+                    <item.icon className="w-4 h-4 text-muted-foreground" />
+                    <div>
+                      <p className="text-sm font-medium text-foreground">{item.label}</p>
+                      <p className="text-xs text-muted-foreground">{item.desc}</p>
+                    </div>
+                  </div>
+                  <Toggle enabled={item.enabled} onChange={item.toggle} label={item.label} />
+                </div>
+              ))}
+              
+              <div className="pt-4">
+                <Button variant="hero" size="sm" className="w-full">
+                  <Settings className="w-4 h-4 mr-2" />
+                  Save Feature Configuration
                 </Button>
               </div>
             </div>

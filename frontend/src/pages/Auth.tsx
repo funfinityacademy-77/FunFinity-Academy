@@ -16,6 +16,7 @@ import { SkeletonLoader } from "@/components/ui/skeleton-loader";
 import { supabase } from "@/lib/supabase";
 import { useGamification } from "@/hooks/use-gamification";
 import { SupportChatWidget } from "@/components/chat/SupportChatWidget";
+import { AgeVerificationModal } from "@/components/AgeVerificationModal";
 import { z } from "zod";
 
 type Role = "student";
@@ -102,6 +103,8 @@ export default function Auth() {
   const [role, setRole] = useState<Role>("student");
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string; name?: string }>({});
+  const [showAgeVerification, setShowAgeVerification] = useState(false);
+  const [ageVerified, setAgeVerified] = useState(false);
   const navigate = useNavigate();
   const { user, role: userRole, signUp, signIn, resetPassword } = useAuth();
   const { toast } = useToast();
@@ -444,7 +447,6 @@ export default function Auth() {
                     className="overflow-hidden"
                   >
                     <div className="space-y-1.5 mb-4">
-                      <Label htmlFor="name" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Full Name</Label>
                       <div className="relative">
                         <User className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                         <motion.div
@@ -455,9 +457,15 @@ export default function Auth() {
                             id="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            placeholder="John Doe"
-                            className="h-12 rounded-xl border-border/50 bg-secondary/40 pl-11 focus:bg-background focus:border-primary/50 transition-all"
+                            placeholder=" "
+                            className="h-12 rounded-xl border-border/50 bg-secondary/40 pl-11 focus:bg-background focus:border-primary/50 transition-all peer"
                           />
+                          <Label
+                            htmlFor="name"
+                            className="absolute left-11 top-1/2 -translate-y-1/2 text-muted-foreground transition-all duration-200 peer-focus:-top-2 peer-focus:left-3 peer-focus:text-xs peer-focus:text-primary peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm pointer-events-none bg-background px-1"
+                          >
+                            Full Name
+                          </Label>
                         </motion.div>
                       </div>
                     </div>
@@ -466,7 +474,6 @@ export default function Auth() {
               </AnimatePresence>
 
               <div className="space-y-1.5">
-                <Label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Email Address</Label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <motion.div whileFocus={{ scale: 1.02 }} className="relative">
@@ -475,9 +482,15 @@ export default function Auth() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="name@example.com"
-                      className="h-12 rounded-xl border-border/50 bg-secondary/40 pl-11 focus:bg-background focus:border-primary/50 transition-all"
+                      placeholder=" "
+                      className="h-12 rounded-xl border-border/50 bg-secondary/40 pl-11 focus:bg-background focus:border-primary/50 transition-all peer"
                     />
+                    <Label
+                      htmlFor="email"
+                      className="absolute left-11 top-1/2 -translate-y-1/2 text-muted-foreground transition-all duration-200 peer-focus:-top-2 peer-focus:left-3 peer-focus:text-xs peer-focus:text-primary peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm pointer-events-none bg-background px-1"
+                    >
+                      Email Address
+                    </Label>
                   </motion.div>
                 </div>
               </div>
@@ -485,7 +498,6 @@ export default function Auth() {
               {!isReset && (
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between mb-1.5">
-                    <Label htmlFor="password" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Password</Label>
                     {mode === "signin" && (
                       <motion.button
                         whileHover={{ scale: 1.05 }}
@@ -506,9 +518,15 @@ export default function Auth() {
                         type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="••••••••"
-                        className="h-12 rounded-xl border-border/50 bg-secondary/40 pl-11 pr-11 focus:bg-background focus:border-primary/50 transition-all"
+                        placeholder=" "
+                        className="h-12 rounded-xl border-border/50 bg-secondary/40 pl-11 pr-11 focus:bg-background focus:border-primary/50 transition-all peer"
                       />
+                      <Label
+                        htmlFor="password"
+                        className="absolute left-11 top-1/2 -translate-y-1/2 text-muted-foreground transition-all duration-200 peer-focus:-top-2 peer-focus:left-3 peer-focus:text-xs peer-focus:text-primary peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm pointer-events-none bg-background px-1"
+                      >
+                        Password
+                      </Label>
                     </motion.div>
                     <motion.button
                       whileHover={{ scale: 1.1 }}

@@ -47,6 +47,7 @@ import WebsiteTour from "@/components/tour/WebsiteTour";
 import { SupportChatWidget } from "@/components/chat/SupportChatWidget";
 import { useGamificationBackend } from "@/hooks/use-gamification-backend";
 import { useEnrollments } from "@/hooks/use-courses";
+import { GlobalSearchBar } from "@/components/GlobalSearchBar";
 
 const navGroups = [
   {
@@ -285,15 +286,8 @@ export function AppLayout() {
               <Menu className="h-5 w-5 text-muted-foreground" />
             </button>
 
-            <div className="hidden w-64 items-center gap-2 rounded-xl border border-border/30 bg-secondary/50 px-3 py-1.5 sm:flex">
-              <Search className="h-4 w-4 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Search courses, topics..."
-                className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
-                aria-label="Search"
-              />
-              <kbd className="rounded border border-border/50 bg-background px-1.5 py-0.5 text-[10px] text-muted-foreground">Ctrl K</kbd>
+            <div className="hidden sm:block">
+              <GlobalSearchBar placeholder="Search courses, topics..." className="w-64" />
             </div>
           </div>
 
@@ -331,8 +325,10 @@ export function AppLayout() {
           </div>
         </header>
 
-        <main id="main-content" className="flex-1 p-3 sm:p-4 lg:p-6" role="main" tabIndex={-1}>
-          <Outlet />
+        <main id="main-content" className="flex-1 overflow-hidden p-3 sm:p-4 lg:p-6" role="main" tabIndex={-1}>
+          <div className="h-full overflow-y-auto">
+            <Outlet />
+          </div>
         </main>
 
         <ReactionSystem />

@@ -1,12 +1,20 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Megaphone, PlusCircle, Users, Globe, User, Trash2, CheckCircle2, Loader2, Award, AlertTriangle, Radio } from "lucide-react";
+import { Megaphone, PlusCircle, Users, Globe, User, Trash2, CheckCircle2, Loader2, Award, AlertTriangle, Radio, Clock, Calendar, Send, Sparkles, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchAnnouncements } from "@/lib/data-service";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 const targetIcon: Record<string, React.ReactNode> = {
   All: <Globe className="w-3 h-3" />,
@@ -38,6 +46,10 @@ export default function AdminAnnouncements() {
   const [target, setTarget] = useState<Target>("All");
   const [priority, setPriority] = useState<Priority>("normal");
   const [urgencyFilter, setUrgencyFilter] = useState<"all" | "urgent" | "normal" | "system_wide">("all");
+  const [scheduleMode, setScheduleMode] = useState(false);
+  const [scheduledDate, setScheduledDate] = useState("");
+  const [scheduledTime, setScheduledTime] = useState("");
+  const [sendPushNotification, setSendPushNotification] = useState(true);
 
   const { data: announcements, isLoading } = useQuery({
     queryKey: ["admin-announcements"],
@@ -96,17 +108,33 @@ export default function AdminAnnouncements() {
       return;
     }
 
+    if (scheduleMode && (!scheduledDate || !scheduledTime)) {
+      toast.error("Please select both date and time for scheduled announcements.");
+      return;
+    }
+
     const now = new Date();
     const dateStr = now.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-
-    addMutation.mutate({
+    
+    const announcementData: any = {
       title: title.trim(),
       body: body.trim(),
       target,
       date: dateStr,
       priority,
       author: "Super Admin",
-    });
+      send_push_notification: sendPushNotification,
+    };
+
+    if (scheduleMode) {
+      announcementData.scheduled_for = new Date(`${scheduledDate}T${scheduledTime}`).toISOString();
+      announcementData.status = 'scheduled';
+    } else {
+      announcementData.status = 'published';
+      announcementData.published_at = now.toISOString();
+    }
+
+    addMutation.mutate(announcementData);
   };
 
   return (
@@ -175,64 +203,159 @@ export default function AdminAnnouncements() {
         </div>
 
         {/* Compose Box */}
-        <div className="platform-card p-6 mb-6">
-          <h2 className="font-display text-base font-semibold text-foreground mb-4">New Announcement</h2>
-          <div className="space-y-3">
-            <input
-              type="text"
+        <Card className="border-border/30 mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Megaphone className="w-5 h-5 text-destructive" />
+              New Announcement
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Announcement title..."
-              className="w-full px-4 py-2.5 rounded-xl bg-secondary/50 border border-border/30 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-primary/50"
+              className="w-full"
             />
-            <textarea
-              rows={3}
+            <Textarea
+              rows={4}
               value={body}
               onChange={(e) => setBody(e.target.value)}
               placeholder="Write your message..."
-              className="w-full px-4 py-2.5 rounded-xl bg-secondary/50 border border-border/30 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-primary/50 resize-none"
+              className="w-full resize-none"
             />
-            <div className="flex items-center justify-between flex-wrap gap-3">
+            
+            {/* Target Selection */}
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">Target Audience</Label>
               <div className="flex gap-2 flex-wrap">
                 {(["All", "Students", "Teachers", "Parents"] as Target[]).map((t) => (
                   <button
                     key={t}
                     onClick={() => setTarget(t)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all ${
+                    className={cn(
+                      "px-3 py-1.5 rounded-xl text-xs font-medium border transition-all flex items-center gap-1.5",
                       target === t
                         ? "bg-primary/10 border-primary/30 text-primary"
                         : "border-border/30 text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                    }`}
+                    )}
                   >
+                    {targetIcon[t]}
                     {t}
                   </button>
                 ))}
+              </div>
+            </div>
+
+            {/* Priority Selection */}
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">Priority Level</Label>
+              <div className="flex gap-2 flex-wrap">
                 {(["normal", "urgent", "system_wide"] as Priority[]).map((p) => (
                   <button
                     key={p}
                     onClick={() => setPriority(p)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all ${
+                    className={cn(
+                      "px-3 py-1.5 rounded-xl text-xs font-medium border transition-all flex items-center gap-1.5",
                       priority === p
-                        ? `${priorityConfig[p].bgClass} ${priorityConfig[p].color}`
-                        : "border-border/30 text-muted-foreground hover:text-foreground"
-                    }`}
+                        ? priorityConfig[p].bgClass + " border-current " + priorityConfig[p].color
+                        : "border-border/30 text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                    )}
                   >
-                    {priorityConfig[p].icon && <span className="mr-1">{priorityConfig[p].icon}</span>}
+                    {priorityConfig[p].icon}
                     {priorityConfig[p].label}
                   </button>
                 ))}
               </div>
-              <Button variant="hero" size="sm" onClick={handlePublish} disabled={addMutation.isPending}>
-                {addMutation.isPending ? <Loader2 className="w-3 h-3 mr-1 animate-spin" /> : <PlusCircle className="w-3 h-3 mr-1" />} Publish
-              </Button>
             </div>
-          </div>
-        </div>
+
+            {/* Scheduling Options */}
+            <div className="space-y-3 pt-3 border-t border-border/20">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-muted-foreground" />
+                  <Label className="text-sm text-foreground">Schedule for later</Label>
+                </div>
+                <Switch
+                  checked={scheduleMode}
+                  onCheckedChange={setScheduleMode}
+                />
+              </div>
+
+              {scheduleMode && (
+                <div className="grid grid-cols-2 gap-3 animate-in fade-in slide-in-from-top-2">
+                  <div className="space-y-1">
+                    <Label className="text-xs text-muted-foreground">Date</Label>
+                    <Input
+                      type="date"
+                      value={scheduledDate}
+                      onChange={(e) => setScheduledDate(e.target.value)}
+                      className="h-9"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label className="text-xs text-muted-foreground">Time</Label>
+                    <Input
+                      type="time"
+                      value={scheduledTime}
+                      onChange={(e) => setScheduledTime(e.target.value)}
+                      className="h-9"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Push Notification Toggle */}
+            <div className="flex items-center justify-between pt-3 border-t border-border/20">
+              <div className="flex items-center gap-2">
+                <Send className="w-4 h-4 text-muted-foreground" />
+                <div>
+                  <Label className="text-sm text-foreground">Send Push Notification</Label>
+                  <p className="text-xs text-muted-foreground">Instantly notify all target users</p>
+                </div>
+              </div>
+              <Switch
+                checked={sendPushNotification}
+                onCheckedChange={setSendPushNotification}
+              />
+            </div>
+
+            {/* Publish Button */}
+            <Button
+              onClick={handlePublish}
+              disabled={addMutation.isPending}
+              className={cn(
+                "w-full",
+                scheduleMode ? "variant-outline" : "variant-hero"
+              )}
+            >
+              {addMutation.isPending ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Publishing...
+                </>
+              ) : scheduleMode ? (
+                <>
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Schedule Announcement
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Publish Now
+                </>
+              )}
+            </Button>
+          </CardContent>
+        </Card>
 
         {/* Announcements List */}
         <div className="space-y-3">
           {!announcements || announcements.length === 0 ? (
-            <div className="platform-card p-8 text-center text-muted-foreground">No announcements yet. Create one above!</div>
+            <Card className="border-border/30 p-8 text-center text-muted-foreground">
+              No announcements yet. Create one above!
+            </Card>
           ) : (
             announcements
               .filter((a) => {

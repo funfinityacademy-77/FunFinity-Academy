@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, Clock, Search, Plus, Pin, Loader2, Send } from "lucide-react";
+import { MessageSquare, Clock, Search, Plus, Pin, Loader2, Send, ArrowUp, Tag, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useForumPosts, useCreateForumPost, useForumReplies, useCreateForumReply } from "@/hooks/use-forums";
+import { useForumPosts, useCreateForumPost, useForumReplies, useCreateForumReply, useUpvotePost } from "@/hooks/use-forums";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -265,10 +265,38 @@ export default function Forums() {
 function ForumPost({ post }: { post: any }) {
   const [expanded, setExpanded] = useState(false);
   const [replyContent, setReplyContent] = useState("");
+  const [upvoted, setUpvoted] = useState(false);
   const { data: replies, isLoading: loadingReplies } = useForumReplies(post.id);
   const createReply = useCreateForumReply();
+  const upvotePost = useUpvotePost();
   const qc = useQueryClient();
   const { user } = useAuth();
+
+  const handleUpvote = () => {
+    if (!user) {
+      toast.error("Please log in to upvote posts");
+      return;
+    }
+    
+    setUpvoted(!upvoted);
+    
+    // Optimistic update
+    qc.setQueryData(["forum_posts", "All Topics"], (old: any[] = []) => 
+      old.map((p: any) => 
+        p.id === post.id 
+          ? { ...p, upvotes: (p.upvotes || 0) + (upvoted ? -1 : 1) }
+          : p
+      )
+    );
+    
+    upvotePost.mutate(post.id, {
+      onError: () => {
+        setUpvoted(!upvoted); // Revert on error
+        qc.invalidateQueries({ queryKey: ["forum_posts"] });
+        toast.error("Failed to upvote. Please try again.");
+      }
+    });
+  };
 
   const handleReply = () => {
     if (!replyContent.trim()) return;
@@ -333,6 +361,18 @@ function ForumPost({ post }: { post: any }) {
       </p>
 
       <div className="flex items-center gap-4 pt-2 relative z-10">
+        <button 
+          onClick={handleUpvote}
+          className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-xl transition-all font-bold text-[11px] uppercase tracking-wider",
+            upvoted 
+              ? "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20" 
+              : "bg-secondary/40 text-muted-foreground hover:text-foreground hover:bg-secondary/60 border border-transparent"
+          )}
+        >
+          <ArrowUp className="w-3.5 h-3.5" />
+          {post.upvotes || 0}
+        </button>
         <button 
           onClick={() => setExpanded(!expanded)}
           className={cn(

@@ -458,7 +458,7 @@ export function Footer() {
             onClick={() => setIsModalOpen(false)}
           >
             {/* Blurred Background */}
-            <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-md" />
+            <div className="absolute inset-0 bg-background/80 dark:bg-slate-900/80 backdrop-blur-md" />
             
             {/* Modal Content */}
             <motion.div
@@ -466,11 +466,11 @@ export function Footer() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25 }}
-              className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto platform-card"
+              className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-card-heavy border-2 border-border/50"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="sticky top-0 bg-slate-900/95 backdrop-blur-md border-b border-border/30 p-6 flex items-center justify-between">
+              <div className="sticky top-0 bg-background/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-border/30 p-6 flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <FunfinityIcon 
                     size="lg"

@@ -13,11 +13,14 @@ export function CookieConsent() {
   });
 
   useEffect(() => {
-    // Always show cookie consent on page load (removed "accepted once" functionality)
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 1000);
-    return () => clearTimeout(timer);
+    // Check if consent has already been given
+    const savedConsent = localStorage.getItem('funfinity_cookie_consent');
+    if (!savedConsent) {
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const handleSavePreferences = () => {
@@ -86,13 +89,6 @@ export function CookieConsent() {
                     We use cookies to enhance your experience. Please choose which cookies you allow us to use.
                   </p>
                 </div>
-                <button
-                  onClick={() => setIsVisible(false)}
-                  className="flex-shrink-0 p-1 rounded-lg hover:bg-secondary/50 text-muted-foreground transition-colors"
-                  aria-label="Close cookie consent"
-                >
-                  <X className="w-4 h-4" />
-                </button>
               </div>
 
               {/* Cookie Options */}

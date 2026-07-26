@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
-import { StickyNote, Loader2 } from "lucide-react";
+import { StickyNote, Loader2, Pen, Eraser, Square, Circle, Download, Undo, Redo } from "lucide-react";
 import NoteCard, { type CanvasNote } from "@/components/notes/NoteCard";
 import NoteEditor from "@/components/notes/NoteEditor";
 import CanvasToolbar, { type PaperStyle } from "@/components/notes/CanvasToolbar";
@@ -10,6 +10,7 @@ import { apiClient } from "@/lib/api-client";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 
 const SOURCES_KEY = "funfinity_sources";
 
@@ -68,6 +69,18 @@ export default function Notes() {
   const panStart = useRef({ x: 0, y: 0, ox: 0, oy: 0 });
   const canvasRef = useRef<HTMLDivElement>(null);
   const maxZ = useRef(notes.reduce((m, n) => Math.max(m, n.zIndex), 0));
+
+  // Drawing state
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [drawingMode, setDrawingMode] = useState<'none' | 'pen' | 'eraser' | 'rectangle' | 'circle'>('none');
+  const [drawingColor, setDrawingColor] = useState('#3b82f6');
+  const [drawingSize, setDrawingSize] = useState(3);
+  const [drawings, setDrawings] = useState<Array<{ type: string; points: number[]; color: string; size: number }>>([]);
+  const [currentDrawing, setCurrentDrawing] = useState<number[] | null>(null);
+  const [history, setHistory] = useState<Array<typeof drawings>>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const canvasDrawRef = useRef<HTMLCanvasElement>(null);
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
 
   useEffect(() => { localStorage.setItem(SOURCES_KEY, JSON.stringify(sources)); }, [sources]);
 
@@ -136,6 +149,76 @@ export default function Notes() {
     setNotes(prev => prev.map(n => n.id === id ? { ...n, zIndex: maxZ.current } : n));
   }, []);
 
+  // Drawing handlers
+  const handleCanvasDrawStart = useCallback((e: React.PointerEvent<HTMLCanvasElement>) => {
+    if (drawingMode === 'none') return;
+    e.preventDefault();
+    setIsDrawing(true);
+    const rect = canvasDrawRef.current?.getBoundingClientRect();
+    const x = (e.clientX - (rect?.left || 0)) / scale - offset.x;
+    const y = (e.clientY - (rect?.top || 0)) / scale - offset.y;
+    setCurrentDrawing([x, y]);
+  }, [drawingMode, scale, offset]);
+
+  const handleCanvasDrawMove = useCallback((e: React.PointerEvent<HTMLCanvasElement>) => {
+    if (!isDrawing || drawingMode === 'none') return;
+    e.preventDefault();
+    const rect = canvasDrawRef.current?.getBoundingClientRect();
+    const x = (e.clientX - (rect?.left || 0)) / scale - offset.x;
+    const y = (e.clientY - (rect?.top || 0)) / scale - offset.y;
+    setCurrentDrawing(prev => prev ? [...prev, x, y] : [x, y]);
+  }, [isDrawing, drawingMode, scale, offset]);
+
+  const handleCanvasDrawEnd = useCallback(() => {
+    if (!isDrawing || !currentDrawing || currentDrawing.length < 4) {
+      setIsDrawing(false);
+      setCurrentDrawing(null);
+      return;
+    }
+    
+    const newDrawing = {
+      type: drawingMode,
+      points: currentDrawing,
+      color: drawingMode === 'eraser' ? 'transparent' : drawingColor,
+      size: drawingSize
+    };
+    
+    setDrawings(prev => [...prev, newDrawing]);
+    setHistory(prev => [...prev.slice(0, historyIndex + 1), [...drawings, newDrawing]]);
+    setHistoryIndex(prev => prev + 1);
+    setIsDrawing(false);
+    setCurrentDrawing(null);
+  }, [isDrawing, currentDrawing, drawingMode, drawingColor, drawingSize, drawings, historyIndex]);
+
+  const handleUndo = useCallback(() => {
+    if (historyIndex > 0) {
+      setHistoryIndex(prev => prev - 1);
+      setDrawings(history[historyIndex - 1]);
+    }
+  }, [history, historyIndex]);
+
+  const handleRedo = useCallback(() => {
+    if (historyIndex < history.length - 1) {
+      setHistoryIndex(prev => prev + 1);
+      setDrawings(history[historyIndex + 1]);
+    }
+  }, [history, historyIndex]);
+
+  const handleClearCanvas = useCallback(() => {
+    setDrawings([]);
+    setHistory([]);
+    setHistoryIndex(-1);
+  }, []);
+
+  const handleDownloadCanvas = useCallback(() => {
+    const canvas = canvasDrawRef.current;
+    if (!canvas) return;
+    const link = document.createElement('a');
+    link.download = `funfinity-notes-${Date.now()}.png`;
+    link.href = canvas.toDataURL();
+    link.click();
+  }, []);
+
   const handleCanvasPointerDown = (e: React.PointerEvent) => {
     if (e.target !== canvasRef.current) return;
     setIsPanning(true);
@@ -191,15 +274,95 @@ export default function Notes() {
       />
 
       <div className="flex-1 relative overflow-hidden" style={{ background: "hsl(var(--background))" }}>
+        {/* Drawing Toolbar */}
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-card/90 backdrop-blur-xl border border-border/30 rounded-2xl p-2 shadow-2xl">
+          <Button
+            variant={drawingMode === 'none' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setDrawingMode('none')}
+            className="h-9 w-9 p-0 rounded-xl"
+          >
+            <StickyNote className="w-4 h-4" />
+          </Button>
+          <div className="w-px h-6 bg-border/30" />
+          <Button
+            variant={drawingMode === 'pen' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setDrawingMode('pen')}
+            className="h-9 w-9 p-0 rounded-xl"
+          >
+            <Pen className="w-4 h-4" />
+          </Button>
+          <Button
+            variant={drawingMode === 'eraser' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setDrawingMode('eraser')}
+            className="h-9 w-9 p-0 rounded-xl"
+          >
+            <Eraser className="w-4 h-4" />
+          </Button>
+          <div className="w-px h-6 bg-border/30" />
+          <input
+            type="color"
+            value={drawingColor}
+            onChange={(e) => setDrawingColor(e.target.value)}
+            className="w-8 h-8 rounded-lg cursor-pointer border-2 border-border/30"
+          />
+          <input
+            type="range"
+            min="1"
+            max="20"
+            value={drawingSize}
+            onChange={(e) => setDrawingSize(Number(e.target.value))}
+            className="w-20"
+          />
+          <div className="w-px h-6 bg-border/30" />
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleUndo}
+            disabled={historyIndex <= 0}
+            className="h-9 w-9 p-0 rounded-xl"
+          >
+            <Undo className="w-4 h-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleRedo}
+            disabled={historyIndex >= history.length - 1}
+            className="h-9 w-9 p-0 rounded-xl"
+          >
+            <Redo className="w-4 h-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleDownloadCanvas}
+            className="h-9 w-9 p-0 rounded-xl"
+          >
+            <Download className="w-4 h-4" />
+          </Button>
+        </div>
+
         <div className="absolute inset-0 pointer-events-none" style={paperBg} />
         <div
           ref={canvasRef}
-          className={cn("absolute inset-0", isPanning ? "cursor-grabbing" : "cursor-default")}
+          className={cn("absolute inset-0", isPanning ? "cursor-grabbing" : drawingMode !== 'none' ? "crosshair" : "cursor-default")}
           onPointerDown={handleCanvasPointerDown}
           onPointerMove={handleCanvasPointerMove}
           onPointerUp={handleCanvasPointerUp}
           onPointerLeave={handleCanvasPointerUp}
         >
+          <canvas
+            ref={canvasDrawRef}
+            className="absolute inset-0 pointer-events-none"
+            style={{ width: '100%', height: '100%' }}
+            onPointerDown={handleCanvasDrawStart}
+            onPointerMove={handleCanvasDrawMove}
+            onPointerUp={handleCanvasDrawEnd}
+            onPointerLeave={handleCanvasDrawEnd}
+          />
           <div style={{
             transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
             transformOrigin: "0 0",

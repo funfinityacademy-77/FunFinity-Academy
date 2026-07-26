@@ -112,6 +112,9 @@ const AdminFeedback = lazy(() => import("./pages/admin/AdminFeedback"));
 const AdminBackgrounds = lazy(() => import("./pages/admin/AdminBackgrounds"));
 const AdminNotifications = lazy(() => import("./pages/admin/AdminNotifications"));
 
+// Parent Portal pages
+const ParentDashboard = lazy(() => import("./pages/parent/ParentDashboard"));
+
 const queryClient = new QueryClient();
 
 // Scroll position restoration component
@@ -187,7 +190,7 @@ const App = () => {
                           <InitConsentScripts />
                           <ScrollRestoration />
                           <Suspense fallback={<RouteSkeleton />}>
-                            <div className="min-h-screen flex flex-col" role="application" style={{ paddingTop: 0 }}>
+                            <div className="min-h-screen flex flex-col" role="application">
                               <Routes>
                                 <Route path="/" element={<Index />} />
                                 <Route path="/auth" element={<Auth />} />
@@ -281,6 +284,9 @@ const App = () => {
                                 <Route path="notifications" element={<AdminNotifications />} />
                                 <Route path="help" element={<HelpCenter />} />
                               </Route>
+
+                              {/* Parent Portal */}
+                              <Route path="/parent" element={<ProtectedRoute allowedRoles={['parent', 'admin']}><ParentDashboard /></ProtectedRoute>} />
 
                               <Route path="*" element={<NotFound />} />
                             </Routes>

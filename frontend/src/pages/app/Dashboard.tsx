@@ -116,7 +116,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
+    <div className="max-w-7xl mx-auto w-full space-y-4 sm:space-y-6">
       {isLoading ? (
         <DashboardSkeleton />
       ) : (
@@ -209,11 +209,58 @@ export default function Dashboard() {
               </Button>
             </div>
           </div>
-          <div className="shrink-0 flex flex-col items-center gap-4">
-            <div className="platform-card p-4 min-w-[160px] text-center bg-gradient-to-br from-cyan/10 to-magenta/10 border-cyan/20">
+          <div className="shrink-0 flex flex-col gap-3 sm:gap-4">
+            {/* XP Card */}
+            <div className="platform-card p-4 min-w-[140px] sm:min-w-[160px] text-center bg-gradient-to-br from-cyan/10 to-magenta/10 border-cyan/20">
               <p className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">Total XP</p>
-              <p className="font-display text-3xl font-bold text-gradient-brand">+{totalXP}</p>
+              <motion.p 
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200 }}
+                className="font-display text-2xl sm:text-3xl font-bold text-gradient-brand"
+              >
+                +{totalXP}
+              </motion.p>
               <p className="text-xs text-muted-foreground">Points earned</p>
+            </div>
+
+            {/* Streak Card */}
+            <div className="platform-card p-4 min-w-[140px] sm:min-w-[160px] text-center bg-gradient-to-br from-orange/10 to-red/10 border-orange/20">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">Current Streak</p>
+              <div className="flex items-center justify-center gap-1">
+                <motion.div
+                  animate={{ rotate: [0, -10, 10, -10, 0] }}
+                  transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
+                >
+                  <Flame className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" />
+                </motion.div>
+                <motion.p 
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                  className="font-display text-2xl sm:text-3xl font-bold text-orange-500"
+                >
+                  {currentStreak}
+                </motion.p>
+              </div>
+              <p className="text-xs text-muted-foreground">Days</p>
+            </div>
+
+            {/* Level Progress */}
+            <div className="platform-card p-4 min-w-[140px] sm:min-w-[160px] text-center bg-gradient-to-br from-blue/10 to-purple/10 border-blue/20">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">Level Progress</p>
+              <div className="mb-2">
+                <motion.p 
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                  className="font-display text-xl sm:text-2xl font-bold text-blue-500"
+                >
+                  {Math.floor(totalXP / 100) + 1}
+                </motion.p>
+              </div>
+              <Progress value={(totalXP % 100)} className="h-2 mb-1" />
+              <p className="text-[10px] text-muted-foreground">{totalXP % 100}/100 XP</p>
             </div>
           </div>
         </div>

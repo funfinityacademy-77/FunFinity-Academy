@@ -14,6 +14,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useQuery } from "@tanstack/react-query";
 import { fetchUsers } from "@/lib/data-service";
 import { useSupabaseRealtime } from "@/hooks/useSupabaseRealtime";
+import { Badge } from "@/components/ui/badge";
 
 const navGroups = [
   {
@@ -91,11 +92,11 @@ export function AdminLayout() {
     ...(users?.filter(u => 
       u.display_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       u.email?.toLowerCase().includes(searchQuery.toLowerCase())
-    ).map(u => ({ type: 'user', id: u.id, label: u.display_name || u.email, href: `/admin/users` })) || []),
-    ...(courses?.filter(c => 
+    ).map(u => ({ type: 'user' as const, id: u.id, label: u.display_name || u.email, href: `/admin/users` })) || []),
+    ...(Array.isArray(courses) ? courses.filter((c: any) => 
       c.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.description?.toLowerCase().includes(searchQuery.toLowerCase())
-    ).map(c => ({ type: 'course', id: c.id, label: c.title, href: `/admin/courses` })) || []),
+    ).map((c: any) => ({ type: 'course' as const, id: c.id, label: c.title, href: `/admin/courses` })) : []),
   ].slice(0, 8);
 
   const handleLogout = async () => {
@@ -173,23 +174,23 @@ export function AdminLayout() {
   );
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="h-screen bg-background flex overflow-hidden">
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <aside className={cn("hidden lg:flex flex-col glass-sidebar shrink-0 transition-all duration-300 fixed top-0 left-0 h-screen z-40 border-r border-destructive/10", sidebarOpen ? "w-60" : "w-[72px]")}>
+      <aside className={cn("hidden lg:flex flex-col glass-sidebar shrink-0 transition-all duration-300 h-full z-40 border-r border-destructive/10", sidebarOpen ? "w-60" : "w-[72px]")}>
         <SidebarContent />
       </aside>
       <AnimatePresence>
         {mobileSidebarOpen && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setMobileSidebarOpen(false)} className="lg:hidden fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40" />
-            <motion.aside initial={{ x: -280 }} animate={{ x: 0 }} exit={{ x: -280 }} transition={{ type: "spring", damping: 25 }} className="lg:hidden fixed top-0 left-0 h-screen w-60 glass-sidebar z-50">
+            <motion.aside initial={{ x: -280 }} animate={{ x: 0 }} exit={{ x: -280 }} transition={{ type: "spring", damping: 25 }} className="lg:hidden fixed top-0 left-0 h-full w-60 glass-sidebar z-50">
               <SidebarContent />
             </motion.aside>
           </>
         )}
       </AnimatePresence>
-      <div className={cn("flex-1 flex flex-col min-h-screen transition-all duration-300", sidebarOpen ? "lg:ml-60" : "lg:ml-[72px]")}>
-        <header className="sticky top-0 z-30 glass-card-heavy border-b border-border/30 px-4 lg:px-6 h-14 flex items-center justify-between">
+      <div className={cn("flex-1 flex flex-col h-full overflow-hidden transition-all duration-300", sidebarOpen ? "lg:ml-60" : "lg:ml-[72px]")}>
+        <header className="flex-shrink-0 z-30 glass-card-heavy border-b border-border/30 px-4 lg:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 rounded-lg hover:bg-secondary/50 transition-colors" aria-label="Toggle sidebar">
               <Menu className="w-5 h-5 text-muted-foreground" />
@@ -255,7 +256,7 @@ export function AdminLayout() {
             <NotificationDropdown accentColor="bg-destructive" />
           </div>
         </header>
-        <main id="main-content" className="flex-1 p-4 lg:p-6" role="main" tabIndex={-1}>
+        <main id="main-content" className="flex-1 overflow-auto p-4 lg:p-6" role="main" tabIndex={-1}>
           <Outlet />
         </main>
       </div>

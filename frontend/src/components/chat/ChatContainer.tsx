@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Send, Search, Plus, Loader2, UserPlus, ShieldAlert, X, MessageSquare, User,
-  ShieldCheck
+  ShieldCheck, Circle, Clock, MoreVertical, Video, Phone
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ import {
   useSearchUsers, 
   useCreateConversation,
   useUpdateConversationStatus,
+  useUserPresence,
   PREDEFINED_RESPONSES,
   getContextAwareResponses
 } from "@/hooks/use-chat";
@@ -35,6 +36,7 @@ export function ChatContainer() {
   const { data: conversations, isLoading: loadingConvos } = useConversations();
   const { data: messages, isLoading: loadingMessages } = useMessages(activeConvoId);
   const { data: searchResults, isLoading: searchingUsers } = useSearchUsers(userSearchQuery);
+  const { data: userPresence } = useUserPresence(activeOtherMember?.user_id);
   
   const sendMessage = useSendMessage();
   const createConversation = useCreateConversation();
@@ -50,6 +52,30 @@ export function ChatContainer() {
     if (role !== "parent") return false;
     // If I'm a parent and neither member is me, I'm monitoring
     return !convo.members?.some((m: any) => m.user_id === user?.id);
+  };
+
+  const getActiveStatus = (userId: string) => {
+    const presence = userPresence?.[userId];
+    if (!presence) return null;
+    
+    const now = new Date();
+    const lastSeen = new Date(presence.last_seen);
+    const diffMinutes = Math.floor((now.getTime() - lastSeen.getTime()) / 60000);
+    
+    if (presence.is_online) {
+      return { status: "online", text: "Active now", color: "bg-emerald-500" };
+    } else if (diffMinutes < 5) {
+      return { status: "recent", text: "Last seen just now", color: "bg-emerald-400" };
+    } else if (diffMinutes < 30) {
+      return { status: "away", text: `Last seen ${diffMinutes}m ago`, color: "bg-yellow-500" };
+    } else if (diffMinutes < 60) {
+      return { status: "away", text: `Last seen ${diffMinutes}m ago`, color: "bg-orange-500" };
+    } else if (diffMinutes < 1440) {
+      const hours = Math.floor(diffMinutes / 60);
+      return { status: "offline", text: `Last seen ${hours}h ago`, color: "bg-gray-400" };
+    } else {
+      return { status: "offline", text: "Last seen recently", color: "bg-gray-400" };
+    }
   };
 
   const filteredConvos = ((conversations as any[]) || []).filter((c) => {
@@ -197,6 +223,7 @@ export function ChatContainer() {
                   const isMonitor = isMonitoring(convo);
                   const displayName = convo.name || other?.profiles?.display_name || "User";
                   const lastMessage = messages?.filter(m => m.conversation_id === convo.id).pop();
+                  const activeStatus = getActiveStatus(other?.user_id);
                   
                   return (
                     <button
@@ -209,8 +236,13 @@ export function ChatContainer() {
                           : "hover:bg-secondary/20 border-transparent hover:border-primary/30"
                       )}
                     >
-                      <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center text-sm font-bold text-primary shrink-0 transition-transform group-hover:scale-105">
-                        {displayName.charAt(0).toUpperCase()}
+                      <div className="relative shrink-0">
+                        <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center text-sm font-bold text-primary transition-transform group-hover:scale-105">
+                          {displayName.charAt(0).toUpperCase()}
+                        </div>
+                        {activeStatus && (
+                          <div className={cn("absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-background", activeStatus.color)} />
+                        )}
                         {convo.type === "pending_student" && (
                           <div className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-background animate-pulse" />
                         )}
@@ -220,15 +252,19 @@ export function ChatContainer() {
                           <p className="text-sm font-semibold text-foreground truncate flex items-center gap-1.5">
                             {displayName}
                             {isMonitor && <ShieldAlert className="w-3 h-3 text-primary animate-pulse" />}
-
                           </p>
-                          {convo.updated_at && (
-                             <span className="text-[10px] text-muted-foreground">
-                               {new Date(convo.updated_at).toLocaleDateString() === new Date().toLocaleDateString() 
-                                 ? new Date(convo.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                                 : new Date(convo.updated_at).toLocaleDateString([], { month: 'short', day: 'numeric' })}
-                             </span>
-                          )}
+                          <div className="flex items-center gap-2">
+                            {activeStatus && activeStatus.status === "online" && (
+                              <span className="text-[10px] font-medium text-emerald-500">Active</span>
+                            )}
+                            {convo.updated_at && (
+                              <span className="text-[10px] text-muted-foreground">
+                                {new Date(convo.updated_at).toLocaleDateString() === new Date().toLocaleDateString() 
+                                  ? new Date(convo.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                                  : new Date(convo.updated_at).toLocaleDateString([], { month: 'short', day: 'numeric' })}
+                              </span>
+                            )}
+                          </div>
                         </div>
                         <p className="text-xs text-muted-foreground truncate opacity-80">
                           {convo.type === "pending_student" 

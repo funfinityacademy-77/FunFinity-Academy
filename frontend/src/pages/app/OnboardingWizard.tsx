@@ -321,14 +321,42 @@ export default function OnboardingWizard() {
             </Button>
           </div>
           
-          {/* Progress bar */}
-          <div className="mt-4 h-2 bg-secondary rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-primary to-accent"
-              initial={{ width: 0 }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.5 }}
-            />
+          {/* Enhanced Progress bar with step indicators */}
+          <div className="mt-4">
+            <div className="flex items-center justify-between mb-2">
+              {ONBOARDING_STEPS.map((step, index) => (
+                <motion.div
+                  key={step.id}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-center"
+                >
+                  <div className={cn(
+                    "w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300",
+                    index < currentStep ? "bg-primary text-primary-foreground" :
+                    index === currentStep ? "bg-primary/20 text-primary border-2 border-primary" :
+                    "bg-secondary/50 text-muted-foreground"
+                  )}>
+                    {index < currentStep ? <Check className="w-4 h-4" /> : index + 1}
+                  </div>
+                  {index < ONBOARDING_STEPS.length - 1 && (
+                    <div className={cn(
+                      "w-12 h-1 mx-1 rounded-full transition-all duration-300",
+                      index < currentStep ? "bg-primary" : "bg-secondary/50"
+                    )} />
+                  )}
+                </motion.div>
+              ))}
+            </div>
+            <div className="h-2 bg-secondary rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-primary to-accent"
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.5 }}
+              />
+            </div>
           </div>
         </div>
       </header>

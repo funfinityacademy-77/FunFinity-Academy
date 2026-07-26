@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { BookOpen, Award, TrendingUp, Save, Plus, Trash2, Sparkles, School, Calculator, FileText, Target } from "lucide-react";
+import { BookOpen, Award, TrendingUp, Save, Plus, Trash2, Sparkles, School, Calculator, FileText, Target, Shield, Sword, Crown, Zap, Heart, Star, Scroll, Globe, Languages, GraduationCap } from "lucide-react";
 import { FunfinityIcon } from "@/components/brand/FunfinityLogo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
 import { apiClient } from "@/lib/api-client";
@@ -18,26 +19,34 @@ import { z } from "zod";
 // Zod validation schemas for XSS prevention and data integrity
 const academicProfileSchema = z.object({
   school_name: z.string().min(2, "School name must be at least 2 characters").max(100, "School name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "School name contains invalid characters"),
-  school_type: z.enum(["Public", "Private", "Charter", "Homeschool"]),
-  grade_level: z.enum(["9th Grade", "10th Grade", "11th Grade", "12th Grade", "Post-Graduate"]),
-  gpa: z.number().min(0, "GPA cannot be negative").max(4.0, "GPA cannot exceed 4.0"),
+  school_type: z.enum(["Public", "Private", "Charter", "Homeschool", "International"]),
+  grade_level: z.enum(["9th Grade", "10th Grade", "11th Grade", "12th Grade", "Post-Graduate", "Year 10", "Year 11", "Year 12", "Year 13"]),
+  grade_scale: z.enum(["4.0 GPA", "Percentage", "IB 1-7", "A-Level", "GCSE", "Other"]),
+  gpa: z.number().min(0, "GPA cannot be negative").max(4.0, "GPA cannot exceed 4.0").optional(),
+  percentage_grade: z.number().min(0, "Percentage cannot be negative").max(100, "Percentage cannot exceed 100").optional(),
+  ib_grade: z.number().min(1, "IB grade must be at least 1").max(7, "IB grade cannot exceed 7").optional(),
   sat_score: z.number().min(400, "SAT score must be at least 400").max(1600, "SAT score cannot exceed 1600").optional(),
   act_score: z.number().min(1, "ACT score must be at least 1").max(36, "ACT score cannot exceed 36").optional(),
   intended_major: z.string().min(2, "Intended major must be at least 2 characters").max(50, "Intended major too long").regex(/^[a-zA-Z\s\-',.]+$/, "Intended major contains invalid characters"),
+  country: z.string().min(2, "Country must be at least 2 characters").max(50, "Country too long").optional(),
+  languages: z.array(z.object({
+    language: z.string().min(2, "Language name too short").max(50, "Language name too long"),
+    proficiency: z.enum(["Native", "Fluent", "Advanced", "Intermediate", "Basic"])
+  })).max(10, "Too many languages"),
   extracurriculars: z.array(z.string().min(2, "Activity name too short").max(100, "Activity name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "Activity name contains invalid characters")).max(20, "Too many extracurricular activities"),
   achievements: z.array(z.string().min(2, "Achievement name too short").max(100, "Achievement name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "Achievement name contains invalid characters")).max(20, "Too many achievements"),
   courses: z.array(z.object({
     name: z.string().min(2, "Course name too short").max(50, "Course name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "Course name contains invalid characters"),
-    level: z.enum(["Regular", "Honors", "AP", "IB", "Dual Enrollment"]),
-    grade: z.enum(["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"]),
+    level: z.enum(["Regular", "Honors", "AP", "IB", "Dual Enrollment", "A-Level", "AS-Level", "GCSE", "Other"]),
+    grade: z.string().min(1, "Grade is required").max(10, "Grade too long"),
     credits: z.number().min(0.5, "Credits must be at least 0.5").max(10, "Credits cannot exceed 10")
   })).max(30, "Too many courses")
 });
 
 const courseSchema = z.object({
   name: z.string().min(2, "Course name too short").max(50, "Course name too long").regex(/^[a-zA-Z0-9\s\-',.]+$/, "Course name contains invalid characters"),
-  level: z.enum(["Regular", "Honors", "AP", "IB", "Dual Enrollment"]),
-  grade: z.enum(["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"]),
+  level: z.enum(["Regular", "Honors", "AP", "IB", "Dual Enrollment", "A-Level", "AS-Level", "GCSE", "Other"]),
+  grade: z.string().min(1, "Grade is required").max(10, "Grade too long"),
   credits: z.number().min(0.5, "Credits must be at least 0.5").max(10, "Credits cannot exceed 10")
 });
 
@@ -45,12 +54,17 @@ interface AcademicProfile {
   id?: string;
   user_id?: string;
   school_name: string;
-  school_type: "Public" | "Private" | "Charter" | "Homeschool";
+  school_type: "Public" | "Private" | "Charter" | "Homeschool" | "International";
   grade_level: string;
-  gpa: number;
+  grade_scale: "4.0 GPA" | "Percentage" | "IB 1-7" | "A-Level" | "GCSE" | "Other";
+  gpa?: number;
+  percentage_grade?: number;
+  ib_grade?: number;
   sat_score?: number;
   act_score?: number;
   intended_major: string;
+  country?: string;
+  languages: Array<{ language: string; proficiency: "Native" | "Fluent" | "Advanced" | "Intermediate" | "Basic" }>;
   extracurriculars: string[];
   achievements: string[];
   courses: Course[];
@@ -61,15 +75,17 @@ interface AcademicProfile {
 interface Course {
   id: string;
   name: string;
-  level: "Regular" | "Honors" | "AP" | "IB" | "Dual Enrollment";
+  level: "Regular" | "Honors" | "AP" | "IB" | "Dual Enrollment" | "A-Level" | "AS-Level" | "GCSE" | "Other";
   grade: string;
   credits: number;
 }
 
-const gradeLevels = ["9th Grade", "10th Grade", "11th Grade", "12th Grade", "Post-Graduate"];
-const schoolTypes = ["Public", "Private", "Charter", "Homeschool"];
-const courseLevels = ["Regular", "Honors", "AP", "IB", "Dual Enrollment"];
-const gradeOptions = ["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"];
+const gradeLevels = ["9th Grade", "10th Grade", "11th Grade", "12th Grade", "Post-Graduate", "Year 10", "Year 11", "Year 12", "Year 13"];
+const schoolTypes = ["Public", "Private", "Charter", "Homeschool", "International"];
+const gradeScales = ["4.0 GPA", "Percentage", "IB 1-7", "A-Level", "GCSE", "Other"];
+const courseLevels = ["Regular", "Honors", "AP", "IB", "Dual Enrollment", "A-Level", "AS-Level", "GCSE", "Other"];
+const gradeOptions = ["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F", "A*", "A", "B", "C", "D", "E", "U", "9", "8", "7", "6", "5", "4", "3", "2", "1"];
+const proficiencyLevels = ["Native", "Fluent", "Advanced", "Intermediate", "Basic"];
 
 export default function AcademicProfile() {
   const { user } = useAuth();
@@ -80,14 +96,18 @@ export default function AcademicProfile() {
     school_name: "",
     school_type: "Public",
     grade_level: "",
+    grade_scale: "4.0 GPA",
     gpa: 0,
     intended_major: "",
+    country: "",
+    languages: [],
     extracurriculars: [],
     achievements: [],
     courses: []
   });
   const [newExtracurricular, setNewExtracurricular] = useState("");
   const [newAchievement, setNewAchievement] = useState("");
+  const [newLanguage, setNewLanguage] = useState({ language: "", proficiency: "Intermediate" as const });
   const [newCourse, setNewCourse] = useState<Course>({
     id: "",
     name: "",
@@ -218,6 +238,23 @@ export default function AcademicProfile() {
     }));
   };
 
+  const addLanguage = () => {
+    if (newLanguage.language.trim()) {
+      setProfile(prev => ({
+        ...prev,
+        languages: [...prev.languages, { ...newLanguage }]
+      }));
+      setNewLanguage({ language: "", proficiency: "Intermediate" });
+    }
+  };
+
+  const removeLanguage = (index: number) => {
+    setProfile(prev => ({
+      ...prev,
+      languages: prev.languages.filter((_, i) => i !== index)
+    }));
+  };
+
   const addCourse = () => {
     if (newCourse.name && newCourse.grade) {
       // Validate with Zod
@@ -294,27 +331,123 @@ export default function AcademicProfile() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-display font-bold text-foreground flex items-center gap-2">
-            <FunfinityIcon size="md" />
-            Academic Profile
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Manage your academic information for personalized college recommendations
-          </p>
+      {/* RPG Character Sheet Header */}
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="glass-card-heavy border-2 border-border/50 rounded-3xl p-6 sm:p-8 relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-glow-cyan opacity-20 blur-3xl" />
+        
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="flex items-center gap-4">
+            {/* Character Avatar */}
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+              className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-2xl shadow-primary/30 border-2 border-primary/20"
+            >
+              <Crown className="w-10 h-10 text-white" />
+            </motion.div>
+            
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-display font-bold text-foreground flex items-center gap-2">
+                <Scroll className="w-6 h-6 text-primary" />
+                Academic Character Sheet
+              </h1>
+              <p className="text-sm text-muted-foreground mt-1">
+                Level {profile.grade_level || "Unknown"} • {profile.school_type || "Public"} School
+              </p>
+              <div className="flex items-center gap-2 mt-2">
+                <Badge variant="outline" className="bg-primary/10 border-primary/30">
+                  <Star className="w-3 h-3 mr-1" />
+                  GPA: {gpaData.weighted}
+                </Badge>
+                <Badge variant="outline" className="bg-orange/10 border-orange/30">
+                  <Zap className="w-3 h-3 mr-1" />
+                  {profile.courses.length} Courses
+                </Badge>
+              </div>
+            </div>
+          </div>
+          
+          <Button 
+            variant="hero" 
+            size="lg"
+            onClick={saveProfile}
+            disabled={saving}
+            className="flex items-center gap-2 shadow-lg shadow-primary/20"
+          >
+            {saving ? <Sparkles className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            {saving ? "Saving..." : "Save Character"}
+          </Button>
         </div>
-        <Button 
-          variant="hero" 
-          size="sm" 
-          onClick={saveProfile}
-          disabled={saving}
-          className="flex items-center gap-2"
-        >
-          {saving ? <Sparkles className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-          {saving ? "Saving..." : "Save Profile"}
-        </Button>
-      </div>
+        
+        {/* Character Stats Bar */}
+        <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-border/30">
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-1 mb-1">
+              <Shield className="w-4 h-4 text-blue-500" />
+              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Defense</span>
+            </div>
+            <motion.p 
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              className="text-xl font-bold text-blue-500"
+            >
+              {Math.min(100, Math.round((parseFloat(gpaData.weighted) / 4.0) * 100))}
+            </motion.p>
+            <Progress value={(parseFloat(gpaData.weighted) / 4.0) * 100} className="h-1.5 mt-1" />
+          </div>
+          
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-1 mb-1">
+              <Sword className="w-4 h-4 text-red-500" />
+              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Attack</span>
+            </div>
+            <motion.p 
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              className="text-xl font-bold text-red-500"
+            >
+              {profile.courses.length * 10}
+            </motion.p>
+            <Progress value={Math.min(100, profile.courses.length * 10)} className="h-1.5 mt-1" />
+          </div>
+          
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-1 mb-1">
+              <Heart className="w-4 h-4 text-pink-500" />
+              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Vitality</span>
+            </div>
+            <motion.p 
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              className="text-xl font-bold text-pink-500"
+            >
+              {profile.achievements.length * 5}
+            </motion.p>
+            <Progress value={Math.min(100, profile.achievements.length * 5)} className="h-1.5 mt-1" />
+          </div>
+          
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-1 mb-1">
+              <Zap className="w-4 h-4 text-yellow-500" />
+              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Energy</span>
+            </div>
+            <motion.p 
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              className="text-xl font-bold text-yellow-500"
+            >
+              {profile.extracurriculars.length * 8}
+            </motion.p>
+            <Progress value={Math.min(100, profile.extracurriculars.length * 8)} className="h-1.5 mt-1" />
+          </div>
+        </div>
+      </motion.div>
 
       {/* School Information */}
       <Card className="glass-card border-border/30">

@@ -66,7 +66,7 @@ export const supabase = createClient(
       detectSessionInUrl: true,
       // SECURITY: Use cookie-based storage instead of localStorage
       // This prevents XSS attacks and complies with GDPR/COPPA requirements
-      storage: window.localStorage, // Fallback - will be overridden by Supabase cookie handling
+      storage: window.localStorage, // Fallback for development only
       storageKey: 'funfinity-auth-token',
       // Enable cookie-based session storage for better security
       cookieOptions: {
@@ -74,7 +74,7 @@ export const supabase = createClient(
         domain: window.location.hostname,
         path: '/',
         sameSite: 'lax',
-        secure: true, // HTTPS only
+        secure: window.location.protocol === 'https:', // HTTPS only in production
         httpOnly: true, // Not accessible via JavaScript
       },
     },

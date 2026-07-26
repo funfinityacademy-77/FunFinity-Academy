@@ -1,14 +1,15 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar as CalendarIcon, Clock, Video, BookOpen, Target, ChevronLeft, ChevronRight, Plus, Loader2, X, Link as LinkIcon, AlertCircle, CheckCircle2, Grid3x3, List, CalendarDays } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, Video, BookOpen, Target, ChevronLeft, ChevronRight, Plus, Loader2, X, Link as LinkIcon, AlertCircle, CheckCircle2, Grid3x3, List, CalendarDays, Bell, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api-client";
-import { format, startOfWeek, endOfWeek, eachDayOfInterval, isSameDay, isToday, addWeeks, subWeeks, startOfMonth, endOfMonth, eachDayOfInterval as eachDayOfMonthInterval, addMonths, subMonths } from "date-fns";
+import { format, startOfWeek, endOfWeek, eachDayOfInterval, isSameDay, isToday, addWeeks, subWeeks, startOfMonth, endOfMonth, eachDayOfInterval as eachDayOfMonthInterval, addMonths, subMonths, differenceInDays, isPast, isFuture } from "date-fns";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
 
@@ -37,6 +38,7 @@ export default function CalendarPage() {
     time: "",
     duration: ""
   });
+  const [selectedFilter, setSelectedFilter] = useState<'all' | 'assignment' | 'quiz' | 'lesson'>('all');
 
   // Calculate date range based on view mode
   const dateRange = useMemo(() => {
@@ -94,9 +96,30 @@ export default function CalendarPage() {
   });
 
   const allEvents = useMemo(() => [...assignments, ...quizzes], [assignments, quizzes]);
-  const todayEvents = useMemo(() => allEvents.filter(e => isSameDay(e.date, new Date())), [allEvents]);
+  const filteredEvents = useMemo(() => {
+    if (selectedFilter === 'all') return allEvents;
+    return allEvents.filter(e => e.type === selectedFilter);
+  }, [allEvents, selectedFilter]);
+  
+  const todayEvents = useMemo(() => filteredEvents.filter(e => isSameDay(e.date, new Date())), [filteredEvents]);
+  const upcomingDeadlines = useMemo(() => {
+    return filteredEvents
+      .filter(e => e.type === 'assignment' && isFuture(e.date))
+      .sort((a, b) => differenceInDays(a.date, b.date))
+      .slice(0, 5);
+  }, [filteredEvents]);
 
-  const getEventsForDay = (day: Date) => allEvents.filter(e => isSameDay(e.date, day));
+  const getEventsForDay = (day: Date) => filteredEvents.filter(e => isSameDay(e.date, day));
+  
+  const getDeadlineUrgency = (date: Date) => {
+    const daysUntil = differenceInDays(date, new Date());
+    if (daysUntil < 0) return { level: 'overdue', color: 'text-red-500 bg-red-500/10 border-red-500/20', label: 'Overdue' };
+    if (daysUntil === 0) return { level: 'today', color: 'text-orange-500 bg-orange-500/10 border-orange-500/20', label: 'Today' };
+    if (daysUntil === 1) return { level: 'tomorrow', color: 'text-yellow-500 bg-yellow-500/10 border-yellow-500/20', label: 'Tomorrow' };
+    if (daysUntil <= 3) return { level: 'urgent', color: 'text-orange-400 bg-orange-400/10 border-orange-400/20', label: `${daysUntil} days` };
+    if (daysUntil <= 7) return { level: 'soon', color: 'text-blue-500 bg-blue-500/10 border-blue-500/20', label: `${daysUntil} days` };
+    return { level: 'normal', color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20', label: `${daysUntil} days` };
+  };
 
   const handleNavigateDate = (direction: 'prev' | 'next') => {
     if (viewMode === 'month') {
@@ -229,6 +252,36 @@ export default function CalendarPage() {
           <p className="text-sm text-muted-foreground mt-1">Manage your academic timeline and deadlines</p>
         </div>
         <div className="flex items-center gap-3">
+          {/* Event Filter */}
+          <div className="flex items-center gap-1 bg-secondary/20 p-1 rounded-xl border border-border/10">
+            <Button
+              variant={selectedFilter === 'all' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setSelectedFilter('all')}
+              className="h-8 px-3 rounded-lg text-xs"
+            >
+              All
+            </Button>
+            <Button
+              variant={selectedFilter === 'assignment' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setSelectedFilter('assignment')}
+              className="h-8 px-3 rounded-lg text-xs"
+            >
+              <Target className="w-3 h-3 mr-1" />
+              Assignments
+            </Button>
+            <Button
+              variant={selectedFilter === 'quiz' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setSelectedFilter('quiz')}
+              className="h-8 px-3 rounded-lg text-xs"
+            >
+              <BookOpen className="w-3 h-3 mr-1" />
+              Quizzes
+            </Button>
+          </div>
+
           {/* View Mode Toggle */}
           <div className="flex items-center gap-1 bg-secondary/20 p-1 rounded-xl border border-border/10">
             <Button 

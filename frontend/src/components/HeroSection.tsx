@@ -231,9 +231,9 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4 md:mb-6 leading-[1.15] sm:leading-[1.2]"
             >
-              Interactive Learning Platform
+              FunFinity Academy
               <br />
-              <span className="text-gradient-brand">For Students Ages 13+</span>
+              <span className="text-gradient-brand">Personalized Learning for Grades 8-12</span>
             </motion.h1>
 
             <motion.p
@@ -242,7 +242,7 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-xs sm:text-sm md:text-base lg:text-lg text-foreground/90 max-w-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed font-medium"
             >
-              Explore coding, mathematics, science, and more through adaptive, AI-assisted lessons designed for middle school, high school, and beyond. COPPA and GDPR compliant.
+              Master mathematics, science, computer science, and humanities through adaptive AI-powered lessons. Built for students, trusted by parents, and designed by educators. COPPA and GDPR compliant.
             </motion.p>
 
             <motion.div

@@ -192,6 +192,31 @@ export default {
       transitionTimingFunction: {
         "bounce-smooth": "cubic-bezier(0.34, 1.56, 0.64, 1)",
         "ease-out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "admin-smooth": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "admin-crisp": "cubic-bezier(0.2, 0, 0.3, 1)",
+      },
+      spacing: {
+        "18": "4.5rem",
+        "88": "22rem",
+        "128": "32rem",
+      },
+      fontSize: {
+        "admin-xs": ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.01em" }],
+        "admin-sm": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0.005em" }],
+        "admin-base": ["1rem", { lineHeight: "1.5rem", letterSpacing: "0em" }],
+      },
+      borderWidth: {
+        "admin-thin": "0.5px",
+        "admin-medium": "1.5px",
+      },
+      opacity: {
+        "admin-dim": "0.03",
+        "admin-subtle": "0.06",
+      },
+      zIndex: {
+        "admin-dropdown": "50",
+        "admin-modal": "60",
+        "admin-toast": "70",
       },
     },
   },

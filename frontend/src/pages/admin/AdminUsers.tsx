@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, Users, UserPlus, Shield, User,
   MoreVertical, CheckCircle, XCircle, X, Mail, User as UserIcon,
   Ban, Trash2, Eye, Lock, FileText, Download, Clock, Activity,
   Brain, Sparkles, Lightbulb, Target, BookOpen, Zap, Award, Filter,
-  SortAsc, Grid, List, ChevronRight, Calendar, Globe
+  SortAsc, Grid, List, ChevronRight, Calendar, Globe, ArrowUpDown, ChevronDown
 } from "lucide-react";
 import { FunfinityIcon } from "@/components/brand/FunfinityLogo";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,7 @@ import { fetchUsers, createUser, restrictUser, banUser, deleteUser, generateLear
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
 import { useTheme } from "@/hooks/use-theme";
+import { useDebounce } from "@/hooks/use-debounce";
 
 const roleIcon: Record<string, React.ReactNode> = {
   Admin:           <Shield className="w-3 h-3" />,
@@ -96,8 +97,11 @@ type LearningPlanState = { isGenerating: boolean; plan: any; error: string | nul
 export default function AdminUsers() {
   const { theme } = useTheme();
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 300);
   const [roleFilter, setRoleFilter] = useState("All");
+  const [statusFilter, setStatusFilter] = useState("All");
   const [sortBy, setSortBy] = useState("name");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const [menu, setMenu] = useState<ActionMenu>(null);
   const [addUserModal, setAddUserModal] = useState<AddUserModal>({ isOpen: false });
@@ -109,6 +113,8 @@ export default function AdminUsers() {
   const [learningPlanState, setLearningPlanState] = useState<LearningPlanState>({ isGenerating: false, plan: null, error: null });
   const [userLearningDNA, setUserLearningDNA] = useState<any>(null);
   const [showPermissionsMatrix, setShowPermissionsMatrix] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
@@ -120,6 +126,85 @@ export default function AdminUsers() {
     },
     refetchInterval: 30000, // Refetch every 30 seconds
   });
+
+  // Filtered and sorted users with pagination
+  const filteredAndSortedUsers = useMemo(() => {
+    let filtered = users || [];
+
+    // Apply search filter
+    if (debouncedSearch) {
+      const searchLower = debouncedSearch.toLowerCase();
+      filtered = filtered.filter(user =>
+        user.display_name?.toLowerCase().includes(searchLower) ||
+        user.email?.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Apply role filter
+    if (roleFilter !== "All") {
+      filtered = filtered.filter(user => 
+        user.user_roles?.some((r: any) => r.role === roleFilter)
+      );
+    }
+
+    // Apply status filter
+    if (statusFilter !== "All") {
+      filtered = filtered.filter(user => {
+        if (statusFilter === "Active") return !user.restricted && !user.banned;
+        if (statusFilter === "Restricted") return user.restricted;
+        if (statusFilter === "Banned") return user.banned;
+        return true;
+      });
+    }
+
+    // Apply sorting
+    filtered.sort((a, b) => {
+      let comparison = 0;
+      switch (sortBy) {
+        case "name":
+          comparison = (a.display_name || "").localeCompare(b.display_name || "");
+          break;
+        case "email":
+          comparison = (a.email || "").localeCompare(b.email || "");
+          break;
+        case "role":
+          const aRole = a.user_roles?.[0]?.role || "";
+          const bRole = b.user_roles?.[0]?.role || "";
+          comparison = aRole.localeCompare(bRole);
+          break;
+        case "created_at":
+          comparison = new Date(a.created_at || 0).getTime() - new Date(b.created_at || 0).getTime();
+          break;
+        default:
+          comparison = 0;
+      }
+      return sortOrder === "asc" ? comparison : -comparison;
+    });
+
+    return filtered;
+  }, [users, debouncedSearch, roleFilter, statusFilter, sortBy, sortOrder]);
+
+  // Pagination
+  const totalPages = Math.ceil(filteredAndSortedUsers.length / itemsPerPage);
+  const paginatedUsers = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredAndSortedUsers.slice(startIndex, endIndex);
+  }, [filteredAndSortedUsers, currentPage, itemsPerPage]);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [debouncedSearch, roleFilter, statusFilter, sortBy, sortOrder]);
+
+  const handleSort = (column: string) => {
+    if (sortBy === column) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(column);
+      setSortOrder("asc");
+    }
+  };
 
   const createUserMutation = useMutation({
     mutationFn: createUser,
@@ -173,6 +258,60 @@ export default function AdminUsers() {
       toast({ title: "Failed to delete user", description: error.message, variant: "destructive" });
     }
   });
+
+  const updateUserRoleMutation = useMutation({
+    mutationFn: ({ userId, role }: { userId: string; role: string }) => {
+      return supabase.from('user_roles').upsert({ user_id: userId, role });
+    },
+    onSuccess: () => {
+      toast({ title: "User role updated successfully", description: "The user's role has been changed." });
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+    },
+    onError: (error: any) => {
+      toast({ title: "Failed to update user role", description: error.message, variant: "destructive" });
+    }
+  });
+
+  const toggleUserStatusMutation = useMutation({
+    mutationFn: ({ userId, status }: { userId: string; status: 'restricted' | 'banned' | 'active' }) => {
+      if (status === 'restricted') {
+        return restrictUser(userId, { reason: 'Admin action', duration_hours: 24 });
+      } else if (status === 'banned') {
+        return banUser(userId, 'Admin action');
+      } else {
+        return supabase.from('profiles').update({ restricted: false, banned: false }).eq('id', userId);
+      }
+    },
+    onSuccess: () => {
+      toast({ title: "User status updated successfully", description: "The user's status has been changed." });
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+    },
+    onError: (error: any) => {
+      toast({ title: "Failed to update user status", description: error.message, variant: "destructive" });
+    }
+  });
+
+  // Security validation for admin privileges
+  const ADMIN_EMAILS = ['funfinityacademy@gmail.com', 'academyfunfinity@gmail.com'];
+  const { user: currentUser } = useAuth();
+  const isMasterAdmin = currentUser?.email && ADMIN_EMAILS.includes(currentUser.email);
+
+  // Security check for admin role modifications
+  const canModifyAdminRole = (targetUserId: string) => {
+    if (!isMasterAdmin) return false;
+    // Prevent master admins from modifying other master admins
+    const targetUser = users?.find(u => u.id === targetUserId);
+    const isTargetMasterAdmin = targetUser?.email && ADMIN_EMAILS.includes(targetUser.email);
+    return !isTargetMasterAdmin;
+  };
+
+  // Security check for critical user actions
+  const canPerformCriticalAction = (targetUserId: string) => {
+    if (!isMasterAdmin) return false;
+    const targetUser = users?.find(u => u.id === targetUserId);
+    const isTargetMasterAdmin = targetUser?.email && ADMIN_EMAILS.includes(targetUser.email);
+    return !isTargetMasterAdmin;
+  };
 
   // Fetch user's Learning DNA data when profile modal opens
   const fetchUserLearningDNA = async (userId: string) => {
@@ -326,7 +465,7 @@ export default function AdminUsers() {
             <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border/30">
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground">{filtered.length} users</span>
+                <span className="text-sm font-medium text-foreground">{filteredAndSortedUsers.length} users</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-emerald-500" />
@@ -336,6 +475,44 @@ export default function AdminUsers() {
                 <BookOpen className="w-4 h-4 text-cyan-500" />
                 <span className="text-sm text-muted-foreground">{(users || []).filter((u: any) => u.user_roles?.role === 'Teacher').length} teachers</span>
               </div>
+            </div>
+
+            {/* Enhanced Filters */}
+            <div className="flex items-center gap-3 mt-4">
+              <Select value={roleFilter} onValueChange={setRoleFilter}>
+                <SelectTrigger className="w-40 h-9 text-xs">
+                  <SelectValue placeholder="Filter by role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="All">All Roles</SelectItem>
+                  <SelectItem value="Admin">Admin</SelectItem>
+                  <SelectItem value="Student">Student</SelectItem>
+                  <SelectItem value="Teacher">Teacher</SelectItem>
+                  <SelectItem value="Parent">Parent</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-40 h-9 text-xs">
+                  <SelectValue placeholder="Filter by status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="All">All Status</SelectItem>
+                  <SelectItem value="Active">Active</SelectItem>
+                  <SelectItem value="Restricted">Restricted</SelectItem>
+                  <SelectItem value="Banned">Banned</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={itemsPerPage.toString()} onValueChange={(value) => setItemsPerPage(Number(value))}>
+                <SelectTrigger className="w-32 h-9 text-xs">
+                  <SelectValue placeholder="Per page" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="10">10 per page</SelectItem>
+                  <SelectItem value="25">25 per page</SelectItem>
+                  <SelectItem value="50">50 per page</SelectItem>
+                  <SelectItem value="100">100 per page</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </CardContent>
         </Card>
@@ -414,16 +591,44 @@ export default function AdminUsers() {
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-border/30 bg-secondary/20">
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">User</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Role</th>
+                      <th 
+                        className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider cursor-pointer hover:text-foreground transition-colors"
+                        onClick={() => handleSort("name")}
+                      >
+                        <div className="flex items-center gap-1">
+                          User {sortBy === "name" && (sortOrder === "asc" ? <ChevronDown className="w-3 h-3" /> : <ArrowUpDown className="w-3 h-3" />)}
+                        </div>
+                      </th>
+                      <th 
+                        className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider cursor-pointer hover:text-foreground transition-colors"
+                        onClick={() => handleSort("role")}
+                      >
+                        <div className="flex items-center gap-1">
+                          Role {sortBy === "role" && (sortOrder === "asc" ? <ChevronDown className="w-3 h-3" /> : <ArrowUpDown className="w-3 h-3" />)}
+                        </div>
+                      </th>
                       <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden md:table-cell">Info</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden sm:table-cell">Status</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden lg:table-cell">Joined</th>
+                      <th 
+                        className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider cursor-pointer hover:text-foreground transition-colors hidden sm:table-cell"
+                        onClick={() => handleSort("status")}
+                      >
+                        <div className="flex items-center gap-1">
+                          Status {sortBy === "status" && (sortOrder === "asc" ? <ChevronDown className="w-3 h-3" /> : <ArrowUpDown className="w-3 h-3" />)}
+                        </div>
+                      </th>
+                      <th 
+                        className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider cursor-pointer hover:text-foreground transition-colors hidden lg:table-cell"
+                        onClick={() => handleSort("created_at")}
+                      >
+                        <div className="flex items-center gap-1">
+                          Joined {sortBy === "created_at" && (sortOrder === "asc" ? <ChevronDown className="w-3 h-3" /> : <ArrowUpDown className="w-3 h-3" />)}
+                        </div>
+                      </th>
                       <th className="px-4 py-3 w-10" />
                     </tr>
                   </thead>
                   <tbody>
-                    {filtered.length === 0 ? (
+                    {paginatedUsers.length === 0 ? (
                       <tr>
                         <td colSpan={6} className="px-4 py-12 text-center">
                           <div className="flex flex-col items-center justify-center">
@@ -433,7 +638,7 @@ export default function AdminUsers() {
                         </td>
                       </tr>
                     ) : (
-                      filtered.map((user: any, i) => {
+                      paginatedUsers.map((user: any, i) => {
                         const role = user.user_roles?.role || "Student";
                         return (
                           <motion.tr key={user.user_id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.04 }}
@@ -499,15 +704,60 @@ export default function AdminUsers() {
                   </tbody>
                 </table>
               </div>
+              
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-between px-4 py-3 border-t border-border/30 bg-secondary/20">
+                  <div className="text-xs text-muted-foreground">
+                    Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, filteredAndSortedUsers.length)} of {filteredAndSortedUsers.length} users
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                      disabled={currentPage === 1}
+                      className="h-8 px-3 text-xs"
+                    >
+                      Previous
+                    </Button>
+                    <div className="flex items-center gap-1">
+                      {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                        const pageNum = i + 1;
+                        return (
+                          <Button
+                            key={pageNum}
+                            variant={currentPage === pageNum ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => setCurrentPage(pageNum)}
+                            className="h-8 w-8 p-0 text-xs"
+                          >
+                            {pageNum}
+                          </Button>
+                        );
+                      })}
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                      disabled={currentPage === totalPages}
+                      className="h-8 px-3 text-xs"
+                    >
+                      Next
+                    </Button>
+                  </div>
+                </div>
+              )}
             ) : (
               <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                {filtered.length === 0 ? (
+                {paginatedUsers.length === 0 ? (
                   <div className="col-span-full flex flex-col items-center justify-center py-12">
                     <Users className="w-12 h-12 text-muted-foreground/30 mb-3" />
                     <p className="text-muted-foreground text-sm">No users found</p>
                   </div>
                 ) : (
-                  filtered.map((user: any, i) => {
+                  paginatedUsers.map((user: any, i) => {
                     const role = user.user_roles?.role || "Student";
                     return (
                       <motion.div

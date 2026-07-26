@@ -11,6 +11,14 @@ interface ProtectedRouteProps {
   requireOnboarding?: boolean;
 }
 
+const ADMIN_EMAILS = ["funfinityacademy@gmail.com", "academyfunfinity@gmail.com"];
+
+const isAdminEmail = (email: string) => {
+  if (!email) return false;
+  const normalizedEmail = email.toLowerCase().trim();
+  return ADMIN_EMAILS.includes(normalizedEmail);
+};
+
 export function ProtectedRoute({ children, allowedRoles, requireOnboarding = false }: ProtectedRouteProps) {
   const { user, role, loading } = useAuth();
   const { isMaintenanceActive } = useMaintenance();
@@ -109,6 +117,18 @@ export function ProtectedRoute({ children, allowedRoles, requireOnboarding = fal
     console.log('ProtectedRoute: Role check failed', { role, allowedRoles });
     const pathMap: Record<string, string> = { student: "/app", admin: "/admin" };
     return <Navigate to={pathMap[role.toLowerCase()] || "/app"} replace />;
+  }
+
+  // Strict admin email enforcement
+  if (role === "admin" && user?.email && !isAdminEmail(user.email)) {
+    console.log('ProtectedRoute: Non-admin email attempting admin access', { email: user.email });
+    return <Navigate to="/app" replace />;
+  }
+
+  // Ensure all standard users route to student dashboard
+  if (role !== "admin" && allowedRoles?.includes("admin")) {
+    console.log('ProtectedRoute: Non-admin attempting admin route', { role });
+    return <Navigate to="/app" replace />;
   }
 
   return <>{children}</>;

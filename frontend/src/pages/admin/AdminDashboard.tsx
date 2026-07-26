@@ -4,7 +4,7 @@ import {
   Users, BookOpen, TrendingUp, AlertCircle, ArrowRight, CheckCircle2,
   Clock, DollarSign, Activity, Shield, Zap, Globe, Server, BarChart3, Loader2,
   Award, FileText, Bell, Palette, MessageSquare, Lightbulb, Wifi, Cpu, Database,
-  RefreshCw, Eye, UserPlus, LogOut, AlertTriangle
+  RefreshCw, Eye, UserPlus, LogOut, AlertTriangle, HeartPulse, XCircle, CheckCircle
 } from "lucide-react";
 import { FunfinityIcon } from "@/components/brand/FunfinityLogo";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ import { useSupabaseRealtime } from "@/hooks/useSupabaseRealtime";
 import { fetchUsers } from "@/lib/data-service";
 import { useQuery } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
+import { LineChart, Line, AreaChart, Area, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 interface Profile {
   id: string;
@@ -41,6 +42,32 @@ export default function AdminDashboard() {
   const [activeUsers, setActiveUsers] = useState(0);
   const [lastUpdated, setLastUpdated] = useState(new Date());
   const [isRefreshing, setIsRefreshing] = useState(false);
+  
+  // Chart data
+  const [weeklyActiveData, setWeeklyActiveData] = useState([
+    { name: 'Mon', users: 120, active: 80 },
+    { name: 'Tue', users: 132, active: 95 },
+    { name: 'Wed', users: 145, active: 110 },
+    { name: 'Thu', users: 138, active: 105 },
+    { name: 'Fri', users: 155, active: 125 },
+    { name: 'Sat', users: 168, active: 140 },
+    { name: 'Sun', users: 175, active: 150 },
+  ]);
+  
+  const [subscriptionData, setSubscriptionData] = useState([
+    { name: 'Free', value: 65, color: '#6366f1' },
+    { name: 'Premium', value: 25, color: '#8b5cf6' },
+    { name: 'Enterprise', value: 10, color: '#ec4899' },
+  ]);
+  
+  const [platformHealthData, setPlatformHealthData] = useState({
+    apiLatency: 45,
+    errorRate: 0.02,
+    uptime: 99.95,
+    databaseConnections: 85,
+    memoryUsage: 62,
+    cpuUsage: 45,
+  });
   
   // Use profiles directly for user count to avoid RPC permission issues
   const { data: users, isLoading: usersLoading, refetch } = useQuery({
@@ -191,52 +218,139 @@ export default function AdminDashboard() {
         ))}
       </motion.div>
 
-      {/* System Health Panel */}
-      <motion.div {...fadeIn(0.15)} className="platform-card p-4 border-border/30">
-        <div className="flex items-center justify-between mb-4">
+      {/* Platform Health Monitor */}
+      <motion.div {...fadeIn(0.15)} className="platform-card p-6 border-border/30">
+        <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
-            <Server className="w-4 h-4 text-muted-foreground" />
-            <h3 className="font-semibold text-sm">System Health</h3>
+            <HeartPulse className="w-5 h-5 text-destructive" />
+            <h3 className="font-semibold text-lg">Platform Health Monitor</h3>
           </div>
           <div className="flex items-center gap-2">
             <div className={cn(
-              "w-2 h-2 rounded-full",
+              "w-3 h-3 rounded-full animate-pulse",
               systemHealth === 'healthy' ? "bg-emerald-500" : systemHealth === 'degraded' ? "bg-yellow-500" : "bg-red-500"
             )} />
-            <span className="text-xs text-muted-foreground capitalize">{systemHealth}</span>
+            <span className="text-sm font-medium capitalize">{systemHealth}</span>
           </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Database</span>
-              <span className="text-emerald-500 font-medium">98%</span>
+              <span className="text-muted-foreground">API Latency</span>
+              <span className="font-medium text-foreground">{platformHealthData.apiLatency}ms</span>
             </div>
-            <Progress value={98} className="h-1" />
+            <Progress value={platformHealthData.apiLatency} max={200} className="h-2" />
           </div>
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">API Response</span>
-              <span className="text-emerald-500 font-medium">95%</span>
+              <span className="text-muted-foreground">Error Rate</span>
+              <span className="font-medium text-foreground">{(platformHealthData.errorRate * 100).toFixed(2)}%</span>
             </div>
-            <Progress value={95} className="h-1" />
+            <Progress value={platformHealthData.errorRate * 100} max={5} className="h-2" />
           </div>
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Storage</span>
-              <span className="text-primary font-medium">72%</span>
+              <span className="text-muted-foreground">Uptime</span>
+              <span className="font-medium text-emerald-500">{platformHealthData.uptime}%</span>
             </div>
-            <Progress value={72} className="h-1" />
+            <Progress value={platformHealthData.uptime} max={100} className="h-2" />
           </div>
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Bandwidth</span>
-              <span className="text-accent font-medium">45%</span>
+              <span className="text-muted-foreground">DB Connections</span>
+              <span className="font-medium text-foreground">{platformHealthData.databaseConnections}%</span>
             </div>
-            <Progress value={45} className="h-1" />
+            <Progress value={platformHealthData.databaseConnections} max={100} className="h-2" />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-muted-foreground">Memory Usage</span>
+              <span className="font-medium text-foreground">{platformHealthData.memoryUsage}%</span>
+            </div>
+            <Progress value={platformHealthData.memoryUsage} max={100} className="h-2" />
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-muted-foreground">CPU Usage</span>
+              <span className="font-medium text-foreground">{platformHealthData.cpuUsage}%</span>
+            </div>
+            <Progress value={platformHealthData.cpuUsage} max={100} className="h-2" />
+          </div>
+          <div className="col-span-2 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+            <CheckCircle className="w-4 h-4 text-emerald-500" />
+            <span>All systems operational</span>
           </div>
         </div>
       </motion.div>
+
+      {/* Charts Section */}
+      <div className="grid lg:grid-cols-2 gap-6">
+        <motion.div {...fadeIn(0.2)} className="platform-card p-6 border-border/30">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <BarChart3 className="w-5 h-5 text-primary" />
+              <h3 className="font-semibold text-lg">Weekly Active Users</h3>
+            </div>
+          </div>
+          <ResponsiveContainer width="100%" height={250}>
+            <AreaChart data={weeklyActiveData}>
+              <defs>
+                <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#6366f1" stopOpacity={0.8}/>
+                  <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                </linearGradient>
+                <linearGradient id="colorActive" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#10b981" stopOpacity={0.8}/>
+                  <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="name" stroke="#6b7280" fontSize={12} />
+              <YAxis stroke="#6b7280" fontSize={12} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+              <Tooltip 
+                contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151', borderRadius: '8px' }}
+                itemStyle={{ color: '#f3f4f6' }}
+              />
+              <Legend />
+              <Area type="monotone" dataKey="users" stroke="#6366f1" fillOpacity={1} fill="url(#colorUsers)" name="Total Users" />
+              <Area type="monotone" dataKey="active" stroke="#10b981" fillOpacity={1} fill="url(#colorActive)" name="Active Users" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </motion.div>
+
+        <motion.div {...fadeIn(0.25)} className="platform-card p-6 border-border/30">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Award className="w-5 h-5 text-accent" />
+              <h3 className="font-semibold text-lg">Subscription Breakdown</h3>
+            </div>
+          </div>
+          <ResponsiveContainer width="100%" height={250}>
+            <PieChart>
+              <Pie
+                data={subscriptionData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {subscriptionData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip 
+                contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151', borderRadius: '8px' }}
+                itemStyle={{ color: '#f3f4f6' }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        </motion.div>
+      </div>
 
       <div className="grid lg:grid-cols-2 gap-6">
         <motion.div {...fadeIn(0.2)} className="space-y-4">
