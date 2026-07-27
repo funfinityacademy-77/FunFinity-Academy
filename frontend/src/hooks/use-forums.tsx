@@ -58,3 +58,18 @@ export function useCreateForumReply() {
     onError: (e: any) => toast.error(e.message),
   });
 }
+
+export function useUpvotePost() {
+  const { user } = useAuth();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (postId: string) => {
+      await apiClient.post(`/api/forum/posts/${postId}/upvote`, { user_id: user!.id });
+    },
+    onSuccess: (_, postId) => {
+      qc.invalidateQueries({ queryKey: ["forum_posts"] });
+      qc.invalidateQueries({ queryKey: ["forum_replies", postId] });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+}
